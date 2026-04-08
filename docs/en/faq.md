@@ -19,9 +19,9 @@ Backend engineers with 1-3 years of experience, and anyone onboarding into backe
 
 No. BEE principles are vendor-agnostic and language-agnostic. When a concept is best illustrated with a specific technology, it is clearly noted as an example, not a recommendation.
 
-### How does BEE relate to ADP and DEE?
+### How does BEE relate to ADE and DEE?
 
-BEE covers backend engineering broadly. ADP (API Design Principles) goes deep on API design. DEE (Database Design Principles) goes deep on database design. BEE links to ADP and DEE for deep dives where topics overlap.
+BEE covers backend engineering broadly. ADE (API Design Essentials) goes deep on API design. DEE (Database Design Principles) goes deep on database design. BEE links to ADE and DEE for deep dives where topics overlap.
 
 ### Can I propose a new BEE?
 
