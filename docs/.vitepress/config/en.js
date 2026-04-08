@@ -51,6 +51,13 @@ function getSidebar(dir) {
   }
 
   const sidebar = getFilesRecursively(docsPath);
+  sidebar.sort((a, b) => {
+    const aIsOverall = a.text && a.text.toLowerCase().includes('overall');
+    const bIsOverall = b.text && b.text.toLowerCase().includes('overall');
+    if (aIsOverall && !bIsOverall) return -1;
+    if (!aIsOverall && bIsOverall) return 1;
+    return 0;
+  });
   mdFileList = mdFileList
     .sort((a, b) => a.id - b.id)
     .map((item) => item.listItem);
@@ -70,6 +77,15 @@ export const en = {
       { text: 'FAQ', link: '/faq' },
       { text: 'LIST', link: '/list' },
     ],
-    sidebar: getSidebar('../en/'),
+    sidebar: [
+      ...getSidebar('../en/'),
+      {
+        text: 'Related Sites',
+        items: [
+          { text: 'ADE -- API Design Essentials', link: 'https://alivedise.github.io/api-design-essentials/' },
+          { text: 'DEE -- Database Engineering Essentials', link: 'https://alivedise.github.io/database-engineering-essentials/' },
+        ],
+      },
+    ],
   },
 };

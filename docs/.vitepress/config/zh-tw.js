@@ -51,6 +51,13 @@ function getSidebar(dir) {
   }
 
   const sidebar = getFilesRecursively(docsPath);
+  sidebar.sort((a, b) => {
+    const aIsOverall = a.text && (a.text.toLowerCase().includes('overall') || a.text.includes('總覽'));
+    const bIsOverall = b.text && (b.text.toLowerCase().includes('overall') || b.text.includes('總覽'));
+    if (aIsOverall && !bIsOverall) return -1;
+    if (!aIsOverall && bIsOverall) return 1;
+    return 0;
+  });
   mdFileList = mdFileList
     .sort((a, b) => a.id - b.id)
     .map((item) => item.listItem);
@@ -76,6 +83,15 @@ export const zhTW = {
       { text: '常見問題', link: '/zh-tw/faq' },
       { text: '列表', link: '/zh-tw/list' },
     ],
-    sidebar: getSidebar('../zh-tw'),
+    sidebar: [
+      ...getSidebar('../zh-tw'),
+      {
+        text: '相關站點',
+        items: [
+          { text: 'ADE -- API 設計精要', link: 'https://alivedise.github.io/api-design-essentials/' },
+          { text: 'DEE -- 資料庫工程精要', link: 'https://alivedise.github.io/database-engineering-essentials/' },
+        ],
+      },
+    ],
   },
 };
