@@ -54,14 +54,14 @@ function getSidebar(dir) {
   mdFileList = mdFileList
     .sort((a, b) => a.id - b.id)
     .map((item) => item.listItem);
-  const listMdContent = `---\ntitle: BEP list\n---\n# BEP Document List\n\n${mdFileList.join('\n')}\n`;
+  const listMdContent = `---\ntitle: BEE list\n---\n# BEE Document List\n\n${mdFileList.join('\n')}\n`;
   fs.writeFileSync(resolve(docsPath, 'list.md'), listMdContent);
   return sidebar;
 }
 
 export const en = {
-  title: 'Backend Engineering Principles',
-  description: 'Backend Engineering Principles documentation',
+  title: 'Backend Engineering Essentials',
+  description: 'Backend Engineering Essentials documentation',
   lang: 'en',
   lastUpdated: true,
   themeConfig: {

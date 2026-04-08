@@ -1,10 +1,10 @@
-# Backend Engineering Principles (BEP)
+# Backend Engineering Essentials (BEE)
 
 A collection of vendor-agnostic backend engineering principles and best practices, built as a bilingual (English / Traditional Chinese) documentation site.
 
 ## Overview
 
-BEP provides numbered, structured guidelines for backend engineering -- from authentication and networking to distributed systems and observability. Each principle includes context, actionable guidance, visual diagrams, examples, and common mistakes.
+BEE provides numbered, structured guidelines for backend engineering -- from authentication and networking to distributed systems and observability. Each principle includes context, actionable guidance, visual diagrams, examples, and common mistakes.
 
 ## Development
 
@@ -19,7 +19,7 @@ pnpm docs:preview  # Preview production build
 
 | Range | Category |
 |-------|----------|
-| 0-9 | BEP Overall |
+| 0-9 | BEE Overall |
 | 10-29 | Authentication & Authorization |
 | 30-49 | Security Fundamentals |
 | 50-69 | Networking Fundamentals |
@@ -39,4 +39,4 @@ pnpm docs:preview  # Preview production build
 
 ## Contributing
 
-Follow the template in [BEP-0](docs/en/BEP%20Overall/0.md) and submit a pull request.
+Follow the template in [BEE-0](docs/en/BEE%20Overall/0.md) and submit a pull request.

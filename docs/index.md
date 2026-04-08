@@ -1,17 +1,17 @@
 ---
 layout: home
-title: BEP Home
+title: BEE Home
 
 hero:
-  name: "BEP"
-  text: "Backend Engineering Principles"
+  name: "BEE"
+  text: "Backend Engineering Essentials"
   tagline: Vendor-agnostic backend knowledge for working engineers
   actions:
     - theme: brand
-      text: What is BEP?
+      text: What is BEE?
       link: /0
     - theme: alt
-      text: Full BEP List
+      text: Full BEE List
       link: /list
     - theme: alt
       text: "繁體中文"

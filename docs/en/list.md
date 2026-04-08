@@ -1,10 +1,10 @@
 ---
-title: BEP list
+title: BEE list
 ---
-# BEP Document List
+# BEE Document List
 
-- [0.BEP Overview](0)
-- [1.How to Read BEP](1)
+- [0.BEE Overview](0)
+- [1.How to Read BEE](1)
 - [5.Glossary](5)
 - [10.Authentication vs Authorization](10)
 - [11.Token-Based Authentication](11)

@@ -2,7 +2,7 @@
 
 ## Repository Overview
 
-This is a VitePress-based bilingual (EN + zh-TW) documentation site for Backend Engineering Principles (BEP).
+This is a VitePress-based bilingual (EN + zh-TW) documentation site for Backend Engineering Essentials (BEE).
 
 ## Commands
 
@@ -20,9 +20,9 @@ This is a VitePress-based bilingual (EN + zh-TW) documentation site for Backend 
 
 ## Content Conventions
 
-- Each BEP file uses frontmatter: `id` (number), `title`, `state` (draft/reviewing/approved), `overview` (boolean)
-- File names match the BEP id: e.g., `100.md` for BEP-100
-- BEP articles follow a template: Context, Principle, Visual, Example, Common Mistakes, Related BEPs, References
+- Each BEE file uses frontmatter: `id` (number), `title`, `state` (draft/reviewing/approved), `overview` (boolean)
+- File names match the BEE id: e.g., `100.md` for BEE-100
+- BEE articles follow a template: Context, Principle, Visual, Example, Common Mistakes, Related BEPs, References
 - Sections after "Principle" are optional
 - Uses RFC 2119 keywords (MUST, SHOULD, MAY) for guidance levels
 - EN and zh-TW content are parallel -- every EN file has a zh-TW counterpart

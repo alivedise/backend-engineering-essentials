@@ -4,7 +4,7 @@ export const shared = {
   transformPageData(pageData) {
     pageData.frontmatter.head ??= [];
     if (pageData.frontmatter.id != null) {
-      pageData.title = `BEP-${pageData.frontmatter.id}: ${pageData.frontmatter.title}`;
+      pageData.title = `BEE-${pageData.frontmatter.id}: ${pageData.frontmatter.title}`;
     } else if (pageData.frontmatter.title != null) {
       pageData.title = `${pageData.frontmatter.title}`;
     }
@@ -13,8 +13,8 @@ export const shared = {
       {
         name: 'og:title',
         content: pageData.frontmatter.id != null
-          ? `BEP-${pageData.frontmatter.id}: ${pageData.frontmatter.title}`
-          : pageData.frontmatter.title || 'Backend Engineering Principles',
+          ? `BEE-${pageData.frontmatter.id}: ${pageData.frontmatter.title}`
+          : pageData.frontmatter.title || 'Backend Engineering Essentials',
       },
     ]);
   },
@@ -58,9 +58,9 @@ export const shared = {
       maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     },
     manifest: {
-      name: 'Backend Engineering Principles',
-      short_name: 'BEP',
-      description: 'Backend Engineering Principles documentation',
+      name: 'Backend Engineering Essentials',
+      short_name: 'BEE',
+      description: 'Backend Engineering Essentials documentation',
       theme_color: '#e67e22',
       icons: [
         {
