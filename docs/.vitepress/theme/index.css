@@ -1,0 +1,35 @@
+:root {
+  --vp-c-brand-1: #e67e22;
+}
+
+.VPSidebarItem .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.VPSidebarItem {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.aside-container {
+  padding-top: 75px !important;
+}
+
+.VPHero .clip {
+  background: linear-gradient(to right, #d35400, #eeeeee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-badge {
+  display: inline-block;
+  background-color: orange;
+  color: white;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-left: 4px;
+  padding: 5px;
+  line-height: 15px;
+}

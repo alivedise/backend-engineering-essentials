@@ -1,0 +1,119 @@
+pre.shiki {
+  padding: 1em;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.markdown-body > * {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+code.shiki {
+  padding: 0;
+  background: transparent;
+}
+
+p > code, li > code {
+  background-color: #f0f0f0;
+  color: #d6336c;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+ul, ol {
+  padding-left: 0.4em;
+}
+
+code .highlighted {
+  background-color: rgb(246, 232, 210);
+  transition: background-color .5s;
+  margin: 0 -24px;
+  padding: 0 24px;
+  width: calc(100% + 48px);
+  display: inline-block;
+}
+
+ul li, ol li {
+  margin-bottom: 0.5em;
+  list-style-type: square;
+}
+
+.markdown-body h1 {
+  font-size: 1.5rem;
+}
+
+.markdown-body h2 {
+  font-size: 1.3rem !important;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.markdown-body li {
+  color: grey;
+  margin-bottom: 10px;
+}
+
+.markdown-body a {
+  color: #e67e22;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  color: #d35400;
+}
+
+.markdown-body p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+}
+
+.must-highlight {
+  color: red;
+  font-weight: bold;
+}
+
+.should-highlight {
+  color: orange;
+  font-weight: bold;
+}
+
+.may-highlight {
+  color: green;
+  font-weight: bold;
+}
+
+.recommended-highlight {
+  color: blue;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+}
+
+td {
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
