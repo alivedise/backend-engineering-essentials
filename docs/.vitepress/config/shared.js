@@ -19,12 +19,12 @@ export const shared = {
     ]);
   },
   cleanUrls: true,
-  base: '/backend-engineering-principles/',
+  base: '/backend-engineering-essentials/',
   lastUpdated: true,
   themeConfig: {
     logo: 'favicon.svg',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/alivedise/backend-engineering-principles' },
+      { icon: 'github', link: 'https://github.com/alivedise/backend-engineering-essentials' },
     ],
     search: {
       provider: 'local',
