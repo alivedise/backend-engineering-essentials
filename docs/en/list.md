@@ -219,3 +219,4 @@ title: BEE list
 - [510.LLM Security and Prompt Injection](510)
 - [511.LLM Observability and Monitoring](511)
 - [512.LLM Context Window Management](512)
+- [513.AI Cost Optimization and Model Routing](513)
