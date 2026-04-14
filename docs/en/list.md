@@ -129,3 +129,4 @@ title: BEE list
 - [425.Consistent Hashing](425)
 - [426.Service Discovery](426)
 - [427.Clock Synchronization and Physical Time](427)
+- [428.Linearizability and Serializability](428)
