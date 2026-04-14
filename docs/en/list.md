@@ -95,6 +95,7 @@ title: BEE list
 - [323.Alerting Philosophy](323)
 - [324.SLOs and Error Budgets](324)
 - [325.Health Checks and Readiness Probes](325)
+- [326.Continuous Profiling in Production](326)
 - [340.The Testing Pyramid](340)
 - [341.Integration Testing for Backend Services](341)
 - [342.Contract Testing](342)
