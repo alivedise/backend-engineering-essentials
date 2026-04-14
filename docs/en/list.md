@@ -139,3 +139,4 @@ title: BEE list
 - [435.Distributed Snapshots](435)
 - [436.Lease-Based Coordination](436)
 - [437.Change Data Capture](437)
+- [438.Session Guarantees and Consistency Models](438)
