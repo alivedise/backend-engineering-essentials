@@ -222,3 +222,4 @@ title: BEE list
 - [513.AI Cost Optimization and Model Routing](513)
 - [514.Fine-Tuning and PEFT Patterns](514)
 - [515.AI Gateway Patterns](515)
+- [516.Embedding Models and Vector Representations](516)
