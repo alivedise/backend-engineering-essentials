@@ -189,3 +189,4 @@ title: BEE list
 - [484.Serverless Architecture Patterns](484)
 - [485.GraphQL Federation](485)
 - [486.The Twelve-Factor App Methodology](486)
+- [487.Background Job and Task Queue Architecture](487)
