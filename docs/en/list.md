@@ -229,3 +229,4 @@ title: BEE list
 - [520.LLM Tool Use and Function Calling Patterns](520)
 - [521.Multi-modal LLM Integration Patterns](521)
 - [522.LLM Guardrails and Content Safety](522)
+- [523.LLM Inference Optimization and Self-Hosting](523)
