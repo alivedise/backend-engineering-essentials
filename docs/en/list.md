@@ -230,3 +230,4 @@ title: BEE list
 - [521.Multi-modal LLM Integration Patterns](521)
 - [522.LLM Guardrails and Content Safety](522)
 - [523.LLM Inference Optimization and Self-Hosting](523)
+- [524.Human-in-the-Loop AI Patterns](524)
