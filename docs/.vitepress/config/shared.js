@@ -18,6 +18,7 @@ export const shared = {
       },
     ]);
   },
+  srcExclude: ['**/superpowers/**'],
   cleanUrls: true,
   base: '/backend-engineering-essentials/',
   lastUpdated: true,
