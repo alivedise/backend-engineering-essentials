@@ -206,3 +206,4 @@ title: BEE list
 - [497.Server-Side Request Forgery (SSRF)](497)
 - [498.OpenAPI Specification and API-First Design](498)
 - [499.Broken Object Level Authorization (BOLA)](499)
+- [500.Dependency Injection and Inversion of Control](500)
