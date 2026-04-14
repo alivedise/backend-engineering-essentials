@@ -110,6 +110,7 @@ title: BEE list
 - [364.Container Fundamentals](364)
 - [365.Pipeline Design](365)
 - [366.Grey and Dark Releases, and A/B Testing](366)
+- [367.GitOps and Declarative Delivery](367)
 - [380.Full-Text Search Fundamentals](380)
 - [381.Search Relevance Tuning](381)
 - [382.Faceted Search and Filtering](382)
