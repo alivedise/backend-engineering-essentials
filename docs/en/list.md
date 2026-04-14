@@ -205,3 +205,4 @@ title: BEE list
 - [496.JVM JIT Compilation and Application Warm-Up](496)
 - [497.Server-Side Request Forgery (SSRF)](497)
 - [498.OpenAPI Specification and API-First Design](498)
+- [499.Broken Object Level Authorization (BOLA)](499)
