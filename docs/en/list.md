@@ -182,3 +182,4 @@ title: BEE list
 - [477.JSONB and Semi-Structured Data in PostgreSQL](477)
 - [478.Temporal Data Modeling](478)
 - [479.gRPC Error Handling and Status Codes](479)
+- [480.Event Schema Design and Versioning](480)
