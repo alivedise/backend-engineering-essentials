@@ -232,3 +232,4 @@ title: BEE list
 - [523.LLM Inference Optimization and Self-Hosting](523)
 - [524.Human-in-the-Loop AI Patterns](524)
 - [525.Chain-of-Thought and Extended Thinking Patterns](525)
+- [526.LLM Caching Strategies](526)
