@@ -157,3 +157,4 @@ title: BEE list
 - [452.Hot Spots and Hot Key Mitigation](452)
 - [453.Graceful Shutdown and Connection Draining](453)
 - [454.Multi-Region Architecture](454)
+- [455.API Gateway Patterns](455)
