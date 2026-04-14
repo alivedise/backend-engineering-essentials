@@ -142,3 +142,4 @@ title: BEE list
 - [438.Session Guarantees and Consistency Models](438)
 - [439.Byzantine Fault Tolerance](439)
 - [440.Two-Phase Locking](440)
+- [441.Anti-Entropy and Replica Repair](441)
