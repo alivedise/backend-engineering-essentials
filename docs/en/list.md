@@ -203,3 +203,4 @@ title: BEE list
 - [494.Container Image Security and Supply Chain Integrity](494)
 - [495.Memory Management and Garbage Collection](495)
 - [496.JVM JIT Compilation and Application Warm-Up](496)
+- [497.Server-Side Request Forgery (SSRF)](497)
