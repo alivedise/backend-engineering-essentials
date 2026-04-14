@@ -191,3 +191,4 @@ title: BEE list
 - [486.The Twelve-Factor App Methodology](486)
 - [487.Background Job and Task Queue Architecture](487)
 - [488.OWASP API Security Top 10](488)
+- [489.HTTP Security Headers](489)
