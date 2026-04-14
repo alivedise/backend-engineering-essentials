@@ -227,3 +227,4 @@ title: BEE list
 - [518.LLM Streaming Patterns](518)
 - [519.AI Memory Systems for Long-Running Agents](519)
 - [520.LLM Tool Use and Function Calling Patterns](520)
+- [521.Multi-modal LLM Integration Patterns](521)
