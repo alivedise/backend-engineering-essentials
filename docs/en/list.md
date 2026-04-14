@@ -186,3 +186,4 @@ title: BEE list
 - [481.Database Connection Proxy and Pooler Architecture](481)
 - [482.Zero-Trust Security Architecture](482)
 - [483.Platform Engineering and Internal Developer Platforms](483)
+- [484.Serverless Architecture Patterns](484)
