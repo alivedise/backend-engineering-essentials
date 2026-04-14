@@ -141,3 +141,4 @@ title: BEE list
 - [437.Change Data Capture](437)
 - [438.Session Guarantees and Consistency Models](438)
 - [439.Byzantine Fault Tolerance](439)
+- [440.Two-Phase Locking](440)
