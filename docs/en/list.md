@@ -194,3 +194,4 @@ title: BEE list
 - [489.HTTP Security Headers](489)
 - [490.Cryptographic Key Management and Key Rotation](490)
 - [491.TLS Certificate Lifecycle and PKI](491)
+- [492.SQL Injection and Prepared Statements](492)
