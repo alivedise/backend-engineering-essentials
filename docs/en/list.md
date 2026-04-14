@@ -236,3 +236,4 @@ title: BEE list
 - [527.LLM Batch Processing Patterns](527)
 - [528.Vector Database Architecture](528)
 - [529.AI Workflow Orchestration](529)
+- [530.Prompt Management and Versioning](530)
