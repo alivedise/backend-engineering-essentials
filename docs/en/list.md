@@ -245,3 +245,4 @@ title: BEE list
 - [536.AI Experimentation and Model A/B Testing](536)
 - [537.AI Agent Safety and Reliability Patterns](537)
 - [538.LLM API Versioning and Model Migration](538)
+- [539.LLM-Based Classification and Semantic Routing](539)
