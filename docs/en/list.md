@@ -169,3 +169,4 @@ title: BEE list
 - [464.Column-Oriented Storage](464)
 - [465.gRPC Streaming Patterns](465)
 - [466.Database Query Planning and EXPLAIN](466)
+- [467.Service-to-Service Authentication](467)
