@@ -223,3 +223,4 @@ title: BEE list
 - [514.Fine-Tuning and PEFT Patterns](514)
 - [515.AI Gateway Patterns](515)
 - [516.Embedding Models and Vector Representations](516)
+- [517.Retrieval Reranking and Hybrid Search](517)
