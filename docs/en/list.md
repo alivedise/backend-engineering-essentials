@@ -224,3 +224,4 @@ title: BEE list
 - [515.AI Gateway Patterns](515)
 - [516.Embedding Models and Vector Representations](516)
 - [517.Retrieval Reranking and Hybrid Search](517)
+- [518.LLM Streaming Patterns](518)
