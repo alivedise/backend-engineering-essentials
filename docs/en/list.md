@@ -204,3 +204,4 @@ title: BEE list
 - [495.Memory Management and Garbage Collection](495)
 - [496.JVM JIT Compilation and Application Warm-Up](496)
 - [497.Server-Side Request Forgery (SSRF)](497)
+- [498.OpenAPI Specification and API-First Design](498)
