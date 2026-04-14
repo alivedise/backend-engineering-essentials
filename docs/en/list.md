@@ -234,3 +234,4 @@ title: BEE list
 - [525.Chain-of-Thought and Extended Thinking Patterns](525)
 - [526.LLM Caching Strategies](526)
 - [527.LLM Batch Processing Patterns](527)
+- [528.Vector Database Architecture](528)
