@@ -135,3 +135,4 @@ title: BEE list
 - [431.Bloom Filters and Probabilistic Data Structures](431)
 - [432.Merkle Trees](432)
 - [433.Quorum Systems and NWR Consistency](433)
+- [434.Failure Detection](434)
