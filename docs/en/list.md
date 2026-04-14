@@ -187,3 +187,4 @@ title: BEE list
 - [482.Zero-Trust Security Architecture](482)
 - [483.Platform Engineering and Internal Developer Platforms](483)
 - [484.Serverless Architecture Patterns](484)
+- [485.GraphQL Federation](485)
