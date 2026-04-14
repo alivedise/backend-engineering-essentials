@@ -226,3 +226,4 @@ title: BEE list
 - [517.Retrieval Reranking and Hybrid Search](517)
 - [518.LLM Streaming Patterns](518)
 - [519.AI Memory Systems for Long-Running Agents](519)
+- [520.LLM Tool Use and Function Calling Patterns](520)
