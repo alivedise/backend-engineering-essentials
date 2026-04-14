@@ -136,3 +136,4 @@ title: BEE list
 - [432.Merkle Trees](432)
 - [433.Quorum Systems and NWR Consistency](433)
 - [434.Failure Detection](434)
+- [435.Distributed Snapshots](435)
