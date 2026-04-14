@@ -249,3 +249,4 @@ title: BEE list
 - [540.LLM Data Flywheel and Continuous Improvement](540)
 - [541.LLM Provider Rate Limiting and Client-Side Quota Management](541)
 - [542.LLM Multitenancy and Prompt Isolation](542)
+- [543.LLM Self-Consistency and Ensemble Sampling](543)
