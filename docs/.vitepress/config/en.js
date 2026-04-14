@@ -2,6 +2,32 @@ import matter from 'gray-matter';
 import { resolve } from 'path';
 import fs from 'fs';
 
+function getMinId(node) {
+  if (node.link) {
+    const id = parseInt(node.link.replace(/^\//, ''), 10);
+    return isNaN(id) ? Infinity : id;
+  }
+  if (node.items && node.items.length) {
+    return Math.min(...node.items.map(getMinId));
+  }
+  return Infinity;
+}
+
+function sortByMinId(nodes) {
+  nodes.forEach((node) => {
+    if (node.items && node.items.length) {
+      sortByMinId(node.items);
+    }
+  });
+  nodes.sort((a, b) => {
+    const aIsOverall = a.text && a.text.toLowerCase().includes('overall');
+    const bIsOverall = b.text && b.text.toLowerCase().includes('overall');
+    if (aIsOverall && !bIsOverall) return -1;
+    if (!aIsOverall && bIsOverall) return 1;
+    return getMinId(a) - getMinId(b);
+  });
+}
+
 function getSidebar(dir) {
   const docsPath = resolve(__dirname, `../${dir}`);
   let mdFileList = [];
@@ -51,13 +77,7 @@ function getSidebar(dir) {
   }
 
   const sidebar = getFilesRecursively(docsPath);
-  sidebar.sort((a, b) => {
-    const aIsOverall = a.text && a.text.toLowerCase().includes('overall');
-    const bIsOverall = b.text && b.text.toLowerCase().includes('overall');
-    if (aIsOverall && !bIsOverall) return -1;
-    if (!aIsOverall && bIsOverall) return 1;
-    return 0;
-  });
+  sortByMinId(sidebar);
   mdFileList = mdFileList
     .sort((a, b) => a.id - b.id)
     .map((item) => item.listItem);
