@@ -184,3 +184,4 @@ title: BEE list
 - [479.gRPC Error Handling and Status Codes](479)
 - [480.Event Schema Design and Versioning](480)
 - [481.Database Connection Proxy and Pooler Architecture](481)
+- [482.Zero-Trust Security Architecture](482)
