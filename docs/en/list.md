@@ -131,3 +131,4 @@ title: BEE list
 - [427.Clock Synchronization and Physical Time](427)
 - [428.Linearizability and Serializability](428)
 - [429.CRDTs: Conflict-free Replicated Data Types](429)
+- [430.Write-Ahead Logging](430)
