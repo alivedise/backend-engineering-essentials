@@ -181,3 +181,4 @@ title: BEE list
 - [476.Database Row-Level Security](476)
 - [477.JSONB and Semi-Structured Data in PostgreSQL](477)
 - [478.Temporal Data Modeling](478)
+- [479.gRPC Error Handling and Status Codes](479)
