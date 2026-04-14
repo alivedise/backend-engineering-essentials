@@ -188,3 +188,4 @@ title: BEE list
 - [483.Platform Engineering and Internal Developer Platforms](483)
 - [484.Serverless Architecture Patterns](484)
 - [485.GraphQL Federation](485)
+- [486.The Twelve-Factor App Methodology](486)
