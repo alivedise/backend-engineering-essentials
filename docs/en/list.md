@@ -176,3 +176,4 @@ title: BEE list
 - [471.Choreography vs Orchestration in Distributed Workflows](471)
 - [472.The Outbox Pattern and Transactional Messaging](472)
 - [473.Idempotency Key Implementation Patterns](473)
+- [474.Webhook Signature Verification and Security](474)
