@@ -210,3 +210,4 @@ title: BEE list
 - [501.Data Privacy and PII Handling](501)
 - [502.Threat Modeling](502)
 - [503.LLM API Integration Patterns](503)
+- [504.AI Agent Architecture Patterns](504)
