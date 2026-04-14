@@ -164,3 +164,4 @@ title: BEE list
 - [459.Presigned URLs and Object Storage Patterns](459)
 - [460.Soft Deletes and Data Retention](460)
 - [461.The N+1 Query Problem and Batch Loading](461)
+- [462.Audit Logging Architecture](462)
