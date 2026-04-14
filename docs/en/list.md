@@ -179,3 +179,4 @@ title: BEE list
 - [474.Webhook Signature Verification and Security](474)
 - [475.OpenTelemetry Instrumentation](475)
 - [476.Database Row-Level Security](476)
+- [477.JSONB and Semi-Structured Data in PostgreSQL](477)
