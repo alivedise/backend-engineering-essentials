@@ -166,3 +166,4 @@ title: BEE list
 - [461.The N+1 Query Problem and Batch Loading](461)
 - [462.Audit Logging Architecture](462)
 - [463.Read Replica Routing and Lag Handling](463)
+- [464.Column-Oriented Storage](464)
