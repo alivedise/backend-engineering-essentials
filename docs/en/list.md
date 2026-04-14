@@ -211,3 +211,4 @@ title: BEE list
 - [502.Threat Modeling](502)
 - [503.LLM API Integration Patterns](503)
 - [504.AI Agent Architecture Patterns](504)
+- [505.Model Context Protocol (MCP)](505)
