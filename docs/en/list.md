@@ -198,3 +198,4 @@ title: BEE list
 - [493.Cross-Site Request Forgery (CSRF) and Defense Patterns](493)
 - [494.Container Image Security and Supply Chain Integrity](494)
 - [495.Memory Management and Garbage Collection](495)
+- [496.JVM JIT Compilation and Application Warm-Up](496)
