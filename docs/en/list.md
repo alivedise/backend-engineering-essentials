@@ -130,3 +130,4 @@ title: BEE list
 - [426.Service Discovery](426)
 - [427.Clock Synchronization and Physical Time](427)
 - [428.Linearizability and Serializability](428)
+- [429.CRDTs: Conflict-free Replicated Data Types](429)
