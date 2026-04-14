@@ -102,6 +102,7 @@ title: BEE list
 - [343.Load Testing and Benchmarking](343)
 - [344.Test Doubles: Mocks, Stubs, Fakes](344)
 - [345.Testing in Production](345)
+- [346.Property-Based Testing](346)
 - [360.Continuous Integration Principles](360)
 - [361.Deployment Strategies](361)
 - [362.Infrastructure as Code](362)
