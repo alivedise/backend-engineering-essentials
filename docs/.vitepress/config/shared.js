@@ -50,7 +50,7 @@ export const shared = {
     },
   },
   head: [
-    ['link', { rel: 'icon', href: 'favicon.svg' }],
+    ['link', { rel: 'icon', href: '/backend-engineering-essentials/favicon.svg' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700' }],
   ],
   pwa: {
