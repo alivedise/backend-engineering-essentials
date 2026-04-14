@@ -238,3 +238,4 @@ title: BEE list
 - [529.AI Workflow Orchestration](529)
 - [530.Prompt Management and Versioning](530)
 - [531.Advanced RAG and Agentic Retrieval Patterns](531)
+- [532.LLM-Powered Document Processing and Information Extraction](532)
