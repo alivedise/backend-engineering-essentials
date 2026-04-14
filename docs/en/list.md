@@ -183,3 +183,4 @@ title: BEE list
 - [478.Temporal Data Modeling](478)
 - [479.gRPC Error Handling and Status Codes](479)
 - [480.Event Schema Design and Versioning](480)
+- [481.Database Connection Proxy and Pooler Architecture](481)
