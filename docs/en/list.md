@@ -217,3 +217,4 @@ title: BEE list
 - [508.Structured Output and Constrained Decoding](508)
 - [509.RAG Pipeline Architecture](509)
 - [510.LLM Security and Prompt Injection](510)
+- [511.LLM Observability and Monitoring](511)
