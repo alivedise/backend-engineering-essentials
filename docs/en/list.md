@@ -177,3 +177,4 @@ title: BEE list
 - [472.The Outbox Pattern and Transactional Messaging](472)
 - [473.Idempotency Key Implementation Patterns](473)
 - [474.Webhook Signature Verification and Security](474)
+- [475.OpenTelemetry Instrumentation](475)
