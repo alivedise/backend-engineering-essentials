@@ -178,3 +178,4 @@ title: BEE list
 - [473.Idempotency Key Implementation Patterns](473)
 - [474.Webhook Signature Verification and Security](474)
 - [475.OpenTelemetry Instrumentation](475)
+- [476.Database Row-Level Security](476)
