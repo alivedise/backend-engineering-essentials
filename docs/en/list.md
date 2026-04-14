@@ -161,3 +161,4 @@ title: BEE list
 - [456.Long-Polling, SSE, and WebSocket Architecture](456)
 - [457.Distributed Job Scheduling](457)
 - [458.Zero-Downtime Schema Migrations](458)
+- [459.Presigned URLs and Object Storage Patterns](459)
