@@ -213,3 +213,4 @@ title: BEE list
 - [504.AI Agent Architecture Patterns](504)
 - [505.Model Context Protocol (MCP)](505)
 - [506.Evaluating and Testing LLM Applications](506)
+- [507.Prompt Engineering vs RAG vs Fine-Tuning](507)
