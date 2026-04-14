@@ -212,3 +212,4 @@ title: BEE list
 - [503.LLM API Integration Patterns](503)
 - [504.AI Agent Architecture Patterns](504)
 - [505.Model Context Protocol (MCP)](505)
+- [506.Evaluating and Testing LLM Applications](506)
