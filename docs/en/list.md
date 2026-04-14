@@ -158,3 +158,4 @@ title: BEE list
 - [453.Graceful Shutdown and Connection Draining](453)
 - [454.Multi-Region Architecture](454)
 - [455.API Gateway Patterns](455)
+- [456.Long-Polling, SSE, and WebSocket Architecture](456)
