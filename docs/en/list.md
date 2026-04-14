@@ -167,3 +167,4 @@ title: BEE list
 - [462.Audit Logging Architecture](462)
 - [463.Read Replica Routing and Lag Handling](463)
 - [464.Column-Oriented Storage](464)
+- [465.gRPC Streaming Patterns](465)
