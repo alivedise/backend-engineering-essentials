@@ -239,3 +239,4 @@ title: BEE list
 - [530.Prompt Management and Versioning](530)
 - [531.Advanced RAG and Agentic Retrieval Patterns](531)
 - [532.LLM-Powered Document Processing and Information Extraction](532)
+- [533.Conversational AI and Multi-Turn Dialog Architecture](533)
