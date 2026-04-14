@@ -214,3 +214,4 @@ title: BEE list
 - [505.Model Context Protocol (MCP)](505)
 - [506.Evaluating and Testing LLM Applications](506)
 - [507.Prompt Engineering vs RAG vs Fine-Tuning](507)
+- [508.Structured Output and Constrained Decoding](508)
