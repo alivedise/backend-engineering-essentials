@@ -243,3 +243,4 @@ title: BEE list
 - [534.Synthetic Data Generation for AI Systems](534)
 - [535.LLM-Based Code Generation and Review Patterns](535)
 - [536.AI Experimentation and Model A/B Testing](536)
+- [537.AI Agent Safety and Reliability Patterns](537)
