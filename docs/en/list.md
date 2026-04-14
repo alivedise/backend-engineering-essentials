@@ -133,3 +133,4 @@ title: BEE list
 - [429.CRDTs: Conflict-free Replicated Data Types](429)
 - [430.Write-Ahead Logging](430)
 - [431.Bloom Filters and Probabilistic Data Structures](431)
+- [432.Merkle Trees](432)
