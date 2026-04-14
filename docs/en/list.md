@@ -208,3 +208,4 @@ title: BEE list
 - [499.Broken Object Level Authorization (BOLA)](499)
 - [500.Dependency Injection and Inversion of Control](500)
 - [501.Data Privacy and PII Handling](501)
+- [502.Threat Modeling](502)
