@@ -241,3 +241,4 @@ title: BEE list
 - [532.LLM-Powered Document Processing and Information Extraction](532)
 - [533.Conversational AI and Multi-Turn Dialog Architecture](533)
 - [534.Synthetic Data Generation for AI Systems](534)
+- [535.LLM-Based Code Generation and Review Patterns](535)
