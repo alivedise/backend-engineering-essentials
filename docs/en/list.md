@@ -168,3 +168,4 @@ title: BEE list
 - [463.Read Replica Routing and Lag Handling](463)
 - [464.Column-Oriented Storage](464)
 - [465.gRPC Streaming Patterns](465)
+- [466.Database Query Planning and EXPLAIN](466)
