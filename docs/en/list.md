@@ -207,3 +207,4 @@ title: BEE list
 - [498.OpenAPI Specification and API-First Design](498)
 - [499.Broken Object Level Authorization (BOLA)](499)
 - [500.Dependency Injection and Inversion of Control](500)
+- [501.Data Privacy and PII Handling](501)
