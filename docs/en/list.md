@@ -237,3 +237,4 @@ title: BEE list
 - [528.Vector Database Architecture](528)
 - [529.AI Workflow Orchestration](529)
 - [530.Prompt Management and Versioning](530)
+- [531.Advanced RAG and Agentic Retrieval Patterns](531)
