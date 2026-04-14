@@ -172,3 +172,4 @@ title: BEE list
 - [467.Service-to-Service Authentication](467)
 - [468.Protocol Buffers and Schema Evolution](468)
 - [469.Database Bulk Operations and UPSERT Patterns](469)
+- [470.Materialized Views and Incremental Computation](470)
