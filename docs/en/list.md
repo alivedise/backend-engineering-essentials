@@ -286,3 +286,4 @@ title: BEE list
 - [577.LLM Inference on Edge and Mobile Devices](577)
 - [578.Mixture of Agents Architecture](578)
 - [579.LLM Output Watermarking and AI Content Provenance](579)
+- [580.Text-to-SQL: Natural Language Database Interfaces](580)
