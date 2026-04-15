@@ -256,3 +256,6 @@ title: BEE list
 - [547.Multi-Agent Debate and Critique Patterns](547)
 - [548.LLM Output Parsing and Structured Extraction Reliability](548)
 - [549.LLM Prompt Compression and Token Efficiency](549)
+- [550.LLM Knowledge Distillation and Model Compression](550)
+- [551.LLM Evaluation Metrics and Automated Scoring Pipelines](551)
+- [552.RAG Evaluation and Quality Measurement](552)
