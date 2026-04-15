@@ -288,3 +288,4 @@ title: BEE list
 - [579.LLM Output Watermarking and AI Content Provenance](579)
 - [580.Text-to-SQL: Natural Language Database Interfaces](580)
 - [581.AI Compliance and Governance Engineering](581)
+- [582.Real-Time Voice AI Integration Patterns](582)
