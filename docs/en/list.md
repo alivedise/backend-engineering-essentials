@@ -300,3 +300,4 @@ title: BEE list
 - [591.Testing Machine Learning Pipelines](591)
 - [592.Responsible AI, Fairness, and Model Cards](592)
 - [593.ML Training Cost Optimization](593)
+- [594.Transfer Learning and Fine-Tuning Patterns](594)
