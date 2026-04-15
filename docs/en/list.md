@@ -289,3 +289,4 @@ title: BEE list
 - [580.Text-to-SQL: Natural Language Database Interfaces](580)
 - [581.AI Compliance and Governance Engineering](581)
 - [582.Real-Time Voice AI Integration Patterns](582)
+- [583.AI Feature Stores for ML Inference](583)
