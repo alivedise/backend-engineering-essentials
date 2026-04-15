@@ -296,3 +296,4 @@ title: BEE list
 - [587.ML Data Validation and Pipeline Quality Gates](587)
 - [588.Model Explainability in Production](588)
 - [589.Online Learning and Continual Model Updates](589)
+- [590.ML Model Serving Infrastructure](590)
