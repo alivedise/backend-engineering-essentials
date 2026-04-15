@@ -301,3 +301,4 @@ title: BEE list
 - [592.Responsible AI, Fairness, and Model Cards](592)
 - [593.ML Training Cost Optimization](593)
 - [594.Transfer Learning and Fine-Tuning Patterns](594)
+- [595.Data Augmentation Strategies for ML Training](595)
