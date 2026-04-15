@@ -282,3 +282,4 @@ title: BEE list
 - [573.RLHF and Alignment Training Infrastructure](573)
 - [574.Process Reward Models and Test-Time Compute Scaling](574)
 - [575.LLM Pretraining Data Pipelines and Web-Scale Corpus Curation](575)
+- [576.LLM Model Merging and Weight-Space Composition](576)
