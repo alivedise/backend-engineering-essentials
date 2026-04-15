@@ -298,3 +298,4 @@ title: BEE list
 - [589.Online Learning and Continual Model Updates](589)
 - [590.ML Model Serving Infrastructure](590)
 - [591.Testing Machine Learning Pipelines](591)
+- [592.Responsible AI, Fairness, and Model Cards](592)
