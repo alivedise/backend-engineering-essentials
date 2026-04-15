@@ -299,3 +299,4 @@ title: BEE list
 - [590.ML Model Serving Infrastructure](590)
 - [591.Testing Machine Learning Pipelines](591)
 - [592.Responsible AI, Fairness, and Model Cards](592)
+- [593.ML Training Cost Optimization](593)
