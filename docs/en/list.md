@@ -253,3 +253,4 @@ title: BEE list
 - [544.AI Red Teaming and Adversarial Testing](544)
 - [545.LLM Hallucination Detection and Factual Grounding](545)
 - [546.LLM Planning and Task Decomposition](546)
+- [547.Multi-Agent Debate and Critique Patterns](547)
