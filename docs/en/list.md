@@ -264,3 +264,4 @@ title: BEE list
 - [555.LLM Multi-Provider Resilience and API Fallback Patterns](555)
 - [556.Extended Thinking and Reasoning Trace Management](556)
 - [557.Multimodal Embeddings and Cross-Modal Retrieval](557)
+- [558.Semantic Caching for LLM Applications](558)
