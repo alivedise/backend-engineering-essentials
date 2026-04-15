@@ -291,3 +291,4 @@ title: BEE list
 - [582.Real-Time Voice AI Integration Patterns](582)
 - [583.AI Feature Stores for ML Inference](583)
 - [584.Shadow Mode and Canary Deployment for ML Models](584)
+- [585.ML Monitoring and Drift Detection](585)
