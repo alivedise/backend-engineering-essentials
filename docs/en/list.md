@@ -252,3 +252,4 @@ title: BEE list
 - [543.LLM Self-Consistency and Ensemble Sampling](543)
 - [544.AI Red Teaming and Adversarial Testing](544)
 - [545.LLM Hallucination Detection and Factual Grounding](545)
+- [546.LLM Planning and Task Decomposition](546)
