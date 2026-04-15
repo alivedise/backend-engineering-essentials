@@ -269,3 +269,4 @@ title: BEE list
 - [560.LLM Load Testing and Capacity Planning](560)
 - [561.Speculative Decoding for LLM Inference](561)
 - [562.Multi-LoRA Serving and Adapter Management](562)
+- [563.LLM Quantization for Inference](563)
