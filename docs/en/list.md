@@ -259,3 +259,8 @@ title: BEE list
 - [550.LLM Knowledge Distillation and Model Compression](550)
 - [551.LLM Evaluation Metrics and Automated Scoring Pipelines](551)
 - [552.RAG Evaluation and Quality Measurement](552)
+- [553.LLM Tokenization Internals and Token Budget Management](553)
+- [554.GraphRAG and Knowledge Graph Augmented Generation](554)
+- [555.LLM Multi-Provider Resilience and API Fallback Patterns](555)
+- [556.Extended Thinking and Reasoning Trace Management](556)
+- [557.Multimodal Embeddings and Cross-Modal Retrieval](557)
