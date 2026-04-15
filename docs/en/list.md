@@ -267,3 +267,4 @@ title: BEE list
 - [558.Semantic Caching for LLM Applications](558)
 - [559.Chunking Strategies for RAG Systems](559)
 - [560.LLM Load Testing and Capacity Planning](560)
+- [561.Speculative Decoding for LLM Inference](561)
