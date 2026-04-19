@@ -56,7 +56,10 @@ export const shared = {
   pwa: {
     registerType: 'autoUpdate',
     workbox: {
-      maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+      // Bumped from 5 MB to 20 MB. The zh-TW local search index grew past 5 MB
+      // as the catalog expanded (currently 5.92 MB). 20 MB gives multi-year headroom
+      // before the next bump is needed.
+      maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
     },
     manifest: {
       name: 'Backend Engineering Essentials',
