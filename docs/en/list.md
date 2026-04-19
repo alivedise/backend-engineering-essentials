@@ -305,3 +305,4 @@ title: BEE list
 - [596.GraphQL HTTP-Layer Caching](596)
 - [597.GraphQL vs REST: Request-Side HTTP Trade-offs](597)
 - [598.GraphQL vs REST: Response-Side HTTP Trade-offs](598)
+- [599.GraphQL Operational Patterns](599)
