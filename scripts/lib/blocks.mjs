@@ -25,11 +25,21 @@ export const BLOCK_ALLOCATION = [
   { slug: 'ai-backend-patterns', source: 'AI Backend Patterns', start: 30001, end: 39999 },
 ];
 
-// Special: Databases/ is merged into data-storage per spec §3 special handling.
-// MERGED_FOLDERS maps a source folder that should be absorbed into another
-// to its destination block slug.
+// Special: small overflow folders are merged into their canonical category
+// per spec §3 special handling. MERGED_FOLDERS maps a source folder that
+// should be absorbed into another to its destination block slug.
+//
+// Overflow folders discovered during migration (each contains a single
+// article that topically belongs in the canonical sibling folder):
+//   Databases (481)  → data-storage
+//   CI-CD (483)      → cicd-devops
+//   Messaging (480)  → messaging
+//   Security (482)   → security-fundamentals
 export const MERGED_FOLDERS = {
   'Databases': 'data-storage',
+  'CI-CD': 'cicd-devops',
+  'Messaging': 'messaging',
+  'Security': 'security-fundamentals',
 };
 
 // Source-name lookup: returns the block slug for a given source folder name,
