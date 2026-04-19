@@ -14,7 +14,9 @@ BEE (Backend Engineering Essentials) is a collection of vendor-agnostic guidelin
 
 ## Context
 
-Backend engineering spans a vast landscape -- from authentication and networking to distributed systems and observability. Engineers often learn these concepts piecemeal, through scattered blog posts, tribal knowledge, or painful production incidents. BEE provides a structured, numbered set of principles that build a coherent mental model of backend engineering.
+Backend engineering spans a wide surface area: authentication, networking, data, distributed systems, observability, and increasingly machine-learning workloads. Engineers learn these topics piecemeal, from blog posts, tribal knowledge, and production incidents. BEE collects them into a numbered, vendor-neutral catalogue with two depth levels: short essentials articles for the foundations, and longer deep-dive series (GraphQL HTTP-layer caching, AI backend patterns) where the topic warrants extended treatment.
+
+Article IDs cluster by category in 1000-id blocks (auth = 1xxx, security = 2xxx, and so on) and URLs are semantic slugs (`/auth/oauth-openid-connect`, not `/1003`). Old numeric URLs continue to resolve via redirect stubs.
 
 ## Purpose
 
@@ -23,7 +25,7 @@ Backend engineering spans a vast landscape -- from authentication and networking
 - Serve as an onboarding resource for engineers entering backend development
 - Bridge the gap between "I know the syntax" and "I understand the system"
 
-## How to Read BEPs
+## How to Read BEE Articles
 
 Each BEE follows a consistent structure:
 
@@ -32,47 +34,60 @@ Each BEE follows a consistent structure:
 - **Visual** -- Diagrams where they aid understanding
 - **Example** -- Concrete, vendor-agnostic examples
 - **Common Mistakes** -- Anti-patterns to avoid
-- **Related BEPs** -- Cross-references to other principles
+- **Related BEEs** -- Cross-references to other principles
 - **References** -- External resources for deeper learning
 
 ## Categories
 
-### Foundation Layer (0-89)
+> Each category occupies a 1000-id block; `1xxx` means BEE-1001 through BEE-1999. `BEE Overall` is an exception (1-99) because it predates the block scheme. `AI Backend Patterns` is a deliberate exception (30001-39999, 10000 wide).
 
-| Range | Category | Focus |
-|-------|----------|-------|
-| 0-9 | BEE Overall | Purpose, glossary, meta |
-| 10-29 | Authentication & Authorization | Identity, access control, tokens, sessions |
-| 30-49 | Security Fundamentals | OWASP, input validation, secrets, cryptography |
-| 50-69 | Networking Fundamentals | TCP/IP, DNS, HTTP, TLS, load balancing |
-| 70-89 | API Design & Communication Protocols | REST, gRPC, GraphQL, versioning, pagination |
+### Foundation Layer (1xxx-4xxx)
 
-### Architecture & Data Layer (100-179)
+| Prefix | Category | Slug | Focus |
+|--------|----------|------|-------|
+| 1-99   | BEE Overall | `/bee-overall` | Purpose, glossary, meta |
+| 1xxx   | Authentication & Authorization | `/auth` | Identity, access control, tokens, sessions |
+| 2xxx   | Security Fundamentals | `/security-fundamentals` | OWASP, input validation, secrets, cryptography |
+| 3xxx   | Networking Fundamentals | `/networking-fundamentals` | TCP/IP, DNS, HTTP, TLS, load balancing |
+| 4xxx   | API Design & Communication Protocols | `/api-design` | REST, gRPC, GraphQL, versioning, pagination |
 
-| Range | Category | Focus |
-|-------|----------|-------|
-| 100-119 | Architecture Patterns | Monolith, microservices, DDD, CQRS, hexagonal |
-| 120-139 | Data Storage & Database Fundamentals | SQL vs NoSQL, indexing, replication, sharding |
-| 140-159 | Data Modeling & Schema Design | ER modeling, normalization, serialization |
-| 160-179 | Transactions & Data Integrity | ACID, isolation levels, sagas, idempotency |
+### Architecture & Data Layer (5xxx-8xxx)
 
-### Runtime Layer (200-279)
+| Prefix | Category | Slug | Focus |
+|--------|----------|------|-------|
+| 5xxx   | Architecture Patterns | `/architecture-patterns` | Monolith, microservices, DDD, CQRS, hexagonal |
+| 6xxx   | Data Storage & Database Fundamentals | `/data-storage` | SQL vs NoSQL, indexing, replication, sharding |
+| 7xxx   | Data Modeling & Schema Design | `/data-modeling` | ER modeling, normalization, serialization |
+| 8xxx   | Transactions & Data Integrity | `/transactions` | ACID, isolation levels, sagas, idempotency |
 
-| Range | Category | Focus |
-|-------|----------|-------|
-| 200-219 | Caching | Invalidation, eviction, distributed cache, HTTP caching |
-| 220-239 | Messaging & Event-Driven | Queues, pub/sub, delivery guarantees, event sourcing |
-| 240-259 | Concurrency & Async | Threads, locks, async I/O, worker pools |
-| 260-279 | Resilience & Reliability | Circuit breakers, retries, timeouts, rate limiting |
+### Runtime Layer (9xxx-12xxx)
 
-### Engineering Practices Layer (300-379)
+| Prefix | Category | Slug | Focus |
+|--------|----------|------|-------|
+| 9xxx   | Caching | `/caching` | Invalidation, eviction, distributed cache, HTTP caching |
+| 10xxx  | Messaging & Event-Driven | `/messaging` | Queues, pub/sub, delivery guarantees, event sourcing |
+| 11xxx  | Concurrency & Async | `/concurrency` | Threads, locks, async I/O, worker pools |
+| 12xxx  | Resilience & Reliability | `/resilience` | Circuit breakers, retries, timeouts, rate limiting |
 
-| Range | Category | Focus |
-|-------|----------|-------|
-| 300-319 | Performance & Scalability | Estimation, scaling, profiling, CDN |
-| 320-339 | Observability | Logs, metrics, traces, SLOs, alerting |
-| 340-359 | Testing Strategies | Test pyramid, integration, contract, load testing |
-| 360-379 | CI/CD & DevOps | CI, deployment strategies, IaC, feature flags |
+### Engineering Practices Layer (13xxx-16xxx)
+
+| Prefix | Category | Slug | Focus |
+|--------|----------|------|-------|
+| 13xxx  | Performance & Scalability | `/performance-scalability` | Estimation, scaling, profiling, CDN |
+| 14xxx  | Observability | `/observability` | Logs, metrics, traces, SLOs, alerting |
+| 15xxx  | Testing Strategies | `/testing` | Test pyramid, integration, contract, load testing |
+| 16xxx  | CI/CD & DevOps | `/cicd-devops` | CI, deployment strategies, IaC, feature flags |
+
+### Specialized Domains (17xxx+)
+
+| Prefix | Category | Slug | Focus |
+|--------|----------|------|-------|
+| 17xxx  | Search | `/search` | Inverted indexes, ranking, query parsing, vector search |
+| 18xxx  | Multi-Tenancy | `/multi-tenancy` | Tenant isolation, noisy-neighbour, per-tenant limits |
+| 19xxx  | Distributed Systems | `/distributed-systems` | Consensus, replication, partition tolerance, time |
+| 30xxx  | AI Backend Patterns | `/ai-backend-patterns` | LLM serving, embeddings, RAG, ML pipelines, MLOps |
+
+> **Why is AI Backend Patterns in the 30xxx block?** It is the only category with a 10000-wide allocation (30001-39999) instead of 1000-wide. The block reflects intentionally deeper coverage of AI-system patterns and reserves room for the topic to grow without colliding with future foundational categories.
 
 ## Related Resources
 
@@ -83,7 +98,7 @@ Each BEE follows a consistent structure:
 
 Alive Kuo -- [alegnadise@gmail.com](mailto:alegnadise@gmail.com)
 
-## Related BEPs
+## Related BEEs
 
 - [BEE-2](how-to-read-bee.md) How to Read BEE
 - [BEE-3](glossary.md) Glossary
