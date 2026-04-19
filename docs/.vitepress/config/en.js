@@ -3,9 +3,8 @@ import { resolve, basename, dirname } from 'path';
 import fs from 'fs';
 
 function getMinId(node) {
-  if (node.link) {
-    const id = parseInt(node.link.replace(/^\//, ''), 10);
-    return isNaN(id) ? Infinity : id;
+  if (node.beeId !== undefined) {
+    return node.beeId;
   }
   if (node.items && node.items.length) {
     return Math.min(...node.items.map(getMinId));
@@ -61,7 +60,7 @@ function getSidebar(dir) {
           if (!data.slug) {
             console.warn(`[sidebar] missing slug in frontmatter: ${fullPath}; falling back to file basename`);
           }
-          let title = `BEE-${data.id} ${data.title}` || file.replace('.md', '');
+          let title = `${data.id}.${data.title}` || file.replace('.md', '');
           if (data && data.placeholder) {
             title = `<span class="VPBadge danger">PLACE</span> ${title}`;
           }
@@ -74,6 +73,7 @@ function getSidebar(dir) {
           result.push({
             text: title,
             link: semanticUrl,
+            beeId: data.id,
           });
         }
       }
