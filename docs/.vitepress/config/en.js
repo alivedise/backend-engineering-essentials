@@ -60,18 +60,20 @@ function getSidebar(dir) {
           if (!data.slug) {
             console.warn(`[sidebar] missing slug in frontmatter: ${fullPath}; falling back to file basename`);
           }
-          let title = `${data.id}.${data.title}` || file.replace('.md', '');
+          let sidebarTitle = data.title || file.replace('.md', '');
+          let listTitle = `${data.id}.${data.title}` || file.replace('.md', '');
           if (data && data.placeholder) {
-            title = `<span class="VPBadge danger">PLACE</span> ${title}`;
+            sidebarTitle = `<span class="VPBadge danger">PLACE</span> ${sidebarTitle}`;
+            listTitle = `<span class="VPBadge danger">PLACE</span> ${listTitle}`;
           }
 
           const semanticUrl = `/${categorySlug}/${articleSlug}`;
           mdFileList.push({
-            listItem: `- [${title}](${semanticUrl})`,
+            listItem: `- [${listTitle}](${semanticUrl})`,
             id: data.id,
           });
           result.push({
-            text: title,
+            text: sidebarTitle,
             link: semanticUrl,
             beeId: data.id,
           });
