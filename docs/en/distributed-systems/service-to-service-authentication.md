@@ -238,6 +238,7 @@ server := &http.Server{
 - [BEE-1001](../auth/authentication-vs-authorization.md) -- Authentication vs Authorization: covers the foundational distinction; service-to-service auth applies the same principles but with automated credential management instead of interactive user login
 - [BEE-1003](../auth/oauth-openid-connect.md) -- Token-Based Authentication: JWT structure and validation apply identically to service tokens; service tokens add `aud` scoping and automation requirements
 - [BEE-2003](../security-fundamentals/secrets-management.md) -- Secrets Management: service credentials (private keys, signing secrets) must be stored and rotated through a secrets manager, not hardcoded or stored in environment variables baked into images
+- [BEE-2007](../security-fundamentals/zero-trust-security-architecture.md) -- Zero-Trust Security Architecture: establishes the architectural principle that every service-to-service call must be authenticated regardless of network origin; this article covers the application-level mechanisms (mTLS, service JWTs, workload identity) that implement that principle
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL Handshake: mTLS extends the standard TLS handshake with client certificate presentation; understanding the base TLS handshake is prerequisite to understanding mTLS
 - [BEE-19043](audit-logging-architecture.md) -- Audit Logging Architecture: service identity must appear in audit log entries to enable cross-service forensic investigation
 
