@@ -7,7 +7,11 @@ import matter from 'gray-matter';
 // Throws if input has no frontmatter.
 export function updateFrontmatter(rawMd, newId, slug) {
   const parsed = matter(rawMd);
-  if (!parsed.matter || parsed.matter.trim().length === 0) {
+  // Note: parsed.matter is unreliable when gray-matter's content cache is hot
+  // (a second matter() call on the same raw string returns parsed.matter as
+  // undefined). Use parsed.data + parsed.isEmpty (always preserved) to detect
+  // missing frontmatter.
+  if (parsed.isEmpty || !parsed.data || Object.keys(parsed.data).length === 0) {
     throw new Error('no frontmatter found in input');
   }
 
