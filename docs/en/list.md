@@ -303,3 +303,4 @@ title: BEE list
 - [594.Transfer Learning and Fine-Tuning Patterns](594)
 - [595.Data Augmentation Strategies for ML Training](595)
 - [596.GraphQL HTTP-Layer Caching](596)
+- [597.GraphQL vs REST: Request-Side HTTP Trade-offs](597)
