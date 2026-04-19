@@ -1,0 +1,268 @@
+---
+id: 30090
+title: 'Responsible AI, Fairness, and Model Cards'
+state: draft
+slug: responsible-ai-fairness-and-model-cards
+---
+
+# [BEE-592] Responsible AI, Fairness, and Model Cards
+
+:::info
+Responsible AI engineering formalizes the practices that prevent ML systems from causing systematic harm — measuring bias across demographic groups, documenting model limitations before deployment, and satisfying regulatory requirements that attach legal liability to algorithmic decisions affecting people's lives.
+:::
+
+## Context
+
+Three incidents defined the responsible AI agenda for practitioners. ProPublica's 2016 investigation of the COMPAS recidivism tool found that Black defendants were 77% more likely to be labeled future violent offenders than White defendants at the same observed risk score. Amazon's hiring algorithm, trained on resumes submitted over a decade, learned to penalize the word "women's" and downgraded graduates of all-women's colleges — the tool was scrapped in 2018. Obermeyer et al. (Science, 2019) dissected a commercial healthcare risk-scoring algorithm used by US health systems and found it systematically underestimated illness severity in Black patients, because it predicted *healthcare costs* rather than *illness*, and Black patients with equal illness receive less care due to structural inequity.
+
+These are not edge cases. They are the predictable result of optimizing a loss function without measuring its distributional impact across groups. The difference between a well-intentioned system and a discriminatory one is often a single missing `groupby` in the evaluation.
+
+The field has responded with three tools:
+
+- **Fairness metrics** (Hardt, Price, Srebro, NeurIPS 2016) formalize what "equal treatment" means mathematically
+- **Model Cards** (Mitchell et al., FAccT 2019) document intended use, performance across demographic groups, and known limitations
+- **Datasheets for Datasets** (Gebru et al., CACM 2021) document training data provenance and composition
+
+Regulatory frameworks now require these artifacts. The EU AI Act (Annex III) classifies systems affecting credit, employment, education, law enforcement, and healthcare as high-risk, triggering mandatory documentation and risk management under Articles 9 and 13. The NIST AI Risk Management Framework (AI RMF 1.0, January 2023) organizes obligations into four functions: GOVERN, MAP, MEASURE, MANAGE.
+
+## Fairness Metrics
+
+Three properties formalize fairness for binary classifiers with a protected attribute A (e.g., race, gender) and prediction Ŷ:
+
+**Demographic Parity** requires equal positive prediction rates across groups:
+```
+P(Ŷ=1 | A=0) = P(Ŷ=1 | A=1)
+```
+A loan model satisfies demographic parity when it approves the same fraction of applicants regardless of race. This is the appropriate constraint when group membership should have zero correlation with the outcome.
+
+**Equalized Odds** (Hardt et al. 2016) requires equal true positive rates *and* equal false positive rates:
+```
+P(Ŷ=1 | A=0, Y=1) = P(Ŷ=1 | A=1, Y=1)   ← equal TPR
+P(Ŷ=1 | A=0, Y=0) = P(Ŷ=1 | A=1, Y=0)   ← equal FPR
+```
+A fraud model satisfies equalized odds when it catches fraud at the same rate for all demographic groups *and* incorrectly flags legitimate transactions at the same rate. This is appropriate when the prediction is consequential in both directions.
+
+**Individual Fairness** requires that similar individuals receive similar predictions. It is conceptually appealing but requires defining a task-specific similarity metric — in practice, this is often domain-specific and difficult to implement without expert input.
+
+### The Impossibility of Simultaneous Fairness
+
+Chouldechova (2017) and Kleinberg et al. (arXiv:1609.05807) proved that when base rates differ between groups — when Group A has a higher true prevalence of the outcome than Group B — it is mathematically impossible to simultaneously satisfy demographic parity, equalized odds, and calibration. You must choose which constraint to optimize; the choice should be driven by the harm model, not technical convenience.
+
+The COMPAS case illustrates this: the tool was calibrated (equal accuracy across groups) but had unequal false positive rates — Black defendants were more often mislabeled as high-risk. Equal calibration and equal false positive rates cannot coexist when recidivism base rates differ between groups.
+
+## Measuring Bias with Fairlearn
+
+Fairlearn (Weerts et al., JMLR 2023, arXiv:2303.16626) provides the `MetricFrame` abstraction: evaluate any sklearn-compatible metric function disaggregated by a sensitive feature.
+
+```python
+import pandas as pd
+import numpy as np
+from fairlearn.metrics import (
+    MetricFrame,
+    demographic_parity_difference,
+    equalized_odds_difference,
+    selection_rate,
+)
+from sklearn.metrics import accuracy_score, false_positive_rate
+
+# y_true, y_pred: model predictions on holdout set
+# sensitive_features: protected attribute (e.g., race, gender)
+sensitive_features = test_df["race"]
+
+mf = MetricFrame(
+    metrics={
+        "accuracy": accuracy_score,
+        "selection_rate": selection_rate,
+        "false_positive_rate": false_positive_rate,
+    },
+    y_true=y_true,
+    y_pred=y_pred,
+    sensitive_features=sensitive_features,
+)
+
+print(mf.by_group)
+#             accuracy  selection_rate  false_positive_rate
+# race
+# Black           0.65           0.52                 0.38
+# White           0.73           0.44                 0.21
+# Hispanic        0.68           0.49                 0.30
+
+# Scalar gap metrics
+dpd = demographic_parity_difference(y_true, y_pred, sensitive_features=sensitive_features)
+eod = equalized_odds_difference(y_true, y_pred, sensitive_features=sensitive_features)
+
+print(f"Demographic parity difference: {dpd:.3f}")   # 0 = perfect parity
+print(f"Equalized odds difference: {eod:.3f}")        # 0 = perfect equalized odds
+```
+
+Fairlearn also provides **mitigation** algorithms — post-processing (`ThresholdOptimizer`) and in-processing (`ExponentiatedGradient`) — that adjust the model to satisfy a specified fairness constraint at minimal accuracy cost.
+
+### Disparate Impact Analysis (4/5ths Rule)
+
+The EEOC Uniform Guidelines on Employee Selection Procedures define disparate impact operationally: if the selection rate for a protected group is less than 80% of the rate for the highest-scoring group, adverse impact is presumed. This 4/5ths (80%) rule is the regulatory threshold for employment decisions in the United States.
+
+```python
+def disparate_impact_analysis(
+    y_pred: np.ndarray,
+    sensitive_features: pd.Series,
+) -> pd.DataFrame:
+    """Compute selection rates and disparate impact ratios per group."""
+    groups = sensitive_features.unique()
+    rates = {
+        group: y_pred[sensitive_features == group].mean()
+        for group in groups
+    }
+    max_rate = max(rates.values())
+
+    return pd.DataFrame([
+        {
+            "group": group,
+            "selection_rate": rate,
+            "disparate_impact_ratio": rate / max_rate,
+            "passes_4_5ths_rule": rate / max_rate >= 0.80,
+        }
+        for group, rate in rates.items()
+    ]).sort_values("selection_rate", ascending=False)
+
+result = disparate_impact_analysis(y_pred, test_df["race"])
+#     group  selection_rate  disparate_impact_ratio  passes_4_5ths_rule
+# 0   White            0.44                    1.00                True
+# 1   Hispanic         0.49                    1.11                True   ← above reference
+# 2   Black            0.52                    1.18                True
+```
+
+The 4/5ths rule is a screening test, not a legal determination. Passing it does not guarantee absence of discrimination; failing it requires investigation and often remediation.
+
+## Model Cards
+
+Mitchell et al. (FAccT 2019, arXiv:1810.03993) propose structured model documentation that travels with the model artifact. A model card MUST include at minimum:
+
+```markdown
+# Model Card: Fraud Classifier v3.2
+
+## Model Details
+- Architecture: Gradient Boosted Trees (XGBoost 2.0.3)
+- Input: 30 transaction features (see feature list in docs/features.md)
+- Output: P(fraud) ∈ [0, 1], threshold 0.5 for binary decision
+- Training date: 2026-03-15
+- Model version: 3.2.0
+
+## Intended Use
+- Primary use: Real-time fraud detection for payment transactions
+- Intended users: Fraud operations team, automated decision systems
+- Out-of-scope: Not validated for non-payment contexts (insurance, identity fraud)
+
+## Training Data
+- Source: Internal transaction logs, 2024-01-01 to 2026-02-28
+- Size: 42M transactions (1.2% positive rate)
+- Geographic coverage: US, EU, LATAM
+- Exclusions: Transactions under $1 (insufficient signal)
+
+## Evaluation Data
+- Holdout: 5M transactions, 2026-03-01 to 2026-03-14 (temporal split)
+
+## Performance Metrics (Overall)
+| Metric | Value |
+|---|---|
+| AUC-ROC | 0.94 |
+| Precision@0.5 | 0.87 |
+| Recall@0.5 | 0.81 |
+| F1 | 0.84 |
+
+## Fairness Evaluation
+| Group | Selection Rate | FPR | Disparate Impact |
+|---|---|---|---|
+| All | 0.48 | 0.06 | 1.00 |
+| US | 0.51 | 0.05 | 1.06 |
+| EU | 0.44 | 0.08 | 0.92 |
+| LATAM | 0.38 | 0.09 | 0.79 ← below 0.80 threshold |
+
+## Known Limitations
+- Performance degrades for transaction types not seen during training (cryptocurrency, BNPL)
+- LATAM selection rate triggers 4/5ths rule; under review by fairness committee
+- Model is not interpretable at the transaction level without SHAP (see BEE-588)
+
+## Ethical Considerations
+- False positives block legitimate transactions; impact disproportionate for LATAM users
+- Do not use threshold below 0.3 without human review in the decision loop
+
+## Caveats and Recommendations
+- Retrain quarterly; model degrades 2-3% AUC over 90 days (measured in production)
+- Fairness re-evaluation MUST occur on every retrain
+```
+
+Publish model cards to the same artifact store as the model weights. In MLflow, attach as an artifact:
+
+```python
+import mlflow
+
+with mlflow.start_run(run_id=run_id):
+    mlflow.log_artifact("model_card.md", artifact_path="documentation")
+    mlflow.log_dict(fairness_metrics, "fairness/metrics.json")
+```
+
+Hugging Face's model card format (https://huggingface.co/docs/hub/model-cards) extends this with YAML frontmatter for machine-readable metadata, enabling automated discovery and filtering by license, task, and language.
+
+## Datasheets for Datasets
+
+Gebru et al. (CACM 2021, arXiv:1803.09010) propose analogous documentation for datasets. Key questions a datasheet MUST answer:
+
+- **Motivation**: Who created the dataset and why? What tasks is it intended for?
+- **Composition**: What types of instances? Are there labels? What are the demographic distributions?
+- **Collection**: How was data collected? What mechanisms, sources, timeframes?
+- **Preprocessing**: What cleaning was applied? How was labeling done? What was the inter-annotator agreement?
+- **Uses**: What tasks is it suitable for? What tasks MUST it NOT be used for?
+- **Distribution**: Under what license? Where is it available? How can it be updated?
+- **Maintenance**: Who maintains it? Is there an erratum process?
+
+The most critical section for fairness is **Composition**: the model can only be as fair as the training data allows. If the training data systematically under-represents a demographic group, or if labeling reflects historical discrimination (as in Obermeyer et al. — healthcare costs proxied for healthcare need), no post-hoc mitigation can fully correct the resulting model.
+
+## Regulatory Integration
+
+For systems classified as high-risk under EU AI Act Annex III (credit, employment, essential public services, law enforcement, migration), Article 9 requires a continuous risk management process and Article 10 imposes specific data governance requirements. Model cards and datasheets are the documentation artifacts that satisfy these requirements.
+
+NIST AI RMF 1.0 maps responsible AI practices to four operational functions:
+
+| Function | Activities |
+|---|---|
+| GOVERN | Establish accountability, assign roles, define policies |
+| MAP | Identify impacted groups, categorize risk level, document context |
+| MEASURE | Run fairness audits, compute MetricFrame, apply 4/5ths rule |
+| MANAGE | Mitigate bias, monitor drift in fairness metrics, escalate failures |
+
+The MEASURE function is where Fairlearn and `MetricFrame` fit directly. GOVERN maps to model card review workflows. MAP corresponds to writing the intended use and ethical considerations sections.
+
+## Common Mistakes
+
+**Evaluating fairness only on overall metrics.** A model with 90% overall accuracy can have 95% accuracy for the majority group and 70% for a minority group. Overall accuracy hides this completely. Fairness evaluation MUST use `groupby` on the sensitive attribute, not aggregate metrics.
+
+**Choosing a fairness constraint without considering the harm model.** Demographic parity requires equal positive rates; equalized odds requires equal error rates. These cannot both hold when base rates differ. Choose the constraint that minimizes the worst harm: in criminal justice, false positives (wrongly labeling someone dangerous) are more harmful than false negatives; in medical screening, false negatives (missing a sick patient) are more harmful. The choice is ethical, not technical.
+
+**Writing a model card once and never updating it.** A model card is documentation for a specific model version. When the model is retrained, the fairness metrics change, the training data cutoff changes, and known limitations may change. Pin model cards to model versions in the artifact store and re-generate on every retrain as part of the CI/CD pipeline.
+
+**Treating the 4/5ths rule as a compliance checkbox.** Passing the 4/5ths rule means the selection rate disparity is below a threshold, not that the model is fair. A model with 80% adverse impact ratio is at the threshold by definition. True fairness work requires understanding *why* disparities exist, not just whether they cross a line.
+
+**Using biased training data and expecting post-hoc mitigation to fix it.** Fairlearn's `ExponentiatedGradient` and `ThresholdOptimizer` can reduce measured disparities, but they cannot recover signal that was never in the data. If the training labels reflect historical discrimination (as in healthcare cost proxies), mitigation adjusts model outputs without changing the underlying discriminatory signal. Datasheet-driven data quality review is upstream of model training, not downstream.
+
+## Related BEEs
+
+- [BEE-588 Model Explainability in Production](588) — SHAP attribution scores complement fairness metrics by explaining individual decisions
+- [BEE-587 ML Data Validation and Pipeline Quality Gates](587) — data validation enforces schema and completeness; fairness audits extend this to distributional properties
+- [BEE-586 ML Experiment Tracking and Model Registry](586) — model cards attach to MLflow runs and model versions
+- [BEE-581 AI Compliance and Governance Engineering](581) — broader AI governance framework that model cards feed into
+
+## References
+
+- Mitchell, M., et al. (2019). Model cards for model reporting. FAccT 2019. arXiv:1810.03993. https://dl.acm.org/doi/10.1145/3287560.3287596
+- Gebru, T., et al. (2021). Datasheets for datasets. Communications of the ACM, 64(12), 86–92. arXiv:1803.09010. https://cacm.acm.org/research/datasheets-for-datasets/
+- Hardt, M., Price, E., & Srebro, N. (2016). Equality of opportunity in supervised learning. NeurIPS 2016. arXiv:1610.02413. https://papers.nips.cc/paper/6374-equality-of-opportunity-in-supervised-learning
+- Weerts, H., et al. (2023). Fairlearn: Assessing and improving fairness of AI systems. JMLR 24(1). arXiv:2303.16626. https://www.jmlr.org/papers/v24/23-0389.html
+- Kleinberg, J., Mullainathan, S., & Raghavan, M. (2016). Inherent trade-offs in the fair determination of risk scores. arXiv:1609.05807. https://arxiv.org/abs/1609.05807
+- Obermeyer, Z., et al. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. Science, 366, 447–453. https://www.science.org/doi/10.1126/science.aax2342
+- ProPublica, "Machine Bias," 2016. https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing
+- NIST AI Risk Management Framework 1.0 (2023). https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf
+- EU AI Act, Article 9 (Risk management system). https://artificialintelligenceact.eu/article/9/
+- EU AI Act, Annex III (High-risk AI systems). https://artificialintelligenceact.eu/annex/3/
+- Fairlearn documentation. https://fairlearn.org/
+- Hugging Face, Model Cards documentation. https://huggingface.co/docs/hub/model-cards
+- EEOC, Uniform Guidelines on Employee Selection Procedures. https://www.eeoc.gov/laws/guidance/questions-and-answers-clarify-and-provide-common-interpretation-uniform-guidelines

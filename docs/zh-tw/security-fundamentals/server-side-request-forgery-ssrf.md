@@ -1,0 +1,225 @@
+---
+id: 2015
+title: 伺服器端請求偽造（SSRF）
+state: draft
+slug: server-side-request-forgery-ssrf
+---
+
+# [BEE-497] 伺服器端請求偽造（SSRF）
+
+:::info
+SSRF 誘使伺服器代替攻擊者發出 HTTP 請求——繞過防火牆，觸及內部服務，並竊取雲端憑證，而這些目標是攻擊者從外部永遠無法直接抵達的。
+:::
+
+## 背景
+
+伺服器端請求偽造在雲端時代成為了決定性漏洞。這種攻擊早於雲端運算就已存在——早期案例出現在內部網路掃描器和 XML 解析器獲取遠端 DTD 的場景中——但當雲端提供商引入可透過可預測、不可路由 IP `169.254.169.254` 存取的執行個體中繼資料服務時，其嚴重性急劇升級。任何在雲端 VM 內運行且會獲取使用者提供 URL 的伺服器，都可能被轉變為竊取 IAM 憑證的代理，而這些憑證掌控著整個雲端帳戶。
+
+現實世界代價最具代表性的案例是 2019 年的 Capital One 資料外洩事件。攻擊者利用一個錯誤設定的 WAF 規則，從 Capital One EC2 執行個體內部向 `http://169.254.169.254/latest/meta-data/iam/security-credentials/` 發出 GET 請求。中繼資料服務回傳了臨時 IAM 憑證。攻擊者利用這些憑證列出並下載了超過 100 個 S3 儲存桶的資料，暴露了約 1.06 億筆客戶記錄。此事件導致 OCC（美國貨幣監理局）開出 8000 萬美元的罰款。根本原因是 SSRF 漏洞與 IAM 角色擁有過多 S3 權限的組合——兩者單獨存在都不足以造成災難，但合在一起則是毀滅性的。
+
+OWASP 在 OWASP Top 10:2021 中將 SSRF 列為獨立項目——A10——專門因為其在雲端託管應用程式中的發生率不斷增加，共有 385 個 CVE 映射到該類別。OWASP API Security Top 10:2023 將其列為 API7，指出容器化和微服務架構增加了暴露面，因為它們通常在具有中繼資料端點和內部服務網格的雲端環境中運行，呈現出具有吸引力的攻擊目標。
+
+## 攻擊機制
+
+核心機制：後端服務從客戶端接收 URL，在伺服器端獲取它，然後返回或處理響應。攻擊者控制該 URL。
+
+**三個攻擊目標：**
+
+**1. 透過中繼資料服務竊取雲端憑證。** AWS EC2、GCP 和 Azure 都在 `169.254.169.254`（一個從主機外部無法到達的連結本地位址）上暴露執行個體中繼資料。在 AWS 使用 IMDSv1 的情況下，對 `http://169.254.169.254/latest/meta-data/iam/security-credentials/<角色名稱>` 的 GET 請求會返回包含 `AccessKeyId`、`SecretAccessKey` 和 `Token` 的 JSON 文件——有效期數小時的臨時憑證。擁有這些憑證，攻擊者可以執行該角色所允許的任何操作。
+
+**2. 內部服務列舉和利用。** 在 VPC 中運行的應用程式可以到達同一網路中的任何其他服務。攻擊者可以使用 SSRF 進行連接埠掃描（`http://10.0.0.1:6379/` 用於 Redis，`http://10.0.0.1:9200/` 用於 Elasticsearch），存取未暴露到網際網路的管理介面，或對信任 VPC 內部流量的內部服務觸發未授權的 API 呼叫。
+
+**3. 盲 SSRF（Blind SSRF）用於帶外資料洩漏。** 當應用程式不將獲取的響應返回給呼叫者時，攻擊者無法直接讀取內容，但仍然可以推斷資訊。伺服器觸發的 DNS 查找揭示哪些域名可以從伺服器的網路解析。時序差異揭示內部連接埠是開放還是關閉的。帶外分析伺服器（Burp Collaborator、Interactsh）接收回調，確認連接性，而攻擊者從未看到 HTTP 響應主體。
+
+**後端工程師必須了解的繞過技術：**
+
+- **替代編碼：** `http://0177.0.0.1/`（八進位）、`http://0x7f000001/`（十六進位）、`http://2130706433/`（十進位）都解析為 `127.0.0.1`。
+- **IPv6 回環：** `http://[::1]/` 繞過對 "127" 的簡單字串比較。
+- **DNS 重綁定：** 攻擊者註冊一個域名，最初解析到合法 IP（通過驗證），然後在應用程式建立實際連接之前將 DNS 記錄更改為 `127.0.0.1`。如果驗證和連接使用獨立的 DNS 解析，則 TOCTOU（檢查時間/使用時間）間隙可被利用。
+- **開放重定向鏈接：** 應用程式獲取 URL，跟隨攻擊者控制的 301/302 重定向，並在重定向後到達 `http://169.254.169.254/`。
+
+## 最佳實踐
+
+### 網路層防禦
+
+**MUST（必須）在所有 AWS EC2 執行個體和 EKS 節點上強制執行 IMDSv2。** IMDSv2 要求在任何中繼資料讀取之前，先透過有時間限制的 PUT 請求獲取令牌：
+
+```bash
+# IMDSv1 — 易受攻擊：任何 SSRF 都可以獲取憑證
+curl http://169.254.169.254/latest/meta-data/iam/security-credentials/my-role
+
+# IMDSv2 — 首先需要 PUT 請求獲取令牌
+TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/iam/security-credentials/my-role
+```
+
+PUT 加上自訂標頭的要求意味著透過 SSRF 發出的瀏覽器或伺服器端 `GET` 請求無法獲取令牌。透過在啟動設定中設置 `HttpTokens: required` 來強制執行 IMDSv2。對所有新基礎設施而言，完全停用 IMDSv1 應該是預設設定。
+
+GCP 透過要求 `Metadata-Flavor: Google` 請求標頭來執行等效保護——跨來源瀏覽器請求無法設置此標頭，在伺服器端客戶端中強制要求此標頭也很容易。
+
+**MUST（必須）在網路層封鎖應用程式伺服器到 RFC 1918 私有位址範圍和連結本地範圍的出站請求**（安全群組出站規則、VPC 防火牆策略）。需要封鎖的關鍵範圍：
+- `10.0.0.0/8`、`172.16.0.0/12`、`192.168.0.0/16` — RFC 1918 私有
+- `169.254.0.0/16` — 連結本地（中繼資料服務）
+- `127.0.0.0/8`、`::1/128` — 回環
+- `100.64.0.0/10` — IANA 共享位址空間（RFC 6598）
+
+網路層封鎖是縱深防禦：即使應用程式層驗證失敗，它也能限制爆炸半徑。
+
+### 應用程式層防禦
+
+**MUST（必須）對使用者提供的 URL 使用允許清單（allowlist），而非封鎖清單（blocklist）。** 封鎖清單本質上是不完整的——新的編碼技巧、IPv6 變體和未來的私有範圍都會繞過它。批准域名或 IP 前綴的允許清單無法被編碼繞過：
+
+```python
+from urllib.parse import urlparse
+import ipaddress
+import socket
+
+ALLOWED_SCHEMES = {"https"}
+ALLOWED_DOMAINS = {"api.trusted-partner.com", "s3.amazonaws.com"}
+
+def is_safe_url(url: str) -> bool:
+    parsed = urlparse(url)
+    if parsed.scheme not in ALLOWED_SCHEMES:
+        return False
+    if parsed.hostname not in ALLOWED_DOMAINS:
+        return False
+    # 解析並驗證 IP 不是私有位址
+    try:
+        addr = ipaddress.ip_address(socket.getaddrinfo(parsed.hostname, None)[0][4][0])
+    except Exception:
+        return False
+    if (addr.is_private or addr.is_loopback or
+            addr.is_link_local or addr.is_reserved):
+        return False
+    return True
+```
+
+**MUST（必須）只解析 URL 一次並在建立實際連接之前驗證 IP——不要在連接時再次解析。** DNS 重綁定攻擊利用了驗證時 DNS 解析（返回合法 IP）和連接時解析（返回 `127.0.0.1`）之間的間隙。緩解措施是只解析一次，驗證 IP，然後直接將已解析的 IP 位址而非主機名傳遞給 HTTP 客戶端。
+
+**MUST（必須）停用用於使用者提供 URL 的 HTTP 客戶端中的 HTTP 重定向跟隨**，或在跟隨之前對每個重定向目標進行允許清單驗證。受信任域上的開放重定向可以鏈接到中繼資料端點的獲取。
+
+**SHOULD（應該）在具有限制出站到允許清單的獨立網路段中運行 URL 獲取 Worker。** 渲染 Webhook 負載的應用程式伺服器不需要與處理客戶身份驗證的伺服器擁有相同的網路存取。
+
+**SHOULD（應該）對 IAM 角色應用最小權限原則。** Capital One 案例中的 SSRF 足以洩露 1 億筆記錄，因為該角色擁有廣泛的 S3 ListBucket 和 GetObject 權限。觸及具有僅能寫入一個特定 S3 路徑角色的中繼資料端點的 SSRF 漏洞，所造成的事件規模將大幅縮小。
+
+### 盲 SSRF 偵測
+
+**SHOULD（應該）對應用程式伺服器的出站請求進行結構化日誌記錄**，包括目標 URL、已解析的 IP 和響應代碼。異常模式——對 `169.254.*` 的請求、大量到內部子網路的請求、意外的 DNS 查找——在成為事件之前是可偵測的。
+
+在安全測試中，使用帶外回調基礎設施（Burp Collaborator、Interactsh）偵測盲 SSRF：將唯一域名作為 URL 值注入，然後檢查伺服器是否向該域名發出了 DNS 查找或 HTTP 請求。DNS 回調確認應用程式嘗試解析攻擊者提供的主機名，即使沒有向客戶端返回 HTTP 響應。
+
+## 視覺圖示
+
+```mermaid
+sequenceDiagram
+    participant A as 攻擊者
+    participant S as 應用程式伺服器
+    participant M as 雲端中繼資料<br/>169.254.169.254
+    participant R as 攻擊者<br/>控制的伺服器
+
+    A->>S: POST /import?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/app-role
+    S->>M: GET /latest/meta-data/iam/...
+    M-->>S: {"AccessKeyId":"ASIA...","SecretAccessKey":"...","Token":"..."}
+    S-->>A: （在響應或日誌中返回憑證）
+    A->>R: aws s3 ls --profile stolen
+
+    style A fill:#c0392b,color:#fff
+    style S fill:#e67e22,color:#fff
+    style M fill:#1d3557,color:#fff
+    style R fill:#c0392b,color:#fff
+```
+
+## 範例
+
+常見的 SSRF 入口點是 URL 預覽或 Webhook 注冊端點：
+
+```python
+# 易受攻擊：直接獲取使用者提供的 URL
+import httpx
+
+@app.post("/webhooks/test")
+async def test_webhook(url: str):
+    # 攻擊者提供：http://169.254.169.254/latest/meta-data/iam/security-credentials/prod-role
+    response = httpx.get(url, follow_redirects=True)
+    return {"status": response.status_code, "body": response.text}
+```
+
+加固後的版本：
+
+```python
+import httpx
+import ipaddress
+import socket
+from urllib.parse import urlparse
+
+ALLOWED_WEBHOOK_HOSTS = {"hooks.slack.com", "api.pagerduty.com"}
+
+def resolve_and_validate(hostname: str) -> str:
+    """解析主機名一次；若 IP 為私有/回環/連結本地則引發異常。"""
+    try:
+        ip_str = socket.getaddrinfo(hostname, None, socket.AF_INET)[0][4][0]
+    except socket.gaierror:
+        raise ValueError(f"無法解析 {hostname}")
+    addr = ipaddress.IPv4Address(ip_str)
+    if addr.is_private or addr.is_loopback or addr.is_link_local or addr.is_reserved:
+        raise ValueError(f"已解析的 IP {ip_str} 在封鎖範圍內")
+    return ip_str
+
+@app.post("/webhooks/test")
+async def test_webhook(url: str):
+    parsed = urlparse(url)
+    if parsed.scheme != "https":
+        raise HTTPException(400, "只允許 HTTPS Webhook")
+    if parsed.hostname not in ALLOWED_WEBHOOK_HOSTS:
+        raise HTTPException(400, "Webhook 主機不在允許清單中")
+    resolved_ip = resolve_and_validate(parsed.hostname)
+    # 傳遞已解析的 IP 以避免連接時的第二次 DNS 解析
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            url,
+            headers={"Host": parsed.hostname},
+            timeout=5.0,
+            follow_redirects=False,  # 不跟隨重定向
+        )
+    return {"status": response.status_code}
+```
+
+對於 AWS 基礎設施，在 CloudFormation 層強制執行 IMDSv2，這樣不需要更改應用程式：
+
+```yaml
+# CloudFormation：在所有 EC2 執行個體上強制執行 IMDSv2
+LaunchTemplate:
+  Type: AWS::EC2::LaunchTemplate
+  Properties:
+    LaunchTemplateData:
+      MetadataOptions:
+        HttpTokens: required          # 停用 IMDSv1
+        HttpPutResponseHopLimit: 1    # 防止容器到達 IMDS
+        HttpEndpoint: enabled
+```
+
+將 `HttpPutResponseHopLimit` 設為 `1` 意味著 IMDSv2 令牌 PUT 無法跨越網路橋接——即使使用 IMDSv2，執行個體內的容器也無法到達中繼資料端點。
+
+## 相關 BEE
+
+- [BEE-2001](owasp-top-10-for-backend.md) -- 後端 OWASP Top 10：SSRF 是 OWASP Top 10:2021 中的 A10
+- [BEE-2008](owasp-api-security-top-10.md) -- OWASP API 安全 Top 10：SSRF 是 API7:2023，具有特定的 API 攻擊向量
+- [BEE-2009](http-security-headers.md) -- HTTP 安全標頭：Content-Security-Policy 限制客戶端獲取，但不能防止伺服器端 SSRF
+- [BEE-2003](secrets-management.md) -- Secrets 管理：針對雲端中繼資料端點的 SSRF 竊取動態發出的密鑰；適當的輪換限制了暴露窗口
+- [BEE-2013](cross-site-request-forgery-csrf-and-defense-patterns.md) -- CSRF：CSRF 和 SSRF 都涉及偽造請求；CSRF 從使用者的瀏覽器偽造請求，SSRF 從伺服器偽造請求
+
+## 參考資料
+
+- [OWASP Top 10:2021 — A10:2021 伺服器端請求偽造 — owasp.org](https://owasp.org/Top10/2021/A10_2021-Server-Side_Request_Forgery_(SSRF)/)
+- [OWASP API Security Top 10:2023 — API7:2023 伺服器端請求偽造 — owasp.org](https://owasp.org/API-Security/editions/2023/en/0xa7-server-side-request-forgery/)
+- [OWASP 伺服器端請求偽造預防備忘單 — cheatsheetseries.owasp.org](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html)
+- [PortSwigger Web Security Academy. 伺服器端請求偽造（SSRF）— portswigger.net](https://portswigger.net/web-security/ssrf)
+- [PortSwigger Web Security Academy. 盲 SSRF 漏洞 — portswigger.net](https://portswigger.net/web-security/ssrf/blind)
+- [Brian Krebs. 我們可以從 Capital One 駭客事件中學到什麼 — krebsonsecurity.com, 2019年8月](https://krebsonsecurity.com/2019/08/what-we-can-learn-from-the-capital-one-hack/)
+- [AWS. 獲得 IMDSv2 的全部優勢並在 AWS 基礎設施中停用 IMDSv1 — aws.amazon.com](https://aws.amazon.com/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/)
+- [AWS. 設定執行個體中繼資料服務 — docs.aws.amazon.com](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html)
+- [IETF RFC 1918. 私有網際網路的位址分配 — datatracker.ietf.org](https://datatracker.ietf.org/doc/html/rfc1918)
+- [IETF RFC 3927. IPv4 連結本地位址的動態設定 — datatracker.ietf.org](https://datatracker.ietf.org/doc/html/rfc3927)
+- [OWASP 測試指南. SSRF 測試 — owasp.org](https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/19-Testing_for_Server-Side_Request_Forgery)

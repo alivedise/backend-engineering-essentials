@@ -1,0 +1,164 @@
+---
+id: 15006
+title: Testing in Production
+state: draft
+slug: testing-in-production
+---
+
+# [BEE-345] Testing in Production
+
+:::info
+Canary analysis, synthetic monitoring, and observability-driven testing.
+:::
+
+## Context
+
+Pre-production environments fail to replicate what matters most: real traffic patterns, real data distributions, and real scale. A staging environment might pass every test suite while the production deployment quietly degrades under load spikes, unusual query patterns, or data edge cases that never appeared in fixtures.
+
+Charity Majors, CTO of Honeycomb, articulated this directly: the job of a developer is not done when code is committed — it is done when you can verify the code is working correctly in production. Observability-driven development means instrumenting code as you write it, deploying to production, and then inspecting behavior through that instrumentation. The question is not whether to test in production, but how to do it safely.
+
+Testing in production is not a replacement for pre-production testing. Unit tests, integration tests, and contract tests still belong in CI. The distinction is that **pre-production tests verify correctness under controlled conditions; production testing verifies behavior under real conditions**. Both are necessary.
+
+## Principle
+
+**Use a layered set of production testing techniques matched to the risk of each change, controlling blast radius at every layer.**
+
+The spectrum from lowest to highest risk:
+
+```mermaid
+graph LR
+    A[Synthetic Monitoring] -->|higher risk| B[Shadow Traffic]
+    B -->|higher risk| C[Canary Deployment]
+    C -->|higher risk| D[Feature Flag Rollout]
+    D -->|higher risk| E[Full Deployment]
+
+    style A fill:#22c55e,color:#fff
+    style B fill:#84cc16,color:#fff
+    style C fill:#eab308,color:#000
+    style D fill:#f97316,color:#fff
+    style E fill:#ef4444,color:#fff
+```
+
+Each technique is described below, from lowest to highest blast radius.
+
+### Synthetic Monitoring
+
+Synthetic monitoring runs automated probes that simulate specific user journeys against your live production system on a scheduled interval. Unlike real user monitoring (RUM), synthetic probes are fully controlled: you know exactly what request was sent, what response was expected, and when the check ran.
+
+Use synthetic monitoring to:
+- Assert that critical paths (login, checkout, search, API health endpoints) remain functional continuously.
+- Detect regressions immediately after deployment before real users encounter them.
+- Establish a baseline SLA: if the synthetic probe sees p99 latency above a threshold, alert before users do.
+
+A synthetic probe that does not cover a critical path provides false confidence. Map your most important user journeys and ensure every one has a synthetic check.
+
+### Shadow Traffic (Dark Launch)
+
+Shadow traffic, also called dark launching, duplicates production requests and sends them to the new version of a service in parallel. The new version processes the requests, but its responses are discarded — users continue to receive responses from the current version only.
+
+This technique allows you to:
+- Verify that the new version handles real query volume and traffic shape without serving errors to users.
+- Compare outputs between old and new versions to catch behavioral differences (divergence testing).
+- Identify latency regressions and infrastructure sizing issues before any user is exposed.
+
+**Critical pitfall:** shadow traffic must not have side effects. If the new service writes to a database, sends emails, charges payments, or produces Kafka events, those side effects affect real data even though responses are discarded. Before running shadow traffic, audit every write path and either stub it out or direct it to a separate test namespace.
+
+Tools like [GoReplay](https://goreplay.org/) and [Diffy](https://github.com/opendiffy/diffy) (used at Twitter, Airbnb) automate shadow traffic capture and divergence analysis.
+
+### Canary Deployment
+
+A canary deployment routes a small percentage of live traffic — typically 1–10% — to the new version, while the remainder continues on the stable version. Both versions run simultaneously, and observability tooling compares their metrics to detect regressions.
+
+Canary analysis focuses on:
+- **Error rates**: Are 5xx rates higher on the canary than the baseline?
+- **Latency**: Has p95 or p99 latency increased on the canary?
+- **Business metrics**: Are conversion rates, success rates, or domain-specific KPIs degraded?
+- **Resource consumption**: Has CPU or memory usage increased unexpectedly?
+
+Generic system dashboards are insufficient for canary analysis. For each deployment, define the specific metrics most sensitive to that change. Deploying a new payment processor? Watch payment success rates and declined transaction rates. Generic CPU graphs will not catch a subtle logic error in payment routing.
+
+Automate canary promotion and rollback. If the canary metrics stay within acceptable bounds for a defined period, promote to 100%. If any metric breaches its threshold, roll back automatically.
+
+See also: [BEE-361 — Canary Deployments](361.md) for implementation detail.
+
+### Feature Flag Rollout
+
+Feature flags decouple deployment from release. Code ships to production disabled, then is enabled progressively for specific user segments: internal users, beta cohort, 1%, 10%, 50%, 100%.
+
+This gives you:
+- **Instant rollback** without a redeploy: disable the flag if a problem surfaces.
+- **Targeted exposure**: enable for internal users or a specific region first, validate, then expand.
+- **Gradual risk increase**: treat each increment as a new canary. Monitor after each increase before proceeding.
+
+Feature flags are most powerful when combined with canary deployments: the canary controls infrastructure-level exposure while the feature flag controls application-level exposure independently.
+
+See also: [BEE-363 — Feature Flags](363.md).
+
+### Observability as the Test Oracle
+
+In pre-production testing, assertions are explicit: `assertEqual(result, expected)`. In production testing, the oracle is your telemetry. Structured logs, distributed traces, and metrics are the mechanism by which you assert that production behavior matches intent.
+
+This means:
+- **Instrument before you ship**: add structured log fields and spans for the specific behavior the new code introduces. If you can't observe it, you can't test it.
+- **Define success criteria in advance**: before running a canary, write down what "passing" looks like — specific metric thresholds, specific error rate ceilings. This prevents post-hoc rationalization of bad results.
+- **Use SLOs as gates**: a canary that degrades your SLO error budget should fail automatically. See [BEE-324 — SLOs as Success Criteria](324.md).
+
+### A/B Testing as Production Testing
+
+A/B testing is a form of production testing where two variants are measured against a user-facing outcome metric. Unlike a canary — which tests for regressions — an A/B test measures whether a change improves a target metric.
+
+The discipline is the same: define success criteria before running the experiment, instrument the outcome metric, allocate traffic with statistical power in mind, and do not extend the experiment past a decision point to fish for significance.
+
+## Worked Example: Deploying a New Search Algorithm
+
+Suppose you are replacing the text-search algorithm backing your product catalog search.
+
+**Step 1 — Shadow traffic (zero user exposure)**
+
+Capture production search queries and replay them against the new search service in parallel with the existing one. Log both result sets. Use a divergence tool to identify queries where the ranked results differ materially. Verify the new algorithm handles the query volume within acceptable CPU and memory bounds. No user sees any new result.
+
+**Step 2 — Canary deployment (5% of traffic)**
+
+Route 5% of live search traffic to the new algorithm. Define success metrics in advance:
+- p95 search latency must not increase by more than 20ms.
+- Search error rate must remain below 0.1%.
+- Click-through rate (CTR) on search results must not decrease by more than 2% relative.
+
+If all metrics hold for 48 hours, the canary is healthy.
+
+**Step 3 — Feature flag rollout (5% → 100% over one week)**
+
+Increase the flag percentage in increments: 5% → 20% → 50% → 100%, with a 24-hour observation window at each step. Monitor the same metrics at each increment. If CTR degrades at 50%, roll back to 20% and investigate before proceeding.
+
+## Common Mistakes
+
+**1. No blast radius control**
+Testing in production without scoping impact means a bug affects all users simultaneously. Every technique above exists to limit scope. If you are not explicitly controlling blast radius, you are not testing in production — you are deploying to production and hoping.
+
+**2. No rollback plan**
+Before running any production test, define the rollback procedure and verify it works. A canary without an automated or well-rehearsed rollback is just a slow full deployment.
+
+**3. Shadow traffic with state-mutating side effects**
+Shadow requests that write to production databases, trigger emails, or increment billing counters corrupt real data. Audit every write path before running shadow traffic. This is the most common and most dangerous shadow traffic mistake.
+
+**4. Synthetic monitoring that misses critical paths**
+A synthetic suite that checks `/health` but not the checkout flow gives false confidence. Map user journeys first, then write probes. Review coverage whenever new user-critical paths are added.
+
+**5. Using production testing as an excuse to skip pre-production testing**
+Production testing catches real-world behavior that pre-production cannot simulate. It does not catch logic errors, type errors, or contract violations that a well-structured test suite would catch in seconds. Both layers are required.
+
+## Related BEPs
+
+- [BEE-265 — Chaos Engineering](265.md): Proactively injecting failures in production to verify resilience.
+- [BEE-324 — SLOs as Success Criteria](324.md): Using SLO error budgets as automated gates for canary promotion.
+- [BEE-361 — Canary Deployments](361.md): Infrastructure patterns for traffic splitting and automated rollback.
+- [BEE-363 — Feature Flags](363.md): Decoupling deployment from release for granular rollout control.
+
+## References
+
+- Charity Majors, "Go Ahead, Test in Production" — [The New Stack](https://thenewstack.io/honeycombs-charity-majors-go-ahead-test-in-production/)
+- Majors, Fong-Jones, Miranda — *Observability Engineering: Achieving Production Excellence* — [O'Reilly](https://www.oreilly.com/library/view/observability-engineering/9781492076438/)
+- Google SRE Workbook — "Canarying Releases" — [sre.google](https://sre.google/workbook/canarying-releases/)
+- Microsoft Engineering Fundamentals — "Shadow Testing" — [github.io](https://microsoft.github.io/code-with-engineering-playbook/automated-testing/shadow-testing/)
+- Datadog — "Best Practices for Monitoring Dark Launches" — [datadoghq.com](https://www.datadoghq.com/blog/dark-launches/)
+- Martin Fowler — "Canary Release" — [martinfowler.com](https://martinfowler.com/bliki/CanaryRelease.html)

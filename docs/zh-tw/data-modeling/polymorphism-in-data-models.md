@@ -1,0 +1,437 @@
+---
+id: 7006
+title: Polymorphism in Data Models
+state: draft
+slug: polymorphism-in-data-models
+---
+
+# [BEE-145] 資料模型中的多型
+
+:::info
+繼承映射策略必須刻意選擇。選錯策略會帶來兩種後果：一張充斥大量 nullable 欄位的肥胖表格，或一個深陷 JOIN 的查詢計畫。
+:::
+
+## 背景
+
+物件導向系統自然地能建模繼承層級：`Payment` 可能是 `CreditCardPayment`、`BankTransfer` 或 `WalletPayment`。每種型別共享核心概念，但各自攜帶不同的屬性。關聯式資料庫本身沒有繼承的概念，因此工程師必須明確選擇一種映射策略。錯誤的選擇——或根本沒有明確選擇——會產生難以查詢、難以施加約束、或無法擴充的結構描述。
+
+這個問題已有深入的研究。Martin Fowler 在 *Patterns of Enterprise Application Architecture* 中記錄了三種標準模式：Single Table Inheritance（單表繼承）、Class Table Inheritance（類別表繼承）、以及 Concrete Table Inheritance（具體表繼承）（[martinfowler.com](https://martinfowler.com/eaaCatalog/singleTableInheritance.html)）。第四種方式——透過 JSONB 或文件儲存進行文件嵌入——已隨現代資料庫的發展而變得實用。每種方式都有各自的成本與效益特徵。
+
+## 問題
+
+多型實體共享基礎概念，但各自的屬性有所分歧：
+
+- **通知（notification）** 可透過電子郵件、簡訊或推播傳送。電子郵件需要 `to_address` 和 `subject`；簡訊需要 `phone_number` 和 `message_body`；推播需要 `device_token` 和 `payload`。
+- **付款（payment）** 可以是信用卡收費、銀行轉帳或錢包扣款。每種類型需要不同的路由欄位。
+- 繪圖工具中的**圖形（shape）** 可以是圓形、矩形或多邊形——每種類型有不同的幾何資料。
+
+挑戰在於：如何在不犧牲查詢簡潔性、資料完整性或儲存效率的情況下，將這些資料儲存於關聯式資料庫中？
+
+## 四種策略
+
+### 策略一：Single Table Inheritance（STI，單表繼承）
+
+所有子型別都存在同一張表中。以 `type` 鑑別器欄位識別子型別。其他型別專用的欄位在不相關的列中填入 `NULL`。
+
+```sql
+CREATE TABLE notifications (
+  id          BIGSERIAL PRIMARY KEY,
+  type        TEXT NOT NULL,          -- 'email' | 'sms' | 'push'
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id     BIGINT NOT NULL,
+
+  -- 僅 Email 使用
+  to_address  TEXT,
+  subject     TEXT,
+
+  -- 僅 SMS 使用
+  phone_number TEXT,
+  message_body TEXT,
+
+  -- 僅 Push 使用
+  device_token TEXT,
+  payload      JSONB
+);
+```
+
+**優點：** 單一表格不需要 JOIN。查詢簡單。新增子型別欄位只需異動一張表。大多數 ORM（ActiveRecord、Hibernate、SQLAlchemy）原生支援。
+
+**缺點：** 每列都有許多 `NULL` 欄位。若新增一個有 10 個獨特欄位的子型別，所有其他列就多了 10 個 nullable 欄位。`NOT NULL` 約束無法在資料庫層級強制執行，只能靠應用程式層處理。當子型別數量多時，表格的欄位數量會急劇膨脹。
+
+**適用時機：** 子型別數量少（2–5 種）、屬性重疊程度高、且子型別經常一起查詢。對於小型層級結構，STI 是務實的第一選擇。
+
+---
+
+### 策略二：Class Table Inheritance（CTI，類別表繼承）
+
+一張基底表儲存共用屬性。每個子型別有專屬的表，透過外鍵指回基底表。子型別列的 `id` 與基底列相同。
+
+```sql
+CREATE TABLE notifications (
+  id         BIGSERIAL PRIMARY KEY,
+  type       TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id    BIGINT NOT NULL
+);
+
+CREATE TABLE notifications_email (
+  notification_id BIGINT PRIMARY KEY REFERENCES notifications(id),
+  to_address      TEXT NOT NULL,
+  subject         TEXT NOT NULL
+);
+
+CREATE TABLE notifications_sms (
+  notification_id BIGINT PRIMARY KEY REFERENCES notifications(id),
+  phone_number    TEXT NOT NULL,
+  message_body    TEXT NOT NULL
+);
+
+CREATE TABLE notifications_push (
+  notification_id BIGINT PRIMARY KEY REFERENCES notifications(id),
+  device_token    TEXT NOT NULL,
+  payload         JSONB
+);
+```
+
+讀取完整的電子郵件通知：
+
+```sql
+SELECT n.*, e.to_address, e.subject
+FROM notifications n
+JOIN notifications_email e ON e.notification_id = n.id
+WHERE n.id = $1;
+```
+
+**優點：** 沒有 nullable 欄位。子型別專用的 `NOT NULL` 約束在資料庫層級強制執行。每張子型別表窄而專注。結構描述清楚地傳達型別層級。
+
+**缺點：** 每次讀取具體型別都需要 JOIN。多型查詢（「給我最近 50 筆任何型別的通知」）需要多次查詢或 `UNION ALL`。修改基底表的結構描述會波及所有子型別表。
+
+**適用時機：** 子型別有許多獨特屬性、資料完整性至關重要（需要大量 `NOT NULL`/`UNIQUE`/FK 約束），且大多數查詢針對特定子型別而非所有型別。另見：[Baeldung SQL Inheritance](https://www.baeldung.com/sql/database-inheritance)。
+
+---
+
+### 策略三：Concrete Table Inheritance（具體表繼承，又稱葉節點繼承）
+
+沒有共用基底表。每個具體子型別都有完全獨立的表，共用屬性和專用屬性都被複製進去。
+
+```sql
+CREATE TABLE notifications_email (
+  id           BIGSERIAL PRIMARY KEY,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id      BIGINT NOT NULL,
+  to_address   TEXT NOT NULL,
+  subject      TEXT NOT NULL
+);
+
+CREATE TABLE notifications_sms (
+  id           BIGSERIAL PRIMARY KEY,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id      BIGINT NOT NULL,
+  phone_number TEXT NOT NULL,
+  message_body TEXT NOT NULL
+);
+
+CREATE TABLE notifications_push (
+  id           BIGSERIAL PRIMARY KEY,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id      BIGINT NOT NULL,
+  device_token TEXT NOT NULL,
+  payload      JSONB
+);
+```
+
+**優點：** 永遠不需要 JOIN。每張表都能完整強制約束。表格之間完全獨立——修改一張表的結構不會影響其他表。
+
+**缺點：** 各型別之間沒有統一的主鍵命名空間（兩個不同的通知可能共享相同的 `id`）。跨型別的多型查詢需要 `UNION ALL`。修改共用屬性（例如將 `user_id` 重新命名為 `account_id`）需要更新每張表。難以建立指向「任意通知」的外鍵。
+
+**適用時機：** 子型別真正獨立（很少一起查詢）、共用屬性極少，且不需要跨整個層級的外鍵參照。通常在「繼承」並非正確思維模式時最適用——這些只是分開的實體。
+
+---
+
+### 策略四：文件嵌入（JSONB / 文件儲存）
+
+鑑別器和共用欄位以一般欄位儲存。所有子型別專用的屬性打包進一個 JSONB 欄位。
+
+```sql
+CREATE TABLE notifications (
+  id         BIGSERIAL PRIMARY KEY,
+  type       TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id    BIGINT NOT NULL,
+  attributes JSONB NOT NULL DEFAULT '{}'
+);
+```
+
+範例資料列：
+
+```sql
+-- Email
+INSERT INTO notifications (type, user_id, attributes) VALUES (
+  'email', 42,
+  '{"to_address": "user@example.com", "subject": "Your order shipped"}'
+);
+
+-- Push
+INSERT INTO notifications (type, user_id, attributes) VALUES (
+  'push', 42,
+  '{"device_token": "abc123", "payload": {"title": "Shipped", "badge": 1}}'
+);
+```
+
+依子型別屬性查詢：
+
+```sql
+SELECT * FROM notifications
+WHERE type = 'push'
+  AND attributes->>'device_token' = 'abc123';
+
+-- 建立 JSONB 欄位的索引以提升效能
+CREATE INDEX ON notifications ((attributes->>'device_token'))
+  WHERE type = 'push';
+```
+
+**優點：** 結構描述穩定——新增子型別屬性不需要 `ALTER TABLE`。對深度巢狀或高度可變的結構處理良好。與文件儲存資料庫原生整合。PostgreSQL JSONB 支援 GIN 索引以高效搜尋屬性（[PostgreSQL JSONB 文件](https://www.postgresql.org/docs/current/datatype-json.html)）。
+
+**缺點：** 子型別專用的 `NOT NULL` 約束無法在資料庫層級強制執行。型別安全完全依賴應用程式層。JSONB 查詢的可讀性比以欄位為基礎的查詢差。對 JSONB 欄位進行聚合運算較為複雜。
+
+**適用時機：** 子型別屬性高度可變且頻繁演進、需要不經過遷移就能彈性調整結構描述，或已處於文件儲存的情境（[BEE-6001](../data-storage/sql-vs-nosql-tradeoffs.md)）。也適用於子型別變體數量龐大且難以預先定義的情況。
+
+---
+
+## Mermaid 圖表：付款層級的三種策略並排
+
+```mermaid
+erDiagram
+
+  %% ── Single Table Inheritance ─────────────────────────────────
+  PAYMENTS_STI {
+    bigint id PK
+    text   type
+    text   status
+    decimal amount
+    text   cc_last4
+    text   cc_network
+    text   bank_account_no
+    text   bank_routing_no
+    text   wallet_provider
+    text   wallet_token
+  }
+
+  %% ── Class Table Inheritance ──────────────────────────────────
+  PAYMENTS_BASE {
+    bigint  id PK
+    text    type
+    text    status
+    decimal amount
+  }
+
+  PAYMENTS_CREDIT_CARD {
+    bigint id PK_FK
+    text   cc_last4
+    text   cc_network
+  }
+
+  PAYMENTS_BANK_TRANSFER {
+    bigint id PK_FK
+    text   bank_account_no
+    text   bank_routing_no
+  }
+
+  PAYMENTS_WALLET {
+    bigint id PK_FK
+    text   wallet_provider
+    text   wallet_token
+  }
+
+  PAYMENTS_BASE ||--o| PAYMENTS_CREDIT_CARD : "extends"
+  PAYMENTS_BASE ||--o| PAYMENTS_BANK_TRANSFER : "extends"
+  PAYMENTS_BASE ||--o| PAYMENTS_WALLET : "extends"
+
+  %% ── Document Embedding ───────────────────────────────────────
+  PAYMENTS_DOC {
+    bigint id PK
+    text   type
+    text   status
+    decimal amount
+    jsonb  attributes
+  }
+```
+
+## 實作範例：通知系統
+
+以下將三種關聯式策略套用於同一個領域——建立一則電子郵件通知。
+
+### 單表方式
+
+```sql
+-- 結構描述：一張寬表
+CREATE TABLE notifications (
+  id           BIGSERIAL PRIMARY KEY,
+  type         TEXT NOT NULL CHECK (type IN ('email','sms','push')),
+  user_id      BIGINT NOT NULL,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  to_address   TEXT,   -- 僅 email
+  subject      TEXT,   -- 僅 email
+  phone_number TEXT,   -- 僅 sms
+  message_body TEXT,   -- 僅 sms
+  device_token TEXT,   -- 僅 push
+  payload      JSONB   -- 僅 push
+);
+
+-- 插入電子郵件通知
+INSERT INTO notifications (type, user_id, to_address, subject)
+VALUES ('email', 1, 'alice@example.com', 'Welcome!');
+
+-- 取得使用者的所有通知（不需要 JOIN）
+SELECT id, type, created_at FROM notifications WHERE user_id = 1;
+
+-- 取得 email 專用欄位
+SELECT to_address, subject FROM notifications
+WHERE user_id = 1 AND type = 'email';
+```
+
+查詢複雜度：低。儲存：每筆 email 列有 5 個 NULL 欄位，每筆 SMS 列有 4 個，每筆 push 列有 5 個。
+
+---
+
+### 類別表方式
+
+```sql
+-- 結構描述：基底表 + 子型別表
+CREATE TABLE notifications (
+  id         BIGSERIAL PRIMARY KEY,
+  type       TEXT NOT NULL,
+  user_id    BIGINT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE notification_emails (
+  notification_id BIGINT PRIMARY KEY REFERENCES notifications(id),
+  to_address      TEXT NOT NULL,
+  subject         TEXT NOT NULL
+);
+
+CREATE TABLE notification_sms (
+  notification_id BIGINT PRIMARY KEY REFERENCES notifications(id),
+  phone_number    TEXT NOT NULL,
+  message_body    TEXT NOT NULL
+);
+
+CREATE TABLE notification_push (
+  notification_id BIGINT PRIMARY KEY REFERENCES notifications(id),
+  device_token    TEXT NOT NULL,
+  payload         JSONB
+);
+
+-- 插入電子郵件通知（兩個敘述，一個交易）
+BEGIN;
+INSERT INTO notifications (type, user_id) VALUES ('email', 1) RETURNING id;
+-- 假設 id = 5
+INSERT INTO notification_emails (notification_id, to_address, subject)
+VALUES (5, 'alice@example.com', 'Welcome!');
+COMMIT;
+
+-- 讀取完整的電子郵件通知（需要 JOIN）
+SELECT n.id, n.created_at, e.to_address, e.subject
+FROM notifications n
+JOIN notification_emails e ON e.notification_id = n.id
+WHERE n.user_id = 1;
+
+-- 讀取任何型別的最新通知（需要 UNION）
+SELECT id, type, created_at FROM notifications
+WHERE user_id = 1 ORDER BY created_at DESC LIMIT 20;
+```
+
+查詢複雜度：中等（讀取特定型別需要 JOIN，多型讀取需要 `UNION ALL`）。儲存：零個 NULL 欄位。
+
+---
+
+### 文件嵌入方式
+
+```sql
+-- 結構描述：基底欄位 + JSONB 包
+CREATE TABLE notifications (
+  id         BIGSERIAL PRIMARY KEY,
+  type       TEXT NOT NULL,
+  user_id    BIGINT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  attrs      JSONB NOT NULL DEFAULT '{}'
+);
+
+CREATE INDEX idx_notifications_email ON notifications ((attrs->>'to_address'))
+  WHERE type = 'email';
+
+-- 插入電子郵件通知
+INSERT INTO notifications (type, user_id, attrs)
+VALUES ('email', 1, '{"to_address":"alice@example.com","subject":"Welcome!"}');
+
+-- 讀取使用者的最新通知（不需要 JOIN）
+SELECT id, type, created_at, attrs FROM notifications
+WHERE user_id = 1 ORDER BY created_at DESC LIMIT 20;
+
+-- 依電子郵件地址查詢
+SELECT * FROM notifications
+WHERE type = 'email' AND attrs->>'to_address' = 'alice@example.com';
+```
+
+查詢複雜度：低。儲存：緊湊。約束強制執行：僅限應用程式層。
+
+---
+
+### 比較
+
+| 考量面向                    | 單表繼承           | 類別表繼承               | 文件嵌入            |
+|-----------------------------|--------------------|--------------------------|--------------------|
+| 讀取特定型別的實體           | 1 次查詢，無 JOIN  | 1 次查詢 + 1 次 JOIN     | 1 次查詢，無 JOIN  |
+| 一次讀取所有型別             | 1 次查詢           | `UNION ALL` 或應用程式   | 1 次查詢           |
+| 資料庫層級的 NOT NULL 約束  | 無                 | 有                       | 無                 |
+| 新增型別的結構描述變更       | `ALTER TABLE`      | 新增子型別表             | 不需要遷移         |
+| NULL 欄位浪費               | 高                 | 無                       | 無                 |
+| 應對數百個子型別             | 差                 | 尚可                     | 好                 |
+
+## 常見錯誤
+
+**1. 在子型別數量過多時使用 STI。** 一旦有超過約 5 個具有不同屬性集的子型別，單表結構就會累積數十個 nullable 欄位。一張有 80 個欄位、大多數列留了 60 個 NULL 的表是結構描述的壞味道——請遷移到類別表或文件嵌入。
+
+**2. 在大量多型讀取時使用類別表繼承。** 如果最常見的查詢是「給我最近 100 筆任何型別的通知」，CTI 就必須對所有子型別表執行 `UNION ALL`。這個查詢計畫無法規模化。若多型讀取是主要情境，STI 或文件嵌入更為合適。
+
+**3. 沒有鑑別器欄位。** 沒有 `type` 欄位，判斷一列屬於哪個子型別的唯一方式，就是去檢查哪張子型別表有對應的 FK 列（在 CTI 中），或從 nullable 欄位的模式猜測（在 STI 中）。務必明確儲存鑑別器。它也能用於建立部分索引和 CHECK 約束。
+
+**4. 在沒有明確理由的情況下混用策略。** 有些程式碼庫一開始使用 STI，後來為某一個子型別加上 CTI，再為另一個加上 JSONB。結果是應用程式開發者必須知道哪個策略適用於哪個實體。如果必須混用策略，請記錄其理由，並在團隊規範中強制執行——不只是在程式碼中。
+
+**5. 在分開的表格更簡單時卻使用多型。** 並非所有「有多種型別」的問題都是繼承問題。如果 `email_notifications`、`sms_notifications` 和 `push_notifications` 幾乎沒有共同點，且很少一起查詢，那麼三張獨立的表（具體表繼承，或乾脆就是三個不同的實體）比任何共用表的方式都要簡單。當層級淺且重疊小時，優先選擇組合和分開的實體，而非繼承映射。
+
+## 決策指南
+
+```
+層級中的子型別數量 ≤ 5，且屬性大量重疊？
+  是 → Single Table Inheritance（簡單、快速、ORM 支援良好）
+
+子型別有許多獨特屬性需要資料庫層級的約束？
+  是 → Class Table Inheritance（正規化、保障完整性）
+
+子型別真正獨立，很少一起查詢？
+  是 → Concrete Table Inheritance（或分開的實體；沒有共用概念）
+
+屬性高度可變、快速演進、或迴避結構描述遷移？
+  是 → 文件嵌入（JSONB 或文件儲存；應用程式強制資料形狀）
+```
+
+## 原則
+
+每個層級選擇一種繼承映射策略並一致執行。鑑別器欄位不可省略——它是資料庫層級判斷一列屬於哪個子型別的唯一訊號。對小型且穩定的層級優先選擇 Single Table Inheritance；當子型別屬性需要資料庫層級的約束時選擇 Class Table Inheritance；當屬性集開放且快速演進時選擇文件嵌入。
+
+## 相關 BEE
+
+- [BEE-6001](../data-storage/sql-vs-nosql-tradeoffs.md) — SQL vs NoSQL：文件儲存原生處理多型資料，不需要此處描述的任何關聯式繼承模式。
+- [BEE-7001](entity-relationship-modeling.md) — ER 建模：繼承映射的決策直接源於實體關係分析。
+- [BEE-7002](normalization-and-denormalization.md) — 正規化：類別表繼承是正規化的方式；單表繼承則為了查詢簡潔而刻意反正規化。
+
+## 參考資料
+
+- Martin Fowler, [Single Table Inheritance](https://martinfowler.com/eaaCatalog/singleTableInheritance.html), *Patterns of Enterprise Application Architecture*
+- Martin Fowler, [Class Table Inheritance](https://martinfowler.com/eaaCatalog/classTableInheritance.html), *Patterns of Enterprise Application Architecture*
+- Martin Fowler, [Concrete Table Inheritance](https://martinfowler.com/eaaCatalog/concreteTableInheritance.html), *Patterns of Enterprise Application Architecture*
+- Artem Khrienov, [Table Inheritance Patterns: Single Table vs. Class Table vs. Concrete Table Inheritance](https://medium.com/@artemkhrenov/table-inheritance-patterns-single-table-vs-class-table-vs-concrete-table-inheritance-1aec1d978de1), Medium
+- PostgreSQL, [JSONB Data Type](https://www.postgresql.org/docs/current/datatype-json.html), Official Documentation
+- Baeldung, [How to Represent Inheritance in a Database](https://www.baeldung.com/sql/database-inheritance)

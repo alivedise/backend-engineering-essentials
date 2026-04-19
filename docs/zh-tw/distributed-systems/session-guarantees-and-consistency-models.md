@@ -1,0 +1,147 @@
+---
+id: 19019
+title: 會話保證與一致性模型
+state: draft
+slug: session-guarantees-and-consistency-models
+---
+
+# [BEE-438] 會話保證與一致性模型
+
+:::info
+線性一致性（全局有序、實時）與最終一致性（無排序保證）之間存在一個模型譜系——會話保證、因果一致性、順序一致性——以協調成本換取新鮮度，為系統設計者提供了一套詞彙，用於精確指定其應用程序所需的一致性屬性，而非接受非此即彼的選擇。
+:::
+
+## Context
+
+CAP 定理在網絡分區期間強制在一致性和可用性之間做出二元選擇，但大多數工程師面臨的是更豐富的問題：這個特定操作實際上需要什麼一致性級別？Werner Vogels 在「最終一致性」（《ACM 通訊》，2009 年 1 月）中闡明了這一點，將**服務器中心**一致性（任何外部觀察者均可觀察到的屬性，如線性一致性）與**客戶端中心**一致性（從單個客戶端視角在其自身會話中可觀察到的屬性）加以區分。用戶在更新後讀取自己的個人資料需要前者；用戶瀏覽商品目錄則不需要。
+
+客戶端中心模型的正式基礎由 Douglas Terry、Alan Demers、Karin Petersen 及其 Xerox PARC 的同事在「弱一致性複製數據的會話保證」（PDIS 1994）中奠定。他們定義了四種可獨立組合的會話保證：
+
+- **讀己之寫（RYW）**：會話內的讀取總是反映同一會話的寫入。若您寫入值 V，在同一會話中永遠不會讀到比 V 更舊的值。
+- **單調讀（MR）**：一旦會話觀察到版本 V 的值，就永遠不會觀察到比 V 更舊的版本。從會話的角度看，時間只向前推進。
+- **單調寫（MW）**：會話發出的寫入按其發出順序應用於所有副本。較晚的寫入永遠不會在同一會話的較早寫入之前可見。
+- **寫跟隨讀（WFR）**：若會話讀取了對象的版本 V 然後寫入新版本，該寫入僅應用於已應用版本 V 的副本。這確保了因果相關的寫入被正確排序。
+
+將全部四者組合起來即得到**會話一致性**（也稱為 PRAM——流水線 RAM，Lipton 和 Sandberg，1988 年），它捕獲了單個用戶對其自身會話的直覺保證，無需在所有會話之間進行全局協調。Peter Bailis、Aaron Davidson 及合作者在「高可用事務：優點與局限性」（VLDB 2013）中證明，RYW、MR 和 MW 在高可用性下可實現（AP 系統可提供它們）；完整的因果一致性（WFR 擴展至跨會話因果性）至少需要一些協調。
+
+Daniel Abadi 在「現代分散式數據庫系統設計中的一致性權衡」（IEEE Computer，2012 年 2 月）中用 **PACELC 定理**擴展了 CAP 框架：即使在沒有分區的情況下，系統也MUST（必須）在更低**延遲**和更強**一致性**之間做出選擇。PACELC 在兩個維度上對系統進行分類：PA/EL（分區可用、否則延遲優化——Cassandra、DynamoDB）vs. PC/EC（分區一致、否則一致性優化——CockroachDB、Cloud Spanner）。這解釋了為什麼即使在健康的集群中，從 Cassandra ONE 副本讀取比 QUORUM 讀取更快但可能更舊。
+
+## Design Thinking
+
+**將一致性模型與訪問模式匹配，而非與數據庫默認值匹配。** 同一數據庫MAY（可以）服務於具有不同需求的多種訪問模式。用戶讀取自己的購物車需要 RYW——他們MUST（必須）看到自己剛添加的商品。用戶瀏覽商品列表需要 MR——價格SHOULD（應該）不向後跳——但不需要實時看到其他用戶的所有編輯。分析儀表板需要最終一致性——為了吞吐量可以接受輕微的陳舊。應按請求或按會話配置一致性，而非全局應用最強模型。
+
+**當路由具有黏性時，會話保證代價低廉。** RYW 和 MR 可以通過簡單地將會話的所有請求路由到同一副本來保證——副本的本地排序保證了單調性。這不需要副本間協調。代價是減少了該會話在副本間的負載均衡。當黏性路由不可行時（會話跨越多個服務，或副本不可用），基於向量時鐘的版本跟蹤將協調移至客戶端：在每個請求中包含會話的最後所見版本令牌；副本等到已應用該版本後才提供讀取。
+
+**因果一致性與 PACELC 延遲相互關聯。** 因果一致性要求傳播到副本 B 的寫入僅在其因果依賴的寫入已應用之後才被應用。強制執行此規則需要副本在每次寫入時交換依賴元數據——每次寫入至少一次跨副本往返。這就是 PACELC 的「E」項所捕獲的延遲成本：即使集群健康，因果一致性也比最終一致性代價更高的延遲。MongoDB 的因果會話和 Amazon 的 CausalConsistency 讀關注通過集群時間標量實現這一點；COPS（Lloyd 等人，SOSP 2011）等系統使用依賴列表。
+
+**升級到更強一致性是單向且局部的。** 從最終一致性開始並升級到因果或會話一致性是有效的遷移路徑。但強化只幫助明確選擇它的操作。如果一個微服務以最終一致性讀取而另一個以因果一致性寫入，無法保證最終一致性讀者看到因果排序的數據。會話保證是針對每個會話的：它對跨會話排序沒有任何說明。
+
+## 一致性譜系
+
+| 模型 | 保證 | 在高可用性下可實現？ | 協調成本 |
+|---|---|---|---|
+| 線性一致性 | 匹配實時的全序 | 否 | 高（每操作仲裁） |
+| 順序一致性 | 全序，無實時 | 否 | 高 |
+| 因果一致性 | 因果相關操作有序 | 否（收斂因果：是） | 中 |
+| 會話（RYW+MR+MW+WFR） | 會話本地排序 | 是（黏性路由） | 低 |
+| 僅單調讀 | 每個會話無時間回退 | 是 | 無（黏性） |
+| 最終一致性 | 所有副本最終一致 | 是 | 無 |
+
+## Example
+
+**MongoDB 因果一致性會話：**
+
+```python
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://replica-set-host/?replicaSet=rs0")
+db = client.mydb
+
+# 啟動因果會話——MongoDB 跟蹤集群時間和操作時間
+# 以在副本集中強制執行 RYW、MR、MW、WFR
+with client.start_session(causal_consistency=True) as session:
+    # 使用多數寫關注寫入——確保寫入在確認前到達多數
+    db.orders.insert_one(
+        {"order_id": 42, "status": "pending"},
+        session=session
+    )
+
+    # 使用多數讀關注 + 會話令牌讀取
+    # MongoDB 發送會話的集群時間；副本等到已應用該時間前的所有操作後才提供讀取
+    order = db.orders.find_one(
+        {"order_id": 42},
+        session=session
+    )
+    # 保證反映上面的 insert（RYW），即使讀取由不同的副本集成員提供
+    assert order["status"] == "pending"
+```
+
+**無黏性路由的 RYW 版本令牌方法：**
+
+```python
+# 寫入後，服務器返回版本令牌（LSN、向量時鐘等）
+# 客戶端在後續讀取中包含此令牌；副本等到達到該版本後才提供讀取
+
+def write_order(order_data):
+    result = db.execute("INSERT INTO orders ...", order_data)
+    return result.replication_token   # 例如 "lsn:0/3A9B4F8"
+
+def read_order(order_id, min_version_token=None):
+    # 包含寫入的令牌，以便任何副本一旦追上至少到該 LSN 就可以提供此讀取
+    return db.execute(
+        "SELECT * FROM orders WHERE order_id = %s",
+        order_id,
+        consistency="session",
+        min_lsn=min_version_token
+    )
+
+token = write_order({"order_id": 42, "status": "pending"})
+# 將令牌傳遞給任何下游服務或下一個請求
+order = read_order(42, min_version_token=token)
+# 即使路由到與寫入不同的節點，也保證 RYW
+```
+
+**實踐中的 PACELC——按操作選擇一致性：**
+
+```
+# Cassandra：PA/EL 系統
+# 默認：PA（最終一致性），低延遲
+SELECT * FROM product_catalog WHERE product_id = 'sku-1';   # ONE → 快速，可接受陳舊
+
+# 為此操作升級到 PC（支付協調成本）
+SELECT * FROM inventory WHERE product_id = 'sku-1' USING SERIAL;  # Paxos 線性一致
+
+# DynamoDB：PA/EL 系統
+# 最終一致性讀取——約 50% 成本，可能陳舊
+response = table.get_item(Key={"order_id": 42})
+
+# 強一致性讀取——2× 成本，始終最新（非線性一致，但是 RYW）
+response = table.get_item(Key={"order_id": 42}, ConsistentRead=True)
+
+# CockroachDB：PC/EC 系統
+# 所有讀取默認線性一致——以延遲為代價的一致性
+SELECT * FROM orders WHERE order_id = 42;  # 始終線性一致，跨區域 = 更慢
+
+# 可選：對讀密集型副本進行陳舊讀取（接受最多 10 秒的陳舊）
+SET transaction_read_only = true;
+SET transaction_as_of_system_time = '-10s';
+SELECT * FROM product_catalog WHERE product_id = 'sku-1';
+```
+
+## Related BEEs
+
+- [BEE-19001](cap-theorem-and-the-consistency-availability-tradeoff.md) -- CAP 定理：CAP 描述了分區時的權衡；PACELC 用正常操作期間的延遲-一致性權衡擴展了它——會話保證是在 CAP 可用性側導航而不完全犧牲每個會話新鮮度的工具之一
+- [BEE-19003](vector-clocks-and-logical-timestamps.md) -- 向量時鐘與邏輯時間戳：用於在副本間實現 RYW 和 WFR 的版本令牌通常是向量時鐘或標量邏輯時間戳；客戶端跟蹤最後所見的時鐘值並請求在該版本或更高版本的讀取
+- [BEE-19009](linearizability-and-serializability.md) -- 線性一致性與可串行化：線性一致性和順序一致性是一致性譜系上最強的服務器中心模型；會話保證是無跨會話協調的最強可實現客戶端中心模型
+- [BEE-19014](quorum-systems-and-nwr-consistency.md) -- 仲裁系統與 NWR 一致性：當 W+R>N 時，QUORUM 讀取近似會話一致性（MR、RYW）；ONE 讀取僅提供最終一致性；仲裁大小決定了每次讀取在一致性譜系上的位置
+
+## References
+
+- [弱一致性複製數據的會話保證 -- Terry, Demers, Petersen 等人, PDIS 1994](https://ieeexplore.ieee.org/document/331722/)
+- [最終一致性 -- Werner Vogels, CACM 2009 年 1 月](https://dl.acm.org/doi/10.1145/1435417.1435432)
+- [現代分散式數據庫系統設計中的一致性權衡（PACELC）-- Daniel Abadi, IEEE Computer 2012](https://ieeexplore.ieee.org/document/6127847/)
+- [PACELC 論文 PDF -- Daniel Abadi, 馬里蘭大學](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf)
+- [高可用事務：優點與局限性 -- Bailis, Davidson, Fekete 等人, VLDB 2013](https://www.vldb.org/pvldb/vol7/p181-bailis.pdf)
+- [高可用事務（擴展版）-- arXiv 2013](https://arxiv.org/abs/1302.0309)
+- [因果一致性讀/寫關注 -- MongoDB 文檔](https://www.mongodb.com/docs/manual/core/causal-consistency-read-write-concerns/)
+- [線性一致性：並發對象的正確性條件 -- Herlihy and Wing, ACM TOPLAS 1990](https://dl.acm.org/doi/10.1145/78969.78972)

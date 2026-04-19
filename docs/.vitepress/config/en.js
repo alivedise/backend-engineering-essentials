@@ -1,5 +1,5 @@
 import matter from 'gray-matter';
-import { resolve } from 'path';
+import { resolve, basename, dirname } from 'path';
 import fs from 'fs';
 
 function getMinId(node) {
@@ -56,7 +56,7 @@ function getSidebar(dir) {
           if (data && typeof data.id === 'undefined') {
             return;
           }
-          const categorySlug = require('path').basename(require('path').dirname(fullPath));
+          const categorySlug = basename(dirname(fullPath));
           const articleSlug = data.slug || file.replace(/\.md$/, '');
           if (!data.slug) {
             console.warn(`[sidebar] missing slug in frontmatter: ${fullPath}; falling back to file basename`);

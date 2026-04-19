@@ -1,0 +1,213 @@
+---
+id: 2016
+title: 物件層級授權缺失（BOLA）
+state: draft
+slug: broken-object-level-authorization-bola
+---
+
+# [BEE-499] 物件層級授權缺失（BOLA）
+
+:::info
+BOLA 發生於 API 正確驗證了使用者身份，但未能驗證已驗證的使用者是否被允許存取其請求的特定資源——讓任何使用者只需更改請求中的 ID，就能存取其他使用者的資料。
+:::
+
+## 背景
+
+OWASP 在 2019 年和 2023 年版的 OWASP API 安全 Top 10 中，都將物件層級授權缺失列為第一大 API 安全風險。原因很直接：API 暴露接受資源識別符（訂單 ID、使用者 ID、文件 ID）作為路徑參數或查詢參數的端點，而大多數 API 正確地驗證了是誰在發出請求，卻不一致地驗證已驗證的使用者是否應被允許存取由該參數所識別的特定物件。
+
+這個漏洞在 API 時代之前以舊名稱**不安全直接物件參照（IDOR）**存在，這個術語在 OWASP Top 10:2007 中被創造，用於描述一類更廣泛的問題：應用程式在未驗證存取的情況下暴露了對內部物件的直接參照。BOLA 是 API 特有的重新框架：問題不在於直接參照本身（在 URL 中使用 `orderId=123` 本身並無問題），而在於物件層級缺少的授權檢查。術語的轉變反映了問題所在位置的轉變——不在 URL 設計中，而在每次物件存取時必須觸發的授權邏輯中。
+
+記錄在案的最具說明性的大規模 BOLA 事件是 2018 年的 USPS 通知交付（Informed Delivery）外洩事件。通知可見性 API 暴露了任何呼叫者提供的使用者 ID 的帳戶資料——電子郵件、使用者名稱、使用者 ID、帳號、郵件行銷活動資料。需要驗證身份；但不需要授權。任何已登入的 USPS 帳戶持有者都可以查詢其他 6000 萬名使用者的帳戶詳情。該漏洞由研究人員於 2018 年 8 月報告，在 Krebs on Security 於 2018 年 11 月公開發布前，超過一年未被修復，最終迫使 USPS 修復。這個漏洞無需利用循序猜測性：API 接受任何有效的使用者 ID，而 USPS 的使用者 ID 並非秘密。
+
+Uber 在 2016 年披露了類似問題：透過修改 Session 請求中的 UUID 和令牌值，研究人員可以取得屬於其他帳戶的行程歷史、司機詳情（UUID、車牌）和乘客姓名。從研究到修復的時間為 11 天——對於系統性授權缺口而言異常快速——但在發現之前的暴露窗口是未知的。
+
+## 設計思考
+
+BOLA 的根源在於開發人員認為授權發生的位置與授權實際需要發生的位置之間的不匹配。
+
+路由層中介軟體強制執行**功能層級授權**：「已驗證的使用者是否具有 `read:orders` 權限？」這個檢查在請求到達路由器時觸發一次。它回答了使用者是否被允許存取 `/orders` 集合端點。
+
+物件層級授權是不同的：它必須回答這個使用者是否被允許存取特定的訂單 `12345`。這個檢查不能存在於通用中介軟體中，因為中介軟體尚不知道處理器將取得哪個物件。它必須存在於處理器本身中，在識別物件之後、返回其資料之前。
+
+大多數 BOLA 漏洞並不複雜。它們遵循一個模式：開發人員實作了身份驗證，並添加了中介軟體來檢查使用者是否具有到達端點的正確角色。處理器取得請求的物件。開發人員認為授權完成了。缺口——「這個物件屬於這個使用者嗎？」——從未被填補，因為身份驗證和基於角色的中介軟體都沒有回答這個問題。
+
+**BOLA 與 BFLA 的對比：** BOLA（API1）是*水平*權限提升——攻擊者存取屬於其他同等權限層級使用者的物件。功能層級授權缺失（BFLA，API5）是*垂直*權限提升——攻擊者呼叫需要比其所持有更高權限的管理員功能。普通使用者讀取另一個使用者的訂單是 BOLA。普通使用者呼叫 `DELETE /admin/users/5` 是 BFLA。兩者都需要授權修復，但在不同的地方。
+
+## 最佳實踐
+
+### 取得後始終檢查擁有權
+
+**MUST（必須）在每個透過使用者控制的識別符取得物件的處理器中，驗證已驗證的使用者是否被授權存取所取得的物件。**這個檢查不能委託給中介軟體，因為中介軟體不知道所取得物件的擁有者。
+
+```python
+# 易受攻擊：身份驗證通過，擁有權從未被檢查
+@router.get("/orders/{order_id}")
+async def get_order(order_id: str, current_user: User = Depends(get_current_user)):
+    order = await db.orders.get(order_id)
+    if order is None:
+        raise HTTPException(404)
+    return order  # 返回給任何已驗證的使用者，無論誰擁有它
+
+# 安全：取得，然後驗證擁有權
+@router.get("/orders/{order_id}")
+async def get_order(order_id: str, current_user: User = Depends(get_current_user)):
+    order = await db.orders.get(order_id)
+    if order is None:
+        raise HTTPException(404)
+    if order.customer_id != current_user.id:           # 擁有權檢查
+        raise HTTPException(403)                        # 403，非 404
+    return order
+```
+
+授權失敗時選擇 403 還是 404 值得注意。返回 403 確認了資源存在。返回 404 避免了資訊洩漏（攻擊者無法區分「此訂單不存在」和「此訂單屬於其他人」）。對於大多數後端 API，對未授權的物件存取返回 404 可以減少資訊洩漏。請一致地選擇。
+
+### 將資料庫查詢範圍限定為已驗證的使用者
+
+**SHOULD（應該）將資料庫查詢範圍限定為已驗證使用者的 ID，而非先按 ID 取得然後再檢查擁有權。**範圍限定的查詢消除了先檢查後使用的競爭條件，並排除了在擁有權檢查意外缺失時返回未授權資料的可能性：
+
+```sql
+-- 易受攻擊：先取得，後檢查
+SELECT * FROM orders WHERE id = $1;
+-- 然後在應用程式程式碼中檢查 order.customer_id == current_user.id
+
+-- 安全：在查詢層級強制執行擁有權
+SELECT * FROM orders WHERE id = $1 AND customer_id = $2;
+-- 若訂單不屬於此使用者，則不返回任何內容
+```
+
+在 ORM 中，等效做法是在每次查詢中按擁有使用者進行過濾：
+
+```python
+# Django ORM：始終將查詢範圍限定為當前使用者
+order = Order.objects.filter(id=order_id, customer=request.user).first()
+if order is None:
+    return HttpResponse(status=404)  # 涵蓋未找到和未授權兩種情況
+```
+
+### 使用非循序、不可猜測的 ID——但了解其限制
+
+**SHOULD（應該）對任何可透過 API 直接存取的資源使用 UUID 或其他不可猜測的識別符。**循序整數 ID（`order_id=1`、`order_id=2`）使列舉變得輕而易舉：找到一個有效 ID 的攻擊者可以遍歷所有其他 ID。UUID 消除了猜測性。
+
+**不可猜測的 ID 是縱深防禦，不是授權檢查的替代品。**USPS 外洩事件涉及任意使用者 ID，而非循序整數。透過共享連結、日誌中的 URL、錯誤訊息或披露的漏洞報告獲得單一 UUID 的攻擊者，可以與使用循序 ID 同樣輕易地利用 BOLA 漏洞。授權檢查始終是必需的。
+
+### 集中化物件層級授權邏輯
+
+**SHOULD（應該）在單一、可測試的位置定義物件層級授權策略**，而非將擁有權檢查分散在各個處理器中。分散的檢查會漂移：新開發人員添加了一個處理器，忘記了擁有權檢查，缺口在安全審查或外洩之前未被發現。
+
+一種模式：始終強制執行擁有權的儲存庫或服務層：
+
+```python
+class OrderRepository:
+    async def get_for_user(self, order_id: str, user_id: str) -> Order:
+        """始終限定範圍——呼叫者無法繞過擁有權檢查。"""
+        order = await self.db.get("SELECT * FROM orders WHERE id=$1 AND customer_id=$2",
+                                  order_id, user_id)
+        if order is None:
+            raise NotFound()
+        return order
+```
+
+處理器呼叫 `order_repo.get_for_user(order_id, current_user.id)`，且不能意外呼叫非限定範圍的變體。沒有非限定範圍的變體。
+
+對於擁有許多服務和複雜權限模型的組織，專用授權策略引擎（如 Open Policy Agent，OPA）可以評估編碼了物件層級規則的 Rego 策略：
+
+```rego
+# OPA 策略：使用者只能讀取自己的訂單或是管理員
+allow {
+    input.action == "read"
+    input.resource.type == "order"
+    input.user.id == input.resource.owner_id
+}
+
+allow {
+    input.action == "read"
+    input.resource.type == "order"
+    input.user.role == "admin"
+}
+```
+
+應用程式在提供物件之前查詢 OPA：
+
+```python
+decision = opa.evaluate("data.orders.allow", {
+    "action": "read",
+    "user": {"id": current_user.id, "role": current_user.role},
+    "resource": {"type": "order", "id": order.id, "owner_id": order.customer_id},
+})
+if not decision:
+    raise HTTPException(403)
+```
+
+這將授權邏輯與應用程式程式碼解耦，使策略可稽核，並在多個服務中建立測試和強制執行物件層級規則的單一點。
+
+### GraphQL 和批次 API
+
+**MUST（必須）在 GraphQL API 的每個解析器上應用物件層級授權**，而非僅在查詢根部。GraphQL 的巢狀解析模型意味著使用者可以透過被允許的父物件到達子物件。如果 `Order.invoices` 的解析器沒有檢查當前使用者是否擁有父訂單，攻擊者可以構建一個遍歷到其不應見到的資料的查詢。
+
+**MUST NOT（不得）依賴查詢複雜性限制或速率限制來防止透過 GraphQL 批次的 BOLA。**GraphQL 允許在單個請求中進行基於別名的多操作批次：
+
+```graphql
+{
+  order_1: order(id: "uuid-1") { total, customerName }
+  order_2: order(id: "uuid-2") { total, customerName }
+  order_3: order(id: "uuid-3") { total, customerName }
+}
+```
+
+如果 `order` 解析器不驗證擁有權，可以在單個 HTTP 請求中檢查 500 個 UUID。解析器中的物件層級授權是唯一有效的控制措施。
+
+## BOLA 測試
+
+標準的 BOLA 測試需要兩個帳戶：
+
+1. 以使用者 A 身份驗證。建立或識別使用者 A 擁有的資源（例如訂單 `uuid-A`）。
+2. 以使用者 B 身份驗證。
+3. 使用使用者 B 的 Session 向使用者 A 的資源發出請求：`GET /orders/uuid-A`。
+4. 如果響應返回訂單資料，則端點存在漏洞。
+
+自動化安全掃描器難以處理 BOLA，因為測試需要了解哪些物件屬於哪個使用者——掃描器沒有的上下文。使用兩個夾具帳戶的手動測試或已驗證的回歸測試是可靠的方法。
+
+## 視覺圖示
+
+```mermaid
+sequenceDiagram
+    participant A as 攻擊者<br/>（使用者 B 的 Session）
+    participant API as API 伺服器
+    participant Auth as 驗證中介軟體
+    participant DB as 資料庫
+
+    A->>API: GET /orders/order-A-uuid
+    API->>Auth: 驗證 JWT
+    Auth-->>API: 有效（使用者 B）
+    note over API: 角色檢查：使用者 B 具有 "read:orders" ✓
+    API->>DB: SELECT * FROM orders WHERE id='order-A-uuid'
+    DB-->>API: {id, customerId: user-A, total: 299.99}
+    note over API: 擁有權檢查：缺失 ✗
+    API-->>A: 200 OK — 使用者 A 的訂單資料
+
+    style A fill:#c0392b,color:#fff
+    style Auth fill:#2d6a4f,color:#fff
+    style API fill:#e67e22,color:#fff
+    style DB fill:#1d3557,color:#fff
+```
+
+## 相關 BEE
+
+- [BEE-1001](../auth/authentication-vs-authorization.md) -- 身份驗證與授權：BOLA 是授權失敗，而非身份驗證失敗——使用者身份已被驗證；其存取特定物件的權限未被驗證
+- [BEE-1005](../auth/rbac-vs-abac.md) -- RBAC 與 ABAC 存取控制模型：單獨的 RBAC 無法防止 BOLA；ABAC 的基於屬性的策略可以將擁有權編碼為屬性，更接近物件層級授權的需求
+- [BEE-2008](owasp-api-security-top-10.md) -- OWASP API 安全 Top 10：BOLA 是 API1:2023——最關鍵的 API 安全風險
+- [BEE-2015](server-side-request-forgery-ssrf.md) -- SSRF：BOLA 和 SSRF 都是關於對系統將存取哪些資源缺乏授權；SSRF 針對網路資源，BOLA 針對資料物件
+- [BEE-18007](../multi-tenancy/database-row-level-security.md) -- 資料庫行層級安全：PostgreSQL RLS 可以在資料庫層強制執行物件層級擁有權，為應用程式層 BOLA 漏洞提供縱深防禦
+
+## 參考資料
+
+- [OWASP API Security Top 10:2023 — API1:2023 物件層級授權缺失 — owasp.org](https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/)
+- [OWASP API Security Top 10:2023 — API5:2023 功能層級授權缺失 — owasp.org](https://owasp.org/API-Security/editions/2023/en/0xa5-broken-function-level-authorization/)
+- [PortSwigger Web Security Academy. 不安全直接物件參照（IDOR）— portswigger.net](https://portswigger.net/web-security/access-control/idor)
+- [Brian Krebs. USPS 網站暴露 6000 萬使用者資料 — krebsonsecurity.com, 2018年11月](https://krebsonsecurity.com/2018/11/usps-site-exposed-data-on-60-million-users/)
+- [Inon Shkedy. 深入探討最關鍵的 API 漏洞——BOLA — inonst.medium.com](https://inonst.medium.com/a-deep-dive-on-the-most-critical-api-vulnerability-bola-1342224ec3f2)
+- [Open Policy Agent 文件 — openpolicyagent.org](https://www.openpolicyagent.org/docs)
+- [Open Policy Agent. HTTP API 授權 — openpolicyagent.org](https://www.openpolicyagent.org/docs/http-api-authorization)
+- [PortSwigger Web Security Academy. GraphQL API 漏洞 — portswigger.net](https://portswigger.net/web-security/graphql)
+- [OWASP 測試指南. 測試權限提升 — owasp.org](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/03-Testing_for_Privilege_Escalation)
+- [OWASP GraphQL 備忘單 — cheatsheetseries.owasp.org](https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html)
