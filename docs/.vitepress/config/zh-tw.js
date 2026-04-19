@@ -56,18 +56,24 @@ function getSidebar(dir) {
           if (data && typeof data.id === 'undefined') {
             return;
           }
-          let title = `${data.id}.${data.title}` || file.replace('.md', '');
+          const categorySlug = require('path').basename(require('path').dirname(fullPath));
+          const articleSlug = data.slug || file.replace(/\.md$/, '');
+          if (!data.slug) {
+            console.warn(`[sidebar] missing slug in frontmatter: ${fullPath}; falling back to file basename`);
+          }
+          let title = `BEE-${data.id} ${data.title}` || file.replace('.md', '');
           if (data && data.placeholder) {
             title = `<span class="VPBadge danger">暫定</span> ${title}`;
           }
 
+          const semanticUrl = `/zh-tw/${categorySlug}/${articleSlug}`;
           mdFileList.push({
-            listItem: `- [${title}](${data.id})`,
+            listItem: `- [${title}](${semanticUrl})`,
             id: data.id,
           });
           result.push({
             text: title,
-            link: `/zh-tw/${data.id}`,
+            link: semanticUrl,
           });
         }
       }

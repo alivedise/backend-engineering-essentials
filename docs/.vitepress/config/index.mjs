@@ -12,10 +12,10 @@ import { zhTW } from './zh-tw';
 const baseConfig = defineConfig({
   ...shared,
   rewrites: {
-    'en/:path+/:page': ':page',
+    'en/:category/:page': ':category/:page',
     'en/list.md': 'list.md',
     'en/faq.md': 'faq.md',
-    'zh-tw/:path+/:page': 'zh-tw/:page',
+    'zh-tw/:category/:page': 'zh-tw/:category/:page',
   },
   locales: {
     root: { label: 'English', ...en },
