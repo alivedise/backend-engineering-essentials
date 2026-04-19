@@ -304,3 +304,4 @@ title: BEE list
 - [595.Data Augmentation Strategies for ML Training](595)
 - [596.GraphQL HTTP-Layer Caching](596)
 - [597.GraphQL vs REST: Request-Side HTTP Trade-offs](597)
+- [598.GraphQL vs REST: Response-Side HTTP Trade-offs](598)

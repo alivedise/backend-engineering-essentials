@@ -187,3 +187,4 @@ title: BEE 全列表
 - [595.ML 訓練的資料增強策略](595)
 - [596.GraphQL 的 HTTP 層快取](596)
 - [597.GraphQL vs REST：請求端的 HTTP 取捨](597)
+- [598.GraphQL vs REST：回應端的 HTTP 取捨](598)
