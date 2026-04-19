@@ -240,6 +240,7 @@ server := &http.Server{
 - [BEE-2003](../security-fundamentals/secrets-management.md) -- Secrets Management: service credentials (private keys, signing secrets) must be stored and rotated through a secrets manager, not hardcoded or stored in environment variables baked into images
 - [BEE-2007](../security-fundamentals/zero-trust-security-architecture.md) -- Zero-Trust Security Architecture: establishes the architectural principle that every service-to-service call must be authenticated regardless of network origin; this article covers the application-level mechanisms (mTLS, service JWTs, workload identity) that implement that principle
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL Handshake: mTLS extends the standard TLS handshake with client certificate presentation; understanding the base TLS handshake is prerequisite to understanding mTLS
+- [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) -- Mutual TLS Handshake and Server Configuration: deep mechanics of the mTLS strategy row in this article's comparison — handshake messages, server verification, and practical setup
 - [BEE-19043](audit-logging-architecture.md) -- Audit Logging Architecture: service identity must appear in audit log entries to enable cross-service forensic investigation
 
 ## References

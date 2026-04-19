@@ -216,7 +216,7 @@ The mesh adds an entirely new operational surface (control plane, certificate au
 Each sidecar is a full proxy process. At 50–200 MB per pod for Envoy-based sidecars, a 200-pod cluster needs gigabytes of RAM that produce no business value. Always benchmark overhead against your cluster's capacity and cost model.
 
 **3. Treating the mesh as a security silver bullet.**
-mTLS proves that Service A is talking to Service B. It does not prove that the request is authorized. You still need application-level authorization (RBAC, JWT validation, business rules). [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) covers mTLS; do not conflate transport security with application security.
+mTLS proves that Service A is talking to Service B. It does not prove that the request is authorized. You still need application-level authorization (RBAC, JWT validation, business rules). [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) covers mTLS mechanics and server setup; do not conflate transport security with application security.
 
 **4. Underestimating latency added by the sidecar.**
 Every service call passes through two proxies (client sidecar + server sidecar). At 2–5 ms per hop, a request chain with 5 hops adds 10–25 ms of pure proxy overhead. For latency-sensitive paths, profile before and after.
@@ -226,7 +226,7 @@ VirtualServices, DestinationRules, and AuthorizationPolicies interact. A misconf
 
 ## Related BEPs
 
-- [BEE-3004 — Mutual TLS (mTLS)](53.md): The security foundation the sidecar enforces
+- [BEE-3007 — Mutual TLS (mTLS) Handshake and Server Configuration](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md): The security foundation the sidecar enforces
 - [BEE-3006 — Reverse Proxy Patterns](55.md): Simpler alternative for smaller deployments
 - [BEE-5001 — Microservices Architecture](100.md): The context in which service meshes become necessary
 - [BEE-12001 — Circuit Breaker Pattern](260.md): Reliability pattern the mesh automates

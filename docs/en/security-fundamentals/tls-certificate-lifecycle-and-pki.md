@@ -205,6 +205,7 @@ flowchart TD
 
 - [BEE-2005](cryptographic-basics-for-engineers.md) -- Cryptographic Basics for Engineers: the asymmetric cryptography (RSA, ECDSA) underlying certificate key pairs and signature chains
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL Handshake: the protocol mechanics that use certificates — how certificates are presented and verified at connection time
+- [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) -- Mutual TLS Handshake and Server Configuration: mTLS protocol mechanics and practical server setup; consumes the PKI layer this article describes
 - [BEE-19048](../distributed-systems/service-to-service-authentication.md) -- Service-to-Service Authentication: mTLS as an authentication strategy; this article covers the PKI layer that makes mTLS work
 - [BEE-2010](cryptographic-key-management-and-key-rotation.md) -- Cryptographic Key Management and Key Rotation: the private key behind a certificate is subject to all key management requirements — DEK/KEK, HSM storage, cryptoperiods
 

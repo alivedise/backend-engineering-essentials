@@ -383,3 +383,4 @@ openssl x509 -enddate -noout -in /etc/ssl/certs/service.pem
 - [BEE-3001](tcp-ip-and-the-network-stack.md) — TCP/IP：TLS 在 TCP 之上運行；理解 TCP 握手可釐清總連線延遲（TCP SYN + TLS = 資料前 2-3 RTT）
 - [BEE-3003](http-versions.md) — HTTP/2 與 HTTP/3：ALPN 在 TLS 上協商 HTTP/2；HTTP/3 使用內建 TLS 1.3 的 QUIC
 - [BEE-3005](load-balancers.md) — 負載均衡器：大規模環境的 TLS 終止策略、SNI 路由和憑證管理
+- [BEE-3007](mutual-tls-handshake-and-server-configuration.md) — Mutual TLS (mTLS) 握手與伺服器設定：用戶端憑證 mTLS 的協定機制、伺服器端驗證與實務設定細節；延伸本文涵蓋的基礎握手

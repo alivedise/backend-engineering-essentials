@@ -237,6 +237,7 @@ server := &http.Server{
 - [BEE-2003](../security-fundamentals/secrets-management.md) -- 密鑰管理：服務憑證（私鑰、簽署密鑰）必須通過密鑰管理器儲存和旋轉，而非硬式編碼或儲存在內嵌於映像中的環境變數中
 - [BEE-2007](../security-fundamentals/zero-trust-security-architecture.md) -- 零信任安全架構：確立「無論網路來源為何，每次服務對服務呼叫都必須經過驗證」的架構原則；本文涵蓋實作該原則的應用層機制（mTLS、服務 JWT、工作負載身份）
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL 握手：mTLS 通過用戶端憑證出示擴展了標準 TLS 握手；理解基礎 TLS 握手是理解 mTLS 的前提
+- [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) -- Mutual TLS 握手與伺服器設定：本文策略比較中 mTLS 列的深入機制；握手訊息、伺服器端驗證與實務設定
 - [BEE-19043](audit-logging-architecture.md) -- 審計日誌架構：服務身份必須出現在審計日誌條目中，以實現跨服務的取證調查
 
 ## 參考資料

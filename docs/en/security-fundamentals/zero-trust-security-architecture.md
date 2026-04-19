@@ -264,6 +264,7 @@ def evaluate(req: AccessRequest) -> Decision:
 - [BEE-2005](cryptographic-basics-for-engineers.md) -- Cryptographic Basics for Engineers: mTLS and certificate-based workload identity are the cryptographic foundation of Zero Trust networking
 - [BEE-19048](../distributed-systems/service-to-service-authentication.md) -- Service-to-Service Authentication: covers the application-level patterns (JWT, API keys, mTLS) that implement Zero Trust between services
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL Handshake: mTLS extends the standard TLS handshake to require client certificate verification
+- [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) -- Mutual TLS Handshake and Server Configuration: deep mechanics of the mTLS handshake and practical server setup; the primitive that enforces east-west zero-trust between services
 
 ## References
 

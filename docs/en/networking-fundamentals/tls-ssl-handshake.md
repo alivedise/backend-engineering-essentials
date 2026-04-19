@@ -383,3 +383,4 @@ Terminating TLS at the load balancer and sending plaintext to backends is common
 - [BEE-3001](tcp-ip-and-the-network-stack.md) — TCP/IP: TLS runs over TCP; understanding the TCP handshake clarifies total connection latency (TCP SYN + TLS = 2-3 RTT before data)
 - [BEE-3003](http-versions.md) — HTTP/2 and HTTP/3: ALPN negotiates HTTP/2 over TLS; HTTP/3 uses QUIC which has TLS 1.3 built-in
 - [BEE-3005](load-balancers.md) — Load Balancers: TLS termination strategies, SNI-based routing, and certificate management at scale
+- [BEE-3007](mutual-tls-handshake-and-server-configuration.md) — Mutual TLS (mTLS) Handshake and Server Configuration: deep mechanics of client-cert mTLS, server verification, and practical setup; extends the base handshake covered here

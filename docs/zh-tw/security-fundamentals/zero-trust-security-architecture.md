@@ -264,6 +264,7 @@ def evaluate(req: AccessRequest) -> Decision:
 - [BEE-2005](cryptographic-basics-for-engineers.md) -- 工程師的密碼學基礎：mTLS 和基於憑證的工作負載身份是零信任網路的密碼學基礎
 - [BEE-19048](../distributed-systems/service-to-service-authentication.md) -- 服務對服務認證：涵蓋實作服務間零信任的應用程式層模式（JWT、API 金鑰、mTLS）
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL 握手：mTLS 將標準 TLS 握手擴展為需要客戶端憑證驗證
+- [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) -- Mutual TLS 握手與伺服器設定：mTLS 握手的深入機制與實務伺服器設定；執行服務間東西向零信任的原語
 
 ## 參考資料
 

@@ -205,6 +205,7 @@ flowchart TD
 
 - [BEE-2005](cryptographic-basics-for-engineers.md) -- 工程師的密碼學基礎：憑證金鑰對和簽名鏈背後的非對稱密碼學（RSA、ECDSA）
 - [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md) -- TLS/SSL 握手：使用憑證的協定機制——連線時憑證如何被出示和驗證
+- [BEE-3007](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md) -- Mutual TLS 握手與伺服器設定：mTLS 協定機制與實務伺服器設定；消費本文所描述的 PKI 層
 - [BEE-19048](../distributed-systems/service-to-service-authentication.md) -- 服務間身份驗證：作為認證策略的 mTLS；本文涵蓋使 mTLS 運作的 PKI 層
 - [BEE-2010](cryptographic-key-management-and-key-rotation.md) -- 密碼學金鑰管理與金鑰輪換：憑證背後的私鑰受所有金鑰管理要求約束——DEK/KEK、HSM 儲存、密碼期
 
