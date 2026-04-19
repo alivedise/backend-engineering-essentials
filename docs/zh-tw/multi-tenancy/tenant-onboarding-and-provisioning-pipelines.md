@@ -5,7 +5,7 @@ state: draft
 slug: tenant-onboarding-and-provisioning-pipelines
 ---
 
-# [BEE-403] 租戶入職與配置流水線
+# [BEE-18004] 租戶入職與配置流水線
 
 :::info
 租戶入職是將新客戶轉變為活躍租戶的運維流水線——以可重複、自動化、完全可觀測的順序配置身份、基礎架構、隔離策略和計費。

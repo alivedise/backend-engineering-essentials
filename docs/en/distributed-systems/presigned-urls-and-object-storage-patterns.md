@@ -5,7 +5,7 @@ state: draft
 slug: presigned-urls-and-object-storage-patterns
 ---
 
-# [BEE-459] Presigned URLs and Object Storage Patterns
+# [BEE-19040] Presigned URLs and Object Storage Patterns
 
 :::info
 Presigned URLs grant temporary, scoped access to private objects in object storage — allowing clients to upload or download files directly to/from storage without routing bytes through the backend server and without exposing long-term credentials.

@@ -5,7 +5,7 @@ state: draft
 slug: glossary
 ---
 
-# [BEE-5] Glossary
+# [BEE-3] Glossary
 
 :::info
 Common terms used across BEE documents.
@@ -65,5 +65,5 @@ Common terms used across BEE documents.
 
 ## Related BEPs
 
-- [BEE-1](bee-overview.md) BEE Overview
+- [BEE-2](bee-overview.md) BEE Overview
 - [BEE-2](how-to-read-bee.md) How to Read BEE

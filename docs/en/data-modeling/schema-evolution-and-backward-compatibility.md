@@ -5,7 +5,7 @@ state: draft
 slug: schema-evolution-and-backward-compatibility
 ---
 
-# [BEE-142] Schema Evolution and Backward Compatibility
+# [BEE-7003] Schema Evolution and Backward Compatibility
 
 :::info
 Design schemas to evolve safely over time. Add optional fields; deprecate before removing; never change a field's type or number in place.

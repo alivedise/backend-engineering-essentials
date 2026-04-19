@@ -5,7 +5,7 @@ state: draft
 slug: optimistic-vs-pessimistic-concurrency-control
 ---
 
-# [BEE-245] 樂觀 vs 悲觀並行控制
+# [BEE-11006] 樂觀 vs 悲觀並行控制
 
 :::info
 根據你的競爭狀況，在衝突預防（悲觀）與衝突偵測（樂觀）之間做出選擇。

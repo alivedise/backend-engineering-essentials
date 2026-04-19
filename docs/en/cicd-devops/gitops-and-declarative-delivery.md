@@ -5,7 +5,7 @@ state: draft
 slug: gitops-and-declarative-delivery
 ---
 
-# [BEE-367] GitOps and Declarative Delivery
+# [BEE-16008] GitOps and Declarative Delivery
 
 :::info
 GitOps applies Git as the single source of truth for infrastructure and application state. An agent running inside the cluster continuously reconciles actual state toward the desired state declared in Git — no credentials leave the cluster, every change is auditable, and rollback is a Git revert.

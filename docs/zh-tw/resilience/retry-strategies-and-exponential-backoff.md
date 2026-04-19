@@ -5,7 +5,7 @@ state: draft
 slug: retry-strategies-and-exponential-backoff
 ---
 
-# [BEE-261] 重試策略與指數退避
+# [BEE-12002] 重試策略與指數退避
 
 :::info
 重試預算、抖動，以及何時不應該重試。

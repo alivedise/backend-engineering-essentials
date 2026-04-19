@@ -5,7 +5,7 @@ state: draft
 slug: rag-evaluation-and-quality-measurement
 ---
 
-# [BEE-552] RAG Evaluation and Quality Measurement
+# [BEE-30050] RAG Evaluation and Quality Measurement
 
 :::info
 RAG evaluation must decompose pipeline quality into two independent subproblems — retrieval (did we fetch the right documents?) and generation (did the model use them faithfully?) — because a failure in either component produces wrong answers, and an aggregate end-to-end score cannot distinguish which component to fix.

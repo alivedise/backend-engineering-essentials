@@ -5,7 +5,7 @@ state: draft
 slug: input-validation-and-sanitization
 ---
 
-# [BEE-31] Input Validation and Sanitization
+# [BEE-2002] Input Validation and Sanitization
 
 :::info
 Validate at every system boundary. Never trust external input.

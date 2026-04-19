@@ -5,7 +5,7 @@ state: draft
 slug: audit-logging-architecture
 ---
 
-# [BEE-462] 審計日誌架構
+# [BEE-19043] 審計日誌架構
 
 :::info
 審計日誌是誰在何時對哪個資源執行了什麼操作的只追加、防篡改記錄——服務於合規性、安全調查和問責制，而非運維可觀測性。

@@ -5,7 +5,7 @@ state: draft
 slug: chunking-strategies-for-rag-systems
 ---
 
-# [BEE-559] Chunking Strategies for RAG Systems
+# [BEE-30057] Chunking Strategies for RAG Systems
 
 :::info
 How a document is split into chunks is the single biggest controllable variable in RAG retrieval quality: too small and chunks lose context; too large and similarity scores are diluted by irrelevant content. Matching chunk size and boundary strategy to document type and query pattern — rather than defaulting to a fixed size — produces measurable improvements without changing the embedding model or retrieval algorithm.
@@ -13,7 +13,7 @@ How a document is split into chunks is the single biggest controllable variable 
 
 ## Context
 
-Retrieval-Augmented Generation systems (BEE-509) index document fragments as embedding vectors and retrieve the most similar fragments at query time. The unit of retrieval is the chunk. Chunks that are too small retrieve precise passages but lose the surrounding context needed for accurate generation; chunks that are too large dilute the query-specific signal with unrelated content, reducing retrieval recall.
+Retrieval-Augmented Generation systems (BEE-30007) index document fragments as embedding vectors and retrieve the most similar fragments at query time. The unit of retrieval is the chunk. Chunks that are too small retrieve precise passages but lose the surrounding context needed for accurate generation; chunks that are too large dilute the query-specific signal with unrelated content, reducing retrieval recall.
 
 Kamradt (2023, "5 Levels of Text Splitting") established a widely-adopted taxonomy of chunking complexity, from naive character splitting to LLM-driven agentic splitting. The taxonomy was later formalized and extended through empirical benchmark work. Bhat, Rudat, Spiekermann, and Flores-Herr (Fraunhofer IAIS, arXiv:2505.21700) measured chunk size effects across four datasets at eight sizes (64 to 2,048 tokens) and found no universal optimum: fact-based queries (SQuAD) peaked at 64–128 tokens with recall of 64.1%, while technical long-answer tasks (TechQA) grew monotonically from 4.8% recall at 64 tokens to 71.5% at 1,024 tokens. The embedding model also affects the optimum — decoder-based models favor larger chunks; encoder-based models favor smaller.
 

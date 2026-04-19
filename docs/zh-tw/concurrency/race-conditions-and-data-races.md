@@ -5,7 +5,7 @@ state: draft
 slug: race-conditions-and-data-races
 ---
 
-# [BEE-241] 競態條件與資料競爭
+# [BEE-11002] 競態條件與資料競爭
 
 :::info
 競態條件（race condition）與資料競爭（data race）是兩種不同的錯誤。混為一談往往導致修了其中一個，另一個卻仍殘留。兩者都要理解，才能寫出正確的並發程式。

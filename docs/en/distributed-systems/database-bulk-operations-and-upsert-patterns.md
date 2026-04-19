@@ -5,7 +5,7 @@ state: draft
 slug: database-bulk-operations-and-upsert-patterns
 ---
 
-# [BEE-469] Database Bulk Operations and UPSERT Patterns
+# [BEE-19050] Database Bulk Operations and UPSERT Patterns
 
 :::info
 Bulk operations — inserting or updating many rows in a single database round trip — reduce client-to-database latency from O(N) to O(1) and can increase write throughput by 10–100×; UPSERT patterns extend this to idempotent writes that safely handle duplicate keys without application-level read-before-write.

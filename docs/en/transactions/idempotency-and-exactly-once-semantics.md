@@ -5,7 +5,7 @@ state: draft
 slug: idempotency-and-exactly-once-semantics
 ---
 
-# [BEE-164] Idempotency and Exactly-Once Semantics
+# [BEE-8005] Idempotency and Exactly-Once Semantics
 
 :::info
 In distributed systems, network failures force retries, and retries produce duplicate messages. The only durable solution is making every operation idempotent: applying it multiple times must produce the same result as applying it once. "Exactly-once" processing is achieved not by eliminating duplicates in transit, but by combining at-least-once delivery with idempotent consumers.
@@ -353,10 +353,10 @@ Design every operation that has side effects to be idempotent. In distributed sy
 
 ## Related BEPs
 
-- [BEE-72: API Idempotency](72.md) -- idempotency keys in HTTP API design
-- [BEE-163: Saga Pattern](./163.md) -- saga compensating transactions must be idempotent
-- [BEE-222: Delivery Guarantees](./222.md) -- at-most-once, at-least-once, exactly-once in messaging systems
-- [BEE-226: Idempotent Message Processing](./226.md) -- patterns for idempotent consumers in event-driven systems
+- [BEE-4003: API Idempotency](72.md) -- idempotency keys in HTTP API design
+- [BEE-8004: Saga Pattern](./163.md) -- saga compensating transactions must be idempotent
+- [BEE-10003: Delivery Guarantees](./222.md) -- at-most-once, at-least-once, exactly-once in messaging systems
+- [BEE-10007: Idempotent Message Processing](./226.md) -- patterns for idempotent consumers in event-driven systems
 
 ## References
 

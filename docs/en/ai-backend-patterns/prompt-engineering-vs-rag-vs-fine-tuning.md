@@ -5,7 +5,7 @@ state: draft
 slug: prompt-engineering-vs-rag-vs-fine-tuning
 ---
 
-# [BEE-507] Prompt Engineering vs RAG vs Fine-Tuning
+# [BEE-30005] Prompt Engineering vs RAG vs Fine-Tuning
 
 :::info
 There are three ways to make an LLM do what you want — prompt engineering, retrieval-augmented generation, and fine-tuning — and choosing the wrong one wastes weeks of work and tens of thousands of dollars. The right decision depends on what kind of problem you are actually solving.
@@ -59,7 +59,7 @@ Prompt engineering fails when the model lacks the underlying knowledge (not solv
 
 **MUST NOT** use RAG as a substitute for prompt engineering for behavior problems. A model that incorrectly formats JSON output will continue to incorrectly format JSON even with retrieval augmentation — the problem is behavioral, not informational.
 
-RAG failure modes: noisy retrieval (wrong chunks returned), missing retrieval (relevant document not in the corpus), and retrieval-generation mismatch (retrieved documents confuse rather than help the model). Diagnose retrieval and generation failures separately — the RAGAS framework (BEE-506) measures each independently.
+RAG failure modes: noisy retrieval (wrong chunks returned), missing retrieval (relevant document not in the corpus), and retrieval-generation mismatch (retrieved documents confuse rather than help the model). Diagnose retrieval and generation failures separately — the RAGAS framework (BEE-30004) measures each independently.
 
 ### Fine-Tune When Behavior Must Be Consistent at Scale
 

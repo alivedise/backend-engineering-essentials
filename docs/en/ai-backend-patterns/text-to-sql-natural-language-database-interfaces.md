@@ -5,7 +5,7 @@ state: draft
 slug: text-to-sql-natural-language-database-interfaces
 ---
 
-# [BEE-580] Text-to-SQL: Natural Language Database Interfaces
+# [BEE-30078] Text-to-SQL: Natural Language Database Interfaces
 
 :::info
 Text-to-SQL translates natural language questions into executable SQL queries using an LLM. It exposes your database to users without requiring SQL knowledge — and introduces a distinct attack surface, a hallucination failure mode that returns plausible but wrong results, and a schema-injection cost that grows quadratically with database size if not addressed.

@@ -5,7 +5,7 @@ state: draft
 slug: secrets-management
 ---
 
-# [BEE-32] 密鑰管理
+# [BEE-2003] 密鑰管理
 
 :::info
 密鑰（secret）的定義、為何硬編碼密鑰危險、Vault 概念、輪換策略、最小權限原則、稽核日誌，以及防止密鑰洩漏至版本控制。
@@ -239,6 +239,6 @@ API_KEY=REPLACE_ME
 
 ## 相關 BEE
 
-- [BEE-15: API Keys](15.md) — 如何為外部使用者設計與核發 API key。
-- [BEE-34: Cryptography](./34.md) — 金鑰長度、演算法選擇與靜態加密。
-- [BEE-35: Dependency Security](./35.md) — 可能間接暴露密鑰的供應鏈風險。
+- [BEE-1006: API Keys](15.md) — 如何為外部使用者設計與核發 API key。
+- [BEE-2005: Cryptography](./34.md) — 金鑰長度、演算法選擇與靜態加密。
+- [BEE-2006: Dependency Security](./35.md) — 可能間接暴露密鑰的供應鏈風險。

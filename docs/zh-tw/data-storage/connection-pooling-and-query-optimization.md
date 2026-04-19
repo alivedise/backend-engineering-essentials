@@ -5,7 +5,7 @@ state: draft
 slug: connection-pooling-and-query-optimization
 ---
 
-# [BEE-125] 連線池與查詢優化
+# [BEE-6006] 連線池與查詢優化
 
 :::info
 透過連線重用降低資料庫開銷，並在進入生產環境前消除低效的查詢模式。

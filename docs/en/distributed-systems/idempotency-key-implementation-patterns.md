@@ -5,7 +5,7 @@ state: draft
 slug: idempotency-key-implementation-patterns
 ---
 
-# [BEE-473] Idempotency Key Implementation Patterns
+# [BEE-19054] Idempotency Key Implementation Patterns
 
 :::info
 An idempotency key is a client-supplied token that allows a server to recognize a repeated request and return the cached response instead of processing it again — turning inherently non-idempotent operations like payment charges into safe-to-retry operations.

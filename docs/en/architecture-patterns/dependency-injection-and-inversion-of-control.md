@@ -5,7 +5,7 @@ state: draft
 slug: dependency-injection-and-inversion-of-control
 ---
 
-# [BEE-500] Dependency Injection and Inversion of Control
+# [BEE-5010] Dependency Injection and Inversion of Control
 
 :::info
 Dependency Injection is a technique where a component receives its dependencies from the outside rather than creating them itself — making the component testable, configurable, and decoupled from concrete implementations.

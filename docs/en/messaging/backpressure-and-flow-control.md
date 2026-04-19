@@ -5,7 +5,7 @@ state: draft
 slug: backpressure-and-flow-control
 ---
 
-# [BEE-225] Backpressure and Flow Control
+# [BEE-10006] Backpressure and Flow Control
 
 :::info
 Preventing fast producers from overwhelming slow consumers through explicit demand signaling and bounded buffers.

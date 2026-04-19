@@ -5,7 +5,7 @@ state: draft
 slug: process-reward-models-and-test-time-compute-scaling
 ---
 
-# [BEE-574] 過程獎勵模型與測試時計算縮放
+# [BEE-30072] 過程獎勵模型與測試時計算縮放
 
 :::info
 縮放推理計算——生成更多候選解決方案並使用驗證器選擇最佳方案——能夠超越縮放訓練計算的效益。配備 64 倍推理預算的小模型可以超越大 14 倍的模型；關鍵瓶頸在於擁有可靠的驗證器來區分正確與錯誤的輸出。
@@ -164,7 +164,7 @@ def generate_with_budget_forcing(
 
 ## GRPO：無評論家的推理模型訓練
 
-使用 PPO 訓練推理模型需要四個模型副本——演員、評論家、獎勵模型和參考模型——消耗比 SFT 多三倍的 GPU 記憶體（參見 BEE-573）。**GRPO（Group Relative Policy Optimization，群體相對策略優化）**，在 DeepSeekMath（arXiv:2402.03300）中引入並在 DeepSeek-R1（arXiv:2501.12948）中擴展，通過從採樣輸出組估計基準值來消除評論家：
+使用 PPO 訓練推理模型需要四個模型副本——演員、評論家、獎勵模型和參考模型——消耗比 SFT 多三倍的 GPU 記憶體（參見 BEE-30071）。**GRPO（Group Relative Policy Optimization，群體相對策略優化）**，在 DeepSeekMath（arXiv:2402.03300）中引入並在 DeepSeek-R1（arXiv:2501.12948）中擴展，通過從採樣輸出組估計基準值來消除評論家：
 
 ```python
 def grpo_loss(
@@ -227,7 +227,7 @@ def generate_with_budget(model, prompt: str, budget: int = 2048) -> str:
 
 ### 對長推理模型服務使用預填充-解碼分離
 
-**應當（SHOULD）** 在大規模服務推理模型時採用預填充與解碼硬體分離（參見 BEE-569）。推理模型表現出極端的預填充-解碼不對稱性：思考 token 的生成是純高吞吐量解碼階段，而可見回應生成是獨立且較短的階段。分離預填充 GPU 和解碼 GPU，可以為每個階段分配專業化硬體，並避免長 KV 快取與預填充計算競爭記憶體的問題。DistServe（arXiv:2401.09670）報告使用此方法能服務 7.4 倍更多請求並滿足同等 SLO。
+**應當（SHOULD）** 在大規模服務推理模型時採用預填充與解碼硬體分離（參見 BEE-30067）。推理模型表現出極端的預填充-解碼不對稱性：思考 token 的生成是純高吞吐量解碼階段，而可見回應生成是獨立且較短的階段。分離預填充 GPU 和解碼 GPU，可以為每個階段分配專業化硬體，並避免長 KV 快取與預填充計算競爭記憶體的問題。DistServe（arXiv:2401.09670）報告使用此方法能服務 7.4 倍更多請求並滿足同等 SLO。
 
 ### 訓練 PRM 時使用 LLM 評判而非 MC 估計進行步驟級標注
 

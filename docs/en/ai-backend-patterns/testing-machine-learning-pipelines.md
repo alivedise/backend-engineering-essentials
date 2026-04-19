@@ -5,7 +5,7 @@ state: draft
 slug: testing-machine-learning-pipelines
 ---
 
-# [BEE-591] Testing Machine Learning Pipelines
+# [BEE-30089] Testing Machine Learning Pipelines
 
 :::info
 ML pipeline testing applies software engineering test discipline to the unique failure modes of data-dependent, probabilistic systems. Unlike conventional software, ML code can silently produce wrong outputs without raising exceptions — a feature transformer that clips values at the wrong percentile, a training loop with a detached tensor, or a serving function that applies feature scaling in a different order than training. Tests catch these failures at development time instead of in production predictions.
@@ -307,10 +307,10 @@ Gate the pipeline: unit tests MUST pass in < 2 minutes. The smoke test MUST comp
 
 ## Related BEEs
 
-- [BEE-587 ML Data Validation and Pipeline Quality Gates](587) — validates data schema and statistical properties (complementary: data in, code here)
-- [BEE-340 The Testing Pyramid](340) — general testing pyramid principles that apply to the unit/integration/smoke test structure
-- [BEE-586 ML Experiment Tracking and Model Registry](586) — baseline model artifacts referenced in regression tests live in MLflow
-- [BEE-589 Online Learning and Continual Model Updates](589) — prequential evaluation shares the test-then-train discipline
+- [BEE-30085 ML Data Validation and Pipeline Quality Gates](587) — validates data schema and statistical properties (complementary: data in, code here)
+- [BEE-15001 The Testing Pyramid](340) — general testing pyramid principles that apply to the unit/integration/smoke test structure
+- [BEE-30084 ML Experiment Tracking and Model Registry](586) — baseline model artifacts referenced in regression tests live in MLflow
+- [BEE-30087 Online Learning and Continual Model Updates](589) — prequential evaluation shares the test-then-train discipline
 
 ## References
 

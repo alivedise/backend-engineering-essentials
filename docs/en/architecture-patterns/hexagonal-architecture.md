@@ -5,7 +5,7 @@ state: draft
 slug: hexagonal-architecture
 ---
 
-# [BEE-103] Hexagonal Architecture
+# [BEE-5004] Hexagonal Architecture
 
 :::info
 Ports and Adapters -- dependency inversion for testable, swappable infrastructure.

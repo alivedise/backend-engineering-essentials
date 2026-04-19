@@ -5,7 +5,7 @@ state: draft
 slug: prefix-caching-and-kv-cache-reuse
 ---
 
-# [BEE-565] Prefix Caching and KV Cache Reuse
+# [BEE-30063] Prefix Caching and KV Cache Reuse
 
 :::info
 When many LLM requests share a common prefix — a system prompt, retrieved document, or few-shot examples — the prefill computation for that prefix is repeated identically for every request. Prefix caching stores the resulting KV tensors and reuses them across requests, cutting TTFT by up to 86% and API cost by up to 90% for long shared prompts.
@@ -195,7 +195,7 @@ flowchart TD
 
 **Placing variable content before fixed content.** A system prompt that embeds a per-request timestamp (e.g., `"Today is 2026-04-15."`) at the beginning invalidates the cache for every request because the prefix differs. Move all dynamic content to the user turn, after the last cache breakpoint.
 
-**Expecting prefix caching to speed up token generation.** Prefix caching only accelerates the prefill phase (TTFT). The decode phase — generating each output token — is unaffected. For workloads with short prompts and long outputs (e.g., story generation, code generation), the benefit is minimal. Use load testing (BEE-560) to measure actual TTFT vs. TPOT for your specific workload.
+**Expecting prefix caching to speed up token generation.** Prefix caching only accelerates the prefill phase (TTFT). The decode phase — generating each output token — is unaffected. For workloads with short prompts and long outputs (e.g., story generation, code generation), the benefit is minimal. Use load testing (BEE-30058) to measure actual TTFT vs. TPOT for your specific workload.
 
 **Assuming cold cache in benchmarks.** The first request to a cold cache pays full prefill cost and a cache-write overhead (25% extra at Anthropic). Benchmarks that run only one request, or that restart the server between runs, will show prefix caching as net-negative. Run at least 5+ warm requests before measuring TTFT.
 
@@ -203,7 +203,7 @@ flowchart TD
 
 **Ignoring the Anthropic break-even analysis.** Anthropic's 5-minute ephemeral cache charges 1.25× the input token price to write and 0.1× to read. If a cached prefix is written once but never hit within its TTL, you paid 25% more than no caching. Prefix caching is cost-positive only when the expected number of reads within the TTL exceeds `1 / (1 - 0.1/1.25)` ≈ 1.09 reads — so even a single re-use within 5 minutes breaks even. For high-traffic prefixes this is trivially satisfied; for rare prompts it may not be.
 
-**Using prefix caching as a substitute for semantic caching.** Prefix caching requires exact token-level match. Semantically identical prompts with different wording ("You are helpful" vs. "Be helpful") miss the cache. For near-duplicate prompt deduplication, semantic caching (BEE-558) is the complementary tool.
+**Using prefix caching as a substitute for semantic caching.** Prefix caching requires exact token-level match. Semantically identical prompts with different wording ("You are helpful" vs. "Be helpful") miss the cache. For near-duplicate prompt deduplication, semantic caching (BEE-30056) is the complementary tool.
 
 ## Related BEEs
 

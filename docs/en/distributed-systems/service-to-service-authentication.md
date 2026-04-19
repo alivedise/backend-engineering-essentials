@@ -5,7 +5,7 @@ state: draft
 slug: service-to-service-authentication
 ---
 
-# [BEE-467] Service-to-Service Authentication
+# [BEE-19048] Service-to-Service Authentication
 
 :::info
 Service-to-service authentication establishes that a calling service is who it claims to be — distinct from user authentication — and is the foundation of zero-trust networking, where no internal request is trusted by default simply because it originates inside a private network.

@@ -5,7 +5,7 @@ state: draft
 slug: zero-downtime-schema-migrations
 ---
 
-# [BEE-458] 零停機資料庫 Schema 遷移
+# [BEE-19039] 零停機資料庫 Schema 遷移
 
 :::info
 零停機 Schema 遷移在不讓應用程式下線的情況下變更生產資料庫的 Schema——透過將每個不向後相容的變更分解為一系列向後相容的步驟，讓舊版和新版程式碼在滾動部署期間可以同時運行。
@@ -165,7 +165,7 @@ flowchart LR
 - [BEE-6007](../data-storage/database-migrations.md) -- 資料庫遷移：涵蓋遷移工具（Flyway、Liquibase、Alembic）和版本控制 Schema 變更的基礎；本文以零停機技術擴展了它
 - [BEE-7003](../data-modeling/schema-evolution-and-backward-compatibility.md) -- Schema 演進與向後相容性：定義向後相容和不向後相容的變更類型；這些分類直接決定需要哪些展開-收縮階段
 - [BEE-16002](../cicd-devops/deployment-strategies.md) -- 部署策略：滾動部署是展開-收縮解決的時間重疊問題的根本原因；藍綠部署簡化了 Schema 遷移但需要資料庫連接切換
-- [BEE-19028](fencing-tokens.md) -- Fencing Token：與應用寫入並發運行的回填任務必須是冪等的；BEE-164 中的冪等性技術直接適用
+- [BEE-19028](fencing-tokens.md) -- Fencing Token：與應用寫入並發運行的回填任務必須是冪等的；BEE-8005 中的冪等性技術直接適用
 
 ## 參考資料
 

@@ -5,7 +5,7 @@ state: draft
 slug: spelling-correction-and-fuzzy-search
 ---
 
-# [BEE-387] Spelling Correction and Fuzzy Search
+# [BEE-17008] Spelling Correction and Fuzzy Search
 
 :::info
 Fuzzy search finds results that approximately match the query, tolerating typos and misspellings — at the cost of higher query latency driven by the number of unique terms in the index, not the number of documents.

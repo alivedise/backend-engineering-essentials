@@ -5,7 +5,7 @@ state: draft
 slug: distributed-caching
 ---
 
-# [BEE-203] Distributed Caching
+# [BEE-9004] Distributed Caching
 
 :::info
 Consistent hashing, virtual nodes, cache cluster topologies, replication, hot key mitigation, and two-tier caching -- how to scale a cache beyond a single node without fragmenting correctness.

@@ -5,7 +5,7 @@ state: draft
 slug: ai-agent-safety-and-reliability-patterns
 ---
 
-# [BEE-537] AI Agent 安全性與可靠性模式
+# [BEE-30035] AI Agent 安全性與可靠性模式
 
 :::info
 在真實部署環境中，LLM Agent 的失敗率高達 41–87%，失敗原因涵蓋 Token 超支失控、工具呼叫逾時引發的連鎖崩潰、協作死鎖，以及無法復原的副作用。防範這些問題需要預算控管、多層逾時保護、以可逆性為優先的工具設計、自動化政策閘道，以及 Schema 驗證的跨 Agent 訊息傳遞。

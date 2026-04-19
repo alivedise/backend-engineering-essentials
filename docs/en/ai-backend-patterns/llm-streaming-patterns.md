@@ -5,7 +5,7 @@ state: draft
 slug: llm-streaming-patterns
 ---
 
-# [BEE-518] LLM Streaming Patterns
+# [BEE-30016] LLM Streaming Patterns
 
 :::info
 LLM streaming delivers the first token to the user in hundreds of milliseconds rather than waiting seconds for a complete response, fundamentally changing the perceived responsiveness of AI features — but introduces a set of architectural concerns around SSE transport, backpressure, error handling mid-stream, and token counting that batch completions do not have.

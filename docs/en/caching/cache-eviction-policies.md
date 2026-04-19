@@ -5,7 +5,7 @@ state: draft
 slug: cache-eviction-policies
 ---
 
-# [BEE-202] Cache Eviction Policies
+# [BEE-9003] Cache Eviction Policies
 
 :::info
 LRU, LFU, FIFO, and adaptive policies -- how caches decide what to discard when memory runs out, and how to pick the right policy for your workload.

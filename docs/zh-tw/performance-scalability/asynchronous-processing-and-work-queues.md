@@ -5,7 +5,7 @@ state: draft
 slug: asynchronous-processing-and-work-queues
 ---
 
-# [BEE-305] 非同步處理與工作佇列
+# [BEE-13006] 非同步處理與工作佇列
 
 :::info
 將耗費資源的操作移出請求路徑。立即回應，在背景執行，讓用戶端能夠觀察進度。

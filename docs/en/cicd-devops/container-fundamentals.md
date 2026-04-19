@@ -5,7 +5,7 @@ state: draft
 slug: container-fundamentals
 ---
 
-# [BEE-364] Container Fundamentals
+# [BEE-16005] Container Fundamentals
 
 ## Context
 
@@ -14,9 +14,9 @@ Containers are everywhere in modern backend engineering -- from local developmen
 Understanding what containers actually are -- isolated Linux processes, not mini-VMs -- changes how you build, secure, and operate them.
 
 **Related BEPs:**
-- [BEE-240 Processes](240.md) -- containers are processes
-- [BEE-325 Health Checks](325.md) -- health checks inside containers
-- [BEE-361 Deployment](361.md) -- containers as the deployment unit
+- [BEE-11001 Processes](240.md) -- containers are processes
+- [BEE-14006 Health Checks](325.md) -- health checks inside containers
+- [BEE-16002 Deployment](361.md) -- containers as the deployment unit
 
 ## Principle
 

@@ -5,7 +5,7 @@ state: draft
 slug: presigned-urls-and-object-storage-patterns
 ---
 
-# [BEE-459] 預簽名 URL 與物件儲存模式
+# [BEE-19040] 預簽名 URL 與物件儲存模式
 
 :::info
 預簽名 URL 授予對物件儲存中私有物件的臨時、有限範圍存取——允許客戶端直接向儲存服務上傳或下載檔案，無需通過後端伺服器傳輸位元組，也無需暴露長期憑證。

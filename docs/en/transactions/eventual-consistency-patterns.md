@@ -5,7 +5,7 @@ state: draft
 slug: eventual-consistency-patterns
 ---
 
-# [BEE-165] Eventual Consistency Patterns
+# [BEE-8006] Eventual Consistency Patterns
 
 :::info
 Eventual consistency is not the absence of consistency -- it is a precisely defined guarantee that replicas will converge to the same state, given sufficient time and no new updates. Understanding the consistency spectrum, conflict resolution strategies, and CRDT data structures lets you build correct, highly available systems.

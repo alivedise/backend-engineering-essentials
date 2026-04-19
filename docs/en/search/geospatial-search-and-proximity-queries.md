@@ -5,7 +5,7 @@ state: draft
 slug: geospatial-search-and-proximity-queries
 ---
 
-# [BEE-386] Geospatial Search and Proximity Queries
+# [BEE-17007] Geospatial Search and Proximity Queries
 
 :::info
 Geospatial search finds records near a point, within a shape, or along a route — problems that cannot be solved with a standard B-tree index and require spatial indexing structures that partition two-dimensional space.

@@ -5,7 +5,7 @@ state: draft
 slug: virtual-threads-and-structured-concurrency
 ---
 
-# [BEE-246] Virtual Threads and Structured Concurrency
+# [BEE-11007] Virtual Threads and Structured Concurrency
 
 :::info
 Java's Project Loom makes the simple thread-per-request model scale like reactive programming — by making threads cheap enough to block without wasting OS resources — while structured concurrency enforces lifetime rules that prevent thread leaks.

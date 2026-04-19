@@ -6,7 +6,7 @@ overview: true
 slug: bee-overview
 ---
 
-# [BEE-0] BEE 總覽
+# [BEE-1] BEE 總覽
 
 :::info
 BEE（Backend Engineering Essentials，後端工程精要）是一組與廠商和語言無關的後端工程指引與最佳實踐。

@@ -5,7 +5,7 @@ state: draft
 slug: isolation-levels-and-their-anomalies
 ---
 
-# [BEE-161] Isolation Levels and Their Anomalies
+# [BEE-8002] Isolation Levels and Their Anomalies
 
 :::info
 Isolation is the most nuanced ACID property. Understanding which anomalies each level prevents -- and which it allows -- is a prerequisite for writing correct concurrent code.
@@ -327,9 +327,9 @@ Know your isolation level and know what it does not prevent. Default to Read Com
 
 ## Related BEPs
 
-- [BEE-160: ACID Properties](./160.md) -- foundational transaction model
-- [BEE-162: Distributed Transactions and Two-Phase Commit](./162.md) -- cross-service coordination
-- [BEE-245: Optimistic vs. Pessimistic Concurrency](245.md) -- choosing a locking strategy
+- [BEE-8001: ACID Properties](./160.md) -- foundational transaction model
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) -- cross-service coordination
+- [BEE-11006: Optimistic vs. Pessimistic Concurrency](245.md) -- choosing a locking strategy
 
 ## References
 

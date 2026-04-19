@@ -5,7 +5,7 @@ state: draft
 slug: prompt-management-and-versioning
 ---
 
-# [BEE-530] Prompt Management and Versioning
+# [BEE-30028] Prompt Management and Versioning
 
 :::info
 Prompts are the primary control surface of a production LLM system — they need the same operational discipline as application code: version control, automated testing, staged deployment, and instant rollback without a full application release.
@@ -266,9 +266,9 @@ flowchart TD
 
 ## Related BEEs
 
-- [BEE-30004](evaluating-and-testing-llm-applications.md) -- Evaluating and Testing LLM Applications: the golden dataset construction and LLM-as-judge patterns described in BEE-506 feed directly into the Promptfoo evaluation suite here
+- [BEE-30004](evaluating-and-testing-llm-applications.md) -- Evaluating and Testing LLM Applications: the golden dataset construction and LLM-as-judge patterns described in BEE-30004 feed directly into the Promptfoo evaluation suite here
 - [BEE-30009](llm-observability-and-monitoring.md) -- LLM Observability and Monitoring: the per-version metrics (cost, latency, error rate) that trigger canary rollback are collected by the observability layer
-- [BEE-16004](../cicd-devops/feature-flags.md) -- Feature Flags: the canary routing mechanism uses the same feature flag infrastructure described in BEE-363
+- [BEE-16004](../cicd-devops/feature-flags.md) -- Feature Flags: the canary routing mechanism uses the same feature flag infrastructure described in BEE-16004
 - [BEE-16002](../cicd-devops/deployment-strategies.md) -- Deployment Strategies: prompt canary rollout follows the same pattern as application canary releases — small percentage, monitor, expand, or rollback
 
 ## References

@@ -5,7 +5,7 @@ state: draft
 slug: llm-inference-on-edge-and-mobile-devices
 ---
 
-# [BEE-577] LLM Inference on Edge and Mobile Devices
+# [BEE-30075] LLM Inference on Edge and Mobile Devices
 
 :::info
 Running LLM inference on-device eliminates cloud API round-trips, keeps sensitive data off external servers, and enables offline operation — at the cost of quantization-induced accuracy loss and thermal throttling constraints that fundamentally differ from server-side deployments.

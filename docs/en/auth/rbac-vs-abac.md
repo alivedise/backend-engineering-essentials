@@ -5,7 +5,7 @@ state: draft
 slug: rbac-vs-abac
 ---
 
-# [BEE-14] RBAC vs ABAC Access Control Models
+# [BEE-1005] RBAC vs ABAC Access Control Models
 
 :::info
 Role-Based Access Control assigns permissions through roles; Attribute-Based Access Control evaluates policies against subject, resource, action, and environment attributes. Choosing the wrong model — or enforcing it in the wrong place — is one of the most reliable ways to build an authorization system that cannot be audited, scaled, or changed.
@@ -13,7 +13,7 @@ Role-Based Access Control assigns permissions through roles; Attribute-Based Acc
 
 ## Context
 
-Authorization is more than a valid token. Once identity is established (BEE-10), the system must decide whether the verified principal is permitted to perform the requested action on the requested resource. Two foundational models govern how that decision is encoded:
+Authorization is more than a valid token. Once identity is established (BEE-1001), the system must decide whether the verified principal is permitted to perform the requested action on the requested resource. Two foundational models govern how that decision is encoded:
 
 **Role-Based Access Control (RBAC)** was formalized by Ferraiolo and Kuhn (1992) and standardized as ANSI INCITS 359-2004 (revised 2012). RBAC groups permissions into roles and assigns roles to users. A user inherits all permissions of every role they hold. The model is explicit: users, roles, permissions, operations, and objects are defined entities with well-specified relationships.
 
@@ -228,9 +228,9 @@ ABAC requires a policy language, a policy engine, attribute stores for subjects 
 
 ## Related BEPs
 
-- [BEE-10: Authentication vs Authorization](10.md) — the pipeline that precedes any permission model
-- [BEE-12: OAuth 2.0 and OpenID Connect](12.md) — how scopes relate to coarse-grained RBAC at the protocol level
-- [BEE-101: API Gateway Patterns](101.md) — enforcement points in a gateway-first architecture
+- [BEE-1001: Authentication vs Authorization](10.md) — the pipeline that precedes any permission model
+- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — how scopes relate to coarse-grained RBAC at the protocol level
+- [BEE-5002: API Gateway Patterns](101.md) — enforcement points in a gateway-first architecture
 
 ## References
 

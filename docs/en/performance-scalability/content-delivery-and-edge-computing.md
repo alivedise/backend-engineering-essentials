@@ -5,7 +5,7 @@ state: draft
 slug: content-delivery-and-edge-computing
 ---
 
-# [BEE-304] Content Delivery and Edge Computing
+# [BEE-13005] Content Delivery and Edge Computing
 
 :::info
 Push content and computation to the edge. Reduce round-trip distance. Serve from cache wherever possible.

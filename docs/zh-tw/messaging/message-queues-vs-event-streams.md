@@ -5,7 +5,7 @@ state: draft
 slug: message-queues-vs-event-streams
 ---
 
-# [BEE-220] 訊息佇列 vs 事件串流
+# [BEE-10001] 訊息佇列 vs 事件串流
 
 :::info
 訊息佇列（RabbitMQ、SQS）與事件串流（Kafka、Kinesis）在語意、傳遞方式與使用情境上的根本差異。

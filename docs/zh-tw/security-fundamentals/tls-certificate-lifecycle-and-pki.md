@@ -5,7 +5,7 @@ state: draft
 slug: tls-certificate-lifecycle-and-pki
 ---
 
-# [BEE-491] TLS 憑證生命週期與 PKI
+# [BEE-2011] TLS 憑證生命週期與 PKI
 
 :::info
 公開金鑰基礎建設（PKI）是使 TLS 身份可驗證的信任鏈系統——了解憑證如何被結構化、簽發、更新、撤銷與監控，對於操作任何透過網際網路或內部網路通訊的後端服務而言至關重要。

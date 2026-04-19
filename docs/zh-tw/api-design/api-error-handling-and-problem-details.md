@@ -5,7 +5,7 @@ state: draft
 slug: api-error-handling-and-problem-details
 ---
 
-# [BEE-75] API 錯誤處理與問題詳情
+# [BEE-4006] API 錯誤處理與問題詳情
 
 :::info
 HTTP 狀態碼作為主要錯誤訊號、RFC 9457 問題詳情格式，以及一致的機器可讀錯誤回應。

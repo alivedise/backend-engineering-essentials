@@ -5,7 +5,7 @@ state: draft
 slug: ai-compliance-and-governance-engineering
 ---
 
-# [BEE-581] AI 合規與治理工程
+# [BEE-30079] AI 合規與治理工程
 
 :::info
 AI 合規工程是建構可審計、可解釋、且具備完整決策記錄的 AI 系統後端的工程學科。這不是事後補填的勾選清單流程。歐盟 AI 法案（Regulation EU 2024/1689，2024 年 8 月 1 日生效）對高風險 AI 系統施加具法律約束力的義務——具體包括：風險管理系統、資料治理、技術文件、自動事件記錄、透明度、人工監督，以及穩健性。滿足這些義務需要具備持久性的後端基礎設施：不可竄改的審計日誌、具備完整溯源的模型倉庫、結構化模型卡、可解釋性管線，以及漂移監測器。在模型上線後才建立這套基礎設施，所付出的代價遠高於從第一天就將其納入設計。
@@ -743,7 +743,7 @@ def check_subgroup_thresholds(
 
 ## 相關 BEE
 
-- [BEE-30042](ai-red-teaming-and-adversarial-testing.md) -- AI 紅隊測試與對抗性測試：對抗性測試是第 15 條（準確率、穩健性、資安）的要求；BEE-544 涵蓋饋入第 9 條風險管理系統的測試方法論
+- [BEE-30042](ai-red-teaming-and-adversarial-testing.md) -- AI 紅隊測試與對抗性測試：對抗性測試是第 15 條（準確率、穩健性、資安）的要求；BEE-30042 涵蓋饋入第 9 條風險管理系統的測試方法論
 - [BEE-30077](llm-output-watermarking-and-ai-content-provenance.md) -- LLM 輸出浮水印與 AI 內容溯源：C2PA 內容憑證和浮水印處理第 50 條（AI 生成內容的透明度義務），補充了第 12 條的審計追蹤義務
 - [BEE-30008](llm-security-and-prompt-injection.md) -- LLM 安全性與提示注入：第 15 條要求資安；提示注入是基於 LLM 的高風險系統的主要資安攻擊面
 - [BEE-14003](../observability/distributed-tracing.md) -- 分散式追蹤：穿插在 AI 審計事件中的 request_id 應與分散式追蹤系統使用的追蹤 ID 相同，以實現 AI 決策與完整系統行為的關聯

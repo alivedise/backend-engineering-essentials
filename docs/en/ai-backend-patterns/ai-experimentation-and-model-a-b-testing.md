@@ -5,7 +5,7 @@ state: draft
 slug: ai-experimentation-and-model-a-b-testing
 ---
 
-# [BEE-536] AI Experimentation and Model A/B Testing
+# [BEE-30034] AI Experimentation and Model A/B Testing
 
 :::info
 Testing one LLM against another in production requires more than traffic splitting — it requires choosing the right evaluation signal, accounting for the high variance of subjective text outputs, and deciding between offline comparison, shadow deployment, live A/B, and adaptive bandit strategies.

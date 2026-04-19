@@ -5,7 +5,7 @@ state: draft
 slug: mixture-of-experts-architecture-and-serving
 ---
 
-# [BEE-566] 混合專家架構與服務
+# [BEE-30064] 混合專家架構與服務
 
 :::info
 混合專家（Mixture of Experts，MoE）將密集前饋層替換為一組專門子網絡（專家）和一個路由器，路由器每個 token 只選擇其中一小部分。結果是一個總參數量龐大但每次前向傳遞激活參數量很少的模型——以推論計算量的一小部分實現密集模型的質量。

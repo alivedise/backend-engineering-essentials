@@ -5,7 +5,7 @@ state: draft
 slug: saga-pattern
 ---
 
-# [BEE-163] Saga 模式
+# [BEE-8004] Saga 模式
 
 :::info
 當一個業務流程跨越多個服務時，你無法使用單一資料庫交易。Saga 模式將流程拆解為一連串本地交易，每個步驟都配備對應的補償動作，以便在後續步驟失敗時撤銷已完成的操作。你可以在不使用跨服務鎖定的情況下達到流程層級的一致性。
@@ -279,10 +279,10 @@ Saga 協調者在失敗時會重試補償交易。不冪等的補償交易（如
 
 ## 相關 BEE
 
-- [BEE-160: ACID Properties](./160.md) — 為何單一資料庫交易是優先基準
-- [BEE-162: Distributed Transactions and Two-Phase Commit](./162.md) — Saga 所取代的方案及其原因
-- [BEE-164: Idempotency and Exactly-Once Semantics](./164.md) — 讓 Saga 步驟和補償操作可安全重試
-- [BEE-220: Messaging Patterns for Microservices](./220.md) — 基於編排的 Saga 的事件基礎設施
+- [BEE-8001: ACID Properties](./160.md) — 為何單一資料庫交易是優先基準
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) — Saga 所取代的方案及其原因
+- [BEE-8005: Idempotency and Exactly-Once Semantics](./164.md) — 讓 Saga 步驟和補償操作可安全重試
+- [BEE-10001: Messaging Patterns for Microservices](./220.md) — 基於編排的 Saga 的事件基礎設施
 
 ## 參考資料
 

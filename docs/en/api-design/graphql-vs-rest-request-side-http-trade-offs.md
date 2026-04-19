@@ -5,7 +5,7 @@ state: draft
 slug: graphql-vs-rest-request-side-http-trade-offs
 ---
 
-# [BEE-597] GraphQL vs REST: Request-Side HTTP Trade-offs
+# [BEE-4011] GraphQL vs REST: Request-Side HTTP Trade-offs
 
 :::info
 REST inherits caching, idempotency, and rate limiting from HTTP itself. GraphQL gets none of them by default and must rebuild each at the schema or middleware layer. This article covers the three request-side gaps and the default mitigations.
@@ -19,7 +19,7 @@ REST inherits caching, idempotency, and rate limiting from HTTP itself. GraphQL 
 2. **Method-level idempotency semantics.** [RFC 9110 §9.2.2](https://httpwg.org/specs/rfc9110.html#idempotent.methods) declares GET, HEAD, OPTIONS, PUT, and DELETE idempotent by definition. Clients and proxies can reason about retry safety from the verb alone, without inspecting the request body.
 3. **Per-route rate-limiting affordances.** Gateways limit per IP × URL pattern. The URL is the natural rate-limit key, and cost-per-request is uniform within a route.
 
-A `POST /graphql` request is opaque to any HTTP intermediary on all three axes. The verb tells you nothing about side effects (is this a query or a mutation?); the URL is identical for every operation, so per-route rate limiting collapses; and the cacheability story requires the persisted-query work covered in BEE-596.
+A `POST /graphql` request is opaque to any HTTP intermediary on all three axes. The verb tells you nothing about side effects (is this a query or a mutation?); the URL is identical for every operation, so per-route rate limiting collapses; and the cacheability story requires the persisted-query work covered in BEE-4010.
 
 The article walks through each request-side gap, shows what teams actually do to close it, and recommends a default per gap. It is not a vendor comparison and not an argument that REST is "better." It is an enumeration of what GraphQL must rebuild and the engineering shape of that rebuild.
 
@@ -33,7 +33,7 @@ The rest of the article expands each row of the table below. The internal struct
 
 | Concern | REST inherits from HTTP | GraphQL must build it |
 |---|---|---|
-| **Cacheable URL** | GET URL is the cache key; ETag/304 free at the edge | Persisted-query GET + `@cacheControl` + ETag (BEE-596) |
+| **Cacheable URL** | GET URL is the cache key; ETag/304 free at the edge | Persisted-query GET + `@cacheControl` + ETag (BEE-4010) |
 | **Idempotency** | RFC 9110 verbs + `Idempotency-Key` header | Idempotency key as schema argument or middleware-read header |
 | **Rate limiting** | Per-IP × URL pattern at the gateway | Query depth limit + complexity scoring + per-resolver limits |
 
@@ -55,9 +55,9 @@ ETag: "v9-abc"
 
 A CDN keys the response on the URL, serves it for 300 seconds, then revalidates with `If-None-Match` on the next request after expiry. The application code emits one header per response and benefits from the entire HTTP cache hierarchy.
 
-**GraphQL gap.** The default `POST /graphql` defeats every CDN. Three blockers act simultaneously: POST is not generally cacheable per [RFC 9111 §2](https://www.rfc-editor.org/rfc/rfc9111.html#name-overview-of-cache-operation); the cache key sits in the JSON request body where CDNs cannot read it; and the response shape varies per query. BEE-596 explores each of these in depth.
+**GraphQL gap.** The default `POST /graphql` defeats every CDN. Three blockers act simultaneously: POST is not generally cacheable per [RFC 9111 §2](https://www.rfc-editor.org/rfc/rfc9111.html#name-overview-of-cache-operation); the cache key sits in the JSON request body where CDNs cannot read it; and the response shape varies per query. BEE-4010 explores each of these in depth.
 
-**Mitigation pattern.** Restore URL-addressability via persisted queries: the client computes a SHA-256 of the normalized query text and sends `GET /graphql?extensions=...&variables=...`. Once the request is GET, schema-level cache hints (the `@cacheControl` directive, replicated across Apollo Server, GraphQL Yoga, and others) drive `Cache-Control` headers, and ETag enables conditional revalidation. The full mechanism, including the cache-fragmentation cost across query shapes, is in BEE-596.
+**Mitigation pattern.** Restore URL-addressability via persisted queries: the client computes a SHA-256 of the normalized query text and sends `GET /graphql?extensions=...&variables=...`. Once the request is GET, schema-level cache hints (the `@cacheControl` directive, replicated across Apollo Server, GraphQL Yoga, and others) drive `Cache-Control` headers, and ETag enables conditional revalidation. The full mechanism, including the cache-fragmentation cost across query shapes, is in BEE-4010.
 
 The alternative is to accept that reads will hit origin and skip CDN integration entirely. This is reasonable for low-traffic APIs where the engineering effort would not pay for itself in saved round trips.
 
@@ -67,7 +67,7 @@ The alternative is to accept that reads will hit origin and skip CDN integration
 
 This is the deepest section. [BEE-4003](api-idempotency.md) covers REST's canonical pattern but does not address GraphQL.
 
-**REST baseline.** [RFC 9110 §9.2.2](https://httpwg.org/specs/rfc9110.html#idempotent.methods) defines GET, HEAD, OPTIONS, PUT, and DELETE as idempotent by their method definition. POST and PATCH are not. For non-idempotent operations, the [Stripe-pioneered `Idempotency-Key` header](https://docs.stripe.com/api/idempotent_requests) lets clients attach a UUID v4 to each operation; the server stores the result against the key for a 24–72 hour window and returns the cached response on retry. The pattern's storage layer is documented in BEE-72: a `(user_id, key)` primary-key table with atomic-insert handling for concurrent duplicates.
+**REST baseline.** [RFC 9110 §9.2.2](https://httpwg.org/specs/rfc9110.html#idempotent.methods) defines GET, HEAD, OPTIONS, PUT, and DELETE as idempotent by their method definition. POST and PATCH are not. For non-idempotent operations, the [Stripe-pioneered `Idempotency-Key` header](https://docs.stripe.com/api/idempotent_requests) lets clients attach a UUID v4 to each operation; the server stores the result against the key for a 24–72 hour window and returns the cached response on retry. The pattern's storage layer is documented in BEE-4003: a `(user_id, key)` primary-key table with atomic-insert handling for concurrent duplicates.
 
 The IETF httpapi working group has been standardizing the header field as [`draft-ietf-httpapi-idempotency-key-header`](https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/), most recently revision -07 in October 2025. The draft is currently expired and has not progressed to RFC, so the field remains a de-facto convention rather than a formal standard, even though the engineering pattern is well-established.
 
@@ -93,7 +93,7 @@ mutation CreateOrder($input: OrderInput!, $idempotencyKey: ID!) {
 }
 ```
 
-The resolver checks an in-storage dedupe table keyed on `idempotencyKey`. On a hit, it returns the cached payload without re-executing the side effect. On a miss, it executes the mutation, stores the result, and returns it. The storage layer is the same one BEE-72 specifies for REST.
+The resolver checks an in-storage dedupe table keyed on `idempotencyKey`. On a hit, it returns the cached payload without re-executing the side effect. On a miss, it executes the mutation, stores the result, and returns it. The storage layer is the same one BEE-4003 specifies for REST.
 
 Strengths: the contract is schema-explicit and visible in introspection, every consumer sees the requirement, and the pattern works over any transport including WebSocket subscriptions. Weakness: every mutation must carry the argument from day one. Retrofitting an existing GraphQL API is invasive because every client and every mutation signature changes.
 
@@ -148,7 +148,7 @@ sequenceDiagram
     end
 ```
 
-**Recommendation.** Default to Pattern A (schema argument) for any mutation that creates non-idempotent side effects. The schema-explicit contract pays for itself in code review and onboarding clarity. Reserve Pattern B for retrofit scenarios where amending every mutation signature is cost-prohibitive — for example, a large existing GraphQL surface migrating from no-idempotency to idempotency without breaking clients. Either way, reuse the BEE-72 dedupe table; do not invent a new storage layer for GraphQL idempotency. Multi-mutation requests need one key per mutation argument (Pattern A handles this naturally) rather than one key for the entire request (Pattern B's failure mode).
+**Recommendation.** Default to Pattern A (schema argument) for any mutation that creates non-idempotent side effects. The schema-explicit contract pays for itself in code review and onboarding clarity. Reserve Pattern B for retrofit scenarios where amending every mutation signature is cost-prohibitive — for example, a large existing GraphQL surface migrating from no-idempotency to idempotency without breaking clients. Either way, reuse the BEE-4003 dedupe table; do not invent a new storage layer for GraphQL idempotency. Multi-mutation requests need one key per mutation argument (Pattern A handles this naturally) rather than one key for the entire request (Pattern B's failure mode).
 
 ## Rate limiting
 
@@ -229,7 +229,7 @@ A `100 requests/minute/IP` limit lets one bad actor send 100 maximum-complexity 
 
 **2. Implementing GraphQL idempotency in a separate storage layer from REST.**
 
-Teams running both protocols often build a second dedupe table for GraphQL mutations, splitting operations on the same logical entity (e.g., "create charge") across two storage paths. Use one table (BEE-72), keyed on whatever identifier the client sends, regardless of transport. The storage layer has nothing to do with the protocol; the only difference is how the key arrives.
+Teams running both protocols often build a second dedupe table for GraphQL mutations, splitting operations on the same logical entity (e.g., "create charge") across two storage paths. Use one table (BEE-4003), keyed on whatever identifier the client sends, regardless of transport. The storage layer has nothing to do with the protocol; the only difference is how the key arrives.
 
 **3. Reading `Idempotency-Key` from HTTP headers without considering multi-mutation requests.**
 

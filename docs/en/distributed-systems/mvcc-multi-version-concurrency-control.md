@@ -5,7 +5,7 @@ state: draft
 slug: mvcc-multi-version-concurrency-control
 ---
 
-# [BEE-445] MVCC: Multi-Version Concurrency Control
+# [BEE-19026] MVCC: Multi-Version Concurrency Control
 
 :::info
 MVCC (Multi-Version Concurrency Control) is a concurrency scheme in which readers never block writers and writers never block readers by retaining multiple timestamped versions of each row: each transaction sees a consistent snapshot of the database as of its start time, while concurrent updates create new versions rather than overwriting data in place.
@@ -25,7 +25,7 @@ Wu et al. published "An Empirical Evaluation of In-Memory Multi-Version Concurre
 
 **Version storage architecture determines the read path cost.** Three designs exist: (1) *Append-only* (PostgreSQL): all versions of a row are written as new heap tuples, linked backward through ctid chains. A reader accessing a row written one hundred updates ago must traverse one hundred heap tuples. (2) *Delta storage* (InnoDB): the main table holds the current committed version; historical versions are stored as delta records in an undo log, linked via rollback pointers. A reader of the current version pays zero overhead; a reader needing an older version pays reconstruction cost proportional to the number of intervening updates. (3) *Time-travel table*: a secondary store holds old versions, and the main table always has current data. This variant appears in some analytical engines. In practice, delta storage wins for OLTP because the common case — reading the latest committed version — is zero-cost.
 
-**Snapshot isolation (SI) is not serializable.** MVCC naturally provides snapshot isolation: each transaction reads from a frozen snapshot taken at transaction start, so non-repeatable reads and phantom reads cannot occur. However, write skew anomalies are still possible (two transactions read overlapping data, each updates a disjoint subset, producing a state neither would have allowed from a fully-serializable execution). Serializable isolation requires additional mechanisms — predicate locks (2PL), or abort-on-dangerous-rw-antidependency (Serializable Snapshot Isolation, BEE-442). Most MVCC databases default to snapshot isolation rather than serializable isolation.
+**Snapshot isolation (SI) is not serializable.** MVCC naturally provides snapshot isolation: each transaction reads from a frozen snapshot taken at transaction start, so non-repeatable reads and phantom reads cannot occur. However, write skew anomalies are still possible (two transactions read overlapping data, each updates a disjoint subset, producing a state neither would have allowed from a fully-serializable execution). Serializable isolation requires additional mechanisms — predicate locks (2PL), or abort-on-dangerous-rw-antidependency (Serializable Snapshot Isolation, BEE-19023). Most MVCC databases default to snapshot isolation rather than serializable isolation.
 
 ## Visual
 

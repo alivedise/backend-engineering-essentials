@@ -5,7 +5,7 @@ state: draft
 slug: retrieval-reranking-and-hybrid-search
 ---
 
-# [BEE-517] 檢索重排序與混合搜尋
+# [BEE-30015] 檢索重排序與混合搜尋
 
 :::info
 單階段稠密檢索會錯過精確的關鍵字匹配；BM25 會錯過改寫後的查詢；在兩階段管線中結合兩者（使用 Reciprocal Rank Fusion）並搭配交叉編碼器重排序器，相比單一方法通常能減少 30–50% 的檢索失敗。
@@ -98,7 +98,7 @@ def rerank(query: str, candidate_docs: list[dict], top_n: int = 10) -> list[dict
 | cross-encoder/ms-marco-MiniLM-L6-v2 | 自架 | CPU 快速推論；英文；低記憶體 |
 | Jina Reranker v2 | API + 自架 | 100+ 語言；支援函式呼叫 |
 
-**SHOULD** 將前 5–10 個文件重排序後注入 LLM 上下文視窗。注入超過 10 個檢索到的塊，會因 BEE-512 中描述的 U 形召回曲線而降低 LLM 效能。
+**SHOULD** 將前 5–10 個文件重排序後注入 LLM 上下文視窗。注入超過 10 個檢索到的塊，會因 BEE-30010 中描述的 U 形召回曲線而降低 LLM 效能。
 
 **MAY** 在投資自架基礎設施之前，透過 API 使用 Cohere Rerank 進行快速原型驗證。API 增加一次網路往返（約 50–100ms），但不需要 GPU：
 

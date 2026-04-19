@@ -5,7 +5,7 @@ state: draft
 slug: infrastructure-as-code
 ---
 
-# [BEE-362] 基礎設施即程式碼
+# [BEE-16003] 基礎設施即程式碼
 
 :::info
 透過版本控制的程式碼管理每一個基礎設施資源。永遠不要手動設定基礎設施。程式碼就是系統；系統就是程式碼。
@@ -168,7 +168,7 @@ data "aws_secretsmanager_secret_version" "db_password" {
 
 機密存放在專用的密鑰存儲（AWS Secrets Manager、HashiCorp Vault、Azure Key Vault）中。IaC 在套用時按名稱引用它們；機密值永遠不會接觸 IaC 檔案或 Git 儲存庫。
 
-參見 [BEE-32：機密管理](#) 了解完整的機密處理政策。
+參見 [BEE-2003：機密管理](#) 了解完整的機密處理政策。
 
 ### 8. 套用前先計畫——絕不盲目套用
 
@@ -180,7 +180,7 @@ data "aws_secretsmanager_secret_version" "db_password" {
 - 比預期更大的影響範圍（模組變更傳播到 40 個資源而不是 4 個）。
 - `tfsec`、`Checkov` 或 OPA 等工具在任何操作發生前浮現的政策違規。
 
-在 IaC 的 CI/CD 中，計畫步驟是強制性的，其輸出會附加到 Pull Request 供審查者檢查。只有在計畫被審查且 PR 被批准後才執行套用。參見 [BEE-360：IaC 的 CI](#) 了解流水線模式。
+在 IaC 的 CI/CD 中，計畫步驟是強制性的，其輸出會附加到 Pull Request 供審查者檢查。只有在計畫被審查且 PR 被批准後才執行套用。參見 [BEE-16001：IaC 的 CI](#) 了解流水線模式。
 
 ### 9. 狀態管理
 
@@ -329,9 +329,9 @@ resource "aws_db_instance" "replica" {
 
 ## 相關 BEE
 
-- [BEE-32：機密管理](#) — 密鑰存儲模式、輪換和執行時注入
-- [BEE-360：IaC 的 CI](#) — 流水線結構：lint、計畫、政策檢查、套用閘道
-- [BEE-361：部署策略](#) — 不可變基礎設施如何實現藍綠和金絲雀部署
+- [BEE-2003：機密管理](#) — 密鑰存儲模式、輪換和執行時注入
+- [BEE-16001：IaC 的 CI](#) — 流水線結構：lint、計畫、政策檢查、套用閘道
+- [BEE-16002：部署策略](#) — 不可變基礎設施如何實現藍綠和金絲雀部署
 
 ## 參考資料
 

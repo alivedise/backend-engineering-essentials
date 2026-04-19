@@ -5,7 +5,7 @@ state: draft
 slug: distributed-snapshots
 ---
 
-# [BEE-435] Distributed Snapshots
+# [BEE-19016] Distributed Snapshots
 
 :::info
 A distributed snapshot captures a consistent global state of a running distributed system — the local state of every process and every message in transit — without stopping execution, by using marker messages to coordinate what each process records as part of the same logical instant.

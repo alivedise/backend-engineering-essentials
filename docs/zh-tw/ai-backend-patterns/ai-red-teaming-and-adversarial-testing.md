@@ -5,7 +5,7 @@ state: draft
 slug: ai-red-teaming-and-adversarial-testing
 ---
 
-# [BEE-544] AI 紅隊測試與對抗性測試
+# [BEE-30042] AI 紅隊測試與對抗性測試
 
 :::info
 AI 紅隊測試是主動式對抗性測試，在使用者或攻擊者發現問題之前，系統性地尋找 LLM 系統的失效模式——涵蓋越獄攻擊、資料擷取、偏見誘發、有害內容生成與工具呼叫完整性——必須將其整合至 CI/CD 管道作為迴歸閘門，而非視為一次性的上線前演習。
@@ -294,7 +294,7 @@ flowchart TD
 
 ## 相關 BEE
 
-- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM 安全性與提示詞注入：紅隊測試所驗證的防禦模式；紅隊測試找出缺口，BEE-510 負責填補
+- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM 安全性與提示詞注入：紅隊測試所驗證的防禦模式；紅隊測試找出缺口，BEE-30008 負責填補
 - [BEE-30020](llm-guardrails-and-content-safety.md) -- LLM 防護欄與內容安全：防護欄是執行期執行層；紅隊測試驗證防護欄在對抗壓力下是否有效
 - [BEE-30004](evaluating-and-testing-llm-applications.md) -- 評估與測試 LLM 應用程式：功能品質評估與紅隊安全評估相輔相成
 - [BEE-30035](ai-agent-safety-and-reliability-patterns.md) -- AI 代理安全與可靠性模式：代理預算上限、熔斷器和回滾令牌是解決紅隊演習發現的過度代理（LLM06）問題的緩解措施

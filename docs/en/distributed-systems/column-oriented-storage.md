@@ -5,7 +5,7 @@ state: draft
 slug: column-oriented-storage
 ---
 
-# [BEE-464] Column-Oriented Storage
+# [BEE-19045] Column-Oriented Storage
 
 :::info
 Column-oriented (columnar) storage physically lays data out by column rather than by row, so a query scanning one column of a million-row table reads a contiguous block of that column's values rather than skipping through row-interleaved bytes — yielding order-of-magnitude improvements for aggregation-heavy OLAP workloads.

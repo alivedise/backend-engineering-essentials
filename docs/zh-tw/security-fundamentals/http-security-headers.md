@@ -5,7 +5,7 @@ state: draft
 slug: http-security-headers
 ---
 
-# [BEE-489] HTTP 安全標頭
+# [BEE-2009] HTTP 安全標頭
 
 :::info
 HTTP 安全回應標頭指示瀏覽器如何處理渲染、資源載入、框架嵌入與傳輸——形成一道縱深防禦層，強化任何面向 Web 的後端服務之客戶端安全。

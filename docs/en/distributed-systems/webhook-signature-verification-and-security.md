@@ -5,7 +5,7 @@ state: draft
 slug: webhook-signature-verification-and-security
 ---
 
-# [BEE-474] Webhook Signature Verification and Security
+# [BEE-19055] Webhook Signature Verification and Security
 
 :::info
 Webhook signature verification uses HMAC-SHA256 to prove that an incoming webhook request was signed by the expected sender and was not tampered with in transit — a required defense against spoofed requests, man-in-the-middle attacks, and replay attacks.
@@ -31,7 +31,7 @@ All major webhook-sending platforms implement this pattern: GitHub uses `X-Hub-S
 
 **MUST reject webhooks with a timestamp outside an acceptable tolerance window (typically ±5 minutes) to prevent replay attacks.** A valid HMAC signature proves the sender knew the secret — but it does not prove the request is fresh. An attacker who captures a legitimate webhook can replay it days later and it will pass signature verification. Including a timestamp in the signed payload (as Stripe does: the signature covers `timestamp.body`) and rejecting requests where `|now - timestamp| > 300 seconds` closes this window.
 
-**MUST store webhook secrets as application secrets, not in source code or version control.** A webhook secret is a symmetric key; exposure means an attacker can forge any payload. Store it in the same system used for other secrets (BEE-32): environment variables, a secrets manager (AWS Secrets Manager, HashiCorp Vault), or encrypted configuration.
+**MUST store webhook secrets as application secrets, not in source code or version control.** A webhook secret is a symmetric key; exposure means an attacker can forge any payload. Store it in the same system used for other secrets (BEE-2003): environment variables, a secrets manager (AWS Secrets Manager, HashiCorp Vault), or encrypted configuration.
 
 **SHOULD support webhook secret rotation without downtime.** Platforms that allow multiple active signatures (Stripe sends both old and new signatures during a rotation window) enable zero-downtime rotation: accept either signature, update the secret, then stop accepting the old one. For platforms with a single secret, implement a short transition window where the server accepts both old and new secrets.
 

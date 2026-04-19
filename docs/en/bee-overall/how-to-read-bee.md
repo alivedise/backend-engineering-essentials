@@ -5,7 +5,7 @@ state: draft
 slug: how-to-read-bee
 ---
 
-# [BEE-1] How to Read BEE
+# [BEE-2] How to Read BEE
 
 :::info
 This document explains the conventions used throughout BEE articles, including RFC 2119 keyword usage.
@@ -56,4 +56,4 @@ BEE articles link to related BEPs, and where topics overlap with ADE or DEE, a t
 
 ## Related BEPs
 
-- [BEE-1](bee-overview.md) BEE Overview
+- [BEE-2](bee-overview.md) BEE Overview

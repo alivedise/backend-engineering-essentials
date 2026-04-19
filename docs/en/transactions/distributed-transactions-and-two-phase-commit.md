@@ -5,7 +5,7 @@ state: draft
 slug: distributed-transactions-and-two-phase-commit
 ---
 
-# [BEE-162] Distributed Transactions and Two-Phase Commit
+# [BEE-8003] Distributed Transactions and Two-Phase Commit
 
 :::info
 Distributed transactions are fundamentally harder than local transactions. Two-phase commit gives you atomicity across nodes -- but at the cost of availability, performance, and operational complexity. Understand the trade-offs before you reach for it.
@@ -225,10 +225,10 @@ Two-phase commit provides atomic commitment across distributed participants but 
 
 ## Related BEPs
 
-- [BEE-160: ACID Properties](./160.md) -- foundation of transaction semantics within a single database
-- [BEE-163: Saga Pattern](./163.md) -- compensating transactions as the practical alternative to 2PC
-- [BEE-164: Idempotency and Exactly-Once Semantics](./164.md) -- making distributed operations safe to retry
-- [BEE-165: Eventual Consistency Patterns](./165.md) -- trading strong consistency for availability
+- [BEE-8001: ACID Properties](./160.md) -- foundation of transaction semantics within a single database
+- [BEE-8004: Saga Pattern](./163.md) -- compensating transactions as the practical alternative to 2PC
+- [BEE-8005: Idempotency and Exactly-Once Semantics](./164.md) -- making distributed operations safe to retry
+- [BEE-8006: Eventual Consistency Patterns](./165.md) -- trading strong consistency for availability
 
 ## References
 

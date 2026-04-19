@@ -5,7 +5,7 @@ state: draft
 slug: authentication-vs-authorization
 ---
 
-# [BEE-10] 認證 vs 授權
+# [BEE-1001] 認證 vs 授權
 
 :::info
 認證（Authentication）確認你是誰；授權（Authorization）決定你被允許做什麼。將兩者混為一談是存取控制失效最常見的根源。
@@ -135,11 +135,11 @@ OAuth 2.0 是授權委派框架。Access token 只證明資源擁有者委派了
 
 ## 相關 BEE
 
-- [BEE-11: Token-Based Authentication](11.md) — token 如何建立身份
-- [BEE-12: OAuth 2.0 and OpenID Connect](12.md) — 委派 vs. 認證
-- [BEE-13: Session Management](13.md) — 維持已認證的狀態
-- [BEE-14: RBAC vs ABAC](14.md) — 深入探討權限模型
-- [BEE-15: API Key Management](15.md) — API 憑證模式
+- [BEE-1002: Token-Based Authentication](11.md) — token 如何建立身份
+- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — 委派 vs. 認證
+- [BEE-1004: Session Management](13.md) — 維持已認證的狀態
+- [BEE-1005: RBAC vs ABAC](14.md) — 深入探討權限模型
+- [BEE-1006: API Key Management](15.md) — API 憑證模式
 
 ## 參考資料
 

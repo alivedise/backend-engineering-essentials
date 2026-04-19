@@ -5,7 +5,7 @@ state: draft
 slug: replication-strategies
 ---
 
-# [BEE-122] Replication Strategies
+# [BEE-6003] Replication Strategies
 
 :::info
 Single-leader, multi-leader, and leaderless replication — tradeoffs, conflict resolution, failover, and replication lag.
@@ -208,7 +208,7 @@ Do not rely on automatic failover without split-brain protection. Fast failover 
 
 ## Related BEPs
 
-- [BEE-120: SQL vs NoSQL](./120.md) — choosing storage engines that constrain replication options
-- [BEE-123: Sharding](./123.md) — partitioning data across nodes, often combined with per-shard replication
-- [BEE-160: ACID Transactions](./160.md) — how replication interacts with transaction isolation
-- [BEE-165: Eventual Consistency](./165.md) — the consistency model that leaderless and async replication naturally provides
+- [BEE-6001: SQL vs NoSQL](./120.md) — choosing storage engines that constrain replication options
+- [BEE-6004: Sharding](./123.md) — partitioning data across nodes, often combined with per-shard replication
+- [BEE-8001: ACID Transactions](./160.md) — how replication interacts with transaction isolation
+- [BEE-8006: Eventual Consistency](./165.md) — the consistency model that leaderless and async replication naturally provides

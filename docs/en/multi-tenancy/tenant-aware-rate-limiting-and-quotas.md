@@ -5,7 +5,7 @@ state: draft
 slug: tenant-aware-rate-limiting-and-quotas
 ---
 
-# [BEE-402] Tenant-Aware Rate Limiting and Quotas
+# [BEE-18003] Tenant-Aware Rate Limiting and Quotas
 
 :::info
 Tenant-aware rate limiting and quotas are the mechanisms that bound how much of a shared system any single tenant can consume — protecting other tenants from noisy neighbors, enforcing commercial plan limits, and giving the system a well-defined load ceiling to design against.

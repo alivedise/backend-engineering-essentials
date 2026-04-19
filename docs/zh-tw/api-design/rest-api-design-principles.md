@@ -5,7 +5,7 @@ state: draft
 slug: rest-api-design-principles
 ---
 
-# [BEE-70] REST API 設計原則
+# [BEE-4001] REST API 設計原則
 
 :::info
 REST 架構限制、以資源為中心的設計、HTTP 方法語意，以及狀態碼用法。

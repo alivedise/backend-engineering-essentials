@@ -5,7 +5,7 @@ state: draft
 slug: llm-planning-and-task-decomposition
 ---
 
-# [BEE-546] LLM Planning and Task Decomposition
+# [BEE-30044] LLM Planning and Task Decomposition
 
 :::info
 Complex multi-step tasks require LLMs to explicitly plan before acting — decomposing work into atomic subtasks, representing dependencies as a directed acyclic graph, and replanning when subtasks fail — rather than attempting to complete a long task in a single forward pass where errors compound silently.

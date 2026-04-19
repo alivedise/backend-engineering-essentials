@@ -5,7 +5,7 @@ state: draft
 slug: materialized-views-and-incremental-computation
 ---
 
-# [BEE-470] 物化視圖與增量計算
+# [BEE-19051] 物化視圖與增量計算
 
 :::info
 物化視圖（Materialized View）將查詢結果儲存在磁碟上並以資料表形式提供服務——以資料新鮮度換取查詢速度；增量計算進一步延伸此概念，僅重新計算結果中發生變動的部分，而非從頭重建整個視圖。

@@ -5,7 +5,7 @@ state: draft
 slug: tail-latency-and-hedged-requests
 ---
 
-# [BEE-451] 尾延遲與對沖請求
+# [BEE-19032] 尾延遲與對沖請求
 
 :::info
 在大型分散式系統中，扇出呼叫中最慢的請求——而非平均值——決定了使用者可見的回應時間。Jeff Dean 和 Luiz André Barroso 在 2013 年的論文《The Tail at Scale》中證明：優化平均延遲是不夠的——在第 99 百分位數時，即使只有一個慢速子呼叫，幾乎所有使用者都會受到影響。

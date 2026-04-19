@@ -5,7 +5,7 @@ state: draft
 slug: api-key-management
 ---
 
-# [BEE-15] API Key Management
+# [BEE-1006] API Key Management
 
 :::info
 API keys are long-lived credentials that identify a client application, not a user. Treat them like passwords: generate them with a cryptographically secure source, hash them before storage, scope them tightly, and rotate them on a schedule.
@@ -197,10 +197,10 @@ A key with no expiry and no rotation plan is a credential that will eventually b
 
 ## Related BEPs
 
-- [BEE-10: Authentication vs Authorization](10.md) — the conceptual boundary between identity and permission
-- [BEE-11: Token-Based Authentication](11.md) — short-lived tokens as an alternative for user-delegated access
-- [BEE-31: Secrets Management](31.md) — storing and rotating credentials in production infrastructure
-- [BEE-71: Rate Limiting and Throttling](71.md) — per-key rate limiting strategies
+- [BEE-1001: Authentication vs Authorization](10.md) — the conceptual boundary between identity and permission
+- [BEE-1002: Token-Based Authentication](11.md) — short-lived tokens as an alternative for user-delegated access
+- [BEE-2002: Secrets Management](31.md) — storing and rotating credentials in production infrastructure
+- [BEE-4002: Rate Limiting and Throttling](71.md) — per-key rate limiting strategies
 
 ## References
 

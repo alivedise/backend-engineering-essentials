@@ -5,7 +5,7 @@ state: draft
 slug: evaluating-and-testing-llm-applications
 ---
 
-# [BEE-506] 評估與測試 LLM 應用程式
+# [BEE-30004] 評估與測試 LLM 應用程式
 
 :::info
 LLM 輸出是機率性的，且往往需要主觀判斷——傳統的二元通過/失敗斷言行不通。有效的 LLM 評估結合了自動化指標、LLM 作為評審員的評分、精心整理的黃金資料集，以及持續的生產監控。

@@ -5,7 +5,7 @@ state: draft
 slug: synthetic-data-generation-for-ai-systems
 ---
 
-# [BEE-534] AI 系統的合成資料生成
+# [BEE-30032] AI 系統的合成資料生成
 
 :::info
 合成資料生成使用 LLM 大規模產生帶標籤的訓練樣本、評估資料集和多樣化測試輸入——打破了對每個新任務或領域都需要昂貴人工標注的依賴。

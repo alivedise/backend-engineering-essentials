@@ -5,7 +5,7 @@ state: draft
 slug: distributed-job-scheduling
 ---
 
-# [BEE-457] Distributed Job Scheduling
+# [BEE-19038] Distributed Job Scheduling
 
 :::info
 Distributed job scheduling coordinates the reliable execution of background tasks — periodic cron jobs, one-off deferred tasks, and long-running workflows — across multiple processes or machines, providing fault tolerance, at-least-once delivery, and observability that a single cron process cannot.
@@ -21,7 +21,7 @@ The Unix `cron` daemon has been scheduling periodic tasks since 1975. For a sing
 
 **No observability.** Cron produces no structured output by default. Logs (if any) go to `/var/mail`. There is no dashboard showing which jobs ran, how long they took, or how many failed. The Google SRE book (Beyer et al., 2016) addresses this directly: "Cron jobs are frequently overlooked from an SRE perspective because they are typically low-priority background activities. But they can become major sources of problems."
 
-**Clock skew across hosts.** Distributed systems rely on system clocks, which can drift. When two replicas each believe they should fire a job at 03:00, even a 50ms clock difference can cause double execution — or a missed execution if one clock skips ahead while the other is behind (see BEE-427 for clock synchronization).
+**Clock skew across hosts.** Distributed systems rely on system clocks, which can drift. When two replicas each believe they should fire a job at 03:00, even a 50ms clock difference can cause double execution — or a missed execution if one clock skips ahead while the other is behind (see BEE-19008 for clock synchronization).
 
 The ACM Queue paper "Reliable Cron across the Planet" (Sanfilippo and Koop, 2015) formalizes these failure modes and describes the architecture Google uses internally to run cron at global scale: a distributed cron daemon backed by Paxos consensus, which guarantees that exactly one replica fires each job even across regional failures.
 
@@ -43,7 +43,7 @@ The trigger layer is where most of the distributed coordination complexity lives
 
 **At-least-once** is the practical default: the system guarantees a job will eventually run, but may run it more than once (on crash and retry). It is achievable with a durable queue and standard distributed systems primitives.
 
-**Exactly-once** is much harder: it requires a global commit protocol that atomically marks the job as "running" and begins execution, with no gap where a crash could cause a re-run. Google Spanner (BEE-454) and Kafka exactly-once transactions approximate this, but even these systems ultimately make jobs idempotent and detect duplicates rather than preventing them at the protocol layer.
+**Exactly-once** is much harder: it requires a global commit protocol that atomically marks the job as "running" and begins execution, with no gap where a crash could cause a re-run. Google Spanner (BEE-19035) and Kafka exactly-once transactions approximate this, but even these systems ultimately make jobs idempotent and detect duplicates rather than preventing them at the protocol layer.
 
 **The practical answer is always: make jobs idempotent, accept at-least-once delivery.** An idempotent job produces the same outcome whether it runs once or ten times. Techniques:
 
@@ -290,7 +290,7 @@ def generate_monthly_invoices(payload: dict):
 
 - [BEE-19005](distributed-locking.md) -- Distributed Locking: the leader election mechanism for the scheduler trigger layer is a direct application of distributed locking primitives
 - [BEE-19028](fencing-tokens.md) -- Fencing Tokens: when using a distributed lock for scheduler leader election, fencing tokens prevent a stale leader from inserting duplicate jobs after its lock has expired
-- [BEE-19017](lease-based-coordination.md) -- Lease-Based Coordination: the heartbeat/lease pattern for job workers is the same lease primitive described in BEE-436
+- [BEE-19017](lease-based-coordination.md) -- Lease-Based Coordination: the heartbeat/lease pattern for job workers is the same lease primitive described in BEE-19017
 - [BEE-10005](../messaging/dead-letter-queues-and-poison-messages.md) -- Dead Letter Queues and Poison Messages: jobs that exceed their retry limit are the job-queue equivalent of poison messages; the DLQ pattern applies directly
 - [BEE-8005](../transactions/idempotency-and-exactly-once-semantics.md) -- Idempotency and Exactly-Once Semantics: all scheduled jobs MUST be designed for idempotency to safely tolerate at-least-once delivery
 - [BEE-19008](clock-synchronization-and-physical-time.md) -- Clock Synchronization and Physical Time: cron expressions are evaluated against wall-clock time; clock skew across replicas is the root cause of duplicate and missed job firings

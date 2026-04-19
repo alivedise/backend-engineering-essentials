@@ -5,7 +5,7 @@ state: draft
 slug: http-caching-and-conditional-requests
 ---
 
-# [BEE-205] HTTP Caching and Conditional Requests
+# [BEE-9006] HTTP Caching and Conditional Requests
 
 :::info
 Cache-Control directives govern how long a response may be stored and by whom. Conditional requests let clients revalidate stale entries cheaply, often receiving a 304 Not Modified with no body. Getting both right is the single highest-leverage performance improvement available at the HTTP layer.
@@ -362,9 +362,9 @@ If `/index.html` or `/api/config` carries `max-age=86400`, a deploy that changes
 
 ## Related BEPs
 
-- [BEE-52: HTTP Fundamentals](52.md) -- request/response model, status codes, and headers
-- [BEE-200: Caching Fundamentals and Cache Hierarchy](./200.md) -- TTL, eviction, and consistency concepts that underpin this article
-- [BEE-304: CDN Architecture](304.md) -- how CDN nodes consume and propagate `Cache-Control` directives
+- [BEE-3003: HTTP Fundamentals](52.md) -- request/response model, status codes, and headers
+- [BEE-9001: Caching Fundamentals and Cache Hierarchy](./200.md) -- TTL, eviction, and consistency concepts that underpin this article
+- [BEE-13005: CDN Architecture](304.md) -- how CDN nodes consume and propagate `Cache-Control` directives
 
 ## References
 

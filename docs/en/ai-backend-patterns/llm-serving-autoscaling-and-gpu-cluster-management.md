@@ -5,7 +5,7 @@ state: draft
 slug: llm-serving-autoscaling-and-gpu-cluster-management
 ---
 
-# [BEE-570] LLM Serving Autoscaling and GPU Cluster Management
+# [BEE-30068] LLM Serving Autoscaling and GPU Cluster Management
 
 :::info
 GPU autoscaling for LLM serving differs fundamentally from CPU autoscaling: GPU node provisioning takes minutes rather than seconds, model loading adds another 1–10 minutes of cold-start penalty, and idle GPUs cost 3–10× more than idle CPUs. Effective GPU cluster management requires a purpose-built stack — GPU Operators for runtime configuration, Karpenter for fast node provisioning, KEDA for queue-depth scaling, and warm pool strategies to make scale-to-zero economically viable.

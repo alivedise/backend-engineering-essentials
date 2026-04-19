@@ -5,7 +5,7 @@ state: draft
 slug: llm-data-flywheel-and-continuous-improvement
 ---
 
-# [BEE-540] LLM Data Flywheel and Continuous Improvement
+# [BEE-30038] LLM Data Flywheel and Continuous Improvement
 
 :::info
 A data flywheel is a self-reinforcing loop where production usage generates traces, traces feed evaluation pipelines, evaluations surface failures, failures drive prompt or model improvements, and improvements raise quality — which in turn generates higher-value future traces. Without deliberately closing this loop, a deployed LLM application degrades silently as user behavior and query distribution evolve.
@@ -27,7 +27,7 @@ The flywheel has four phases that must all be deliberately engineered:
 
 **Collect**: every production LLM interaction is a potential training signal. The question is which signals to retain and at what fidelity. Storing every token of every prompt at full resolution is expensive; storing nothing makes the flywheel impossible. The answer is structured trace schemas with sampling policies.
 
-**Evaluate**: online evaluation runs asynchronously on a sample of production traces to produce quality scores. This is distinct from offline evaluation on golden datasets (BEE-506) — online evaluation operates on real user queries, in real production conditions, and surfaces failure modes that curated datasets never anticipated.
+**Evaluate**: online evaluation runs asynchronously on a sample of production traces to produce quality scores. This is distinct from offline evaluation on golden datasets (BEE-30004) — online evaluation operates on real user queries, in real production conditions, and surfaces failure modes that curated datasets never anticipated.
 
 **Select**: not every low-scoring trace is equally valuable to review. Active learning selects the traces that, when labeled, would give the most information gain for the next improvement cycle. Random sampling from the failure set is wasteful; uncertainty-weighted, diversity-preserving selection is more efficient.
 
@@ -221,7 +221,7 @@ def evaluate_trace_async(
     return results
 ```
 
-**MUST** use a different model family as the evaluator than the model being evaluated. Self-evaluation exhibits self-preference bias — Claude models rate Claude outputs higher, GPT models rate GPT outputs higher (see BEE-536 for the cross-family judge pattern).
+**MUST** use a different model family as the evaluator than the model being evaluated. Self-evaluation exhibits self-preference bias — Claude models rate Claude outputs higher, GPT models rate GPT outputs higher (see BEE-30034 for the cross-family judge pattern).
 
 **SHOULD** use low-precision scoring (1–3 scale, or boolean) rather than a fine-grained Likert scale. LLM judges show high variance at high precision; binary and 3-point scales produce more reproducible scores across evaluation runs.
 
@@ -399,7 +399,7 @@ def build_preference_pairs_from_feedback(
 
 ### Close the Loop: Deploy Improvements Through Staged Rollout
 
-**MUST** deploy all improvements — whether prompt updates or fine-tuned model weights — through the same staged rollout process used for any production change: shadow mode validation followed by a canary ramp (see BEE-536). The flywheel's value is compounded iteration; each improvement must be validated before the next cycle begins:
+**MUST** deploy all improvements — whether prompt updates or fine-tuned model weights — through the same staged rollout process used for any production change: shadow mode validation followed by a canary ramp (see BEE-30034). The flywheel's value is compounded iteration; each improvement must be validated before the next cycle begins:
 
 ```python
 from enum import Enum
@@ -408,7 +408,7 @@ class ImprovementType(Enum):
     PROMPT_UPDATE = "prompt_update"   # Fastest; no model retraining
     SFT = "sft"                       # Fine-tuning on preferred examples
     DPO = "dpo"                       # Preference optimization on pairs
-    MODEL_MIGRATION = "model_migration"  # New model version (see BEE-538)
+    MODEL_MIGRATION = "model_migration"  # New model version (see BEE-30036)
 
 @dataclass
 class FlyWheelCycle:
@@ -482,8 +482,8 @@ flowchart TD
     ImplicitFB["Implicit feedback\n(rephrase, abandon,\ntask complete)"]
     PrefPairs["Preference pairs\n(chosen / rejected)"]
     Improve{"Improvement\ntype?"}
-    PromptUpdate["Prompt update\n(BEE-530)"]
-    DPOTrain["DPO / SFT\nfine-tuning\n(BEE-514)"]
+    PromptUpdate["Prompt update\n(BEE-30028)"]
+    DPOTrain["DPO / SFT\nfine-tuning\n(BEE-30012)"]
     Shadow["Shadow mode\nvalidation"]
     Canary["Canary ramp\n1% → 5% → 20% → 100%"]
     RegressionTest["Regression test\ncase (on failure)"]
@@ -536,7 +536,7 @@ flowchart TD
 | Training signal | High quality (human-labeled) | Variable (judge-labeled); human review needed for high-value cases |
 | Best for | Pre-deployment validation | Distribution drift, new failure mode discovery |
 
-Use both: offline evaluation gates deployment (BEE-506); online evaluation drives the next improvement cycle.
+Use both: offline evaluation gates deployment (BEE-30004); online evaluation drives the next improvement cycle.
 
 ## Related BEEs
 

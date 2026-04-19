@@ -5,7 +5,7 @@ state: draft
 slug: transfer-learning-and-fine-tuning-patterns
 ---
 
-# [BEE-594] Transfer Learning and Fine-Tuning Patterns
+# [BEE-30092] Transfer Learning and Fine-Tuning Patterns
 
 :::info
 Transfer learning reuses representations learned on a large source dataset for a target task with fewer labeled examples, cutting the data and compute requirements by an order of magnitude — but only when the source and target domains are sufficiently similar and the fine-tuning strategy matches the available data size.
@@ -240,10 +240,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-514 Fine-Tuning and PEFT Patterns](514) — LLM-specific fine-tuning (LoRA, QLoRA, adapters) — distinct from the CV/NLP fine-tuning covered here
-- [BEE-593 ML Training Cost Optimization](593) — mixed precision and gradient checkpointing apply directly to fine-tuning workloads
-- [BEE-591 Testing Machine Learning Pipelines](591) — behavioral tests for fine-tuned models should verify that task-specific invariants hold
-- [BEE-589 Online Learning and Continual Model Updates](589) — continual learning addresses catastrophic forgetting in streaming settings; complementary to the batch fine-tuning approach here
+- [BEE-30012 Fine-Tuning and PEFT Patterns](514) — LLM-specific fine-tuning (LoRA, QLoRA, adapters) — distinct from the CV/NLP fine-tuning covered here
+- [BEE-30091 ML Training Cost Optimization](593) — mixed precision and gradient checkpointing apply directly to fine-tuning workloads
+- [BEE-30089 Testing Machine Learning Pipelines](591) — behavioral tests for fine-tuned models should verify that task-specific invariants hold
+- [BEE-30087 Online Learning and Continual Model Updates](589) — continual learning addresses catastrophic forgetting in streaming settings; complementary to the batch fine-tuning approach here
 
 ## References
 

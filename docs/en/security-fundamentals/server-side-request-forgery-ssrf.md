@@ -5,7 +5,7 @@ state: draft
 slug: server-side-request-forgery-ssrf
 ---
 
-# [BEE-497] Server-Side Request Forgery (SSRF)
+# [BEE-2015] Server-Side Request Forgery (SSRF)
 
 :::info
 SSRF tricks a server into issuing HTTP requests on behalf of an attacker — bypassing firewalls, reaching internal services, and exfiltrating cloud credentials that the attacker can never reach directly.

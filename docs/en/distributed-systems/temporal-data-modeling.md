@@ -5,7 +5,7 @@ state: draft
 slug: temporal-data-modeling
 ---
 
-# [BEE-478] Temporal Data Modeling
+# [BEE-19058] Temporal Data Modeling
 
 :::info
 Temporal data modeling tracks not just the current state of an entity but also its history — both when a fact was true in the real world (valid time) and when it was recorded in the database (transaction time). Systems that need to answer "what did we believe on this date?" require both dimensions.

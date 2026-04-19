@@ -5,7 +5,7 @@ state: draft
 slug: ai-agent-architecture-patterns
 ---
 
-# [BEE-504] AI Agent Architecture Patterns
+# [BEE-30002] AI Agent Architecture Patterns
 
 :::info
 An AI agent is an LLM that can take actions: it calls tools, observes results, and decides what to do next, repeating until a goal is reached. This loop-based architecture introduces failure modes, security risks, and operational concerns that a single LLM API call does not.

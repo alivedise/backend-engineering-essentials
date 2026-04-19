@@ -5,7 +5,7 @@ state: draft
 slug: data-privacy-and-pii-handling
 ---
 
-# [BEE-501] Data Privacy and PII Handling
+# [BEE-2017] Data Privacy and PII Handling
 
 :::info
 Handling Personally Identifiable Information (PII) correctly means collecting only what you need, protecting it in transit and at rest, scrubbing it from logs, and deleting it on demand — not as an afterthought, but as an engineering constraint baked into every system that touches user data.

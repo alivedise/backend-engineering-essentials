@@ -5,7 +5,7 @@ state: draft
 slug: optimistic-vs-pessimistic-concurrency-control
 ---
 
-# [BEE-245] Optimistic vs Pessimistic Concurrency Control
+# [BEE-11006] Optimistic vs Pessimistic Concurrency Control
 
 :::info
 Choose between conflict prevention (pessimistic) and conflict detection (optimistic) based on your contention profile.

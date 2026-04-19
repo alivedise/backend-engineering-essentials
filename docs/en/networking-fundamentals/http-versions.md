@@ -5,7 +5,7 @@ state: draft
 slug: http-versions
 ---
 
-# [BEE-52] HTTP/1.1, HTTP/2, HTTP/3
+# [BEE-3003] HTTP/1.1, HTTP/2, HTTP/3
 
 :::info
 Protocol evolution, multiplexing, head-of-line blocking, and QUIC — what changed between each version and why it matters for backend services.
@@ -268,8 +268,8 @@ Domain sharding (splitting assets across multiple subdomains) was a valid HTTP/1
 
 ## Related BEPs
 
-- [BEE-50 — TCP/IP and the Network Stack](./50.md): TCP handshake, slow start, and why QUIC replaces TCP for HTTP/3.
-- [BEE-53 — TLS/SSL Handshake](./53.md): ALPN extension, TLS 1.3 integration with QUIC, certificate negotiation.
-- [BEE-54 — Load Balancers](./54.md): Layer 7 termination of HTTP/2 and HTTP/3, protocol translation to upstreams.
-- [BEE-70 — REST API Design](70.md): How protocol version affects API latency and client connection strategy.
-- [BEE-205 — HTTP Caching](205.md): Cache-Control semantics are defined in RFC 9110 and apply identically across all HTTP versions.
+- [BEE-3001 — TCP/IP and the Network Stack](./50.md): TCP handshake, slow start, and why QUIC replaces TCP for HTTP/3.
+- [BEE-3004 — TLS/SSL Handshake](./53.md): ALPN extension, TLS 1.3 integration with QUIC, certificate negotiation.
+- [BEE-3005 — Load Balancers](./54.md): Layer 7 termination of HTTP/2 and HTTP/3, protocol translation to upstreams.
+- [BEE-4001 — REST API Design](70.md): How protocol version affects API latency and client connection strategy.
+- [BEE-9006 — HTTP Caching](205.md): Cache-Control semantics are defined in RFC 9110 and apply identically across all HTTP versions.

@@ -5,7 +5,7 @@ state: draft
 slug: dependency-injection-and-inversion-of-control
 ---
 
-# [BEE-500] 依賴注入與控制反轉
+# [BEE-5010] 依賴注入與控制反轉
 
 :::info
 依賴注入是一種技術，讓元件從外部接收其依賴，而非自行建立——使元件可測試、可設定，並與具體實作解耦。

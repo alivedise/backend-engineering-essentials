@@ -5,7 +5,7 @@ state: draft
 slug: ai-cost-optimization-and-model-routing
 ---
 
-# [BEE-513] AI 成本優化與模型路由
+# [BEE-30011] AI 成本優化與模型路由
 
 :::info
 LLM API 費用隨 Token 量增長而擴大，輸出 Token 的費用是輸入 Token 的 4–5 倍，且大多數查詢並不需要最強大的模型 —— 路由、快取與批次處理合在一起，可在不明顯損失品質的前提下將費用降低 50–98%。
@@ -197,7 +197,7 @@ compressed_context = compressor.compress_prompt(
 
 **MUST** 從生產第一天起就將 API 費用歸因到業務維度 —— 功能、使用者、租戶、實驗。未被歸因的費用沒有負責人，會靜默地增長，直到出現在雲端帳單上。
 
-**SHOULD** 為每筆請求計算並記錄 `cost_usd` 作為指標（詳見 BEE-511）。按 `feature` 彙總以識別應用的哪些部分驅動支出；按 `user_id` 彙總以偵測每用戶異常。
+**SHOULD** 為每筆請求計算並記錄 `cost_usd` 作為指標（詳見 BEE-30009）。按 `feature` 彙總以識別應用的哪些部分驅動支出；按 `user_id` 彙總以偵測每用戶異常。
 
 **SHOULD** 設定軟性預算警報和硬性限制：
 - 當某功能的每日費用超過基準的 2 倍時發送警報

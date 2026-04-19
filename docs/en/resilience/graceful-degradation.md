@@ -5,7 +5,7 @@ state: draft
 slug: graceful-degradation
 ---
 
-# [BEE-264] Graceful Degradation
+# [BEE-12005] Graceful Degradation
 
 :::info
 Serve reduced but useful functionality when components fail. Identify critical versus non-critical features, define fallbacks for each, and fail gracefully rather than all-or-nothing.
@@ -38,7 +38,7 @@ The first step in designing graceful degradation is building a degradation hiera
 
 The degradation hierarchy is a product and engineering decision, not a purely technical one. For an e-commerce product page: product title, price, and the ability to add to cart are **critical**. Inventory count is **important** (users want to know if something is in stock, but a cached or approximate count is better than no count). Customer reviews are **non-critical** (users can purchase without reading reviews). Personalized recommendations are **best-effort** (they are merchandising, not functionality).
 
-Document this hierarchy explicitly. It guides circuit breaker fallbacks (BEE-260), bulkhead partition sizing (BEE-263), and on-call triage decisions.
+Document this hierarchy explicitly. It guides circuit breaker fallbacks (BEE-12001), bulkhead partition sizing (BEE-12004), and on-call triage decisions.
 
 ## Degradation Strategies
 
@@ -156,7 +156,7 @@ Google's SRE book describes load shedding at the infrastructure level; for appli
 
 - Product info: returned normally.
 - Inventory count: returned normally.
-- Reviews: circuit breaker (BEE-260) opens; fallback triggers; reviews section omitted from response. `_degraded: ["reviews"]` added to response metadata.
+- Reviews: circuit breaker (BEE-12001) opens; fallback triggers; reviews section omitted from response. `_degraded: ["reviews"]` added to response metadata.
 - Recommendations: returned normally.
 - Result: users see product info, inventory, and recommendations. No reviews section. No error. Page is fully functional for the primary user action (purchasing).
 
@@ -190,7 +190,7 @@ If the team has not decided which features are critical and which are non-critic
 
 ### 3. Degradation not tested
 
-Fallback code paths are rarely exercised in normal operation. Bugs in fallback logic are discovered only during real incidents — precisely when the system is already under stress. Test every fallback path in integration tests and in chaos engineering exercises (BEE-265). Simulate the reviews service being down; confirm the reviews section is absent, not broken.
+Fallback code paths are rarely exercised in normal operation. Bugs in fallback logic are discovered only during real incidents — precisely when the system is already under stress. Test every fallback path in integration tests and in chaos engineering exercises (BEE-12006). Simulate the reviews service being down; confirm the reviews section is absent, not broken.
 
 ### 4. Stale data served silently
 

@@ -5,7 +5,7 @@ state: draft
 slug: cross-site-request-forgery-csrf-and-defense-patterns
 ---
 
-# [BEE-493] 跨站請求偽造（CSRF）與防禦模式
+# [BEE-2013] 跨站請求偽造（CSRF）與防禦模式
 
 :::info
 CSRF 利用瀏覽器自動將 session cookie 附加到發往某網域的每個請求這一機制——防禦措施的運作原理是要求跨域攻擊者無法偽造的同源意圖證明。

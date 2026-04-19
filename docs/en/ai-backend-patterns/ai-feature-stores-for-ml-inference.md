@@ -5,7 +5,7 @@ state: draft
 slug: ai-feature-stores-for-ml-inference
 ---
 
-# [BEE-583] AI Feature Stores for ML Inference
+# [BEE-30081] AI Feature Stores for ML Inference
 
 :::info
 A feature store is shared infrastructure that separates feature computation from model training and inference. It provides an offline store for training datasets and an online store for low-latency serving — with a guarantee that the same feature values are available in both paths. Without this separation, duplicate transformation logic causes train-serve skew, which is the leading cause of silent accuracy degradation in production ML systems.
@@ -314,11 +314,11 @@ t_env.execute_sql("""
 
 ## Related BEEs
 
-- [BEE-503 LLM API Integration Patterns](503) — LLM inference pipelines that consume features from online stores for prompt augmentation
-- [BEE-509 RAG Pipeline Architecture](509) — vector retrieval as a form of on-demand feature computation
-- [BEE-529 AI Workflow Orchestration](529) — orchestrating the feature pipeline alongside training and serving workflows
-- [BEE-126 Database Migrations](126) — schema evolution in the offline store (Parquet/Delta schema changes)
-- [BEE-437 Change Data Capture](437) — CDC as the source stream for real-time feature materialization
+- [BEE-30001 LLM API Integration Patterns](503) — LLM inference pipelines that consume features from online stores for prompt augmentation
+- [BEE-30007 RAG Pipeline Architecture](509) — vector retrieval as a form of on-demand feature computation
+- [BEE-30027 AI Workflow Orchestration](529) — orchestrating the feature pipeline alongside training and serving workflows
+- [BEE-6007 Database Migrations](126) — schema evolution in the offline store (Parquet/Delta schema changes)
+- [BEE-19018 Change Data Capture](437) — CDC as the source stream for real-time feature materialization
 
 ## References
 

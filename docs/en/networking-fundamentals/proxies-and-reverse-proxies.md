@@ -5,7 +5,7 @@ state: draft
 slug: proxies-and-reverse-proxies
 ---
 
-# [BEE-55] Proxies and Reverse Proxies
+# [BEE-3006] Proxies and Reverse Proxies
 
 :::info
 Forward proxy vs reverse proxy, use cases, SSL termination, request routing, sidecar proxy pattern, and common configuration pitfalls.

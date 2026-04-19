@@ -5,7 +5,7 @@ state: draft
 slug: search-indexing-pipelines-and-data-synchronization
 ---
 
-# [BEE-384] Search Indexing Pipelines and Data Synchronization
+# [BEE-17005] Search Indexing Pipelines and Data Synchronization
 
 :::info
 Keeping a search index consistent with its authoritative data source requires a deliberate synchronization strategy — naive dual writes lose data on partial failures, while robust pipelines trade some consistency for reliability.
@@ -25,7 +25,7 @@ In addition to synchronization, the pipeline must handle *document transformatio
 
 ## Design Thinking
 
-Think of the search index as a *read model* (similar to the read side of a CQRS architecture — see BEE-102). It exists to serve queries efficiently; the authoritative state lives elsewhere. This framing has two implications:
+Think of the search index as a *read model* (similar to the read side of a CQRS architecture — see BEE-5003). It exists to serve queries efficiently; the authoritative state lives elsewhere. This framing has two implications:
 
 1. **Consistency is eventually consistent by design.** Accept that there will be a window — measured in milliseconds to seconds — between a write to the source and its visibility in search. Design the product UX accordingly. If a user creates a record and immediately searches for it, the record may not yet appear. This is normal and should be communicated clearly rather than hidden.
 

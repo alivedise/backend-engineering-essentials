@@ -5,7 +5,7 @@ state: draft
 slug: testing-in-production
 ---
 
-# [BEE-345] Testing in Production
+# [BEE-15006] Testing in Production
 
 :::info
 Canary analysis, synthetic monitoring, and observability-driven testing.
@@ -79,7 +79,7 @@ Generic system dashboards are insufficient for canary analysis. For each deploym
 
 Automate canary promotion and rollback. If the canary metrics stay within acceptable bounds for a defined period, promote to 100%. If any metric breaches its threshold, roll back automatically.
 
-See also: [BEE-361 — Canary Deployments](361.md) for implementation detail.
+See also: [BEE-16002 — Canary Deployments](361.md) for implementation detail.
 
 ### Feature Flag Rollout
 
@@ -92,7 +92,7 @@ This gives you:
 
 Feature flags are most powerful when combined with canary deployments: the canary controls infrastructure-level exposure while the feature flag controls application-level exposure independently.
 
-See also: [BEE-363 — Feature Flags](363.md).
+See also: [BEE-16004 — Feature Flags](363.md).
 
 ### Observability as the Test Oracle
 
@@ -101,7 +101,7 @@ In pre-production testing, assertions are explicit: `assertEqual(result, expecte
 This means:
 - **Instrument before you ship**: add structured log fields and spans for the specific behavior the new code introduces. If you can't observe it, you can't test it.
 - **Define success criteria in advance**: before running a canary, write down what "passing" looks like — specific metric thresholds, specific error rate ceilings. This prevents post-hoc rationalization of bad results.
-- **Use SLOs as gates**: a canary that degrades your SLO error budget should fail automatically. See [BEE-324 — SLOs as Success Criteria](324.md).
+- **Use SLOs as gates**: a canary that degrades your SLO error budget should fail automatically. See [BEE-14005 — SLOs as Success Criteria](324.md).
 
 ### A/B Testing as Production Testing
 
@@ -149,10 +149,10 @@ Production testing catches real-world behavior that pre-production cannot simula
 
 ## Related BEPs
 
-- [BEE-265 — Chaos Engineering](265.md): Proactively injecting failures in production to verify resilience.
-- [BEE-324 — SLOs as Success Criteria](324.md): Using SLO error budgets as automated gates for canary promotion.
-- [BEE-361 — Canary Deployments](361.md): Infrastructure patterns for traffic splitting and automated rollback.
-- [BEE-363 — Feature Flags](363.md): Decoupling deployment from release for granular rollout control.
+- [BEE-12006 — Chaos Engineering](265.md): Proactively injecting failures in production to verify resilience.
+- [BEE-14005 — SLOs as Success Criteria](324.md): Using SLO error budgets as automated gates for canary promotion.
+- [BEE-16002 — Canary Deployments](361.md): Infrastructure patterns for traffic splitting and automated rollback.
+- [BEE-16004 — Feature Flags](363.md): Decoupling deployment from release for granular rollout control.
 
 ## References
 

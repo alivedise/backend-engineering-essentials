@@ -5,7 +5,7 @@ state: draft
 slug: evaluating-and-testing-llm-applications
 ---
 
-# [BEE-506] Evaluating and Testing LLM Applications
+# [BEE-30004] Evaluating and Testing LLM Applications
 
 :::info
 LLM outputs are probabilistic and often subjectively judged — traditional binary pass/fail assertions break down. Effective LLM evaluation combines automated metrics, LLM-as-judge scoring, curated golden datasets, and continuous production monitoring.

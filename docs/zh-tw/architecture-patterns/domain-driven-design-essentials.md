@@ -5,7 +5,7 @@ state: draft
 slug: domain-driven-design-essentials
 ---
 
-# [BEE-101] 領域驅動設計精要
+# [BEE-5002] 領域驅動設計精要
 
 :::info
 限界上下文、通用語言與策略性 DDD 模式，用於劃定服務與模組邊界。

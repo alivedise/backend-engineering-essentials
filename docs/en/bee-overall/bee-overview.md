@@ -6,7 +6,7 @@ overview: true
 slug: bee-overview
 ---
 
-# [BEE-0] BEE Overview
+# [BEE-1] BEE Overview
 
 :::info
 BEE (Backend Engineering Essentials) is a collection of vendor-agnostic guidelines and best practices for backend engineering.

@@ -5,7 +5,7 @@ state: draft
 slug: openapi-specification-and-api-first-design
 ---
 
-# [BEE-498] OpenAPI Specification and API-First Design
+# [BEE-4009] OpenAPI Specification and API-First Design
 
 :::info
 OpenAPI is a vendor-neutral, language-agnostic format for describing REST APIs. API-first design means writing the OpenAPI document before writing code — making the contract the deliverable, not a byproduct.

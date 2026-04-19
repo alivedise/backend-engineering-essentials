@@ -5,7 +5,7 @@ state: draft
 slug: database-row-level-security
 ---
 
-# [BEE-476] Database Row-Level Security
+# [BEE-18007] Database Row-Level Security
 
 :::info
 Row-Level Security (RLS) enforces data isolation at the database layer by attaching predicate conditions to every query against a table — ensuring that even if application code contains a tenant-ID bug, the database itself prevents cross-tenant data leakage.
@@ -13,7 +13,7 @@ Row-Level Security (RLS) enforces data isolation at the database layer by attach
 
 ## Context
 
-Multi-tenant applications that share a database table across tenants (the shared-schema isolation model, BEE-401) face a persistent risk: application code that forgets to include a `WHERE tenant_id = ?` clause will silently return or overwrite another tenant's data. This class of bug is particularly dangerous because it passes unit tests (which typically run with a single tenant), is invisible in logs, and can cause regulatory compliance failures.
+Multi-tenant applications that share a database table across tenants (the shared-schema isolation model, BEE-18002) face a persistent risk: application code that forgets to include a `WHERE tenant_id = ?` clause will silently return or overwrite another tenant's data. This class of bug is particularly dangerous because it passes unit tests (which typically run with a single tenant), is invisible in logs, and can cause regulatory compliance failures.
 
 The traditional defense is code review and query-level testing, but neither is fully reliable at scale. PostgreSQL addressed this at the database level with Row-Level Security, introduced in version 9.5 (2016). RLS attaches policy expressions to a table; the database evaluates these expressions as additional `WHERE` conditions on every query — reads, writes, updates, and deletes — regardless of whether the application included them. A `SELECT * FROM orders` by an application that forgot the tenant filter will return only the rows the current tenant is permitted to see.
 

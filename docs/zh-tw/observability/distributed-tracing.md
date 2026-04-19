@@ -5,7 +5,7 @@ state: draft
 slug: distributed-tracing
 ---
 
-# [BEE-322] 分散式追蹤
+# [BEE-14003] 分散式追蹤
 
 :::info
 Trace 與 Span 概念、W3C Trace Context 傳播機制、抽樣策略，以及如何對服務進行埋點，確保 Trace 在每個服務邊界都保持完整。

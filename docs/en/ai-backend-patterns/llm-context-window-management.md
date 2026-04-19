@@ -5,7 +5,7 @@ state: draft
 slug: llm-context-window-management
 ---
 
-# [BEE-512] LLM Context Window Management
+# [BEE-30010] LLM Context Window Management
 
 :::info
 The context window is the one finite resource shared by every component of an LLM request — system prompt, conversation history, retrieved documents, and generated output. Managing it well determines cost, latency, and whether the model can actually find and use the information you put in front of it.

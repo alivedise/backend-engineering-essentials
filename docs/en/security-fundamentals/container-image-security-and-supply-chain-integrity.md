@@ -5,7 +5,7 @@ state: draft
 slug: container-image-security-and-supply-chain-integrity
 ---
 
-# [BEE-494] Container Image Security and Supply Chain Integrity
+# [BEE-2014] Container Image Security and Supply Chain Integrity
 
 :::info
 Container images are immutable deployment units that embed the entire software stack — securing the image build pipeline, scanning for vulnerabilities, signing for provenance, and verifying at admission are the four controls that prevent supply chain attacks from reaching production.
@@ -19,7 +19,7 @@ NIST SP 800-190 ("Application Container Security Guide," Souppaya, Morello, Scar
 
 The scale of the malicious image problem is documented. Palo Alto Networks' Unit 42 research identified 30 malicious Docker Hub images with over 20 million combined pulls, generating approximately $200,000 in stolen Monero cryptocurrency through embedded XMRig miners. Attackers used typosquatting (image names mimicking popular official images), multi-architecture tags for maximum victim reach, and hidden cron jobs that activated miners post-deployment. A separate Sysdig analysis of 250,000 Linux images on Docker Hub found 1,652 malicious images; 61% of all image pulls in their sample came from public registries with no signature verification.
 
-The trust model problem is structural. A container image from a public registry carries an implicit claim: "this is what the publisher intended." Without signature verification, that claim is unverifiable. Without vulnerability scanning, embedded CVEs are invisible until exploitation. Without an admission controller enforcing policy at deployment, neither scanning nor signing provides any protection if images are pulled and run directly. BEE-364 (Container Fundamentals) covers how containers work; this article covers how to trust what is inside them.
+The trust model problem is structural. A container image from a public registry carries an implicit claim: "this is what the publisher intended." Without signature verification, that claim is unverifiable. Without vulnerability scanning, embedded CVEs are invisible until exploitation. Without an admission controller enforcing policy at deployment, neither scanning nor signing provides any protection if images are pulled and run directly. BEE-16005 (Container Fundamentals) covers how containers work; this article covers how to trust what is inside them.
 
 ## Design Thinking
 

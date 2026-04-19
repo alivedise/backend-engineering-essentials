@@ -5,7 +5,7 @@ state: draft
 slug: normalization-and-denormalization
 ---
 
-# [BEE-141] 正規化與反正規化
+# [BEE-7002] 正規化與反正規化
 
 :::tip 深入閱讀
 關於資料庫層級的正規化理論與正式定義，請參閱 [DEE-100: 正規化](https://alivedise.github.io/database-engineering-essentials/100)。
@@ -180,7 +180,7 @@ CREATE TABLE seller_stats (
 
 ### CQRS 讀取模型
 
-對於複雜的讀取工作負載，可考慮將寫入模型（正規化）與讀取模型（反正規化、為查詢優化）分開。詳細說明請參閱 [BEE-102: CQRS](./102.md)。
+對於複雜的讀取工作負載，可考慮將寫入模型（正規化）與讀取模型（反正規化、為查詢優化）分開。詳細說明請參閱 [BEE-5003: CQRS](./102.md)。
 
 ## 一致性成本
 
@@ -219,9 +219,9 @@ ALTER TABLE orders
 
 ## 相關 BEE
 
-- [BEE-102: CQRS](./102.md) — 將讀取模型分離，作為一種結構化的反正規化模式
-- [BEE-120: SQL vs NoSQL](./120.md) — 文件型資料庫在反正規化資料上的適用場景
-- [BEE-140: Entity-Relationship 建模](./140.md) — 正規化前如何識別實體
+- [BEE-5003: CQRS](./102.md) — 將讀取模型分離，作為一種結構化的反正規化模式
+- [BEE-6001: SQL vs NoSQL](./120.md) — 文件型資料庫在反正規化資料上的適用場景
+- [BEE-7001: Entity-Relationship 建模](./140.md) — 正規化前如何識別實體
 
 ## 常見錯誤
 

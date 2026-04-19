@@ -5,7 +5,7 @@ state: draft
 slug: ml-monitoring-and-drift-detection
 ---
 
-# [BEE-585] ML Monitoring and Drift Detection
+# [BEE-30083] ML Monitoring and Drift Detection
 
 :::info
 A deployed ML model's accuracy silently degrades when the world it was trained on diverges from the world it now predicts. Drift detection is the infrastructure that measures this gap — comparing feature distributions, prediction distributions, and estimated outcomes against a reference baseline. The central challenge is that ground truth labels often arrive hours or days after predictions, so production monitoring must work without them. The toolkit is a combination of statistical tests for data drift and probability calibration for label-free performance estimation.
@@ -270,11 +270,11 @@ AWS SageMaker Model Monitor runs on a configurable schedule and emits metrics to
 
 ## Related BEEs
 
-- [BEE-511 LLM Observability and Monitoring](511) — LLM-specific observability: token counts, latency, output quality
-- [BEE-536 AI Experimentation and Model A/B Testing](536) — statistical experiment design for ML
-- [BEE-583 AI Feature Stores for ML Inference](583) — feature infrastructure; feature drift often originates here
-- [BEE-584 Shadow Mode and Canary Deployment for ML Models](584) — deployment gates that precede ongoing monitoring
-- [BEE-320 The Three Pillars: Logs, Metrics, Traces](320) — observability foundations
+- [BEE-30009 LLM Observability and Monitoring](511) — LLM-specific observability: token counts, latency, output quality
+- [BEE-30034 AI Experimentation and Model A/B Testing](536) — statistical experiment design for ML
+- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure; feature drift often originates here
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — deployment gates that precede ongoing monitoring
+- [BEE-14001 The Three Pillars: Logs, Metrics, Traces](320) — observability foundations
 
 ## References
 

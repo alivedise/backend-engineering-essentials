@@ -5,7 +5,7 @@ state: draft
 slug: pagination-patterns
 ---
 
-# [BEE-73] Pagination Patterns
+# [BEE-4004] Pagination Patterns
 
 :::info
 Choosing the right pagination strategy prevents unbounded result sets, protects database performance, and gives clients a consistent, predictable navigation experience.
@@ -304,5 +304,5 @@ Running `SELECT COUNT(*)` on every paginated request doubles the database load f
 
 ## Related BEPs
 
-- [BEE-70: REST API Design](./70.md) — Foundational REST conventions this article builds on.
-- [BEE-125: Query Optimization](125.md) — Index strategies that make cursor pagination and keyset queries efficient.
+- [BEE-4001: REST API Design](./70.md) — Foundational REST conventions this article builds on.
+- [BEE-6006: Query Optimization](125.md) — Index strategies that make cursor pagination and keyset queries efficient.

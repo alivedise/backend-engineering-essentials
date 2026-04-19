@@ -5,7 +5,7 @@ state: draft
 slug: idempotent-message-processing
 ---
 
-# [BEE-226] 冪等訊息處理
+# [BEE-10007] 冪等訊息處理
 
 :::info
 設計能容忍重複投遞的消費者。

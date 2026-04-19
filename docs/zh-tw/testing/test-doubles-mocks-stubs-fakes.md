@@ -5,7 +5,7 @@ state: draft
 slug: test-doubles-mocks-stubs-fakes
 ---
 
-# [BEE-344] 測試替身：Mock、Stub、Fake
+# [BEE-15005] 測試替身：Mock、Stub、Fake
 
 :::info
 五種測試替身類型、各自適用情境，以及過度 Mock 如何造成與實作細節緊耦合的脆弱測試。
@@ -303,9 +303,9 @@ expect(mockService.process).toHaveBeenCalledWith(
 
 ## 相關 BEE
 
-- [BEE-103 — 六邊形架構](103.md)：Port 是天然的 Mock 邊界。Mock Port 介面，而非其背後的物件。
-- [BEE-340 — 測試金字塔](./340.md)：使用替身的單元測試構成底層；金字塔決定各類型應寫多少。
-- [BEE-341 — 整合測試](./341.md)：何時不應 Mock — 需要真實基礎設施才能提供有意義測試覆蓋率的情況。
+- [BEE-5004 — 六邊形架構](103.md)：Port 是天然的 Mock 邊界。Mock Port 介面，而非其背後的物件。
+- [BEE-15001 — 測試金字塔](./340.md)：使用替身的單元測試構成底層；金字塔決定各類型應寫多少。
+- [BEE-15002 — 整合測試](./341.md)：何時不應 Mock — 需要真實基礎設施才能提供有意義測試覆蓋率的情況。
 
 ## 參考資料
 

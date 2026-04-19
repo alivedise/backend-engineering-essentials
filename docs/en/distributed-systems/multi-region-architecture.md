@@ -5,7 +5,7 @@ state: draft
 slug: multi-region-architecture
 ---
 
-# [BEE-454] Multi-Region Architecture
+# [BEE-19035] Multi-Region Architecture
 
 :::info
 Multi-region architecture deploys a system across geographically separated data centers to reduce latency for distant users, survive regional failures, and comply with data residency regulations — but every design decision must contend with the speed of light, which sets an irreducible lower bound on cross-region write latency.

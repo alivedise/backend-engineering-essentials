@@ -5,7 +5,7 @@ state: draft
 slug: llm-pretraining-data-pipelines-and-web-scale-corpus-curation
 ---
 
-# [BEE-575] LLM 預訓練資料流水線與網路規模語料庫整理
+# [BEE-30073] LLM 預訓練資料流水線與網路規模語料庫整理
 
 :::info
 預訓練語料庫的品質決定了任何 LLM 能夠學習的上限——這比模型架構甚至計算預算更為關鍵。將 PB 規模的網路爬取資料處理為訓練就緒的 token 串流，需要多階段流水線：HTML 提取、語言識別、啟發式過濾、模糊去重複，以及基於品質的選擇，每個階段都可能過濾掉 50–90% 的原始輸入。

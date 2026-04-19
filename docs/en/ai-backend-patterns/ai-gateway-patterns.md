@@ -5,7 +5,7 @@ state: draft
 slug: ai-gateway-patterns
 ---
 
-# [BEE-515] AI Gateway Patterns
+# [BEE-30013] AI Gateway Patterns
 
 :::info
 An AI gateway is a reverse proxy purpose-built for LLM traffic that centralizes token-based rate limiting, multi-provider failover, cost attribution, semantic caching, and PII scrubbing — concerns that a standard API gateway handles inadequately because LLM requests and responses are asymmetric in size, cost, and latency in ways that HTTP-level primitives do not model.
@@ -150,7 +150,7 @@ response = litellm.completion(
 
 ### Attribute Cost at Every Request
 
-**MUST** record `cost_usd`, `input_tokens`, `output_tokens`, `model`, and at minimum one business dimension (`team_id`, `feature`, `tenant_id`) for every request that passes through the gateway. This data is the prerequisite for knowing which optimization to apply first (see BEE-513).
+**MUST** record `cost_usd`, `input_tokens`, `output_tokens`, `model`, and at minimum one business dimension (`team_id`, `feature`, `tenant_id`) for every request that passes through the gateway. This data is the prerequisite for knowing which optimization to apply first (see BEE-30011).
 
 **SHOULD** enforce the tagging at the gateway rather than trusting the application layer:
 

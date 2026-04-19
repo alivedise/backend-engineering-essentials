@@ -5,7 +5,7 @@ state: draft
 slug: distributed-rate-limiting-algorithms
 ---
 
-# [BEE-449] Distributed Rate Limiting Algorithms
+# [BEE-19030] Distributed Rate Limiting Algorithms
 
 :::info
 Rate limiting protects services by bounding how many requests a client can make in a time window. The five canonical algorithms — fixed window, sliding window log, sliding window counter, token bucket, and leaky bucket — differ in burst tolerance, memory cost, and susceptibility to boundary attacks. Choosing the right algorithm requires understanding these trade-offs; choosing the right implementation requires understanding why naïve Redis scripts have race conditions.

@@ -5,7 +5,7 @@ state: draft
 slug: database-connection-proxy-and-pooler-architecture
 ---
 
-# [BEE-481] Database Connection Proxy and Pooler Architecture
+# [BEE-6008] Database Connection Proxy and Pooler Architecture
 
 :::info
 A database connection proxy sits between application instances and the database, maintaining a small pool of long-lived server connections that many application threads share — converting the O(application_instances × threads) connection count that would overwhelm the database into the O(database_cores) count the database was designed for.

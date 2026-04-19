@@ -5,7 +5,7 @@ state: draft
 slug: protocol-buffers-and-schema-evolution
 ---
 
-# [BEE-468] Protocol Buffers 與 Schema 演進
+# [BEE-19049] Protocol Buffers 與 Schema 演進
 
 :::info
 Protocol Buffers（protobuf）使用欄位編號（field number）而非欄位名稱作為每個欄位的二進位識別標識，這使得新增欄位和重新命名欄位是安全的，但變更或重複使用欄位編號是一個無聲的資料損壞隱患，需要明確的 Schema 治理來預防。

@@ -5,7 +5,7 @@ state: draft
 slug: vector-clocks-and-logical-timestamps
 ---
 
-# [BEE-422] Vector Clocks and Logical Timestamps
+# [BEE-19003] Vector Clocks and Logical Timestamps
 
 :::info
 Logical timestamps give distributed systems a way to track causality — which event happened before which — without relying on synchronized physical clocks, solving the fundamental problem that wall-clock time cannot establish event ordering across independent nodes.

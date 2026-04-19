@@ -5,7 +5,7 @@ state: draft
 slug: api-versioning-strategies
 ---
 
-# [BEE-71] API Versioning Strategies
+# [BEE-4002] API Versioning Strategies
 
 :::info
 URL path, header, query param, and content negotiation versioning — when each is appropriate, how to manage breaking changes, and how to retire old versions.

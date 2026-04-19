@@ -5,7 +5,7 @@ state: draft
 slug: api-gateway-patterns
 ---
 
-# [BEE-455] API Gateway 模式
+# [BEE-19036] API Gateway 模式
 
 :::info
 API Gateway 是客戶端流量進入微服務架構的單一入口點——一個在第七層（Layer 7）運作的反向代理，在一處集中執行身份驗證、速率限制、路由與可觀測性，而不是在每個服務中重複這些邏輯。
@@ -224,9 +224,9 @@ services:
 
 ## 相關 BEE
 
-- [BEE-3006](../networking-fundamentals/proxies-and-reverse-proxies.md) -- 代理與反向代理：Gateway 是專業化的反向代理；BEE-55 涵蓋網路層；本文涵蓋建立在其上的應用層關注點
+- [BEE-3006](../networking-fundamentals/proxies-and-reverse-proxies.md) -- 代理與反向代理：Gateway 是專業化的反向代理；BEE-3006 涵蓋網路層；本文涵蓋建立在其上的應用層關注點
 - [BEE-1001](../auth/authentication-vs-authorization.md) -- 身份驗證 vs. 授權：Gateway 執行粗粒度身份驗證（有效的 JWT？）和 scope 級授權；細粒度授權（此使用者能讀取此記錄嗎？）保留在服務中
-- [BEE-12007](../resilience/rate-limiting-and-throttling.md) -- 速率限制與節流：Gateway 速率限制在邊緣應用；BEE-266 涵蓋其背後的演算法
+- [BEE-12007](../resilience/rate-limiting-and-throttling.md) -- 速率限制與節流：Gateway 速率限制在邊緣應用；BEE-12007 涵蓋其背後的演算法
 - [BEE-12001](../resilience/circuit-breaker-pattern.md) -- 斷路器模式：Gateway 的斷路器防止上游故障級聯到所有 Gateway 客戶端
 - [BEE-5006](../architecture-patterns/sidecar-and-service-mesh-concepts.md) -- Sidecar 與服務網格概念：服務網格使用 mTLS 和可觀測性處理東西向（服務間）流量；API Gateway 處理南北向（客戶端到服務）流量；兩者互補，不是替代
 

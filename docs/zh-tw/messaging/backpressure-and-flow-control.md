@@ -5,7 +5,7 @@ state: draft
 slug: backpressure-and-flow-control
 ---
 
-# [BEE-225] 背壓與流量控制
+# [BEE-10006] 背壓與流量控制
 
 :::info
 透過明確的需求訊號與有界緩衝區，防止快速生產者壓垮緩慢的消費者。

@@ -5,7 +5,7 @@ state: draft
 slug: testing-pyramid
 ---
 
-# [BEE-340] The Testing Pyramid
+# [BEE-15001] The Testing Pyramid
 
 :::info
 Structure your test suite like a pyramid: many fast unit tests at the base, fewer integration tests in the middle, and a small number of E2E tests at the top.

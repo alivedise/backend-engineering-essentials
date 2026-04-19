@@ -5,7 +5,7 @@ state: draft
 slug: chain-of-thought-and-extended-thinking-patterns
 ---
 
-# [BEE-525] Chain-of-Thought and Extended Thinking Patterns
+# [BEE-30023] Chain-of-Thought and Extended Thinking Patterns
 
 :::info
 Chain-of-thought prompting and extended thinking models both trade inference cost for reasoning quality — the key engineering decisions are knowing when that trade is worth making, how to invoke each approach, and how to route between them based on task complexity.

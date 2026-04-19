@@ -5,7 +5,7 @@ state: draft
 slug: jsonb-and-semi-structured-data-in-postgresql
 ---
 
-# [BEE-477] JSONB and Semi-Structured Data in PostgreSQL
+# [BEE-19057] JSONB and Semi-Structured Data in PostgreSQL
 
 :::info
 PostgreSQL's `jsonb` type stores JSON as a parsed binary structure — enabling GIN index-based containment queries and key-existence checks without a separate document database, while keeping ACID guarantees and the ability to join against normalized tables.

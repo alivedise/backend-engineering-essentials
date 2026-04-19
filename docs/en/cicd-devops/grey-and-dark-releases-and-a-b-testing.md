@@ -5,7 +5,7 @@ state: draft
 slug: grey-and-dark-releases-and-a-b-testing
 ---
 
-# [BEE-366] Grey and Dark Releases, and A/B Testing
+# [BEE-16007] Grey and Dark Releases, and A/B Testing
 
 :::info
 Dark launches, grey releases, and A/B tests are three production-testing patterns that share the same substrate — routing a fraction of real traffic to a different code path — but serve different goals: validating new systems under load without user impact, progressively rolling out changes with automatic rollback gates, and measuring whether a change improves user behavior.

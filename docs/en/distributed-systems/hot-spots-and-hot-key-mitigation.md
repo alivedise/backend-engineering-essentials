@@ -5,7 +5,7 @@ state: draft
 slug: hot-spots-and-hot-key-mitigation
 ---
 
-# [BEE-452] Hot Spots and Hot Key Mitigation
+# [BEE-19033] Hot Spots and Hot Key Mitigation
 
 :::info
 A hot key is a single cache entry, database partition, or message queue partition that receives a disproportionate share of traffic — enough to saturate the single node responsible for it while the rest of the cluster sits idle. The fix is never "buy a bigger node": it requires distributing the load across the cluster.

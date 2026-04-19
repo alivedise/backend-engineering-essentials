@@ -5,7 +5,7 @@ state: draft
 slug: speculative-decoding-for-llm-inference
 ---
 
-# [BEE-561] LLM 推論的投機解碼
+# [BEE-30059] LLM 推論的投機解碼
 
 :::info
 自回歸 LLM 解碼每次前向傳遞只生成一個 token，在每次傳遞之間 GPU 大量閒置，等待從記憶體載入權重。投機解碼（Speculative Decoding）攤銷這個成本：廉價的草稿模型依序提出多個 token，大型目標模型在單次並行前向傳遞中驗證所有提案，採用修改版拒絕取樣，可在數學上保證輸出分布與目標模型完全相同。
@@ -76,7 +76,7 @@ speculative_config={
 
 ### 使用 EAGLE 最大化單用戶延遲降低
 
-**應該（SHOULD）** 在優化生成密集型工作負載的單用戶 p50 和 p99 TTFT 及 ITL（見 BEE-560）時使用 EAGLE 或 EAGLE-2。EAGLE 需要預訓練的草稿頭——官方提供了 LLaMA-2、LLaMA-3、Mistral 和 Vicuna 家族的草稿頭。
+**應該（SHOULD）** 在優化生成密集型工作負載的單用戶 p50 和 p99 TTFT 及 ITL（見 BEE-30058）時使用 EAGLE 或 EAGLE-2。EAGLE 需要預訓練的草稿頭——官方提供了 LLaMA-2、LLaMA-3、Mistral 和 Vicuna 家族的草稿頭。
 
 ```python
 # 在 vLLM 中使用 EAGLE-2 動態草稿樹

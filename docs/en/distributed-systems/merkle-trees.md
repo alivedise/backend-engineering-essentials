@@ -5,7 +5,7 @@ state: draft
 slug: merkle-trees
 ---
 
-# [BEE-432] Merkle Trees
+# [BEE-19013] Merkle Trees
 
 :::info
 A Merkle tree lets you verify that a single element belongs to a large dataset — or that two replicas agree — using only O(log n) hashes instead of transferring all n items. This asymmetry makes Merkle trees the standard primitive for anti-entropy repair in distributed databases, content-addressed storage in Git, transaction verification in Bitcoin, and tamper-evident logging in certificate transparency.
@@ -29,7 +29,7 @@ The useful property follows from the avalanche effect of cryptographic hash func
 
 **Use a Merkle tree when you need to verify subset membership or compare large datasets cheaply.** The fundamental trade-off is space (storing the tree) and time (building and updating the tree) against communication cost (O(log n) vs O(n) for comparison or verification). This trade-off favors Merkle trees when datasets are large, communication is expensive, and verifications are frequent — exactly the conditions in distributed database repair, blockchain SPV, and certificate auditing.
 
-**Merkle trees are static structures that are expensive to update.** Appending a new leaf requires recomputing O(log n) hashes up to the root. Inserting in the middle requires restructuring the tree. Certificate Transparency logs sidestep this by being append-only — they never modify existing leaves. Cassandra and DynamoDB rebuild Merkle trees periodically over fixed key ranges rather than maintaining them incrementally. If your use case requires frequent random updates, a Merkle tree may not be the right structure; consider Bloom filters for membership (BEE-431) or versioned vector clocks (BEE-422) for causality tracking.
+**Merkle trees are static structures that are expensive to update.** Appending a new leaf requires recomputing O(log n) hashes up to the root. Inserting in the middle requires restructuring the tree. Certificate Transparency logs sidestep this by being append-only — they never modify existing leaves. Cassandra and DynamoDB rebuild Merkle trees periodically over fixed key ranges rather than maintaining them incrementally. If your use case requires frequent random updates, a Merkle tree may not be the right structure; consider Bloom filters for membership (BEE-19012) or versioned vector clocks (BEE-19003) for causality tracking.
 
 **The hash function choice determines security properties.** SHA-1 is broken for collision resistance (SHAttered attack, 2017) and Git is migrating to SHA-256. Bitcoin uses double-SHA-256 (SHA-256 applied twice). Certificate Transparency uses SHA-256. For new systems, use SHA-256 or SHA-3. The second-preimage resistance property matters most for Merkle trees: given a leaf, it MUST be computationally infeasible to find a different leaf with the same hash. Most current hash functions provide this even where collision resistance is weaker.
 

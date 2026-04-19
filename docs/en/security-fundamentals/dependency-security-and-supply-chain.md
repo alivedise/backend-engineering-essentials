@@ -5,7 +5,7 @@ state: draft
 slug: dependency-security-and-supply-chain
 ---
 
-# [BEE-35] Dependency Security and Supply Chain
+# [BEE-2006] Dependency Security and Supply Chain
 
 :::info
 Third-party dependencies extend your attack surface far beyond the code you write. Lock files, vulnerability scanning, Software Bill of Materials (SBOM), and a disciplined update strategy are the first-line controls against supply chain compromise.
@@ -282,9 +282,9 @@ A dependency that was clean at deploy time may have a CVE published the followin
 
 ## Related BEPs
 
-- [BEE-30: OWASP Top 10 for Backend](30.md) — A06 Vulnerable and Outdated Components in context of the full Top 10
-- [BEE-31: Secrets Management](31.md) — credential leaks via compromised dependencies
-- [BEE-365: Pipeline Design](365.md) — CI/CD pipeline security controls and artifact signing
+- [BEE-2001: OWASP Top 10 for Backend](30.md) — A06 Vulnerable and Outdated Components in context of the full Top 10
+- [BEE-2002: Secrets Management](31.md) — credential leaks via compromised dependencies
+- [BEE-16006: Pipeline Design](365.md) — CI/CD pipeline security controls and artifact signing
 
 ## References
 

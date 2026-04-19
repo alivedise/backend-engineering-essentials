@@ -5,7 +5,7 @@ state: draft
 slug: load-testing-and-benchmarking
 ---
 
-# [BEE-343] Load Testing and Benchmarking
+# [BEE-15004] Load Testing and Benchmarking
 
 :::info
 Load testing validates that your system meets its performance and reliability targets under realistic traffic. Measure percentiles, not averages. Simulate production-like load patterns. Integrate into CI so regressions surface before deployment.

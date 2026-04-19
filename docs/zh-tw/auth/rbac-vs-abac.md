@@ -5,7 +5,7 @@ state: draft
 slug: rbac-vs-abac
 ---
 
-# [BEE-14] RBAC vs ABAC 存取控制模型
+# [BEE-1005] RBAC vs ABAC 存取控制模型
 
 :::info
 Role-Based Access Control（角色型存取控制）透過角色指派權限；Attribute-Based Access Control（屬性型存取控制）則根據 subject、resource、action 與 environment 的屬性評估政策。選錯模型，或在錯誤的層級執行檢查，是讓授權系統無法稽核、難以擴展、也無法變更的最可靠方式之一。
@@ -227,9 +227,9 @@ ABAC 需要政策語言、政策引擎、subject 與 resource 的屬性儲存，
 
 ## 相關 BEE
 
-- [BEE-10: Authentication vs Authorization](10.md) — 所有權限模型的前置管線
-- [BEE-12: OAuth 2.0 and OpenID Connect](12.md) — scope 如何在協定層面對應粗粒度 RBAC
-- [BEE-101: API Gateway Patterns](101.md) — gateway-first 架構中的執行點
+- [BEE-1001: Authentication vs Authorization](10.md) — 所有權限模型的前置管線
+- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — scope 如何在協定層面對應粗粒度 RBAC
+- [BEE-5002: API Gateway Patterns](101.md) — gateway-first 架構中的執行點
 
 ## 參考資料
 

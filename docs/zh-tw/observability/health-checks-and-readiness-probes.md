@@ -5,7 +5,7 @@ state: draft
 slug: health-checks-and-readiness-probes
 ---
 
-# [BEE-325] 健康檢查與就緒探針
+# [BEE-14006] 健康檢查與就緒探針
 
 :::info
 存活探針、就緒探針與啟動探針各有不同用途。用錯探針就會造成連鎖重啟、流量中斷或故障無從察覺。

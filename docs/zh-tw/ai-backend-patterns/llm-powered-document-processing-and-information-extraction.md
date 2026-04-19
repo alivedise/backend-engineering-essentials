@@ -5,7 +5,7 @@ state: draft
 slug: llm-powered-document-processing-and-information-extraction
 ---
 
-# [BEE-532] LLM 文件處理與資訊提取
+# [BEE-30030] LLM 文件處理與資訊提取
 
 :::info
 LLM 驅動的資訊提取將非結構化文件——發票、合約、表單、研究論文——轉化為結構化記錄；關鍵的工程決策在於如何定義輸出 Schema、如何驗證並修正提取欄位，以及如何在生產工作負載所需的規模下進行流水線處理。
@@ -324,7 +324,7 @@ flowchart TD
 - [BEE-30006](structured-output-and-constrained-decoding.md) -- 結構化輸出與受限解碼：在標記層面強制執行 Schema 合規性的解碼層機制（語法約束、函數呼叫）
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG 流程架構：本文的文件解析與分塊直接饋入 RAG 流程的索引階段
 - [BEE-30025](llm-batch-processing-patterns.md) -- LLM 批次處理模式：OpenAI 和 Anthropic 的批次 API 可直接應用於大量文件提取工作負載
-- [BEE-30022](human-in-the-loop-ai-patterns.md) -- 人工介入 AI 模式：本文的人工審查路由模式是 BEE-524 中信心度閘控人工審查模式的一個實例
+- [BEE-30022](human-in-the-loop-ai-patterns.md) -- 人工介入 AI 模式：本文的人工審查路由模式是 BEE-30022 中信心度閘控人工審查模式的一個實例
 
 ## 參考資料
 

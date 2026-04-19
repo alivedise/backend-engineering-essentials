@@ -5,7 +5,7 @@ state: draft
 slug: tls-certificate-lifecycle-and-pki
 ---
 
-# [BEE-491] TLS Certificate Lifecycle and PKI
+# [BEE-2011] TLS Certificate Lifecycle and PKI
 
 :::info
 Public Key Infrastructure (PKI) is the chain-of-trust system that makes TLS identities verifiable — understanding how certificates are structured, issued, renewed, revoked, and monitored is essential for operating any backend service that communicates over the internet or an internal network.

@@ -5,7 +5,7 @@ state: draft
 slug: full-text-search-fundamentals
 ---
 
-# [BEE-380] Full-Text Search Fundamentals
+# [BEE-17001] Full-Text Search Fundamentals
 
 :::info
 How full-text search engines convert raw documents into inverted indexes, score results with BM25, and why SQL `LIKE` is the wrong tool for relevance-ranked search.

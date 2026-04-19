@@ -5,7 +5,7 @@ state: draft
 slug: llm-prompt-compression-and-token-efficiency
 ---
 
-# [BEE-549] LLM Prompt Compression and Token Efficiency
+# [BEE-30047] LLM Prompt Compression and Token Efficiency
 
 :::info
 Context windows are finite, expensive, and attention is not uniform across positions — prompt compression reduces token count while preserving the semantic content the model needs, using techniques from perplexity-guided token selection to learned compression embeddings, with compression ratios from 2× to 20× depending on acceptable accuracy trade-off.

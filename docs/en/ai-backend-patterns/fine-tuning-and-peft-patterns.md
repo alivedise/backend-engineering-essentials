@@ -5,7 +5,7 @@ state: draft
 slug: fine-tuning-and-peft-patterns
 ---
 
-# [BEE-514] Fine-Tuning and PEFT Patterns
+# [BEE-30012] Fine-Tuning and PEFT Patterns
 
 :::info
 Fine-tuning adapts a pre-trained model to a specific style, domain, or task. Parameter-Efficient Fine-Tuning (PEFT) methods — particularly LoRA and QLoRA — make this practical on a single GPU: 1,000 high-quality training examples and a 48 GB GPU can produce a fine-tuned 65B-parameter model that matches the quality of full fine-tuning at a fraction of the cost.

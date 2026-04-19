@@ -5,7 +5,7 @@ state: draft
 slug: llm-output-watermarking-and-ai-content-provenance
 ---
 
-# [BEE-579] LLM Output Watermarking and AI Content Provenance
+# [BEE-30077] LLM Output Watermarking and AI Content Provenance
 
 :::info
 LLM watermarking embeds a statistically detectable signal into generated text at inference time without modifying the model or degrading output quality. It enables a provider to verify whether a given piece of text was produced by their system — and to prove it was not when it wasn't. The signal is invisible to readers but measurable by a detector with access to the secret key. The fundamental limitation: a determined attacker who can query the generation API repeatedly can reconstruct the key for under $50 in API costs.

@@ -5,7 +5,7 @@ state: draft
 slug: asynchronous-processing-and-work-queues
 ---
 
-# [BEE-305] Asynchronous Processing and Work Queues
+# [BEE-13006] Asynchronous Processing and Work Queues
 
 :::info
 Move expensive operations off the request path. Return immediately, process in the background, let clients observe progress.

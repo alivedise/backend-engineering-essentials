@@ -5,7 +5,7 @@ state: draft
 slug: extended-thinking-and-reasoning-trace-management
 ---
 
-# [BEE-556] 延伸思考與推理追蹤管理
+# [BEE-30054] 延伸思考與推理追蹤管理
 
 :::info
 延伸思考（Anthropic）和推理 token（OpenAI o1/o3）讓模型在產生最終答案前有額外的計算預算來處理問題 — 以更高的 token 計費、更長的延遲和提示快取失效為代價，改善多步驟推理任務的準確性。管理推理預算、將思考區塊與回應分開串流，以及判斷延伸思考何時有益或有害，是不同的工程考量。

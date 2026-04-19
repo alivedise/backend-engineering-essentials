@@ -5,7 +5,7 @@ state: draft
 slug: search-analytics-and-feedback-loops
 ---
 
-# [BEE-388] Search Analytics and Feedback Loops
+# [BEE-17009] Search Analytics and Feedback Loops
 
 :::info
 Search analytics converts user behavior — clicks, reformulations, abandonments — into signals that continuously improve relevance. Without instrumentation, search is a black box; with it, every query becomes a data point for the next iteration.

@@ -5,7 +5,7 @@ state: draft
 slug: llm-evaluation-metrics-and-automated-scoring-pipelines
 ---
 
-# [BEE-551] LLM 評估指標與自動化評分管道
+# [BEE-30049] LLM 評估指標與自動化評分管道
 
 :::info
 生產環境中的 LLM 品質保證需要分層評估管道——每次提交時執行快速的程式碼評分器，在拉取請求時執行基於模型的評分（G-Eval、LLM 裁判），並對生產流量進行採樣監控——同時需要統計嚴謹性來區分真實的性能退化與測量噪音，以及偏見控制防止 LLM 裁判獎勵冗長而非準確。

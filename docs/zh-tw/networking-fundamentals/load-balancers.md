@@ -5,7 +5,7 @@ state: draft
 slug: load-balancers
 ---
 
-# [BEE-54] 負載平衡器
+# [BEE-3005] 負載平衡器
 
 :::info
 L4 vs L7 負載平衡、演算法、健康檢查、連線排除，以及高可用性。

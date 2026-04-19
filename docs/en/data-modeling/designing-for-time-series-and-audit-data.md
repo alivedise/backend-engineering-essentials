@@ -5,7 +5,7 @@ state: draft
 slug: designing-for-time-series-and-audit-data
 ---
 
-# [BEE-144] Designing for Time-Series and Audit Data
+# [BEE-7005] Designing for Time-Series and Audit Data
 
 :::info
 Record history by appending, never overwriting. Use bi-temporal modeling when you need both "what was true" and "what did we know." Store all timestamps in UTC, partition by time for performance, and enforce retention policies before storage becomes unbounded.

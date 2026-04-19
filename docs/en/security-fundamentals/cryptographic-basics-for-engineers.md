@@ -5,7 +5,7 @@ state: draft
 slug: cryptographic-basics-for-engineers
 ---
 
-# [BEE-34] Cryptographic Basics for Engineers
+# [BEE-2005] Cryptographic Basics for Engineers
 
 :::info
 Cryptography is the foundation of secure communication and data storage. Understanding when to hash, when to encrypt, and which algorithms to choose prevents the class of vulnerabilities that arise from misapplied or home-grown crypto.

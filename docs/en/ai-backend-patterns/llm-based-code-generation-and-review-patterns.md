@@ -5,7 +5,7 @@ state: draft
 slug: llm-based-code-generation-and-review-patterns
 ---
 
-# [BEE-535] LLM-Based Code Generation and Review Patterns
+# [BEE-30033] LLM-Based Code Generation and Review Patterns
 
 :::info
 Integrating LLMs into a code generation or review pipeline requires more than a prompt and a text response — it requires repo-level context management, AST-based validation, isolated execution sandboxing, and structured output formats that downstream tooling can act on.

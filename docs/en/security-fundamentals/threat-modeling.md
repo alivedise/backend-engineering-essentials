@@ -5,7 +5,7 @@ state: draft
 slug: threat-modeling
 ---
 
-# [BEE-502] Threat Modeling
+# [BEE-2018] Threat Modeling
 
 :::info
 Threat modeling is a structured, design-phase exercise that asks "what can go wrong?" before a line of production code is written — identifying threats, rating their risk, and assigning mitigations while changes are still cheap.

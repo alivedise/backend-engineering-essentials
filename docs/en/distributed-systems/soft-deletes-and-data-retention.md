@@ -5,7 +5,7 @@ state: draft
 slug: soft-deletes-and-data-retention
 ---
 
-# [BEE-460] Soft Deletes and Data Retention
+# [BEE-19041] Soft Deletes and Data Retention
 
 :::info
 Soft deletion marks records as deleted with a timestamp flag rather than removing them from the database, preserving the audit trail and enabling undo — but the pattern carries hidden costs in query complexity, index bloat, unique constraint breakage, and GDPR compliance that must be managed explicitly.

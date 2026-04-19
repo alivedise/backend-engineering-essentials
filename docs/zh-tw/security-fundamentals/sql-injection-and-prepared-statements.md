@@ -5,7 +5,7 @@ state: draft
 slug: sql-injection-and-prepared-statements
 ---
 
-# [BEE-492] SQL 注入與預備語句
+# [BEE-2012] SQL 注入與預備語句
 
 :::info
 SQL 注入利用查詢邏輯與使用者提供資料之間缺乏結構性邊界的問題——預備語句透過完全獨立的協定通道傳輸查詢結構和參數值，從根本上解決了這個問題。

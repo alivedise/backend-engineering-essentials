@@ -5,7 +5,7 @@ state: draft
 slug: publish-subscribe-pattern
 ---
 
-# [BEE-221] 發布-訂閱模式
+# [BEE-10002] 發布-訂閱模式
 
 :::info
 Fan-out、主題路由與解耦生產者和消費者 — 發布者發送訊息時，不需要知道誰、或有多少人會接收。

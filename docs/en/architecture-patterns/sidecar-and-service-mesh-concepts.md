@@ -5,7 +5,7 @@ state: draft
 slug: sidecar-and-service-mesh-concepts
 ---
 
-# [BEE-105] Sidecar and Service Mesh Concepts
+# [BEE-5006] Sidecar and Service Mesh Concepts
 
 :::info
 Cross-cutting concerns without polluting application code.
@@ -222,15 +222,15 @@ mTLS proves that Service A is talking to Service B. It does not prove that the r
 Every service call passes through two proxies (client sidecar + server sidecar). At 2–5 ms per hop, a request chain with 5 hops adds 10–25 ms of pure proxy overhead. For latency-sensitive paths, profile before and after.
 
 **5. Complex mesh configuration without adequate observability.**
-VirtualServices, DestinationRules, and AuthorizationPolicies interact. A misconfiguration can silently affect traffic. Before rolling out advanced mesh features, ensure you have distributed tracing (BEE-321) and metrics dashboards in place so misconfigurations surface quickly.
+VirtualServices, DestinationRules, and AuthorizationPolicies interact. A misconfiguration can silently affect traffic. Before rolling out advanced mesh features, ensure you have distributed tracing (BEE-14002) and metrics dashboards in place so misconfigurations surface quickly.
 
 ## Related BEPs
 
-- [BEE-53 — Mutual TLS (mTLS)](53.md): The security foundation the sidecar enforces
-- [BEE-55 — Reverse Proxy Patterns](55.md): Simpler alternative for smaller deployments
-- [BEE-100 — Microservices Architecture](100.md): The context in which service meshes become necessary
-- [BEE-260 — Circuit Breaker Pattern](260.md): Reliability pattern the mesh automates
-- [BEE-321 — Distributed Tracing](321.md): Observability that sidecars enable automatically
+- [BEE-3004 — Mutual TLS (mTLS)](53.md): The security foundation the sidecar enforces
+- [BEE-3006 — Reverse Proxy Patterns](55.md): Simpler alternative for smaller deployments
+- [BEE-5001 — Microservices Architecture](100.md): The context in which service meshes become necessary
+- [BEE-12001 — Circuit Breaker Pattern](260.md): Reliability pattern the mesh automates
+- [BEE-14002 — Distributed Tracing](321.md): Observability that sidecars enable automatically
 
 ## References
 

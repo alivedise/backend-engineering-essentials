@@ -5,7 +5,7 @@ state: draft
 slug: indexing-deep-dive
 ---
 
-# [BEE-121] Indexing Deep Dive
+# [BEE-6002] Indexing Deep Dive
 
 :::info
 B-tree, hash, full-text, composite, covering, partial, and full-text indexes — what they are, when to use them, and when not to.
@@ -298,7 +298,7 @@ WHERE status = 'active';
 
 ## Related BEPs
 
-- [BEE-120 — SQL vs NoSQL](./120.md): Choosing the right database affects what index types are available and relevant.
-- [BEE-124 — Storage Engines](./124.md): How the storage engine (InnoDB, WiredTiger, etc.) interacts with indexes at the page level.
-- [BEE-125 — Query Optimization](./125.md): EXPLAIN in depth, statistics, and query planner hints.
-- [BEE-303 — Profiling](303.md): Measuring the actual impact of index changes in production.
+- [BEE-6001 — SQL vs NoSQL](./120.md): Choosing the right database affects what index types are available and relevant.
+- [BEE-6005 — Storage Engines](./124.md): How the storage engine (InnoDB, WiredTiger, etc.) interacts with indexes at the page level.
+- [BEE-6006 — Query Optimization](./125.md): EXPLAIN in depth, statistics, and query planner hints.
+- [BEE-13004 — Profiling](303.md): Measuring the actual impact of index changes in production.

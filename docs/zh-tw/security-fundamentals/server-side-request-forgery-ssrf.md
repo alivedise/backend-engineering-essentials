@@ -5,7 +5,7 @@ state: draft
 slug: server-side-request-forgery-ssrf
 ---
 
-# [BEE-497] 伺服器端請求偽造（SSRF）
+# [BEE-2015] 伺服器端請求偽造（SSRF）
 
 :::info
 SSRF 誘使伺服器代替攻擊者發出 HTTP 請求——繞過防火牆，觸及內部服務，並竊取雲端憑證，而這些目標是攻擊者從外部永遠無法直接抵達的。

@@ -5,7 +5,7 @@ state: draft
 slug: rlhf-and-alignment-training-infrastructure
 ---
 
-# [BEE-573] RLHF 與對齊訓練基礎設施
+# [BEE-30071] RLHF 與對齊訓練基礎設施
 
 :::info
 基於 PPO 的 RLHF 需要同時維護四個模型副本——演員（actor）、評論家（critic）、獎勵模型（reward model）與參考模型（reference model）——消耗超過監督式微調（SFT）三倍的 GPU 記憶體。DPO 消除了獎勵模型與評論家，僅需兩個副本，將訓練複雜度降低為對偏好對的二元交叉熵損失，代價是僅支援離線優化。

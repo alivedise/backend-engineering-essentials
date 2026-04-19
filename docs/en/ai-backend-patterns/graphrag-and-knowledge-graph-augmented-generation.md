@@ -5,7 +5,7 @@ state: draft
 slug: graphrag-and-knowledge-graph-augmented-generation
 ---
 
-# [BEE-554] GraphRAG and Knowledge Graph Augmented Generation
+# [BEE-30052] GraphRAG and Knowledge Graph Augmented Generation
 
 :::info
 Standard vector RAG retrieves isolated chunks — it cannot traverse multi-hop relationships or reason over community structure. GraphRAG builds a knowledge graph from source documents, detects communities with the Leiden algorithm, and generates hierarchical summaries that enable both local entity lookup and global theme-level queries that flat retrieval cannot answer.
@@ -13,7 +13,7 @@ Standard vector RAG retrieves isolated chunks — it cannot traverse multi-hop r
 
 ## Context
 
-Retrieval-Augmented Generation with dense vector search (BEE-509) retrieves semantically similar chunks but treats each chunk as an independent unit. When a query requires aggregating information across many documents — "what are the main themes in this corpus?" or "how does entity A relate to entity B through intermediaries?" — vector similarity alone cannot traverse the graph of relationships.
+Retrieval-Augmented Generation with dense vector search (BEE-30007) retrieves semantically similar chunks but treats each chunk as an independent unit. When a query requires aggregating information across many documents — "what are the main themes in this corpus?" or "how does entity A relate to entity B through intermediaries?" — vector similarity alone cannot traverse the graph of relationships.
 
 Edge, Trinh, Cheng, Bradley, Chao, Mody, Truitt, and Larson (arXiv:2404.16130, Microsoft Research, 2024) introduced GraphRAG, a pipeline that extracts entity-relationship triples from source text using an LLM, builds a property graph, applies the Leiden community detection algorithm (Traag, Waltman, and van Eck, arXiv:1810.08473) to partition entities into hierarchical communities, and generates community summaries that are indexed alongside raw chunks. At query time, GraphRAG routes to either local search (entity lookup, neighborhood expansion) or global search (community summary aggregation), matching query type to retrieval strategy.
 

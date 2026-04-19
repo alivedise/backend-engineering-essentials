@@ -5,7 +5,7 @@ state: draft
 slug: write-ahead-logging
 ---
 
-# [BEE-430] Write-Ahead Logging
+# [BEE-19011] Write-Ahead Logging
 
 :::info
 Write-Ahead Logging (WAL) is the protocol that makes database durability practical: by writing a description of every change to an append-only log before writing the actual data pages, a database can recover from crashes without losing committed transactions — and use that same log as the source of truth for replication.

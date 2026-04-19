@@ -5,7 +5,7 @@ state: draft
 slug: autocomplete-and-typeahead-search
 ---
 
-# [BEE-385] Autocomplete and Typeahead Search
+# [BEE-17006] Autocomplete and Typeahead Search
 
 :::info
 Autocomplete returns ranked prefix-matching suggestions in under 100ms — a latency budget so tight that runtime trie traversal alone cannot meet it, requiring pre-computed top-K results cached at each prefix node.
@@ -41,7 +41,7 @@ Engineers MUST pre-compute top-K results per prefix node and store them in the i
 
 Engineers MUST bound K (suggestions stored per prefix) and L (maximum indexed prefix length). Indexing every possible prefix of every possible query without bounds makes the index grow without limit. L=20–25 characters covers nearly all realistic user inputs; K=10–20 is sufficient for most UIs.
 
-Engineers SHOULD decouple the suggestion index from the full-text search index (BEE-380). The two have different update patterns and query shapes. Autocomplete is a read-heavy, latency-critical, eventually consistent system; full-text search requires near-real-time indexing and relevance scoring. Running them on separate infrastructure allows independent scaling and tuning.
+Engineers SHOULD decouple the suggestion index from the full-text search index (BEE-17001). The two have different update patterns and query shapes. Autocomplete is a read-heavy, latency-critical, eventually consistent system; full-text search requires near-real-time indexing and relevance scoring. Running them on separate infrastructure allows independent scaling and tuning.
 
 Engineers SHOULD build the autocomplete index from aggregated query logs rather than from the document corpus directly. Popularity-ranked suggestions ("what did other users search for when they typed this prefix?") outperform alphabetically sorted document titles as suggestions. The aggregation pipeline computes frequency counts over a rolling window (24 hours, 7 days) and merges them into the suggestion scores.
 

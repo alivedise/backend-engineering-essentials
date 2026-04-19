@@ -5,7 +5,7 @@ state: draft
 slug: jvm-jit-compilation-and-application-warm-up
 ---
 
-# [BEE-496] JVM JIT Compilation and Application Warm-Up
+# [BEE-13008] JVM JIT Compilation and Application Warm-Up
 
 :::info
 The JVM's Just-In-Time compiler starts slow and gets faster as it observes actual runtime behavior — understanding this pipeline explains why Java services suffer cold-start latency spikes and what to do about them.

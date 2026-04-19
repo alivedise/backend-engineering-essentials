@@ -5,7 +5,7 @@ state: draft
 slug: api-error-handling-and-problem-details
 ---
 
-# [BEE-75] API Error Handling and Problem Details
+# [BEE-4006] API Error Handling and Problem Details
 
 :::info
 HTTP status codes as the primary error signal, RFC 9457 Problem Details format, and consistent machine-readable error responses.

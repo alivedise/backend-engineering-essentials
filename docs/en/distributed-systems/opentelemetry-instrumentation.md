@@ -5,7 +5,7 @@ state: draft
 slug: opentelemetry-instrumentation
 ---
 
-# [BEE-475] OpenTelemetry Instrumentation
+# [BEE-19056] OpenTelemetry Instrumentation
 
 :::info
 OpenTelemetry is the CNCF-graduated standard for generating, collecting, and exporting telemetry (traces, metrics, logs) from applications — providing a single, vendor-neutral SDK that replaces vendor-specific agents and enables backend-agnostic observability.

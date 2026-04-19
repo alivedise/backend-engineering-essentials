@@ -5,7 +5,7 @@ state: draft
 slug: platform-engineering-and-internal-developer-platforms
 ---
 
-# [BEE-483] Platform Engineering and Internal Developer Platforms
+# [BEE-16009] Platform Engineering and Internal Developer Platforms
 
 :::info
 Platform engineering is the discipline of building and maintaining self-service Internal Developer Platforms (IDPs) that reduce the cognitive load on application teams — letting developers provision infrastructure, create services, and deploy software without waiting on operations.

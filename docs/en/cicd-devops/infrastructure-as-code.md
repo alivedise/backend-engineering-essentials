@@ -5,7 +5,7 @@ state: draft
 slug: infrastructure-as-code
 ---
 
-# [BEE-362] Infrastructure as Code
+# [BEE-16003] Infrastructure as Code
 
 :::info
 Manage every infrastructure resource through version-controlled code. Never configure infrastructure manually. The code is the system; the system is the code.
@@ -168,7 +168,7 @@ data "aws_secretsmanager_secret_version" "db_password" {
 
 Secrets live in a dedicated secrets store (AWS Secrets Manager, HashiCorp Vault, Azure Key Vault). IaC references them by name at apply time; the secret value never touches the IaC file or the Git repository.
 
-See [BEE-32: Secrets Management](#) for the full secrets handling policy.
+See [BEE-2003: Secrets Management](#) for the full secrets handling policy.
 
 ### 8. Plan Before Apply — Never Apply Blindly
 
@@ -180,7 +180,7 @@ The plan output answers: "If I apply this, what will be created, changed, or des
 - Wider blast radius than expected (a module change propagating to 40 resources instead of 4).
 - Policy violations surfaced by tools like `tfsec`, `Checkov`, or OPA before anything is touched.
 
-In CI/CD for IaC, the plan step is mandatory and its output is attached to the pull request for reviewer inspection. Apply only runs after the plan has been reviewed and the PR approved. See [BEE-360: CI for IaC](#) for the pipeline pattern.
+In CI/CD for IaC, the plan step is mandatory and its output is attached to the pull request for reviewer inspection. Apply only runs after the plan has been reviewed and the PR approved. See [BEE-16001: CI for IaC](#) for the pipeline pattern.
 
 ### 9. State Management
 
@@ -329,9 +329,9 @@ resource "aws_db_instance" "replica" {
 
 ## Related BEPs
 
-- [BEE-32: Secrets Management](#) — Secrets store patterns, rotation, and injection at runtime
-- [BEE-360: CI for IaC](#) — Pipeline structure: lint, plan, policy check, apply gates
-- [BEE-361: Deployment Strategies](#) — How immutable infrastructure enables blue-green and canary deployments
+- [BEE-2003: Secrets Management](#) — Secrets store patterns, rotation, and injection at runtime
+- [BEE-16001: CI for IaC](#) — Pipeline structure: lint, plan, policy check, apply gates
+- [BEE-16002: Deployment Strategies](#) — How immutable infrastructure enables blue-green and canary deployments
 
 ## References
 

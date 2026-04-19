@@ -5,7 +5,7 @@ state: draft
 slug: dns-resolution
 ---
 
-# [BEE-51] DNS Resolution
+# [BEE-3002] DNS Resolution
 
 ## Context
 
@@ -343,7 +343,7 @@ Backend engineers measure database query time, HTTP request time, and service pr
 
 ## Related BEPs
 
-- [BEE-50 — TCP/IP and the Network Stack](./50.md): What happens after DNS resolves—the TCP connection lifecycle.
-- [BEE-53 — TLS/SSL Handshake](./53.md): TLS adds another round-trip on top of TCP; DNS + TCP + TLS means three round-trips before the first HTTP byte.
-- [BEE-51 — Load Balancers](./51.md): L7 load balancers as an alternative to DNS-based load balancing, with health checking.
-- [BEE-261 — Timeouts](261.md): DNS resolution is part of the total request latency; set DNS timeout budgets explicitly.
+- [BEE-3001 — TCP/IP and the Network Stack](./50.md): What happens after DNS resolves—the TCP connection lifecycle.
+- [BEE-3004 — TLS/SSL Handshake](./53.md): TLS adds another round-trip on top of TCP; DNS + TCP + TLS means three round-trips before the first HTTP byte.
+- [BEE-3002 — Load Balancers](./51.md): L7 load balancers as an alternative to DNS-based load balancing, with health checking.
+- [BEE-12002 — Timeouts](261.md): DNS resolution is part of the total request latency; set DNS timeout budgets explicitly.

@@ -5,7 +5,7 @@ state: draft
 slug: session-management
 ---
 
-# [BEE-13] 會話管理
+# [BEE-1004] 會話管理
 
 :::info
 Session（會話）是伺服器端與客戶端識別碼綁定的狀態。安全地生成 session、在傳輸中保護 session ID，以及可靠地銷毀 session，是三個不可妥協的要求。
@@ -240,10 +240,10 @@ function handle_logout(request):
 
 ## 相關 BEE
 
-- [BEE-10: Authentication vs Authorization](10.md) — 身份驗證管道背景
-- [BEE-11: Token-Based Authentication](11.md) — session 的無狀態替代方案
-- [BEE-30: Transport Security](/en/30) — Secure cookie 底層的 HTTPS 要求
-- [BEE-33: Secrets Management](/en/33) — session store 中的 secrets 處理
+- [BEE-1001: Authentication vs Authorization](10.md) — 身份驗證管道背景
+- [BEE-1002: Token-Based Authentication](11.md) — session 的無狀態替代方案
+- [BEE-2001: Transport Security](/en/30) — Secure cookie 底層的 HTTPS 要求
+- [BEE-2004: Secrets Management](/en/33) — session store 中的 secrets 處理
 
 ## 參考資料
 

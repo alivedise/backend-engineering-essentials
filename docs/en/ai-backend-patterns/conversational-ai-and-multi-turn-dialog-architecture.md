@@ -5,7 +5,7 @@ state: draft
 slug: conversational-ai-and-multi-turn-dialog-architecture
 ---
 
-# [BEE-533] Conversational AI and Multi-Turn Dialog Architecture
+# [BEE-30031] Conversational AI and Multi-Turn Dialog Architecture
 
 :::info
 A conversational AI backend is a stateful distributed system: each user turn must load prior context, send the accumulated history to the LLM, and persist the new exchange — while managing the context window that grows with every message until it must be pruned.

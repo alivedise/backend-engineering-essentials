@@ -5,7 +5,7 @@ state: draft
 slug: multi-lora-serving-and-adapter-management
 ---
 
-# [BEE-562] Multi-LoRA Serving and Adapter Management
+# [BEE-30060] Multi-LoRA Serving and Adapter Management
 
 :::info
 LoRA fine-tuning produces compact adapter weights (10–100 MB) that specialize a base model for a specific domain or tenant. Serving each adapter as a separate model copy is infeasible at scale. Dedicated multi-LoRA serving systems share the base model across thousands of concurrent adapters, batch computation across heterogeneous adapters with custom GPU kernels, and page adapter weights through a GPU/CPU/disk cache hierarchy — achieving throughput within 10% of a single-model server.

@@ -5,7 +5,7 @@ state: draft
 slug: cqrs
 ---
 
-# [BEE-102] CQRS
+# [BEE-5003] CQRS
 
 :::info
 Separate read and write models for systems where reads and writes have fundamentally different scaling, complexity, or performance requirements.
@@ -184,7 +184,7 @@ Apply CQRS when at least one of the following is true:
 | Read queries are complex (multi-join, full-text, aggregation) | Maintain a purpose-built read model; avoid query complexity in the domain model |
 | Write-side domain is complex with rich invariants | Keep the write model focused on correctness; do not pollute it with read conveniences |
 | You need multiple representations of the same data | Build multiple projections from one event stream |
-| You need an audit trail of all state changes | Combine with event sourcing (BEE-223) |
+| You need an audit trail of all state changes | Combine with event sourcing (BEE-10004) |
 
 ## Common Mistakes
 

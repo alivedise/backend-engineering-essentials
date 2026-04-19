@@ -5,7 +5,7 @@ state: draft
 slug: byzantine-fault-tolerance
 ---
 
-# [BEE-439] Byzantine Fault Tolerance
+# [BEE-19020] Byzantine Fault Tolerance
 
 :::info
 Byzantine Fault Tolerance (BFT) extends crash fault tolerance to the case where nodes may behave arbitrarily — sending contradictory messages, colluding, or lying — rather than merely stopping; tolerating f Byzantine faults requires at least 3f+1 nodes compared to 2f+1 for crash faults, making BFT the necessary foundation for consensus in adversarial or multi-party environments.

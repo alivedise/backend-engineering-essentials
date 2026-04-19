@@ -5,7 +5,7 @@ state: draft
 slug: graphql-federation
 ---
 
-# [BEE-485] GraphQL Federation
+# [BEE-4008] GraphQL Federation
 
 :::info
 GraphQL Federation is a protocol and architecture for composing multiple independently owned GraphQL services — subgraphs — into a single unified API surface — the supergraph — served through a router, without requiring a central schema team to own all types.

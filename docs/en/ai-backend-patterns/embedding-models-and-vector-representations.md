@@ -5,7 +5,7 @@ state: draft
 slug: embedding-models-and-vector-representations
 ---
 
-# [BEE-516] Embedding Models and Vector Representations
+# [BEE-30014] Embedding Models and Vector Representations
 
 :::info
 An embedding model converts text into a dense numeric vector such that semantically similar texts produce geometrically close vectors. Choosing the right model, dimensionality, distance metric, and caching strategy determines retrieval quality across the RAG pipeline, semantic search, and recommendation features that depend on it.

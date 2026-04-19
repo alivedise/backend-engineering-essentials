@@ -5,7 +5,7 @@ state: draft
 slug: read-replica-routing-and-lag-handling
 ---
 
-# [BEE-463] Read Replica Routing and Lag Handling
+# [BEE-19044] Read Replica Routing and Lag Handling
 
 :::info
 Read replica routing directs SELECT queries to replicas to reduce primary load, but replication lag — the delay between a write on the primary and its appearance on a replica — breaks read-your-writes consistency. Engineering the application layer to detect, tolerate, and compensate for lag is the central challenge.

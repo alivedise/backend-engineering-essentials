@@ -5,7 +5,7 @@ state: draft
 slug: dead-letter-queues-and-poison-messages
 ---
 
-# [BEE-224] 死信佇列與毒訊息
+# [BEE-10005] 死信佇列與毒訊息
 
 :::info
 將無法處理的訊息路由至專用的暫存佇列。持續監控它。主動檢查它。在重播之前先修復根本原因。絕不讓單一問題訊息阻擋所有正常訊息的流動。

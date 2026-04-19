@@ -5,7 +5,7 @@ state: draft
 slug: llm-output-watermarking-and-ai-content-provenance
 ---
 
-# [BEE-579] LLM 輸出浮水印與 AI 內容溯源
+# [BEE-30077] LLM 輸出浮水印與 AI 內容溯源
 
 :::info
 LLM 浮水印在推論時將統計可偵測的信號嵌入生成文字，無需修改模型或降低輸出品質。它使提供者能夠驗證特定文字是否由其系統生成——以及在不是時加以證明。該信號對讀者不可見，但對持有密鑰的偵測器可測量。根本限制：有決心的攻擊者若能重複查詢生成 API，可在 50 美元以內的 API 成本內重建密鑰。

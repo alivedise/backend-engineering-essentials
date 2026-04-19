@@ -5,7 +5,7 @@ state: draft
 slug: circuit-breaker-pattern
 ---
 
-# [BEE-260] Circuit Breaker Pattern
+# [BEE-12001] Circuit Breaker Pattern
 
 :::info
 Detect failures early, open the circuit to fail fast, and allow controlled recovery through the half-open state.
@@ -232,7 +232,7 @@ A slow endpoint on Service B should not trip the circuit for a fast, healthy end
 | Node.js | `opossum` |
 | Service mesh | Envoy (Istio, Linkerd) — see [BEE-5006](../architecture-patterns/sidecar-and-service-mesh-concepts.md) |
 
-Service meshes (BEE-105) can implement circuit breaking as a sidecar, removing it from application code entirely. This is the preferred approach in Kubernetes environments for consistent cross-service policy.
+Service meshes (BEE-5006) can implement circuit breaking as a sidecar, removing it from application code entirely. This is the preferred approach in Kubernetes environments for consistent cross-service policy.
 
 ## Related BEPs
 

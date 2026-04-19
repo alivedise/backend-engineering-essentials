@@ -5,7 +5,7 @@ state: draft
 slug: model-context-protocol-mcp
 ---
 
-# [BEE-505] Model Context Protocol (MCP)
+# [BEE-30003] Model Context Protocol (MCP)
 
 :::info
 The Model Context Protocol is an open standard for connecting AI models to external tools and data sources — replacing the N×M custom integration problem (N models × M data sources) with a single, reusable server-client interface.

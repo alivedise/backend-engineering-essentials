@@ -5,7 +5,7 @@ state: draft
 slug: change-data-capture
 ---
 
-# [BEE-437] Change Data Capture
+# [BEE-19018] Change Data Capture
 
 :::info
 Change Data Capture (CDC) turns a database's own replication log into a real-time stream of changes — creates, updates, and deletes — that downstream systems can consume without polling, dual-writing, or touching application code, making it the standard primitive for keeping caches, search indexes, event buses, and data warehouses in sync with a system of record.

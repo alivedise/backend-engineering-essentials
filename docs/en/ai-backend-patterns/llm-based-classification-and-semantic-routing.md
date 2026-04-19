@@ -5,7 +5,7 @@ state: draft
 slug: llm-based-classification-and-semantic-routing
 ---
 
-# [BEE-539] LLM-Based Classification and Semantic Routing
+# [BEE-30037] LLM-Based Classification and Semantic Routing
 
 :::info
 Semantic routing replaces keyword and regex dispatch with embedding-space classification — an incoming query is encoded into a vector and compared against pre-encoded route examples, producing a routing decision in single-digit milliseconds at zero LLM API cost. Hybrid layering (rules → embedding router → LLM fallback) achieves over 90% routing precision while reducing expensive model calls by up to 85%.

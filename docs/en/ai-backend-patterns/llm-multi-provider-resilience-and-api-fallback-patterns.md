@@ -5,7 +5,7 @@ state: draft
 slug: llm-multi-provider-resilience-and-api-fallback-patterns
 ---
 
-# [BEE-555] LLM Multi-Provider Resilience and API Fallback Patterns
+# [BEE-30053] LLM Multi-Provider Resilience and API Fallback Patterns
 
 :::info
 Relying on a single LLM provider creates a single point of failure — outages, rate limit exhaustion, and model deprecations affect production without warning. Multi-provider routing with circuit breakers, provider-normalized clients, and health-aware fallback queues converts provider risk from a service dependency into a routing decision.

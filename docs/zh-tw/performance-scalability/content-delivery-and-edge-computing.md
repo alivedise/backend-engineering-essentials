@@ -5,7 +5,7 @@ state: draft
 slug: content-delivery-and-edge-computing
 ---
 
-# [BEE-304] 內容傳遞與邊緣運算
+# [BEE-13005] 內容傳遞與邊緣運算
 
 :::info
 將內容與運算推送至邊緣節點。縮短往返距離。盡可能從快取提供服務。

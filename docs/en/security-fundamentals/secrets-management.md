@@ -5,7 +5,7 @@ state: draft
 slug: secrets-management
 ---
 
-# [BEE-32] Secrets Management
+# [BEE-2003] Secrets Management
 
 :::info
 What counts as a secret, why hardcoded secrets are dangerous, vault concepts, rotation strategy, least privilege, audit logging, and preventing secret leaks from source control.
@@ -238,6 +238,6 @@ Run secret-scanning in CI as a second gate. This catches secrets that were intro
 
 ## Related BEPs
 
-- [BEE-15: API Keys](15.md) — How to design and issue API keys for external consumers.
-- [BEE-34: Cryptography](./34.md) — Key lengths, algorithm selection, and encryption at rest.
-- [BEE-35: Dependency Security](./35.md) — Supply chain risks that can expose secrets indirectly.
+- [BEE-1006: API Keys](15.md) — How to design and issue API keys for external consumers.
+- [BEE-2005: Cryptography](./34.md) — Key lengths, algorithm selection, and encryption at rest.
+- [BEE-2006: Dependency Security](./35.md) — Supply chain risks that can expose secrets indirectly.

@@ -5,7 +5,7 @@ state: draft
 slug: bulkhead-pattern
 ---
 
-# [BEE-263] Bulkhead Pattern
+# [BEE-12004] Bulkhead Pattern
 
 :::info
 Partition resources by dependency so that a failure or slowdown in one partition cannot exhaust resources needed by others.
@@ -15,7 +15,7 @@ Partition resources by dependency so that a failure or slowdown in one partition
 
 Most service calls share a single, bounded resource: a thread pool, a connection pool, or a semaphore. When a dependency becomes slow — not broken, just slow — threads pile up waiting for responses. If every request to your service touches that slow dependency, the shared pool drains. New requests queue. The queue grows. Eventually every inbound request is stuck waiting — including requests that have nothing to do with the slow dependency.
 
-This is **resource exhaustion cascading failure**. It is subtle and common. A circuit breaker (BEE-260) trips when a dependency *fails*; it does not protect you from a dependency that is merely *slow*. Timeouts (BEE-261) bound how long a single call waits, but if 500 threads are all waiting up to 5 seconds simultaneously, you still exhaust the pool before any timeout fires.
+This is **resource exhaustion cascading failure**. It is subtle and common. A circuit breaker (BEE-12001) trips when a dependency *fails*; it does not protect you from a dependency that is merely *slow*. Timeouts (BEE-12002) bound how long a single call waits, but if 500 threads are all waiting up to 5 seconds simultaneously, you still exhaust the pool before any timeout fires.
 
 The Bulkhead pattern, described by Michael Nygard in *Release It!* (Pragmatic Programmers, 2018) and documented in the Microsoft Azure Architecture Center ([learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead](https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead)), addresses this by allocating separate resource partitions — bulkheads — to different dependencies or caller classes. A failure in one bulkhead cannot consume resources in another.
 
@@ -141,9 +141,9 @@ With a circuit breaker added: once the failure rate threshold is reached, the br
 
 **Recommended layering (inner to outer):**
 
-1. **Timeout** (BEE-261) — Bound how long any single call can block.
+1. **Timeout** (BEE-12002) — Bound how long any single call can block.
 2. **Bulkhead** — Bound how many concurrent calls can be in-flight to each dependency.
-3. **Circuit Breaker** (BEE-260) — Stop calling dependencies that are failing or saturated.
+3. **Circuit Breaker** (BEE-12001) — Stop calling dependencies that are failing or saturated.
 
 ## Sizing Bulkhead Partitions
 

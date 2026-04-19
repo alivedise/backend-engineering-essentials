@@ -5,7 +5,7 @@ state: draft
 slug: coordination-services
 ---
 
-# [BEE-448] 協調服務
+# [BEE-19029] 協調服務
 
 :::info
 協調服務是一種容錯、強一致性的小型元資料儲存，提供構建模塊——監視（watch）、臨時節點或租約、原子交易——讓分散式應用程式能夠組合出更高層次的原語，如領導者選舉、分散式鎖、服務發現和配置分發，而無需每個應用程式重新實作共識演算法。
@@ -151,7 +151,7 @@ func runLeaderElection(ctx context.Context, client *clientv3.Client) error {
     // 取得隔離令牌：成為領導者時的版本號
     resp, _ := election.Leader(ctx)
     fencingToken := resp.Kvs[0].CreateRevision
-    _ = fencingToken  // 傳遞給受保護的資源（見 BEE-447）
+    _ = fencingToken  // 傳遞給受保護的資源（見 BEE-19028）
 
     // 執行領導者工作；完成或關閉前呼叫 Resign
     defer election.Resign(ctx)

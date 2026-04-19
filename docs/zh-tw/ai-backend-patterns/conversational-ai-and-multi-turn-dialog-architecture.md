@@ -5,7 +5,7 @@ state: draft
 slug: conversational-ai-and-multi-turn-dialog-architecture
 ---
 
-# [BEE-533] 對話式 AI 與多輪對話架構
+# [BEE-30031] 對話式 AI 與多輪對話架構
 
 :::info
 對話式 AI 後端是一個有狀態的分散式系統：每次使用者輸入都必須載入先前的上下文、將累積的歷史記錄發送給 LLM，並持久化新的交換——同時管理隨著每則訊息增長直至必須剪裁的上下文視窗。

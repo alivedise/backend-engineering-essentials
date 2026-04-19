@@ -5,7 +5,7 @@ state: draft
 slug: zero-downtime-schema-migrations
 ---
 
-# [BEE-458] Zero-Downtime Schema Migrations
+# [BEE-19039] Zero-Downtime Schema Migrations
 
 :::info
 Zero-downtime schema migrations change a production database schema without taking the application offline — by decomposing each backward-incompatible change into a sequence of backward-compatible steps that allow old and new code to run simultaneously during a rolling deployment.
@@ -165,7 +165,7 @@ flowchart LR
 - [BEE-6007](../data-storage/database-migrations.md) -- Database Migrations: covers migration tooling (Flyway, Liquibase, Alembic) and the fundamentals of version-controlled schema changes; this article extends it with zero-downtime techniques
 - [BEE-7003](../data-modeling/schema-evolution-and-backward-compatibility.md) -- Schema Evolution and Backward Compatibility: defines backward-compatible and backward-incompatible change types; the classifications directly determine which expand-contract phases are needed
 - [BEE-16002](../cicd-devops/deployment-strategies.md) -- Deployment Strategies: rolling deploys are the root cause of the temporal overlap problem that expand-contract solves; blue-green deploys simplify schema migration but require database connection switching
-- [BEE-19028](fencing-tokens.md) -- Fencing Tokens: backfill jobs that run concurrently with application writes must be idempotent; the idempotency techniques from BEE-164 apply directly
+- [BEE-19028](fencing-tokens.md) -- Fencing Tokens: backfill jobs that run concurrently with application writes must be idempotent; the idempotency techniques from BEE-8005 apply directly
 
 ## References
 

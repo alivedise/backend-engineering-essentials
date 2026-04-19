@@ -5,7 +5,7 @@ state: draft
 slug: owasp-api-security-top-10
 ---
 
-# [BEE-488] OWASP API 安全 Top 10
+# [BEE-2008] OWASP API 安全 Top 10
 
 :::info
 OWASP API 安全 Top 10 是一份針對 API 最關鍵安全風險的優先排序清單——有別於一般的 OWASP Top 10——旨在協助團隊識別並修復對 REST、GraphQL、gRPC 及其他結構化 API 介面影響最深的漏洞。

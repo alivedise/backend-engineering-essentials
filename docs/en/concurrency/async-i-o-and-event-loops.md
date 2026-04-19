@@ -5,7 +5,7 @@ state: draft
 slug: async-i-o-and-event-loops
 ---
 
-# [BEE-243] Async I/O and Event Loops
+# [BEE-11004] Async I/O and Event Loops
 
 :::info
 Non-blocking I/O and event loops let a single thread serve thousands of concurrent connections. Understanding the model — and what breaks it — is fundamental to building high-throughput backend services.

@@ -5,7 +5,7 @@ state: draft
 slug: ai-experimentation-and-model-a-b-testing
 ---
 
-# [BEE-536] AI 實驗與模型 A/B 測試
+# [BEE-30034] AI 實驗與模型 A/B 測試
 
 :::info
 在生產環境中測試一個 LLM 對比另一個，需要的不只是流量分割——還需要選擇正確的評估信號、考慮主觀文字輸出的高變異性，以及在離線比較、影子部署、即時 A/B 和自適應老虎機策略之間做出選擇。

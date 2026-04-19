@@ -5,7 +5,7 @@ state: draft
 slug: cache-stampede-and-thundering-herd
 ---
 
-# [BEE-204] 快取踩踏與驚群效應
+# [BEE-9005] 快取踩踏與驚群效應
 
 :::info
 當快取鍵在高負載下過期，大量並行請求可能同時競相重新產生資料，進而癱瘓資料庫。本文定義此問題，並說明每位後端工程師應掌握的緩解策略。
@@ -356,10 +356,10 @@ def get_product_safe(product_id: str) -> dict:
 
 ## 相關 BEE
 
-- [BEE-200: Caching Fundamentals](./200.md) -- 基礎概念：TTL、淘汰策略、一致性
-- [BEE-201: Cache Invalidation](./201.md) -- 快取失效事件是踩踏的主要觸發源
-- [BEE-203: Distributed Cache](./203.md) -- 踩踏在快取節點間的擴散
-- [BEE-266: Rate Limiting](266.md) -- 踩踏發生時的最後一道 DB 保護
+- [BEE-9001: Caching Fundamentals](./200.md) -- 基礎概念：TTL、淘汰策略、一致性
+- [BEE-9002: Cache Invalidation](./201.md) -- 快取失效事件是踩踏的主要觸發源
+- [BEE-9004: Distributed Cache](./203.md) -- 踩踏在快取節點間的擴散
+- [BEE-12007: Rate Limiting](266.md) -- 踩踏發生時的最後一道 DB 保護
 
 ## 參考資料
 

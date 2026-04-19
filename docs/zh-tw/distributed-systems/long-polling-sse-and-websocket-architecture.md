@@ -5,7 +5,7 @@ state: draft
 slug: long-polling-sse-and-websocket-architecture
 ---
 
-# [BEE-456] Long-Polling、SSE 與 WebSocket 架構
+# [BEE-19037] Long-Polling、SSE 與 WebSocket 架構
 
 :::info
 客戶端與伺服器之間的即時通訊需要在三種持久化模型中做出選擇——long-polling、Server-Sent Events 和 WebSocket——每種都有根本不同的連線生命週期、方向性和擴展特性。這個選擇決定了負載均衡器是否需要 sticky sessions、graceful shutdown 如何運作，以及伺服器能同時保持多少客戶端連線。
@@ -286,7 +286,7 @@ server {
 
 ## 相關 BEE
 
-- [BEE-19034](graceful-shutdown-and-connection-draining.md) -- Graceful Shutdown 與連線 Draining：WebSocket 連線需要比 HTTP 請求更長的 drain 窗口；BEE-453 中的關閉排序直接適用，但需要更高的 `terminationGracePeriodSeconds`
+- [BEE-19034](graceful-shutdown-and-connection-draining.md) -- Graceful Shutdown 與連線 Draining：WebSocket 連線需要比 HTTP 請求更長的 drain 窗口；BEE-19034 中的關閉排序直接適用，但需要更高的 `terminationGracePeriodSeconds`
 - [BEE-11004](../concurrency/async-i-o-and-event-loops.md) -- 非同步 I/O 與事件迴圈：WebSocket 伺服器是 I/O 密集型，受益於非同步事件迴圈；只有使用非阻塞 I/O 才能保持數千個空閒連線
 - [BEE-11005](../concurrency/producer-consumer-and-worker-pool-patterns.md) -- 生產者-消費者與 Worker Pool 模式：從 pub/sub broker 到 WebSocket 連線的訊息扇出是一個生產者-消費者問題
 - [BEE-19036](api-gateway-patterns.md) -- API Gateway 模式：WebSocket 連線通常通過 API Gateway，Gateway 必須配置為傳遞升級握手並支援長期連線

@@ -5,7 +5,7 @@ state: draft
 slug: pagination-patterns
 ---
 
-# [BEE-73] 分頁模式
+# [BEE-4004] 分頁模式
 
 :::info
 選擇正確的分頁策略可防止無界結果集、保護資料庫效能，並為客戶端提供一致且可預期的導覽體驗。
@@ -304,5 +304,5 @@ def get_page_size(requested: int | None) -> int:
 
 ## 相關 BEE
 
-- [BEE-70: REST API 設計](./70.md) — 本文建立在其上的 REST 基礎規範。
-- [BEE-125: 查詢優化](125.md) — 使游標分頁與鍵集查詢高效的索引策略。
+- [BEE-4001: REST API 設計](./70.md) — 本文建立在其上的 REST 基礎規範。
+- [BEE-6006: 查詢優化](125.md) — 使游標分頁與鍵集查詢高效的索引策略。

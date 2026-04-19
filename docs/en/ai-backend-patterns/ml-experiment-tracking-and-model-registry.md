@@ -5,7 +5,7 @@ state: draft
 slug: ml-experiment-tracking-and-model-registry
 ---
 
-# [BEE-586] ML Experiment Tracking and Model Registry
+# [BEE-30084] ML Experiment Tracking and Model Registry
 
 :::info
 Experiment tracking records the hyperparameters, metrics, code version, and artifacts of every training run in a queryable log. A model registry provides a governance layer between training and deployment — versioning trained models, managing promotion through environments, and allowing serving code to reference models by stable alias rather than by specific version. Without these systems, reproducing a prior result or coordinating a model handoff from training to serving requires manual bookkeeping that breaks at team scale.
@@ -330,11 +330,11 @@ For W&B, all data is stored in W&B's cloud (or self-hosted with W&B Server). For
 
 ## Related BEEs
 
-- [BEE-536 AI Experimentation and Model A/B Testing](536) — online A/B testing for live model versions in production
-- [BEE-583 AI Feature Stores for ML Inference](583) — feature infrastructure consumed by training pipelines
-- [BEE-584 Shadow Mode and Canary Deployment for ML Models](584) — deployment patterns that consume model registry versions
-- [BEE-585 ML Monitoring and Drift Detection](585) — production monitoring after a model is promoted
-- [BEE-126 Database Migrations](126) — PostgreSQL MLflow backend schema management
+- [BEE-30034 AI Experimentation and Model A/B Testing](536) — online A/B testing for live model versions in production
+- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure consumed by training pipelines
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — deployment patterns that consume model registry versions
+- [BEE-30083 ML Monitoring and Drift Detection](585) — production monitoring after a model is promoted
+- [BEE-6007 Database Migrations](126) — PostgreSQL MLflow backend schema management
 
 ## References
 

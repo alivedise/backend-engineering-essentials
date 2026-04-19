@@ -5,7 +5,7 @@ state: draft
 slug: ai-red-teaming-and-adversarial-testing
 ---
 
-# [BEE-544] AI Red Teaming and Adversarial Testing
+# [BEE-30042] AI Red Teaming and Adversarial Testing
 
 :::info
 AI red teaming is proactive adversarial testing that systematically seeks failure modes in LLM systems before users or attackers find them — covering jailbreaks, data extraction, bias elicitation, harmful content generation, and tool-call integrity — and must be integrated into the CI/CD pipeline as a regression gate, not treated as a one-time pre-launch exercise.
@@ -296,7 +296,7 @@ flowchart TD
 
 ## Related BEEs
 
-- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM Security and Prompt Injection: the defense patterns that red teaming validates; red teaming finds the gaps, BEE-510 closes them
+- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM Security and Prompt Injection: the defense patterns that red teaming validates; red teaming finds the gaps, BEE-30008 closes them
 - [BEE-30020](llm-guardrails-and-content-safety.md) -- LLM Guardrails and Content Safety: guardrails are the runtime enforcement layer; red teaming tests whether the guardrails hold under adversarial pressure
 - [BEE-30004](evaluating-and-testing-llm-applications.md) -- Evaluating and Testing LLM Applications: functional quality evaluation complements red team safety evaluation
 - [BEE-30035](ai-agent-safety-and-reliability-patterns.md) -- AI Agent Safety and Reliability Patterns: agent budget caps, circuit breakers, and rollback tokens are the mitigations that address Excessive Agency (LLM06) findings from red team exercises

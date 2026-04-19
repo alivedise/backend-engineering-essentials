@@ -5,7 +5,7 @@ state: draft
 slug: ai-agent-architecture-patterns
 ---
 
-# [BEE-504] AI 代理架構模式
+# [BEE-30002] AI 代理架構模式
 
 :::info
 AI 代理是一種能夠採取行動的 LLM：它呼叫工具、觀察結果，並決定下一步做什麼，如此循環直到目標達成。這種基於循環的架構引入了單次 LLM API 呼叫所沒有的故障模式、安全風險和營運問題。

@@ -5,7 +5,7 @@ state: draft
 slug: llm-batch-processing-patterns
 ---
 
-# [BEE-527] LLM 批次處理模式
+# [BEE-30025] LLM 批次處理模式
 
 :::info
 OpenAI 和 Anthropic 的批次處理 API 以最長 24 小時的完成時間換取 50% 的成本折扣——關鍵的工程工作在於構建具備冪等性的 JSONL 輸入、將 custom_id 映射回來源記錄，以及建立只重新提交失敗項目的重試邏輯。
@@ -344,9 +344,9 @@ flowchart TD
 ## 相關 BEE
 
 - [BEE-30001](llm-api-integration-patterns.md) -- LLM API 整合模式：提交和輪詢步驟的重試和超時模式；批次 API 回應的結構化錯誤處理
-- [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI 成本優化與模型路由：批次處理是離線工作負載的主要成本杠桿；BEE-513 中的路由層應將非互動請求導向批次路徑
+- [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI 成本優化與模型路由：批次處理是離線工作負載的主要成本杠桿；BEE-30011 中的路由層應將非互動請求導向批次路徑
 - [BEE-30024](llm-caching-strategies.md) -- LLM 快取策略：提示快取在 Anthropic 上與批次折扣疊加；批次規模下兩個層次合計可達 90-95% 的節省
-- [BEE-5009](../architecture-patterns/background-job-and-task-queue-architecture.md) -- 後台作業和任務佇列架構：批次作業協調遵循相同的持久作業佇列原則；batch_id 追蹤映射到 BEE-487 中的作業狀態機模式
+- [BEE-5009](../architecture-patterns/background-job-and-task-queue-architecture.md) -- 後台作業和任務佇列架構：批次作業協調遵循相同的持久作業佇列原則；batch_id 追蹤映射到 BEE-5009 中的作業狀態機模式
 
 ## 參考資料
 

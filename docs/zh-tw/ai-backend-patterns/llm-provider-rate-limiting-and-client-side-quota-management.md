@@ -5,7 +5,7 @@ state: draft
 slug: llm-provider-rate-limiting-and-client-side-quota-management
 ---
 
-# [BEE-541] LLM 供應商速率限制與客戶端配額管理
+# [BEE-30039] LLM 供應商速率限制與客戶端配額管理
 
 :::info
 LLM 供應商採用多維速率限制（每分鐘請求數、每分鐘輸入 Token 數、每分鐘輸出 Token 數），以令牌桶（token bucket）演算法懲罰突發流量而非平均流量——有效管理這些限制需要預檢 Token 估算、基於供應商標頭的全抖動退避重試（full-jitter backoff）、與供應商執行策略相映射的客戶端令牌桶，以及同時對所有限制維度設卡的優先佇列。

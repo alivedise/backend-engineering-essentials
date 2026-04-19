@@ -5,7 +5,7 @@ state: draft
 slug: polymorphism-in-data-models
 ---
 
-# [BEE-145] 資料模型中的多型
+# [BEE-7006] 資料模型中的多型
 
 :::info
 繼承映射策略必須刻意選擇。選錯策略會帶來兩種後果：一張充斥大量 nullable 欄位的肥胖表格，或一個深陷 JOIN 的查詢計畫。

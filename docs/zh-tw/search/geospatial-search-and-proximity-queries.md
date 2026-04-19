@@ -5,7 +5,7 @@ state: draft
 slug: geospatial-search-and-proximity-queries
 ---
 
-# [BEE-386] 地理空間搜尋與鄰近查詢
+# [BEE-17007] 地理空間搜尋與鄰近查詢
 
 :::info
 地理空間搜尋尋找某一點附近、某個形狀內或沿某條路線的記錄——這些問題無法用標準 B-tree 索引解決，需要能夠對二維空間進行分區的空間索引結構。

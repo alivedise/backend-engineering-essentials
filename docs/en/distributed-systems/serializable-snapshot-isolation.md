@@ -5,7 +5,7 @@ state: draft
 slug: serializable-snapshot-isolation
 ---
 
-# [BEE-442] Serializable Snapshot Isolation
+# [BEE-19023] Serializable Snapshot Isolation
 
 :::info
 Serializable Snapshot Isolation (SSI) achieves full SERIALIZABLE isolation by running on top of Snapshot Isolation's non-blocking multi-version reads and aborting only the transactions that form a "dangerous structure" — two consecutive read-write antidependencies that cannot be serialized — letting reads never block writes while still preventing write skew and all other serialization anomalies.

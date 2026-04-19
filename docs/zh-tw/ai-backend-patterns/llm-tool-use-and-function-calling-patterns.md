@@ -5,7 +5,7 @@ state: draft
 slug: llm-tool-use-and-function-calling-patterns
 ---
 
-# [BEE-520] LLM 工具使用與函式呼叫模式
+# [BEE-30018] LLM 工具使用與函式呼叫模式
 
 :::info
 工具使用將 LLM 從文字生成器轉變為能夠對現實世界採取行動的代理。理解協定機制——工具呼叫如何編碼、結果如何回傳、錯誤如何處理，以及平行執行如何運作——是在任何供應商 API 之上構建可靠 AI 功能的前提。
@@ -321,7 +321,7 @@ sequenceDiagram
 
 ## 相關 BEE
 
-- [BEE-30002](ai-agent-architecture-patterns.md) -- AI 代理架構模式：工具使用是代理採取行動的機制；本 BEE 涵蓋協定機制，而 BEE-504 涵蓋協調、規劃和多代理拓撲
+- [BEE-30002](ai-agent-architecture-patterns.md) -- AI 代理架構模式：工具使用是代理採取行動的機制；本 BEE 涵蓋協定機制，而 BEE-30002 涵蓋協調、規劃和多代理拓撲
 - [BEE-30006](structured-output-and-constrained-decoding.md) -- 結構化輸出與受約束解碼：工具參數的嚴格模式和引導解碼使用與結構化 JSON 輸出相同的受約束解碼基礎設施
 - [BEE-30008](llm-security-and-prompt-injection.md) -- LLM 安全性與提示注入：工具參數注入是工具使用所啟用的特定攻擊向量；通過工具結果的間接提示注入是首要威脅
 - [BEE-30016](llm-streaming-patterns.md) -- LLM 串流模式：工具呼叫參數以增量方式串流，必須在解析前積累；stop_reason 訊號在串流和批次模式中相同

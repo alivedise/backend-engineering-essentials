@@ -5,7 +5,7 @@ state: draft
 slug: llm-api-integration-patterns
 ---
 
-# [BEE-503] LLM API Integration Patterns
+# [BEE-30001] LLM API Integration Patterns
 
 :::info
 Integrating a Large Language Model API into a backend service introduces a distinct class of operational concerns: stateless context management, token-based billing, probabilistic outputs, and novel attack surfaces. Treating an LLM call like any other HTTP request produces unreliable, expensive, and insecure systems.

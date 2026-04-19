@@ -5,7 +5,7 @@ state: draft
 slug: multi-tenancy-models
 ---
 
-# [BEE-400] Multi-Tenancy Models
+# [BEE-18001] Multi-Tenancy Models
 
 :::info
 Multi-tenancy is the architectural property where a single software system serves multiple customers (tenants) using shared infrastructure — and the three fundamental models (silo, pool, bridge) represent different points on the spectrum between full isolation and full sharing.

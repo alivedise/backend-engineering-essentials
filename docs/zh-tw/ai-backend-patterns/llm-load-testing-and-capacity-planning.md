@@ -5,7 +5,7 @@ state: draft
 slug: llm-load-testing-and-capacity-planning
 ---
 
-# [BEE-560] LLM 負載測試與容量規劃
+# [BEE-30058] LLM 負載測試與容量規劃
 
 :::info
 LLM 支援的服務打破了傳統負載測試的假設：回應依 token 數量而非請求數量計費和限速，串流回應需要將延遲分解為不同階段，而 GPU KV 快取記憶體（而非 CPU 執行緒）才是並發的關鍵限制。JMeter 和 Locust 等工具預設情況下測量的是錯誤的指標；容量規劃必須以 token 而非請求為單位進行。

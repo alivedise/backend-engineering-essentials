@@ -5,7 +5,7 @@ state: draft
 slug: ml-model-serving-infrastructure
 ---
 
-# [BEE-590] ML Model Serving Infrastructure
+# [BEE-30088] ML Model Serving Infrastructure
 
 :::info
 Model serving infrastructure translates a trained model artifact into a production service that handles concurrent inference requests with defined latency SLOs. Serving is not simply wrapping a model in a Flask handler — it involves dynamic batching to maximize GPU utilization, gRPC vs REST protocol selection, cold start mitigation for scale-to-zero deployments, and a multi-replica request routing layer. Getting this wrong produces either wasted GPU capacity (under-batching) or violated latency budgets (over-batching, cold starts).
@@ -275,10 +275,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-584 Shadow Mode and Canary Deployment for ML Models](584) — promote new model versions safely in the serving infrastructure
-- [BEE-585 ML Monitoring and Drift Detection](585) — instrument the serving layer to detect prediction distribution shifts
-- [BEE-523 LLM Inference Optimization and Self-Hosting](523) — LLM-specific serving (vLLM, TGI) with different batching semantics
-- [BEE-302 Connection Pooling and Resource Management](302) — connection management principles that apply to model serving clients
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — promote new model versions safely in the serving infrastructure
+- [BEE-30083 ML Monitoring and Drift Detection](585) — instrument the serving layer to detect prediction distribution shifts
+- [BEE-30021 LLM Inference Optimization and Self-Hosting](523) — LLM-specific serving (vLLM, TGI) with different batching semantics
+- [BEE-13003 Connection Pooling and Resource Management](302) — connection management principles that apply to model serving clients
 
 ## References
 

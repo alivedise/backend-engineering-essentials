@@ -5,7 +5,7 @@ state: draft
 slug: llm-output-parsing-and-structured-extraction-reliability
 ---
 
-# [BEE-548] LLM Output Parsing and Structured Extraction Reliability
+# [BEE-30046] LLM Output Parsing and Structured Extraction Reliability
 
 :::info
 Converting LLM free-form text to schema-compliant structured data requires a layered reliability strategy: native API constraints for hard guarantees, client-side validation with retry loops for probabilistic enforcement, and local constrained decoding for self-hosted models — with semantic validators covering the domain logic that token-level constraints cannot express.

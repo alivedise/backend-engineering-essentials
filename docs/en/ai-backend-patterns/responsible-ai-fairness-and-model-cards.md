@@ -5,7 +5,7 @@ state: draft
 slug: responsible-ai-fairness-and-model-cards
 ---
 
-# [BEE-592] Responsible AI, Fairness, and Model Cards
+# [BEE-30090] Responsible AI, Fairness, and Model Cards
 
 :::info
 Responsible AI engineering formalizes the practices that prevent ML systems from causing systematic harm — measuring bias across demographic groups, documenting model limitations before deployment, and satisfying regulatory requirements that attach legal liability to algorithmic decisions affecting people's lives.
@@ -180,7 +180,7 @@ Mitchell et al. (FAccT 2019, arXiv:1810.03993) propose structured model document
 ## Known Limitations
 - Performance degrades for transaction types not seen during training (cryptocurrency, BNPL)
 - LATAM selection rate triggers 4/5ths rule; under review by fairness committee
-- Model is not interpretable at the transaction level without SHAP (see BEE-588)
+- Model is not interpretable at the transaction level without SHAP (see BEE-30086)
 
 ## Ethical Considerations
 - False positives block legitimate transactions; impact disproportionate for LATAM users
@@ -246,10 +246,10 @@ The MEASURE function is where Fairlearn and `MetricFrame` fit directly. GOVERN m
 
 ## Related BEEs
 
-- [BEE-588 Model Explainability in Production](588) — SHAP attribution scores complement fairness metrics by explaining individual decisions
-- [BEE-587 ML Data Validation and Pipeline Quality Gates](587) — data validation enforces schema and completeness; fairness audits extend this to distributional properties
-- [BEE-586 ML Experiment Tracking and Model Registry](586) — model cards attach to MLflow runs and model versions
-- [BEE-581 AI Compliance and Governance Engineering](581) — broader AI governance framework that model cards feed into
+- [BEE-30086 Model Explainability in Production](588) — SHAP attribution scores complement fairness metrics by explaining individual decisions
+- [BEE-30085 ML Data Validation and Pipeline Quality Gates](587) — data validation enforces schema and completeness; fairness audits extend this to distributional properties
+- [BEE-30084 ML Experiment Tracking and Model Registry](586) — model cards attach to MLflow runs and model versions
+- [BEE-30079 AI Compliance and Governance Engineering](581) — broader AI governance framework that model cards feed into
 
 ## References
 

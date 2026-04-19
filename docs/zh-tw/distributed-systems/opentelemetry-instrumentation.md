@@ -5,7 +5,7 @@ state: draft
 slug: opentelemetry-instrumentation
 ---
 
-# [BEE-475] OpenTelemetry 可觀測性實作
+# [BEE-19056] OpenTelemetry 可觀測性實作
 
 :::info
 OpenTelemetry 是 CNCF 畢業的可觀測性標準，用於從應用程式產生、收集和匯出遙測資料（追蹤、指標、日誌）——提供單一的廠商中立 SDK，取代廠商特定的代理程式，實現與後端無關的可觀測性。

@@ -5,7 +5,7 @@ state: draft
 slug: llm-hallucination-detection-and-factual-grounding
 ---
 
-# [BEE-545] LLM Hallucination Detection and Factual Grounding
+# [BEE-30043] LLM Hallucination Detection and Factual Grounding
 
 :::info
 LLM hallucinations — outputs that are fabricated, unsupported, or contradictory to source material — require a multi-layer production detection pipeline: atomic claim decomposition, NLI or LLM-based claim verification against retrieved context, and self-consistency sampling as a reference-free fallback when no ground truth is available.
@@ -17,7 +17,7 @@ Hallucination — the generation of plausible but unfaithful or factually incorr
 
 A counterintuitive finding from the TruthfulQA benchmark (Lin et al., 2022): larger models are not more truthful. The benchmark of 817 questions across 38 categories — designed to capture questions where humans commonly hold false beliefs — showed that GPT models achieved only 58% truthfulness while human performance was 94%. Larger models proved better at mimicking the style of confident falsehoods they had seen in pre-training data, making scale alone an insufficient remedy.
 
-For RAG systems specifically, the research community developed RAGAS (Saad-Falcon et al., 2023), a reference-free evaluation framework that scores faithfulness (is the answer grounded in the retrieved context?), answer relevance (does it address the question?), and context relevance (is the retrieved context focused?). RAGAS uses an LLM-as-judge approach to decompose outputs into atomic statements and verify each against the retrieved documents. Separately, Manakul et al. (2023) introduced SelfCheckGPT: a zero-resource method that detects hallucinations by sampling the same prompt multiple times — facts the model genuinely knows will appear consistently across samples, while hallucinated facts diverge, analogous to self-consistency (BEE-543) used in reverse.
+For RAG systems specifically, the research community developed RAGAS (Saad-Falcon et al., 2023), a reference-free evaluation framework that scores faithfulness (is the answer grounded in the retrieved context?), answer relevance (does it address the question?), and context relevance (is the retrieved context focused?). RAGAS uses an LLM-as-judge approach to decompose outputs into atomic statements and verify each against the retrieved documents. Separately, Manakul et al. (2023) introduced SelfCheckGPT: a zero-resource method that detects hallucinations by sampling the same prompt multiple times — facts the model genuinely knows will appear consistently across samples, while hallucinated facts diverge, analogous to self-consistency (BEE-30041) used in reverse.
 
 HaluEval (Li et al., 2023) established that ChatGPT generates hallucinated content approximately 19.5% of the time across question answering, dialogue, and summarization tasks. FActScore (Min et al., 2023) showed that even GPT-4 achieves only 58% atomic factual precision on open-domain biography generation.
 

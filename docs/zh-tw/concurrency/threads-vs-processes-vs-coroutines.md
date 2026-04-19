@@ -5,7 +5,7 @@ state: draft
 slug: threads-vs-processes-vs-coroutines
 ---
 
-# [BEE-240] 執行緒 vs 行程 vs 協程
+# [BEE-11001] 執行緒 vs 行程 vs 協程
 
 :::info
 並行模型與資源取捨。選錯抽象層在大規模情境下會導致資源耗盡、資料競爭或 CPU 浪費——本文將各模型對應至適合的使用場景。

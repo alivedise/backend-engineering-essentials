@@ -5,7 +5,7 @@ state: draft
 slug: grpc-error-handling-and-status-codes
 ---
 
-# [BEE-479] gRPC 錯誤處理與狀態碼
+# [BEE-19059] gRPC 錯誤處理與狀態碼
 
 :::info
 gRPC 定義了 17 個標準狀態碼，取代 RPC 語義中的 HTTP 狀態碼，並提供兩層錯誤模型——基本狀態（碼 + 訊息）和豐富的結構化詳情——使客戶端能夠對錯誤採取程式化的動作，而無需解析純文字訊息。

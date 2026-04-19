@@ -5,7 +5,7 @@ state: draft
 slug: llm-context-window-management
 ---
 
-# [BEE-512] LLM 上下文視窗管理
+# [BEE-30010] LLM 上下文視窗管理
 
 :::info
 上下文視窗是 LLM 請求所有組件共享的唯一有限資源——系統提示、對話歷史、檢索文件和生成輸出。有效管理它決定了成本、延遲，以及模型是否真的能找到並使用你放在它面前的資訊。

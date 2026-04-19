@@ -5,7 +5,7 @@ state: draft
 slug: distributed-tracing
 ---
 
-# [BEE-322] Distributed Tracing
+# [BEE-14003] Distributed Tracing
 
 :::info
 Trace and span concepts, W3C trace context propagation, sampling strategies, and how to instrument services so traces remain intact across every service boundary.

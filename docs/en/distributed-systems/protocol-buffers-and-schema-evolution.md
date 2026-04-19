@@ -5,7 +5,7 @@ state: draft
 slug: protocol-buffers-and-schema-evolution
 ---
 
-# [BEE-468] Protocol Buffers and Schema Evolution
+# [BEE-19049] Protocol Buffers and Schema Evolution
 
 :::info
 Protocol Buffers (protobuf) use field numbers — not field names — as the binary identity of each field, which makes adding and renaming fields safe, but changing or reusing field numbers a silent data corruption hazard that requires explicit schema governance to prevent.

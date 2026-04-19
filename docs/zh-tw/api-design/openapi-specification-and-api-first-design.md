@@ -5,7 +5,7 @@ state: draft
 slug: openapi-specification-and-api-first-design
 ---
 
-# [BEE-498] OpenAPI 規範與 API 優先設計
+# [BEE-4009] OpenAPI 規範與 API 優先設計
 
 :::info
 OpenAPI 是一種供應商中立、語言無關的 REST API 描述格式。API 優先設計意味著在撰寫程式碼之前先撰寫 OpenAPI 文件——讓契約成為交付物，而非副產品。

@@ -5,7 +5,7 @@ state: draft
 slug: cryptographic-key-management-and-key-rotation
 ---
 
-# [BEE-490] Cryptographic Key Management and Key Rotation
+# [BEE-2010] Cryptographic Key Management and Key Rotation
 
 :::info
 Cryptographic key management is the discipline of generating, distributing, storing, using, rotating, and destroying encryption keys — the keys are as sensitive as the data they protect, and their lifecycle determines the real-world security of any encryption scheme.
@@ -19,7 +19,7 @@ NIST SP 800-57 Part 1 ("Recommendation for Key Management"), first published in 
 
 The practical failures are consistent. The 2022–2023 LastPass and GoTo breaches share the same root failure: an encryption key was stored in the same access scope as the data it protected. In the GoTo breach, attackers exfiltrated encrypted customer backup archives from a third-party cloud storage provider — along with the encryption key for those archives, which was accessible via the same compromised credential. The encryption provided zero protection because the key and the ciphertext were co-located. The LastPass incident followed a similar pattern across two stages of escalation, ultimately because production master keys were reachable from a personal device without HSM enforcement.
 
-BEE-34 (Cryptographic Basics for Engineers) covers algorithm selection — which cipher, which mode, which key size. This article covers what happens after the algorithm is chosen: how keys are generated, who holds them, how long they live, and how they change without disrupting the system.
+BEE-2005 (Cryptographic Basics for Engineers) covers algorithm selection — which cipher, which mode, which key size. This article covers what happens after the algorithm is chosen: how keys are generated, who holds them, how long they live, and how they change without disrupting the system.
 
 ## Design Thinking
 

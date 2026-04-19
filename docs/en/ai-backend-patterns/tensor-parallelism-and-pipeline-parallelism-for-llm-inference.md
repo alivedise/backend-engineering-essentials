@@ -5,7 +5,7 @@ state: draft
 slug: tensor-parallelism-and-pipeline-parallelism-for-llm-inference
 ---
 
-# [BEE-568] Tensor Parallelism and Pipeline Parallelism for LLM Inference
+# [BEE-30066] Tensor Parallelism and Pipeline Parallelism for LLM Inference
 
 :::info
 When a large language model exceeds the memory capacity of a single GPU, it must be sharded across multiple devices. Tensor parallelism splits individual weight matrices across GPUs in the same node; pipeline parallelism splits model layers across nodes. Choosing and composing these strategies correctly determines whether you extract 90% or 50% of your hardware's theoretical throughput.

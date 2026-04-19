@@ -5,7 +5,7 @@ state: draft
 slug: failure-detection
 ---
 
-# [BEE-434] Failure Detection
+# [BEE-19015] Failure Detection
 
 :::info
 Failure detection is the distributed systems problem of determining whether a remote process has crashed or is merely slow — a problem with no perfect solution in asynchronous networks, but one that practical systems address through heartbeats, probabilistic suspicion, and indirect probing to trade detection speed against false positive rate.
@@ -31,7 +31,7 @@ Practical systems use three main approaches. **Heartbeat-based detection** is th
 
 **Tune the false positive tradeoff explicitly.** Every failure detector has a detection time vs. false positive rate curve. Shortening the timeout or lowering the phi threshold detects failures faster but increases the rate at which live nodes are incorrectly suspected. False positives in distributed databases cause unnecessary leader elections, data redistribution, and replication storms. In Cassandra, a false positive declaration causes all data served by that node to be re-routed to other replicas, increasing their load. On EC2 or Kubernetes with network jitter, phi_convict_threshold 8 is conservative; 5 may cause false flapping.
 
-**Treat network partitions differently from node crashes.** A heartbeat timeout cannot distinguish a crashed node from a partitioned-but-alive node. If your system acts the same way in both cases (marking the node as dead and redistributing its work), you may violate correctness when the partition heals and the presumed-dead node is still writing. This is the split-brain problem. Systems like Raft solve it by requiring nodes to stop serving writes if they lose quorum contact, preventing the partitioned node from diverging. Failure detection alone does not solve this — it must be combined with a fencing mechanism (see BEE-424 on distributed locking) or a consensus protocol.
+**Treat network partitions differently from node crashes.** A heartbeat timeout cannot distinguish a crashed node from a partitioned-but-alive node. If your system acts the same way in both cases (marking the node as dead and redistributing its work), you may violate correctness when the partition heals and the presumed-dead node is still writing. This is the split-brain problem. Systems like Raft solve it by requiring nodes to stop serving writes if they lose quorum contact, preventing the partitioned node from diverging. Failure detection alone does not solve this — it must be combined with a fencing mechanism (see BEE-19005 on distributed locking) or a consensus protocol.
 
 ## Visual
 

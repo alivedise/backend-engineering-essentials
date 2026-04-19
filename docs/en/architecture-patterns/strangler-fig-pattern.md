@@ -5,7 +5,7 @@ state: draft
 slug: strangler-fig-pattern
 ---
 
-# [BEE-104] Strangler Fig Pattern
+# [BEE-5005] Strangler Fig Pattern
 
 :::info
 Incrementally replace a legacy system by growing a new system around it -- route by route, feature by feature -- until the old system can be decommissioned.
@@ -183,7 +183,7 @@ Legacy system traffic drops to zero. Monitor for one release cycle, then decommi
 | Change Data Capture (CDC) | Legacy DB streams row-level changes to new system via Debezium or similar |
 | Backfill migration | Batch job copies historical data to new schema before cutover |
 
-See [BEE-126] for database migration strategies in depth.
+See [BEE-6007] for database migration strategies in depth.
 
 ## Measuring Progress
 

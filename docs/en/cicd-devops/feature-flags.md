@@ -5,7 +5,7 @@ state: draft
 slug: feature-flags
 ---
 
-# [BEE-363] Feature Flags
+# [BEE-16004] Feature Flags
 
 :::info
 Feature flags decouple code deployment from feature release, letting you ship code to production without exposing it to users — and enabling instant rollback without a redeploy.
@@ -180,7 +180,7 @@ request arrives
   → response
 ```
 
-Kill switches complement graceful degradation (see [BEE-264](#)) — the flag disables the feature, the fallback behavior keeps the service responding.
+Kill switches complement graceful degradation (see [BEE-12005](#)) — the flag disables the feature, the fallback behavior keeps the service responding.
 
 ---
 
@@ -232,6 +232,6 @@ Flag A requires Flag B to be enabled. Flag B requires Flag C. This creates combi
 
 ## Related BEPs
 
-- [BEE-264: Graceful Degradation](#) — Kill switches enable instant degradation; graceful degradation defines the fallback behavior when a feature is disabled
-- [BEE-345: Testing in Production](#) — Feature flags are one mechanism for safe production testing; progressive rollout relies on production observability
-- [BEE-361: Canary Deployment](#) — Canary deployment routes traffic by instance percentage; feature flags route by user segment or percentage within a single deployment
+- [BEE-12005: Graceful Degradation](#) — Kill switches enable instant degradation; graceful degradation defines the fallback behavior when a feature is disabled
+- [BEE-15006: Testing in Production](#) — Feature flags are one mechanism for safe production testing; progressive rollout relies on production observability
+- [BEE-16002: Canary Deployment](#) — Canary deployment routes traffic by instance percentage; feature flags route by user segment or percentage within a single deployment

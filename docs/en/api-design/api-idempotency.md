@@ -5,7 +5,7 @@ state: draft
 slug: api-idempotency
 ---
 
-# [BEE-72] Idempotency in APIs
+# [BEE-4003] Idempotency in APIs
 
 :::info
 Idempotency keys, safe vs idempotent methods, and retry-safe API design.

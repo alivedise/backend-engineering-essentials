@@ -5,7 +5,7 @@ state: draft
 slug: monolith-vs-microservices-vs-modular-monolith
 ---
 
-# [BEE-100] 單體 vs 微服務 vs 模組化單體
+# [BEE-5001] 單體 vs 微服務 vs 模組化單體
 
 :::info
 各部署方式的取捨、適用時機，以及彼此之間的遷移路徑。

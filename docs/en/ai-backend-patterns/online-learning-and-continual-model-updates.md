@@ -5,7 +5,7 @@ state: draft
 slug: online-learning-and-continual-model-updates
 ---
 
-# [BEE-589] Online Learning and Continual Model Updates
+# [BEE-30087] Online Learning and Continual Model Updates
 
 :::info
 Online learning updates model weights incrementally on each arriving data point without storing or reprocessing historical data. It is the correct approach when data arrives faster than batch retraining cycles can absorb it, when the underlying distribution shifts continuously, or when storage of historical examples is infeasible. The tradeoff is sensitivity to noise and the risk of catastrophic forgetting — overwriting previously learned patterns when concept drift changes the distribution.
@@ -221,10 +221,10 @@ graph LR
 
 ## Related BEEs
 
-- [BEE-585 ML Monitoring and Drift Detection](585) — population-level drift detection complements ADWIN's per-prediction detection
-- [BEE-584 Shadow Mode and Canary Deployment for ML Models](584) — validate the retrained model before promoting it to replace the online learner
-- [BEE-586 ML Experiment Tracking and Model Registry](586) — track each checkpoint and batch-retrained model in MLflow for auditability
-- [BEE-529 AI Workflow Orchestration](529) — Airflow/Argo DAGs triggered by drift detection for batch retraining
+- [BEE-30083 ML Monitoring and Drift Detection](585) — population-level drift detection complements ADWIN's per-prediction detection
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — validate the retrained model before promoting it to replace the online learner
+- [BEE-30084 ML Experiment Tracking and Model Registry](586) — track each checkpoint and batch-retrained model in MLflow for auditability
+- [BEE-30027 AI Workflow Orchestration](529) — Airflow/Argo DAGs triggered by drift detection for batch retraining
 
 ## References
 

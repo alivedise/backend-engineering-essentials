@@ -5,7 +5,7 @@ state: draft
 slug: zero-trust-security-architecture
 ---
 
-# [BEE-482] Zero-Trust Security Architecture
+# [BEE-2007] Zero-Trust Security Architecture
 
 :::info
 Zero Trust replaces the perimeter security model — "trusted inside, untrusted outside" — with "never trust, always verify": every access request, whether from inside or outside the network, is authenticated, authorized, and continuously validated before access is granted.

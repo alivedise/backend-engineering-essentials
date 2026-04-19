@@ -5,7 +5,7 @@ state: draft
 slug: owasp-top-10-for-backend
 ---
 
-# [BEE-30] OWASP Top 10 for Backend
+# [BEE-2001] OWASP Top 10 for Backend
 
 :::info
 The OWASP Top 10 is the industry-standard catalogue of the most critical web application security risks. Every backend engineer should understand each category, where it manifests in a typical system, and the first-line defense against it.
@@ -335,12 +335,12 @@ Microservices on an internal network are not inherently trusted. A compromised s
 
 ## Related BEPs
 
-- [BEE-10: Authentication vs Authorization](10.md) — foundational access control pipeline (A01, A07)
-- [BEE-31: Input Validation and Sanitization](31.md) — defending against injection (A03)
-- [BEE-32: Secrets Management](32.md) — protecting credentials and keys (A02)
-- [BEE-33: CORS and Same-Origin Policy](33.md) — browser-side access control configuration (A05)
-- [BEE-34: Cryptographic Basics for Engineers](34.md) — encryption and hashing fundamentals (A02)
-- [BEE-35: Dependency Security and Supply Chain](35.md) — managing third-party risk (A06)
+- [BEE-1001: Authentication vs Authorization](10.md) — foundational access control pipeline (A01, A07)
+- [BEE-2002: Input Validation and Sanitization](31.md) — defending against injection (A03)
+- [BEE-2003: Secrets Management](32.md) — protecting credentials and keys (A02)
+- [BEE-2004: CORS and Same-Origin Policy](33.md) — browser-side access control configuration (A05)
+- [BEE-2005: Cryptographic Basics for Engineers](34.md) — encryption and hashing fundamentals (A02)
+- [BEE-2006: Dependency Security and Supply Chain](35.md) — managing third-party risk (A06)
 
 ## References
 

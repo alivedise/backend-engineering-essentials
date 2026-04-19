@@ -5,7 +5,7 @@ state: draft
 slug: extended-thinking-and-reasoning-trace-management
 ---
 
-# [BEE-556] Extended Thinking and Reasoning Trace Management
+# [BEE-30054] Extended Thinking and Reasoning Trace Management
 
 :::info
 Extended thinking (Anthropic) and reasoning tokens (OpenAI o1/o3) give models additional computation budget to work through problems before producing a final answer — improving accuracy on multi-step reasoning tasks at the cost of higher token billing, longer latency, and prompt cache invalidation. Managing the reasoning budget, streaming thinking blocks separately from responses, and deciding when extended thinking helps versus hurts are distinct engineering concerns.

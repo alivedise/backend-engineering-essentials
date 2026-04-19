@@ -5,7 +5,7 @@ state: draft
 slug: oauth-openid-connect
 ---
 
-# [BEE-12] OAuth 2.0 與 OpenID Connect
+# [BEE-1003] OAuth 2.0 與 OpenID Connect
 
 :::info
 OAuth 2.0 以委派方式授予存取權限，無需共享憑證。OpenID Connect（OIDC）在其上新增了已驗證的身分層。單獨使用 OAuth 2.0 進行身分認證，是現代 API 安全中最常見、也最危險的誤解之一。
@@ -217,9 +217,9 @@ Implicit grant 直接在 URL fragment（`#access_token=...`）中回傳 access t
 
 ## 相關 BEE
 
-- [BEE-10: Authentication vs Authorization](10.md) — OAuth 2.0 與 OIDC 所跨越的身分認證與授權概念邊界
-- [BEE-11: Token-Based Authentication](11.md) — JWT 結構、驗證與令牌生命週期
-- [BEE-33: Third-Party API Integration Security](33.md) — OAuth 在外部服務整合情境下的應用
+- [BEE-1001: Authentication vs Authorization](10.md) — OAuth 2.0 與 OIDC 所跨越的身分認證與授權概念邊界
+- [BEE-1002: Token-Based Authentication](11.md) — JWT 結構、驗證與令牌生命週期
+- [BEE-2004: Third-Party API Integration Security](33.md) — OAuth 在外部服務整合情境下的應用
 
 ## 參考資料
 

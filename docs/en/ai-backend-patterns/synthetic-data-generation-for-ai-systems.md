@@ -5,7 +5,7 @@ state: draft
 slug: synthetic-data-generation-for-ai-systems
 ---
 
-# [BEE-534] Synthetic Data Generation for AI Systems
+# [BEE-30032] Synthetic Data Generation for AI Systems
 
 :::info
 Synthetic data generation uses LLMs to produce labeled training examples, evaluation datasets, and diverse test inputs at scale — breaking the dependency on expensive human annotation for every new task or domain.

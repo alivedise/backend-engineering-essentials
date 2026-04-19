@@ -5,7 +5,7 @@ state: draft
 slug: bloom-filters-and-probabilistic-data-structures
 ---
 
-# [BEE-431] 布隆過濾器與概率數據結構
+# [BEE-19012] 布隆過濾器與概率數據結構
 
 :::info
 概率數據結構以有界的錯誤答案概率換取內存和時間的顯著減少——布隆過濾器完全消除假陰性，同時限制假陽性，使其成為 LSM 樹數據庫和 CDN 快取所依賴的「確定不存在」快速路徑的理想工具。

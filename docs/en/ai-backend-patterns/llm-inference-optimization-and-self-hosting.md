@@ -5,7 +5,7 @@ state: draft
 slug: llm-inference-optimization-and-self-hosting
 ---
 
-# [BEE-523] LLM Inference Optimization and Self-Hosting
+# [BEE-30021] LLM Inference Optimization and Self-Hosting
 
 :::info
 Self-hosting open-weight LLMs requires understanding the algorithms that turn raw model weights into low-latency, high-throughput serving — continuous batching, speculative decoding, quantization, and the VRAM arithmetic that determines whether a model fits at all.

@@ -5,7 +5,7 @@ state: draft
 slug: multi-agent-debate-and-critique-patterns
 ---
 
-# [BEE-547] Multi-Agent Debate and Critique Patterns
+# [BEE-30045] Multi-Agent Debate and Critique Patterns
 
 :::info
 Multi-agent debate — having separate LLM agents propose, critique, and revise answers over multiple rounds — improves factual accuracy and reasoning on complex tasks, but introduces sycophantic convergence as a failure mode and incurs O(rounds × agents) token cost that must be bounded by explicit stopping conditions.

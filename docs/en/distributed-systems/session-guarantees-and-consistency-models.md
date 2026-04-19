@@ -5,7 +5,7 @@ state: draft
 slug: session-guarantees-and-consistency-models
 ---
 
-# [BEE-438] Session Guarantees and Consistency Models
+# [BEE-19019] Session Guarantees and Consistency Models
 
 :::info
 Between linearizability (globally ordered, real-time) and eventual consistency (no ordering guarantees) lies a spectrum of models — session guarantees, causal consistency, sequential consistency — that trade coordination cost against freshness, giving system designers a vocabulary for specifying exactly the consistency properties their application needs rather than accepting an all-or-nothing choice.

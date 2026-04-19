@@ -5,7 +5,7 @@ state: draft
 slug: continuous-integration-principles
 ---
 
-# [BEE-360] 持續整合原則
+# [BEE-16001] 持續整合原則
 
 :::info
 頻繁整合程式碼、以自動化建置與測試驗證每次變更，並將損壞的建置視為團隊最優先處理的問題。

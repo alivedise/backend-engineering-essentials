@@ -5,7 +5,7 @@ state: draft
 slug: llm-streaming-patterns
 ---
 
-# [BEE-518] LLM 串流模式
+# [BEE-30016] LLM 串流模式
 
 :::info
 LLM 串流在幾百毫秒內就能將第一個 Token 傳遞給使用者，而不需等待幾秒鐘才取得完整回應，從根本上改變了 AI 功能的感知回應速度 —— 但同時引入了批次完成所沒有的架構問題：SSE 傳輸、背壓、串流中途的錯誤處理，以及 Token 計數。

@@ -5,7 +5,7 @@ state: draft
 slug: contract-testing
 ---
 
-# [BEE-342] Contract Testing
+# [BEE-15003] Contract Testing
 
 :::info
 Contract testing verifies that the communication agreement between a consumer and a provider is honored — without requiring both services to be deployed simultaneously. Use it to catch API breaking changes before they reach production.

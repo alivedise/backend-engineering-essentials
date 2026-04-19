@@ -5,7 +5,7 @@ state: draft
 slug: cqrs
 ---
 
-# [BEE-102] CQRS
+# [BEE-5003] CQRS
 
 :::info
 對讀取與寫入模型進行分離，適用於讀寫在擴展需求、複雜度或效能要求上存在根本差異的系統。

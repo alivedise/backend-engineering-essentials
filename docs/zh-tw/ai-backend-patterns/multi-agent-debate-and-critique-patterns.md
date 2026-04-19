@@ -5,7 +5,7 @@ state: draft
 slug: multi-agent-debate-and-critique-patterns
 ---
 
-# [BEE-547] 多智能體辯論與批判模式
+# [BEE-30045] 多智能體辯論與批判模式
 
 :::info
 多智能體辯論（Multi-agent debate）——讓多個 LLM 智能體分多輪提出答案、相互批評並修改——能提升複雜任務的事實準確性與推理品質，但會引入「諂媚性收斂（sycophantic convergence）」這一失效模式，並產生 O(回合數 × 智能體數) 的 token 成本，必須以明確的終止條件加以控制。

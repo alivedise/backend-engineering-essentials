@@ -5,7 +5,7 @@ state: draft
 slug: input-validation-and-sanitization
 ---
 
-# [BEE-31] 輸入驗證與清理
+# [BEE-2002] 輸入驗證與清理
 
 :::info
 在每個系統邊界進行驗證。永遠不要信任外部輸入。

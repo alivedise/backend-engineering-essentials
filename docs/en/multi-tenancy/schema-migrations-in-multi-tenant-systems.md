@@ -5,7 +5,7 @@ state: draft
 slug: schema-migrations-in-multi-tenant-systems
 ---
 
-# [BEE-404] Schema Migrations in Multi-Tenant Systems
+# [BEE-18005] Schema Migrations in Multi-Tenant Systems
 
 :::info
 Schema migrations in multi-tenant systems are substantially more complex than in single-tenant systems — the deployment model determines whether a single migration affects all tenants simultaneously or must be fanned out across hundreds or thousands of isolated databases, each requiring individual tracking and rollback capability.
@@ -13,7 +13,7 @@ Schema migrations in multi-tenant systems are substantially more complex than in
 
 ## Context
 
-BEE-126 covers database migrations as a general practice. Multi-tenancy introduces a qualitatively different challenge: the scope and coordination of applying a migration depends entirely on the isolation model in use. In the pool model, one migration touches one database — familiar territory. In the silo or bridge model, one logical migration may need to execute against N tenant databases, each of which may be at a different version, may fail independently, and may require independent rollback.
+BEE-6007 covers database migrations as a general practice. Multi-tenancy introduces a qualitatively different challenge: the scope and coordination of applying a migration depends entirely on the isolation model in use. In the pool model, one migration touches one database — familiar territory. In the silo or bridge model, one logical migration may need to execute against N tenant databases, each of which may be at a different version, may fail independently, and may require independent rollback.
 
 The stakes are high. A failed migration in a single-tenant system affects one system. A failed migration in a silo deployment that has started applying across 500 tenant databases may have partially modified 300 of them when it fails, leaving the fleet in a mixed state. Recovery requires knowing exactly which tenants have the new schema, which have the old, and which are in an intermediate state — information that must be tracked explicitly before the migration starts.
 

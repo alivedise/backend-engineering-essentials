@@ -5,7 +5,7 @@ state: draft
 slug: llm-caching-strategies
 ---
 
-# [BEE-526] LLM Caching Strategies
+# [BEE-30024] LLM Caching Strategies
 
 :::info
 LLM caching operates at three layers — exact-match, semantic, and provider prefix caching — each with different hit rates, invalidation logic, and cost profiles. Building all three in sequence can reduce effective token spend by 70–95% for repetitive workloads.
@@ -300,7 +300,7 @@ flowchart TD
 
 ## Related BEEs
 
-- [BEE-9001](../caching/caching-fundamentals-and-cache-hierarchy.md) -- Caching Fundamentals and Cache Hierarchy: the eviction policies, cache stampede prevention, and TTL strategies described in BEE-200 apply directly to the exact-match and semantic cache layers here
+- [BEE-9001](../caching/caching-fundamentals-and-cache-hierarchy.md) -- Caching Fundamentals and Cache Hierarchy: the eviction policies, cache stampede prevention, and TTL strategies described in BEE-9001 apply directly to the exact-match and semantic cache layers here
 - [BEE-30001](llm-api-integration-patterns.md) -- LLM API Integration Patterns: retry and timeout logic for provider calls; provider prefix caching interacts with streaming responses discussed there
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG Pipeline Architecture: RAG context injected into the system prompt is the largest single candidate for prefix caching; corpus version must be reflected in cache keys
 - [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI Cost Optimization and Model Routing: provider prefix caching is one of the primary cost reduction levers alongside model routing and batch processing

@@ -5,7 +5,7 @@ state: draft
 slug: serverless-architecture-patterns
 ---
 
-# [BEE-484] 無伺服器架構模式
+# [BEE-5007] 無伺服器架構模式
 
 :::info
 無伺服器架構（Serverless Architecture）將伺服器配置、擴展與基礎設施管理的責任轉移給雲端供應商。開發者只需部署在離散事件觸發下執行的程式碼，平台負責處理其餘一切，包括在閒置時縮減至零。

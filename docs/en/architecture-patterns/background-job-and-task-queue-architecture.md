@@ -5,7 +5,7 @@ state: draft
 slug: background-job-and-task-queue-architecture
 ---
 
-# [BEE-487] Background Job and Task Queue Architecture
+# [BEE-5009] Background Job and Task Queue Architecture
 
 :::info
 A task queue decouples work from the HTTP request cycle by accepting a job description synchronously, persisting it to a broker, and executing it asynchronously by one or more worker processes — enabling horizontal scaling of compute-intensive, time-consuming, or externally rate-limited operations without blocking the client.

@@ -5,7 +5,7 @@ state: draft
 slug: vector-database-architecture
 ---
 
-# [BEE-528] Vector Database Architecture
+# [BEE-30026] Vector Database Architecture
 
 :::info
 Vector databases store high-dimensional embeddings and answer approximate nearest neighbor queries in milliseconds — the key engineering decisions are which ANN algorithm to use, how to size memory for the index, and how to handle metadata filtering without breaking recall.

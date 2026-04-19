@@ -5,7 +5,7 @@ state: draft
 slug: memory-management-and-garbage-collection
 ---
 
-# [BEE-495] 記憶體管理與垃圾回收
+# [BEE-13007] 記憶體管理與垃圾回收
 
 :::info
 每個後端執行環境都透過以下三種策略之一回收記憶體：引用計數、追蹤回收或編譯期所有權；每種方式在吞吐量、延遲與可維運性上都有截然不同的代價，其重要性不亞於演算法的選擇。
@@ -214,7 +214,7 @@ flowchart TD
 
 **在沒有先分析的情況下調優 GC 參數**。在建立 GC 日誌與分析資料的基準線之前就修改 `-XX:MaxGCPauseMillis`、`GOGC` 或 GC 世代大小，只是猜測。先測量 GC 暫停時間與分配速率，再帶著明確目標進行調優。
 
-**建立過多 goroutine 或執行緒**。Goroutine 雖然輕量（初始堆疊 2 KB），但建立數百萬個持有閉包捕獲的長命 goroutine，會因堆疊記憶體與閉包物件而造成 Heap 壓力。使用 Worker Pool（BEE-244）來限制並發數量。
+**建立過多 goroutine 或執行緒**。Goroutine 雖然輕量（初始堆疊 2 KB），但建立數百萬個持有閉包捕獲的長命 goroutine，會因堆疊記憶體與閉包物件而造成 Heap 壓力。使用 Worker Pool（BEE-11005）來限制並發數量。
 
 ## 相關 BEE
 

@@ -5,7 +5,7 @@ state: draft
 slug: bloom-filters-and-probabilistic-data-structures
 ---
 
-# [BEE-431] Bloom Filters and Probabilistic Data Structures
+# [BEE-19012] Bloom Filters and Probabilistic Data Structures
 
 :::info
 Probabilistic data structures trade a bounded probability of incorrect answers for dramatic reductions in memory and time — Bloom filters eliminate false negatives entirely while bounding false positives, making them ideal for the "definitely not present" fast-path that LSM-tree databases and CDN caches rely on.

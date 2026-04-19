@@ -5,7 +5,7 @@ state: draft
 slug: owasp-top-10-for-backend
 ---
 
-# [BEE-30] 後端的 OWASP Top 10
+# [BEE-2001] 後端的 OWASP Top 10
 
 :::info
 OWASP Top 10 是業界公認的最關鍵 Web 應用程式安全風險目錄。每位後端工程師都應了解各類別的含義、它在典型系統中的攻擊點，以及第一道防線應為何。
@@ -335,12 +335,12 @@ API Security Top 10 處理 API 情境中特有或更突出的風險：
 
 ## 相關 BEE
 
-- [BEE-10: Authentication vs Authorization](10.md) — 基礎存取控制流水線（A01、A07）
-- [BEE-31: Input Validation and Sanitization](31.md) — 防禦注入攻擊（A03）
-- [BEE-32: Secrets Management](32.md) — 保護憑證與金鑰（A02）
-- [BEE-33: CORS and Same-Origin Policy](33.md) — 瀏覽器端存取控制設定（A05）
-- [BEE-34: Cryptographic Basics for Engineers](34.md) — 加密與雜湊基礎（A02）
-- [BEE-35: Dependency Security and Supply Chain](35.md) — 管理第三方風險（A06）
+- [BEE-1001: Authentication vs Authorization](10.md) — 基礎存取控制流水線（A01、A07）
+- [BEE-2002: Input Validation and Sanitization](31.md) — 防禦注入攻擊（A03）
+- [BEE-2003: Secrets Management](32.md) — 保護憑證與金鑰（A02）
+- [BEE-2004: CORS and Same-Origin Policy](33.md) — 瀏覽器端存取控制設定（A05）
+- [BEE-2005: Cryptographic Basics for Engineers](34.md) — 加密與雜湊基礎（A02）
+- [BEE-2006: Dependency Security and Supply Chain](35.md) — 管理第三方風險（A06）
 
 ## 參考資料
 

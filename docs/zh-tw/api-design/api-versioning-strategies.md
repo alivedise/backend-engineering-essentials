@@ -5,7 +5,7 @@ state: draft
 slug: api-versioning-strategies
 ---
 
-# [BEE-71] API 版本控制策略
+# [BEE-4002] API 版本控制策略
 
 :::info
 URL 路徑、標頭、查詢參數與內容協商版本控制——各自的適用時機、如何管理破壞性變更，以及如何退役舊版本。

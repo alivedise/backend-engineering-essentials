@@ -5,7 +5,7 @@ state: draft
 slug: flashattention-and-efficient-attention-kernels
 ---
 
-# [BEE-564] FlashAttention 與高效注意力核心
+# [BEE-30062] FlashAttention 與高效注意力核心
 
 :::info
 標準注意力在每次前向傳遞中將 N×N 矩陣具現化到 GPU HBM，使記憶體頻寬——而非計算——成為長序列的瓶頸。FlashAttention 及其後繼者通過將注意力分塊放入 SRAM 來避免這一問題，而分組查詢注意力（GQA）則縮小了在解碼步驟中存儲注意力狀態的 KV 快取。這些技術共同使現代 LLM 能夠在不需要成比例增加更多 GPU 的情況下服務 128K token 的上下文。
@@ -144,7 +144,7 @@ output = flash_attn_with_kvcache(
 # 當 seqlen_cache 較大時應用 Flash-Decoding 的並行 KV 分割
 ```
 
-**不應（SHOULD NOT）** 僅在預填充階段測試注意力核心。FlashAttention-2 的加速在長序列預填充時最為明顯。Flash-Decoding 的加速在長 KV 長度的解碼時最為明顯。生產 LLM 工作負載通常在解碼而非預填充上花費更多時間。應分別使用 TTFT（預填充）和 ITL（解碼）指標測試兩個階段（見 BEE-560）。
+**不應（SHOULD NOT）** 僅在預填充階段測試注意力核心。FlashAttention-2 的加速在長序列預填充時最為明顯。Flash-Decoding 的加速在長 KV 長度的解碼時最為明顯。生產 LLM 工作負載通常在解碼而非預填充上花費更多時間。應分別使用 TTFT（預填充）和 ITL（解碼）指標測試兩個階段（見 BEE-30058）。
 
 ## 圖解
 
@@ -197,7 +197,7 @@ flowchart TD
 
 **在 fp32 模型上使用 `attn_implementation="flash_attention_2"`。** FA2 需要半精度（fp16 或 bf16）。傳入 fp32 張量會引發運行時錯誤。在啟用 FA2 之前，始終將模型轉換為 bf16，或使用 `attn_implementation="sdpa"`（它會回退到記憶體高效的 fp32 核心）。
 
-**僅在預填充階段進行基準測試。** FlashAttention-2 的加速在長序列預填充時最為明顯。Flash-Decoding 的加速在長 KV 長度解碼時最為明顯。生產 LLM 工作負載通常在解碼比預填充花費更多時間。應使用 TTFT（預填充）和 ITL（解碼）指標分別測試兩個階段（見 BEE-560）。
+**僅在預填充階段進行基準測試。** FlashAttention-2 的加速在長序列預填充時最為明顯。Flash-Decoding 的加速在長 KV 長度解碼時最為明顯。生產 LLM 工作負載通常在解碼比預填充花費更多時間。應使用 TTFT（預填充）和 ITL（解碼）指標分別測試兩個階段（見 BEE-30058）。
 
 **擴展上下文長度時忽略 KV 快取大小。** 將上下文從 4K 擴展到 128K 將每個請求的 KV 快取乘以 32 倍。沒有 GQA，這會在達到理論上下文限制的一小部分時耗盡 GPU VRAM。在向用戶宣傳最大上下文長度之前，始終計算 KV 快取記憶體。
 

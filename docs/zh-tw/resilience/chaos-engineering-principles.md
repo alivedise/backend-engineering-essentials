@@ -5,7 +5,7 @@ state: draft
 slug: chaos-engineering-principles
 ---
 
-# [BEE-265] 混沌工程原則
+# [BEE-12006] 混沌工程原則
 
 :::info
 透過主動注入故障來建立對系統韌性的信心。定義穩定狀態、提出假說、注入故障、觀察系統行為，並根據所學採取行動。

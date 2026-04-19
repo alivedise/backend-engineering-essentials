@@ -5,7 +5,7 @@ state: draft
 slug: human-in-the-loop-ai-patterns
 ---
 
-# [BEE-524] Human-in-the-Loop AI Patterns
+# [BEE-30022] Human-in-the-Loop AI Patterns
 
 :::info
 Human-in-the-loop (HITL) is the architectural layer that routes AI outputs to human reviewers when the model's confidence is low, the action is irreversible, or audit compliance requires it — and feeds the results of that review back as labeled data for continued improvement.
@@ -155,7 +155,7 @@ async def process_sla_violations(review_queue, fallback_policy: str):
 
 ### Build Approval Workflows for High-Stakes Agent Actions
 
-When an AI agent is about to take an irreversible action — send a message, execute a database write, charge a payment — it should pause and request human approval rather than proceeding autonomously. BEE-504 establishes the principle; this is the implementation:
+When an AI agent is about to take an irreversible action — send a message, execute a database write, charge a payment — it should pause and request human approval rather than proceeding autonomously. BEE-30002 establishes the principle; this is the implementation:
 
 ```python
 import asyncio
@@ -279,8 +279,8 @@ stateDiagram-v2
 
 ## Related BEEs
 
-- [BEE-30002](ai-agent-architecture-patterns.md) -- AI Agent Architecture Patterns: BEE-504 establishes the principle of human checkpoints for high-risk agent actions; BEE-524 provides the queue and workflow implementation behind those checkpoints
-- [BEE-30004](evaluating-and-testing-llm-applications.md) -- Evaluating and Testing LLM Applications: audit sampling and override rate tracking are evaluation signals that feed the continuous evaluation loop described in BEE-506
+- [BEE-30002](ai-agent-architecture-patterns.md) -- AI Agent Architecture Patterns: BEE-30002 establishes the principle of human checkpoints for high-risk agent actions; BEE-30022 provides the queue and workflow implementation behind those checkpoints
+- [BEE-30004](evaluating-and-testing-llm-applications.md) -- Evaluating and Testing LLM Applications: audit sampling and override rate tracking are evaluation signals that feed the continuous evaluation loop described in BEE-30004
 - [BEE-30017](ai-memory-systems-for-long-running-agents.md) -- AI Memory Systems for Long-Running Agents: human-corrected outputs are a form of episodic memory that can be stored and retrieved to improve future responses
 - [BEE-30020](llm-guardrails-and-content-safety.md) -- LLM Guardrails and Content Safety: safety violations are one of the primary escalation triggers feeding the HITL queue
 

@@ -5,7 +5,7 @@ state: draft
 slug: coordination-services
 ---
 
-# [BEE-448] Coordination Services
+# [BEE-19029] Coordination Services
 
 :::info
 A coordination service is a fault-tolerant, strongly-consistent store of small metadata that provides building blocks — watches, ephemeral nodes or leases, atomic transactions — from which distributed applications compose higher-level primitives like leader election, distributed locks, service discovery, and configuration distribution without each application re-implementing consensus.
@@ -151,7 +151,7 @@ func runLeaderElection(ctx context.Context, client *clientv3.Client) error {
     // Retrieve the fencing token: the revision at which we became leader
     resp, _ := election.Leader(ctx)
     fencingToken := resp.Kvs[0].CreateRevision
-    _ = fencingToken  // pass to protected resources (see BEE-447)
+    _ = fencingToken  // pass to protected resources (see BEE-19028)
 
     // Do leader work; call Resign when done or before shutdown
     defer election.Resign(ctx)

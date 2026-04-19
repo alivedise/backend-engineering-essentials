@@ -5,7 +5,7 @@ state: draft
 slug: session-management
 ---
 
-# [BEE-13] Session Management
+# [BEE-1004] Session Management
 
 :::info
 A session is server-side state bound to a client identifier. Generating sessions securely, protecting the session ID in transit, and destroying sessions reliably are the three non-negotiable requirements.
@@ -240,10 +240,10 @@ Clearing the session cookie without deleting the server-side record leaves the s
 
 ## Related BEPs
 
-- [BEE-10: Authentication vs Authorization](10.md) — identity pipeline context
-- [BEE-11: Token-Based Authentication](11.md) — stateless alternative to sessions
-- [BEE-30: Transport Security](/en/30) — HTTPS requirement underlying Secure cookie
-- [BEE-33: Secrets Management](/en/33) — handling secrets in session stores
+- [BEE-1001: Authentication vs Authorization](10.md) — identity pipeline context
+- [BEE-1002: Token-Based Authentication](11.md) — stateless alternative to sessions
+- [BEE-2001: Transport Security](/en/30) — HTTPS requirement underlying Secure cookie
+- [BEE-2004: Secrets Management](/en/33) — handling secrets in session stores
 
 ## References
 

@@ -5,7 +5,7 @@ state: draft
 slug: circuit-breaker-pattern
 ---
 
-# [BEE-260] 斷路器模式
+# [BEE-12001] 斷路器模式
 
 :::info
 及早偵測故障、開路以快速失敗，並透過半開狀態實現受控的服務恢復。

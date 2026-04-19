@@ -5,7 +5,7 @@ state: draft
 slug: anti-entropy-and-replica-repair
 ---
 
-# [BEE-441] Anti-Entropy and Replica Repair
+# [BEE-19022] Anti-Entropy and Replica Repair
 
 :::info
 Anti-entropy is the set of mechanisms distributed databases use to detect and reconcile diverged replicas — hinted handoff repairs writes that missed a temporarily unavailable node, read repair heals stale data discovered during reads, and background anti-entropy compares replica state using Merkle trees to find and fix inconsistencies in data that is never read — together these three layers implement eventual consistency in practice.

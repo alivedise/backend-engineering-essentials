@@ -5,7 +5,7 @@ state: draft
 slug: chaos-engineering-principles
 ---
 
-# [BEE-265] Chaos Engineering Principles
+# [BEE-12006] Chaos Engineering Principles
 
 :::info
 Proactive fault injection to build confidence in system resilience. Define steady state, form a hypothesis, inject failure, observe the system, and act on what you learn.
@@ -161,7 +161,7 @@ Game days are not a substitute for automated experiments, and automated experime
 | 3 — Automated | Experiments run on schedule | CI/CD integration, automated steady-state monitoring, experiment library |
 | 4 — Continuous | Chaos as part of normal operations | Production chaos always-on, regression detection, integrated with SLO monitoring |
 
-Most teams begin at Level 1 and should target Level 3 within 12–18 months of starting. Level 4 is appropriate for mature platform teams with strong SLO practices (BEE-321).
+Most teams begin at Level 1 and should target Level 3 within 12–18 months of starting. Level 4 is appropriate for mature platform teams with strong SLO practices (BEE-14002).
 
 ## Worked Example
 

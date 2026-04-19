@@ -5,7 +5,7 @@ state: draft
 slug: graceful-shutdown-and-connection-draining
 ---
 
-# [BEE-453] Graceful Shutdown and Connection Draining
+# [BEE-19034] Graceful Shutdown and Connection Draining
 
 :::info
 Graceful shutdown is the process of stopping a service without dropping in-flight requests: finish the work in progress, reject new work, close connections cleanly, and exit. In Kubernetes, doing this correctly requires understanding a race condition that is fundamental to how the platform works — and patching it with a preStop sleep.

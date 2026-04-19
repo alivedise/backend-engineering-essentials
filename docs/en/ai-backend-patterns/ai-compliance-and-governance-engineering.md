@@ -5,7 +5,7 @@ state: draft
 slug: ai-compliance-and-governance-engineering
 ---
 
-# [BEE-581] AI Compliance and Governance Engineering
+# [BEE-30079] AI Compliance and Governance Engineering
 
 :::info
 AI compliance engineering is the discipline of building backend systems that produce auditable, explainable, and documented records of AI decision-making. It is not a post-hoc checkbox process. The EU AI Act (Regulation EU 2024/1689, in force 1 August 2024) imposes legally binding obligations on high-risk AI systems — specifically: risk management systems, data governance, technical documentation, automatic event logging, transparency, human oversight, and robustness. Satisfying these obligations requires durable backend infrastructure: immutable audit logs, model registries with full lineage, structured model cards, explainability pipelines, and drift monitors. Building this infrastructure after a model is in production costs significantly more than building it from day one.
@@ -745,7 +745,7 @@ def check_subgroup_thresholds(
 
 ## Related BEEs
 
-- [BEE-30042](ai-red-teaming-and-adversarial-testing.md) -- AI Red Teaming and Adversarial Testing: adversarial testing is required by Article 15 (Accuracy, Robustness, Cybersecurity); BEE-544 covers the test methodology that feeds the Article 9 risk management system
+- [BEE-30042](ai-red-teaming-and-adversarial-testing.md) -- AI Red Teaming and Adversarial Testing: adversarial testing is required by Article 15 (Accuracy, Robustness, Cybersecurity); BEE-30042 covers the test methodology that feeds the Article 9 risk management system
 - [BEE-30077](llm-output-watermarking-and-ai-content-provenance.md) -- LLM Output Watermarking and AI Content Provenance: C2PA content credentials and watermarking address Article 50 (transparency obligations for AI-generated content), complementing the audit trail obligations in Article 12
 - [BEE-30008](llm-security-and-prompt-injection.md) -- LLM Security and Prompt Injection: Article 15 requires cybersecurity; prompt injection is the primary cybersecurity attack surface for LLM-based high-risk systems
 - [BEE-14003](../observability/distributed-tracing.md) -- Distributed Tracing: the request_id threaded through the AI audit event should be the same trace ID used by the distributed tracing system, enabling correlation of AI decisions with full system behavior

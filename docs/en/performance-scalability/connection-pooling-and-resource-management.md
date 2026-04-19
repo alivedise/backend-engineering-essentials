@@ -5,7 +5,7 @@ state: draft
 slug: connection-pooling-and-resource-management
 ---
 
-# [BEE-302] Connection Pooling and Resource Management
+# [BEE-13003] Connection Pooling and Resource Management
 
 :::info
 Every connection is a resource. Pool them wisely, or your downstream systems will tell you when you did not.

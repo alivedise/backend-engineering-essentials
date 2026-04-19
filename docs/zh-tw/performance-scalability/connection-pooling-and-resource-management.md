@@ -5,7 +5,7 @@ state: draft
 slug: connection-pooling-and-resource-management
 ---
 
-# [BEE-302] 連線池與資源管理
+# [BEE-13003] 連線池與資源管理
 
 :::info
 每一條連線都是資源。妥善地用池管理它，否則下游系統會替你發現問題。

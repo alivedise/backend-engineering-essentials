@@ -5,7 +5,7 @@ state: draft
 slug: semantic-caching-for-llm-applications
 ---
 
-# [BEE-558] Semantic Caching for LLM Applications
+# [BEE-30056] Semantic Caching for LLM Applications
 
 :::info
 Exact-match caching reuses responses only when the query string is identical — an impossibly strict condition for natural language. Semantic caching replaces string equality with vector-similarity matching: when a new query is semantically equivalent to a cached query, the stored response is returned without calling the LLM, reducing API costs by 30–70% and cache-hit latency by 50–100×.
@@ -13,7 +13,7 @@ Exact-match caching reuses responses only when the query string is identical —
 
 ## Context
 
-Standard caching with a key-value store (BEE-200) identifies cache hits by the exact bytes of the key. For LLM queries, this means "What is the capital of France?" and "Tell me the capital of France" are treated as different requests and billed separately, even though any LLM will produce an identical or semantically equivalent response. Natural language paraphrasing makes exact-match hit rates negligible for real conversational workloads.
+Standard caching with a key-value store (BEE-9001) identifies cache hits by the exact bytes of the key. For LLM queries, this means "What is the capital of France?" and "Tell me the capital of France" are treated as different requests and billed separately, even though any LLM will produce an identical or semantically equivalent response. Natural language paraphrasing makes exact-match hit rates negligible for real conversational workloads.
 
 Bang (2023, NLP-OSS Workshop, "GPTCache: An Open-Source Semantic Cache for LLM Applications Enabling Faster Answers and Cost Savings") introduced the first systematic open-source semantic cache architecture. GPTCache converts each incoming query to an embedding vector, stores the embedding and its associated LLM response, and uses approximate nearest-neighbor (ANN) search to detect semantically similar future queries. A similarity threshold determines when a retrieved entry is "close enough" to reuse. Studies across ChatGPT query logs (MeanCache, arXiv:2403.02694, IPDPS 2025) found that 31% of user queries within a session are semantically similar to a prior query — this is the practical ceiling for per-session cache hit rate.
 

@@ -5,7 +5,7 @@ state: draft
 slug: llm-output-parsing-and-structured-extraction-reliability
 ---
 
-# [BEE-548] LLM 輸出解析與結構化提取可靠性
+# [BEE-30046] LLM 輸出解析與結構化提取可靠性
 
 :::info
 將 LLM 自由文本轉換為符合 schema 的結構化資料，需要分層可靠性策略：以原生 API 約束提供硬性保證、以用戶端驗證加重試循環實現概率性執行、以本地受約束解碼處理自託管模型——再搭配語義驗證器覆蓋 token 級約束無法表達的領域邏輯。

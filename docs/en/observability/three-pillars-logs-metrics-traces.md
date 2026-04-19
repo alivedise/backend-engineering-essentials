@@ -5,7 +5,7 @@ state: draft
 slug: three-pillars-logs-metrics-traces
 ---
 
-# [BEE-320] The Three Pillars: Logs, Metrics, Traces
+# [BEE-14001] The Three Pillars: Logs, Metrics, Traces
 
 :::info
 What logs, metrics, and traces each provide, why all three are necessary, and how to correlate them during an incident.

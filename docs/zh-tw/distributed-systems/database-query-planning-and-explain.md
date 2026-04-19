@@ -5,7 +5,7 @@ state: draft
 slug: database-query-planning-and-explain
 ---
 
-# [BEE-466] 資料庫查詢計畫與 EXPLAIN
+# [BEE-19047] 資料庫查詢計畫與 EXPLAIN
 
 :::info
 查詢計畫器（query planner）透過估算不同存取路徑與連接方法的成本，選擇執行 SQL 陳述式的方式；`EXPLAIN` 讓這些選擇變得可見，而 `EXPLAIN ANALYZE` 則加入實測的執行時間——兩者合在一起，是診斷慢查詢最主要的工具，無需靠猜測。

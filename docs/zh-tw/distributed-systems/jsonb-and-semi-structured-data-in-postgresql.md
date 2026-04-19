@@ -5,7 +5,7 @@ state: draft
 slug: jsonb-and-semi-structured-data-in-postgresql
 ---
 
-# [BEE-477] JSONB 與 PostgreSQL 半結構化資料
+# [BEE-19057] JSONB 與 PostgreSQL 半結構化資料
 
 :::info
 PostgreSQL 的 `jsonb` 型別以解析後的二進制結構儲存 JSON — 支援基於 GIN 索引的包含查詢與鍵值存在性檢查，無須另建文件資料庫，同時保有 ACID 保證及與正規化資料表的 JOIN 能力。

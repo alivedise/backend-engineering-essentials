@@ -5,7 +5,7 @@ state: draft
 slug: llm-hallucination-detection-and-factual-grounding
 ---
 
-# [BEE-545] LLM 幻覺偵測與事實依據
+# [BEE-30043] LLM 幻覺偵測與事實依據
 
 :::info
 LLM 幻覺——虛構、不受支持或與來源材料矛盾的輸出——需要多層生產環境偵測管道：原子聲明分解、基於 NLI 或 LLM 的聲明與檢索上下文驗證，以及在無參考資料可用時以自我一致性採樣作為備用方案。

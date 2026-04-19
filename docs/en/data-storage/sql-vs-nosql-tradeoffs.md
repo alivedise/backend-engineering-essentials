@@ -5,7 +5,7 @@ state: draft
 slug: sql-vs-nosql-tradeoffs
 ---
 
-# [BEE-120] SQL vs NoSQL Tradeoffs
+# [BEE-6001] SQL vs NoSQL Tradeoffs
 
 :::info
 Relational, document, key-value, column-family, graph -- choose based on data shape and access patterns, not trend.

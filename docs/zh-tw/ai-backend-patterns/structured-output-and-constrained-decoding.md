@@ -5,7 +5,7 @@ state: draft
 slug: structured-output-and-constrained-decoding
 ---
 
-# [BEE-508] 結構化輸出與受限解碼
+# [BEE-30006] 結構化輸出與受限解碼
 
 :::info
 LLM 預設產生自由格式文字，這使得可靠的符合 Schema 的 JSON 在規模化時成為一個解析問題。受限解碼（Constrained Decoding）在 Token 層級解決了這個問題，消除了生產環境中「提示要求 JSON」方法所產生的 8–15% JSON 解析失敗率。

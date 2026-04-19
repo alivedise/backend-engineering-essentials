@@ -5,7 +5,7 @@ state: draft
 slug: delivery-guarantees
 ---
 
-# [BEE-222] 交付保證
+# [BEE-10003] 交付保證
 
 :::info
 At-most-once、at-least-once 與 exactly-once 語意——各自的成本、適用時機，以及為什麼「恰好一次」比聽起來更微妙。

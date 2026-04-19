@@ -5,7 +5,7 @@ state: draft
 slug: crdts-conflict-free-replicated-data-types
 ---
 
-# [BEE-429] CRDTs: Conflict-free Replicated Data Types
+# [BEE-19010] CRDTs: Conflict-free Replicated Data Types
 
 :::info
 CRDTs are data structures that can be replicated across multiple nodes, updated concurrently without coordination, and merged automatically into a consistent state — making them the principled mechanism for building highly available systems that converge without conflicts, without relying on consensus or distributed locking.
@@ -13,7 +13,7 @@ CRDTs are data structures that can be replicated across multiple nodes, updated 
 
 ## Context
 
-Eventual consistency (BEE-165) is a promise: replicas will converge if updates stop. The promise says nothing about *how* convergence happens when two replicas have diverged. The naive answer — "last write wins" using timestamps — silently discards updates. The cautious answer — "require consensus before every write" — destroys the availability you sought by going eventually consistent in the first place.
+Eventual consistency (BEE-8006) is a promise: replicas will converge if updates stop. The promise says nothing about *how* convergence happens when two replicas have diverged. The naive answer — "last write wins" using timestamps — silently discards updates. The cautious answer — "require consensus before every write" — destroys the availability you sought by going eventually consistent in the first place.
 
 Marc Shapiro, Nuno Preguiça, Carlos Baquero, and Marek Zawirski formalized the solution in "A Comprehensive Study of Convergent and Commutative Replicated Data Types" (INRIA Technical Report RR-7506, 2011) and the conference paper "Conflict-free Replicated Data Types" (SSS 2011). The insight: if you design data types whose merge functions are **commutative, associative, and idempotent**, then any order of merging any set of updates will always produce the same result. You don't need to coordinate at write time because the merge is guaranteed to converge.
 

@@ -5,7 +5,7 @@ state: draft
 slug: threads-vs-processes-vs-coroutines
 ---
 
-# [BEE-240] Threads vs Processes vs Coroutines
+# [BEE-11001] Threads vs Processes vs Coroutines
 
 :::info
 Concurrency models and their resource tradeoffs. Choosing the wrong abstraction at scale causes resource exhaustion, data races, or wasted CPU — this article maps each model to its appropriate use case.

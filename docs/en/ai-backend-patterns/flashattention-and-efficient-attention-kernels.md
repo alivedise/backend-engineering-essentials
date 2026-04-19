@@ -5,7 +5,7 @@ state: draft
 slug: flashattention-and-efficient-attention-kernels
 ---
 
-# [BEE-564] FlashAttention and Efficient Attention Kernels
+# [BEE-30062] FlashAttention and Efficient Attention Kernels
 
 :::info
 Standard attention materializes an N×N matrix in GPU HBM for every forward pass, making memory bandwidth — not compute — the binding constraint for large sequence lengths. FlashAttention and its successors tile attention into SRAM to avoid this, while Grouped-Query Attention shrinks the KV cache that stores attention state across decoding steps. Together these techniques are why modern LLMs can serve 128K-token contexts without requiring proportionally more GPUs.
@@ -198,7 +198,7 @@ flowchart TD
 
 **Using fp32 models with `attn_implementation="flash_attention_2"`.** FA2 requires half-precision (fp16 or bf16). Passing fp32 tensors raises a runtime error. Always cast the model to bf16 before enabling FA2, or use `attn_implementation="sdpa"` which falls back to a memory-efficient fp32 kernel.
 
-**Benchmarking only the prefill phase.** FlashAttention-2's speedup is most visible at long sequences during prefill. Flash-Decoding's speedup is most visible during decode at long KV lengths. A production LLM workload typically spends more wall time in decode than prefill. Benchmark both phases separately using TTFT (prefill) and ITL (decode) metrics (see BEE-560).
+**Benchmarking only the prefill phase.** FlashAttention-2's speedup is most visible at long sequences during prefill. Flash-Decoding's speedup is most visible during decode at long KV lengths. A production LLM workload typically spends more wall time in decode than prefill. Benchmark both phases separately using TTFT (prefill) and ITL (decode) metrics (see BEE-30058).
 
 **Ignoring KV cache size when scaling context length.** Extending context from 4K to 128K multiplies KV cache per request by 32×. Without GQA, this exhausts GPU VRAM at a fraction of the theoretical context limit. Always calculate KV cache memory before advertising a maximum context length to users.
 

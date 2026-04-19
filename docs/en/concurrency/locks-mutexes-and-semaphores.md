@@ -5,7 +5,7 @@ state: draft
 slug: locks-mutexes-and-semaphores
 ---
 
-# [BEE-242] Locks, Mutexes, and Semaphores
+# [BEE-11003] Locks, Mutexes, and Semaphores
 
 :::info
 Locks are the most common way to protect shared state, but they are also a frequent source of bugs: deadlock, starvation, and performance bottlenecks. Understanding the distinctions between mutex, semaphore, read-write lock, and spinlock — and the four conditions that cause deadlock — is foundational for concurrent systems.

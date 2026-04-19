@@ -5,7 +5,7 @@ state: draft
 slug: llm-based-classification-and-semantic-routing
 ---
 
-# [BEE-539] 基於 LLM 的分類與語義路由
+# [BEE-30037] 基於 LLM 的分類與語義路由
 
 :::info
 語義路由以嵌入空間分類取代關鍵字和正則表達式調度——傳入查詢被編碼為向量，並與預編碼的路由範例進行比較，在單位數毫秒內以零 LLM API 成本產生路由決策。混合分層（規則 → 嵌入路由器 → LLM 後備）可達到 90% 以上的路由精度，同時將高成本模型呼叫減少多達 85%。

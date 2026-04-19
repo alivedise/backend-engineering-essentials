@@ -5,7 +5,7 @@ state: draft
 slug: advanced-rag-and-agentic-retrieval-patterns
 ---
 
-# [BEE-531] Advanced RAG and Agentic Retrieval Patterns
+# [BEE-30029] Advanced RAG and Agentic Retrieval Patterns
 
 :::info
 Standard RAG — embed the query, retrieve top-k, generate — fails when the query is underspecified, the retrieved documents are irrelevant, or the answer requires synthesizing information across many documents; advanced retrieval patterns address each failure mode with targeted interventions at the query, retrieval, and indexing layers.
@@ -13,7 +13,7 @@ Standard RAG — embed the query, retrieve top-k, generate — fails when the qu
 
 ## Context
 
-Basic RAG (BEE-509) establishes a pipeline: chunk documents, embed them, store in a vector database, embed the query, retrieve top-k by cosine similarity, inject into context, generate. This pipeline works well for narrow factual lookup over well-structured corpora. It degrades in four identifiable ways.
+Basic RAG (BEE-30007) establishes a pipeline: chunk documents, embed them, store in a vector database, embed the query, retrieve top-k by cosine similarity, inject into context, generate. This pipeline works well for narrow factual lookup over well-structured corpora. It degrades in four identifiable ways.
 
 First, the semantic gap between a user query and a relevant document. A user asks "why does my Python script hang?" but the relevant documentation describes "thread deadlock in CPython's GIL." The query vector and the document vector are not close in embedding space. Gao et al. (arXiv:2212.10496, ACL 2023) introduced HyDE — Hypothetical Document Embeddings — to bridge this gap: generate a hypothetical document that would answer the query, embed that document, and retrieve using the hypothetical document's vector instead of the query's.
 
@@ -28,9 +28,9 @@ Fourth, flat indexing cannot answer questions that require synthesizing across m
 Advanced retrieval patterns compose. A production system often applies several in sequence:
 
 1. **Query transformation** (HyDE, multi-query, step-back) — improve what gets retrieved
-2. **Retrieval** — the core vector/keyword/hybrid search (BEE-517)
+2. **Retrieval** — the core vector/keyword/hybrid search (BEE-30015)
 3. **Retrieval evaluation and correction** (CRAG) — verify what was retrieved is relevant
-4. **Reranking** (BEE-517) — reorder retrieved documents by a cross-encoder
+4. **Reranking** (BEE-30015) — reorder retrieved documents by a cross-encoder
 5. **Generation** — inject verified, ranked context into the LLM
 
 Each layer adds latency and cost. The question is which layers to invest in based on the dominant failure mode. Profile retrieval quality first — measure recall@k and MRR on a golden query set — before adding complexity.

@@ -5,7 +5,7 @@ state: draft
 slug: message-queues-vs-event-streams
 ---
 
-# [BEE-220] Message Queues vs Event Streams
+# [BEE-10001] Message Queues vs Event Streams
 
 :::info
 Fundamental differences in semantics, delivery, and use cases between message queues (RabbitMQ, SQS) and event streams (Kafka, Kinesis).

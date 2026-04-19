@@ -5,7 +5,7 @@ state: draft
 slug: quorum-systems-and-nwr-consistency
 ---
 
-# [BEE-433] 仲裁系統與 NWR 一致性
+# [BEE-19014] 仲裁系統與 NWR 一致性
 
 :::info
 NWR 模型——N 個副本總數、寫入成功所需的 W 個確認、讀取返回所需的 R 個響應——讓系統設計者通過強制寫仲裁和讀仲裁重疊來在最大可用性和強一致性之間進行調整：W + R > N 保證任何讀取集中至少有一個副本已看到最新的寫入。

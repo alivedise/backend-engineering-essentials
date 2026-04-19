@@ -5,7 +5,7 @@ state: draft
 slug: encoding-and-serialization-formats
 ---
 
-# [BEE-143] Encoding and Serialization Formats
+# [BEE-7004] Encoding and Serialization Formats
 
 :::info
 Choose your encoding format based on who consumes the data and what your throughput and schema evolution requirements are. JSON for public APIs and human-readable configs; Protobuf for high-performance RPC; Avro for event streaming with schema evolution; MessagePack when you need binary JSON without a schema overhead.

@@ -5,7 +5,7 @@ state: draft
 slug: ai-gateway-patterns
 ---
 
-# [BEE-515] AI 閘道器模式
+# [BEE-30013] AI 閘道器模式
 
 :::info
 AI 閘道器是專為 LLM 流量設計的反向代理，集中處理以 Token 為基礎的速率限制、多供應商故障切換、費用歸因、語義快取與 PII 清除 —— 這些問題一般的 API 閘道器處理不當，因為 LLM 請求與回應的大小、費用和延遲具有 HTTP 層級原語無法建模的非對稱性。
@@ -150,7 +150,7 @@ response = litellm.completion(
 
 ### 在每個請求中進行費用歸因
 
-**MUST** 為通過閘道器的每個請求記錄 `cost_usd`、`input_tokens`、`output_tokens`、`model`，以及至少一個業務維度（`team_id`、`feature`、`tenant_id`）。這份資料是判斷首先應用哪種優化的前提條件（見 BEE-513）。
+**MUST** 為通過閘道器的每個請求記錄 `cost_usd`、`input_tokens`、`output_tokens`、`model`，以及至少一個業務維度（`team_id`、`feature`、`tenant_id`）。這份資料是判斷首先應用哪種優化的前提條件（見 BEE-30011）。
 
 **SHOULD** 在閘道器層強制標記，而非信任應用層：
 

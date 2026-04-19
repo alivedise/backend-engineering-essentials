@@ -5,7 +5,7 @@ state: draft
 slug: broken-object-level-authorization-bola
 ---
 
-# [BEE-499] Broken Object Level Authorization (BOLA)
+# [BEE-2016] Broken Object Level Authorization (BOLA)
 
 :::info
 BOLA occurs when an API authenticates a user correctly but fails to verify that the authenticated user is allowed to access the specific resource they requested — letting any user reach any other user's data by changing an ID in the request.

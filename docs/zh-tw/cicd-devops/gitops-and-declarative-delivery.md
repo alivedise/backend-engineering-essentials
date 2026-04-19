@@ -5,7 +5,7 @@ state: draft
 slug: gitops-and-declarative-delivery
 ---
 
-# [BEE-367] GitOps 與宣告式交付
+# [BEE-16008] GitOps 與宣告式交付
 
 :::info
 GitOps 將 Git 作為基礎設施與應用程式狀態的唯一真相來源。運行在叢集內部的代理程式持續將實際狀態調和至 Git 中宣告的期望狀態——憑證不離開叢集，每次變更皆可稽核，回滾只需 git revert。

@@ -5,7 +5,7 @@ state: draft
 slug: back-of-envelope-estimation
 ---
 
-# [BEE-300] 粗略估算
+# [BEE-13001] 粗略估算
 
 :::info
 每位工程師都應熟記的延遲數字，以及容量計算方法。

@@ -5,7 +5,7 @@ state: draft
 slug: llm-tokenization-internals-and-token-budget-management
 ---
 
-# [BEE-553] LLM 分詞內部機制與 Token 預算管理
+# [BEE-30051] LLM 分詞內部機制與 Token 預算管理
 
 :::info
 每次 LLM API 呼叫都以 token 計費，而非字元或詞彙 — 了解分詞器如何將文字轉換為整數序列、為何中日韓語言的費用是英文的 2-3 倍，以及如何在發送請求前計算 token 數，可防止預算超支、上下文視窗溢位和靜默截斷錯誤。

@@ -5,7 +5,7 @@ state: draft
 slug: tenant-aware-observability
 ---
 
-# [BEE-405] Tenant-Aware Observability
+# [BEE-18006] Tenant-Aware Observability
 
 :::info
 Tenant-aware observability treats the tenant identifier as a first-class dimension in every signal — logs, metrics, and traces — so that operators can isolate noisy tenants, enforce per-tenant SLOs, attribute infrastructure costs to specific customers, and meet data-residency compliance requirements without aggregating telemetry across tenant boundaries.

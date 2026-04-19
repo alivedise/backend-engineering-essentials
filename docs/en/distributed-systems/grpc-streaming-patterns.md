@@ -5,7 +5,7 @@ state: draft
 slug: grpc-streaming-patterns
 ---
 
-# [BEE-465] gRPC Streaming Patterns
+# [BEE-19046] gRPC Streaming Patterns
 
 :::info
 gRPC offers four RPC types — unary, server streaming, client streaming, and bidirectional streaming — each suited to a distinct communication pattern; choosing the wrong type wastes a connection, breaks flow control, or forces polling where push would suffice.

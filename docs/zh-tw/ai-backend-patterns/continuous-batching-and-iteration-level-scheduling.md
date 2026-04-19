@@ -5,7 +5,7 @@ state: draft
 slug: continuous-batching-and-iteration-level-scheduling
 ---
 
-# [BEE-567] 連續批次處理與迭代層級排程
+# [BEE-30065] 連續批次處理與迭代層級排程
 
 :::info
 連續批次處理（Continuous Batching）以單次解碼迭代為粒度來排程 LLM 推論，而非以完整請求為粒度。當一個序列完成後，其槽位立即重新分配給下一個等待中的請求——消除了靜態批次處理造成的 GPU 閒置問題，在相同延遲下可將吞吐量提升 2–36 倍。

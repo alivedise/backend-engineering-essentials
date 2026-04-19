@@ -5,7 +5,7 @@ state: draft
 slug: caching-fundamentals-and-cache-hierarchy
 ---
 
-# [BEE-200] Caching Fundamentals and Cache Hierarchy
+# [BEE-9001] Caching Fundamentals and Cache Hierarchy
 
 :::info
 CPU cache, application cache, CDN cache -- understanding the full stack of caching layers and the patterns that connect them.

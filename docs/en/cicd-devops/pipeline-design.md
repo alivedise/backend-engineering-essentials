@@ -5,7 +5,7 @@ state: draft
 slug: pipeline-design
 ---
 
-# [BEE-365] Pipeline Design
+# [BEE-16006] Pipeline Design
 
 :::info
 Design your pipeline for fast feedback first: parallelize independent stages, build the artifact once, promote it through environments, and gate production behind human approval.

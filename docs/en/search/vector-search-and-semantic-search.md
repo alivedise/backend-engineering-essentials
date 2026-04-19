@@ -5,7 +5,7 @@ state: draft
 slug: vector-search-and-semantic-search
 ---
 
-# [BEE-383] Vector Search and Semantic Search
+# [BEE-17004] Vector Search and Semantic Search
 
 :::info
 Vector search finds results by geometric proximity in a high-dimensional embedding space, enabling queries that match meaning rather than exact keywords.
@@ -13,7 +13,7 @@ Vector search finds results by geometric proximity in a high-dimensional embeddi
 
 ## Context
 
-Traditional full-text search (BEE-380) matches query terms against an inverted index. It excels when users know the exact words in the target document, but breaks down when they do not: a query for "heart attack" misses documents that say "myocardial infarction", and a query for "cheap" misses pages that say "affordable" or "low-cost". The underlying problem is that keyword search treats text as a bag of tokens, ignoring semantics.
+Traditional full-text search (BEE-17001) matches query terms against an inverted index. It excels when users know the exact words in the target document, but breaks down when they do not: a query for "heart attack" misses documents that say "myocardial infarction", and a query for "cheap" misses pages that say "affordable" or "low-cost". The underlying problem is that keyword search treats text as a bag of tokens, ignoring semantics.
 
 Semantic search addresses this by working in a continuous vector space rather than a discrete token space. A machine learning model — typically a transformer-based encoder such as BERT, Sentence-BERT, or a model from the OpenAI or Cohere embedding APIs — maps each piece of text into a dense numerical vector (an *embedding*) of fixed dimensionality (commonly 384, 768, or 1536 dimensions). The model is trained so that semantically similar texts land near each other in this space, regardless of the specific words used.
 
@@ -121,7 +121,7 @@ final    = sort_by_score(scored)[:5]
 
 ```
 // Run both retrieval systems independently
-keyword_results = bm25_search(query_text, top_k=20)   // BEE-380
+keyword_results = bm25_search(query_text, top_k=20)   // BEE-17001
 vector_results  = hnsw_search(query_embedding, top_k=20)
 
 // RRF: score = Σ 1 / (rank + k), k=60 is standard

@@ -5,7 +5,7 @@ state: draft
 slug: broken-object-level-authorization-bola
 ---
 
-# [BEE-499] 物件層級授權缺失（BOLA）
+# [BEE-2016] 物件層級授權缺失（BOLA）
 
 :::info
 BOLA 發生於 API 正確驗證了使用者身份，但未能驗證已驗證的使用者是否被允許存取其請求的特定資源——讓任何使用者只需更改請求中的 ID，就能存取其他使用者的資料。

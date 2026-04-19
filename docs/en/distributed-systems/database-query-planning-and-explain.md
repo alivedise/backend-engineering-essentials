@@ -5,7 +5,7 @@ state: draft
 slug: database-query-planning-and-explain
 ---
 
-# [BEE-466] Database Query Planning and EXPLAIN
+# [BEE-19047] Database Query Planning and EXPLAIN
 
 :::info
 A query planner chooses how to execute a SQL statement by estimating the cost of alternative access paths and join methods; `EXPLAIN` makes those choices visible, and `EXPLAIN ANALYZE` adds measured runtimes — together they are the primary tool for diagnosing slow queries without guessing.

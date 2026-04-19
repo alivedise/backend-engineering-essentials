@@ -5,7 +5,7 @@ state: draft
 slug: llm-based-code-generation-and-review-patterns
 ---
 
-# [BEE-535] 基於 LLM 的程式碼生成與審查模式
+# [BEE-30033] 基於 LLM 的程式碼生成與審查模式
 
 :::info
 將 LLM 整合到程式碼生成或審查流程中，需要的不只是一個提示詞和文字回應——它需要程式庫層級的上下文管理、基於 AST 的驗證、隔離的執行沙盒，以及下游工具可以直接操作的結構化輸出格式。

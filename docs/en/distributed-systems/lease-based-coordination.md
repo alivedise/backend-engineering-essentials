@@ -5,7 +5,7 @@ state: draft
 slug: lease-based-coordination
 ---
 
-# [BEE-436] Lease-Based Coordination
+# [BEE-19017] Lease-Based Coordination
 
 :::info
 A lease is a time-bounded grant of authority: the holder may act without contacting the grantor for the duration of the lease, and the authority expires automatically if not renewed — making leases more fault-tolerant than indefinite locks because holder crashes resolve themselves without requiring failure detection.
@@ -15,7 +15,7 @@ A lease is a time-bounded grant of authority: the holder may act without contact
 
 Cary Gray and David Cheriton introduced leases in "Leases: An Efficient Fault-Tolerant Mechanism for Distributed File Cache Consistency" (SOSP 1989). The problem they were solving: a distributed file system cache needs to know whether it can serve a cached read without checking the server for updates. A traditional locking approach grants the cache a read lock; when the cached data changes, the server revokes the lock. But revocation requires the server to find and contact every cache holder — expensive — and if a cache crashes while holding a lock, the server must detect the crash and reclaim the lock before allowing writes. Leases solve both problems: grant the cache authority to serve cached data for time T; if it needs to update, it renews the lease; when T expires without renewal, the server is free to grant a conflicting lease to someone else. No revocation protocol needed. No crash detection needed.
 
-The invariant leases provide: at any given time, at most one entity holds a valid lease for a given resource. The grantor enforces this by waiting at least T_lease + T_clock_skew before granting a conflicting lease. If the previous holder's clock and the grantor's clock agree within T_clock_skew, the previous holder will have stopped acting on its lease before the new one is granted. This requires that clocks are bounded in their divergence — an assumption that NTP with bounded skew, GPS time, or Google's TrueTime (see BEE-427) can provide.
+The invariant leases provide: at any given time, at most one entity holds a valid lease for a given resource. The grantor enforces this by waiting at least T_lease + T_clock_skew before granting a conflicting lease. If the previous holder's clock and the grantor's clock agree within T_clock_skew, the previous holder will have stopped acting on its lease before the new one is granted. This requires that clocks are bounded in their divergence — an assumption that NTP with bounded skew, GPS time, or Google's TrueTime (see BEE-19008) can provide.
 
 Google's Chubby lock service (Burrows, OSDI 2006) operationalized this pattern at scale. Chubby is a Paxos-replicated service providing distributed locks and a small amount of storage; it is the coordination substrate for GFS leader election, Bigtable metadata management, and MapReduce. Clients hold session leases against the Chubby master. If a client cannot renew its session lease within the session timeout, it enters a "jeopardy" period in which it must stop acting on any locks or cached data it holds — the distributed equivalent of a process stopping itself rather than risking stale authority. When the session is restored, the client learns whether its locks are still valid. ZooKeeper emerged as an open-source alternative using the same core idea: ephemeral nodes that vanish when their creating session expires.
 

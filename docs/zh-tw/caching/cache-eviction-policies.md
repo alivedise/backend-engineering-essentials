@@ -5,7 +5,7 @@ state: draft
 slug: cache-eviction-policies
 ---
 
-# [BEE-202] 快取淘汰策略
+# [BEE-9003] 快取淘汰策略
 
 :::info
 LRU、LFU、FIFO 與自適應策略 -- 快取在記憶體耗盡時如何決定要丟棄哪些資料，以及如何為你的工作負載選擇正確的策略。

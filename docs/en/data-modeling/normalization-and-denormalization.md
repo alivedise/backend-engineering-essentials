@@ -5,7 +5,7 @@ state: draft
 slug: normalization-and-denormalization
 ---
 
-# [BEE-141] Normalization and Denormalization
+# [BEE-7002] Normalization and Denormalization
 
 :::tip Deep Dive
 For database-level normalization theory and formal definitions, see [DEE-100: Normalization](https://alivedise.github.io/database-engineering-essentials/100).
@@ -180,7 +180,7 @@ The application increments `total_orders` and `total_revenue_cents` atomically w
 
 ### CQRS Read Models
 
-For complex read workloads, consider separating the write model (normalized) from the read model (denormalized and query-shaped). This is covered in depth in [BEE-102: CQRS](./102.md).
+For complex read workloads, consider separating the write model (normalized) from the read model (denormalized and query-shaped). This is covered in depth in [BEE-5003: CQRS](./102.md).
 
 ## The Consistency Cost
 
@@ -219,9 +219,9 @@ This is actually *semantically correct* denormalization: historical records ofte
 
 ## Related BEPs
 
-- [BEE-102: CQRS](./102.md) — separate read models as a structured denormalization pattern
-- [BEE-120: SQL vs NoSQL](./120.md) — when document databases are a natural fit for denormalized data
-- [BEE-140: Entity-Relationship Modeling](./140.md) — how to identify entities before normalizing
+- [BEE-5003: CQRS](./102.md) — separate read models as a structured denormalization pattern
+- [BEE-6001: SQL vs NoSQL](./120.md) — when document databases are a natural fit for denormalized data
+- [BEE-7001: Entity-Relationship Modeling](./140.md) — how to identify entities before normalizing
 
 ## Common Mistakes
 

@@ -5,7 +5,7 @@ state: draft
 slug: context-window-extension-techniques-for-llms
 ---
 
-# [BEE-571] Context Window Extension Techniques for LLMs
+# [BEE-30069] Context Window Extension Techniques for LLMs
 
 :::info
 LLMs trained with a fixed context window catastrophically degrade when asked to process longer sequences, because their positional embeddings produce out-of-distribution rotation angles. A family of techniques — Positional Interpolation, NTK-aware scaling, YaRN, LongLoRA, and ALiBi — extends usable context from 4K to 128K+ tokens, each trading off compute cost, quality, and whether fine-tuning is required.

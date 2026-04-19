@@ -5,7 +5,7 @@ state: draft
 slug: twelve-factor-app-methodology
 ---
 
-# [BEE-486] 十二要素應用程式方法論
+# [BEE-5008] 十二要素應用程式方法論
 
 :::info
 十二要素應用程式（Twelve-Factor App）是一套建構軟體即服務（SaaS）應用程式的方法論，旨在讓應用程式可在各種執行環境中移植、無需伺服器管理即可部署，並能水平擴展——這套方法論是從 Heroku 平台上觀察數千個應用程式部署所總結出的模式。

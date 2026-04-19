@@ -5,7 +5,7 @@ state: draft
 slug: partitioning-and-sharding
 ---
 
-# [BEE-123] Partitioning and Sharding
+# [BEE-6004] Partitioning and Sharding
 
 :::info
 Range-based, hash-based, and consistent hashing partitioning — partition key selection, hotspot mitigation, and resharding tradeoffs.
@@ -196,7 +196,7 @@ For skewed key distributions: switch to hash-based partitioning, or choose a hig
 
 For monotonic keys with range partitioning: prepend a random salt or use a hash prefix. `shard_id = hash(created_at) mod N` instead of `shard_id = range(created_at)`. This breaks range scans but eliminates write hotspots.
 
-For celebrity rows: the partition key approach cannot fully solve this — a single key is still a single partition. Mitigations include application-level caching (BEE-203), read replicas on the hot partition, or splitting the celebrity record into multiple virtual records with different keys (requires application logic to merge on read).
+For celebrity rows: the partition key approach cannot fully solve this — a single key is still a single partition. Mitigations include application-level caching (BEE-9004), read replicas on the hot partition, or splitting the celebrity record into multiple virtual records with different keys (requires application logic to merge on read).
 
 ## Resharding
 
@@ -239,7 +239,7 @@ Partition on the key that aligns with your most frequent access pattern and has 
 
 Use hash-based partitioning unless you have a strong requirement for range scans across partition boundaries. Hash partitioning eliminates write hotspots and distributes load evenly. If you need range scans, use range partitioning and explicitly mitigate hotspot risk in your key design.
 
-Do not shard prematurely. A single well-tuned PostgreSQL or MySQL instance can handle datasets in the hundreds of gigabytes and tens of thousands of QPS with proper indexing (BEE-121). Sharding adds significant operational overhead. Reach for it when you have a concrete capacity problem that cannot be solved by vertical scaling, read replicas, or caching.
+Do not shard prematurely. A single well-tuned PostgreSQL or MySQL instance can handle datasets in the hundreds of gigabytes and tens of thousands of QPS with proper indexing (BEE-6002). Sharding adds significant operational overhead. Reach for it when you have a concrete capacity problem that cannot be solved by vertical scaling, read replicas, or caching.
 
 When you do shard, plan for resharding from day one. Use logical over-sharding so that adding physical nodes does not require re-keying data. Document the resharding procedure before you need it.
 
@@ -257,7 +257,7 @@ When you do shard, plan for resharding from day one. Use logical over-sharding s
 
 ## Related BEPs
 
-- [BEE-120: SQL vs NoSQL](./120.md) — storage engine choice often determines sharding model options
-- [BEE-121: Indexing Deep Dive](./121.md) — secondary index behavior in sharded systems
-- [BEE-121: Replication Strategies](./121.md) — shards are typically replicated; partitioning and replication compose
-- [BEE-203: Distributed Caching](203.md) — consistent hashing is used in cache cluster routing with the same principles
+- [BEE-6001: SQL vs NoSQL](./120.md) — storage engine choice often determines sharding model options
+- [BEE-6002: Indexing Deep Dive](./121.md) — secondary index behavior in sharded systems
+- [BEE-6002: Replication Strategies](./121.md) — shards are typically replicated; partitioning and replication compose
+- [BEE-9004: Distributed Caching](203.md) — consistent hashing is used in cache cluster routing with the same principles

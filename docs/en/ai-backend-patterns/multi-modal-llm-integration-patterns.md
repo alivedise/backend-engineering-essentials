@@ -5,7 +5,7 @@ state: draft
 slug: multi-modal-llm-integration-patterns
 ---
 
-# [BEE-521] Multi-modal LLM Integration Patterns
+# [BEE-30019] Multi-modal LLM Integration Patterns
 
 :::info
 Multi-modal LLMs accept images, audio, and documents alongside text. Integrating them correctly requires understanding how each modality is tokenized, priced, pre-processed, and passed to the API — because the decisions made at the ingestion layer determine both the quality of the model's output and the cost per request.

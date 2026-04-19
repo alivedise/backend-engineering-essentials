@@ -5,7 +5,7 @@ state: draft
 slug: cryptographic-basics-for-engineers
 ---
 
-# [BEE-34] 工程師的密碼學基礎
+# [BEE-2005] 工程師的密碼學基礎
 
 :::info
 密碼學（Cryptography）是安全通訊與資料儲存的根基。了解何時使用雜湊（hash）、何時加密，以及如何選擇演算法，能防止因誤用或自製密碼系統所產生的漏洞。

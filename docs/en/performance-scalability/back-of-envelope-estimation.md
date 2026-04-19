@@ -5,7 +5,7 @@ state: draft
 slug: back-of-envelope-estimation
 ---
 
-# [BEE-300] Back-of-Envelope Estimation
+# [BEE-13001] Back-of-Envelope Estimation
 
 :::info
 Latency numbers every engineer should know and capacity math.

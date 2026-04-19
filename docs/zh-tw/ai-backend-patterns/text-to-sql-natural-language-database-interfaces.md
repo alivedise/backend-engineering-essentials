@@ -5,7 +5,7 @@ state: draft
 slug: text-to-sql-natural-language-database-interfaces
 ---
 
-# [BEE-580] Text-to-SQL：自然語言資料庫介面
+# [BEE-30078] Text-to-SQL：自然語言資料庫介面
 
 :::info
 Text-to-SQL 使用 LLM 將自然語言問題翻譯為可執行的 SQL 查詢。它讓使用者無需掌握 SQL 即可存取資料庫——同時引入了獨特的攻擊面、回傳看似合理但錯誤結果的幻覺失效模式，以及若不加以處理會隨資料庫大小二次方增長的 Schema 注入成本。

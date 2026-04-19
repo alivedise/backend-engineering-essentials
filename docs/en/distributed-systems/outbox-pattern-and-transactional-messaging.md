@@ -5,7 +5,7 @@ state: draft
 slug: outbox-pattern-and-transactional-messaging
 ---
 
-# [BEE-472] The Outbox Pattern and Transactional Messaging
+# [BEE-19053] The Outbox Pattern and Transactional Messaging
 
 :::info
 The Outbox Pattern solves the dual-write problem — the inability to atomically update a database and publish a message to a broker in one operation — by writing events to an "outbox" table in the same database transaction as the business data, then having a separate relay process publish them to the broker.
@@ -21,7 +21,7 @@ Martin Kleppmann identifies this failure mode explicitly in Chapter 11 of "Desig
 
 The Outbox Pattern, formalized and popularized by Chris Richardson in his microservices.io pattern catalog, resolves the problem by turning the two-system write into a single-system write. The service writes its business data and an outbox record to the same relational database in a single transaction. Because the outbox table is in the same database, the write is atomic: either both the business row and the outbox record are committed, or neither is. A separate process — the relay or publisher — then reads from the outbox table and publishes to the message broker independently. The relay is retryable and crash-safe because the outbox persists until the event is confirmed published.
 
-The pattern provides **at-least-once delivery**: the relay may publish an event and then crash before marking it as sent, causing it to be published again on the next relay run. Consumers must be designed to handle duplicates — a requirement that applies equally to any message-based system (BEE-226).
+The pattern provides **at-least-once delivery**: the relay may publish an event and then crash before marking it as sent, causing it to be published again on the next relay run. Consumers must be designed to handle duplicates — a requirement that applies equally to any message-based system (BEE-10007).
 
 ## Design Thinking
 
@@ -73,7 +73,7 @@ Ordering guarantees *across* aggregate IDs typically are not provided or needed.
 
 **MUST NOT use database `LISTEN/NOTIFY` as the sole relay mechanism.** PostgreSQL `LISTEN/NOTIFY` notifications can be dropped if no listener is connected at the time of the `NOTIFY`. The outbox table provides durability; `LISTEN/NOTIFY` can supplement the relay as a low-latency wake-up signal, but the relay must fall back to polling the table.
 
-**MUST ensure the relay is idempotent on the broker side.** The relay may publish an event and crash before marking it as sent. On restart, it will publish the event again. Brokers and consumers must handle duplicates — either via broker-level deduplication (Kafka's idempotent producer), consumer-level idempotency (BEE-226), or by including a unique event ID in the payload that consumers can deduplicate.
+**MUST ensure the relay is idempotent on the broker side.** The relay may publish an event and crash before marking it as sent. On restart, it will publish the event again. Brokers and consumers must handle duplicates — either via broker-level deduplication (Kafka's idempotent producer), consumer-level idempotency (BEE-10007), or by including a unique event ID in the payload that consumers can deduplicate.
 
 **SHOULD include a unique event ID in every outbox record and propagate it as the message ID to the broker.** Most brokers allow setting a message key or ID. Setting it to the outbox record's UUID enables broker-side deduplication and makes consumer-side idempotency straightforward: store processed IDs in a set and skip duplicates.
 

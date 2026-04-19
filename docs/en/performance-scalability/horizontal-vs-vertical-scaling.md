@@ -5,7 +5,7 @@ state: draft
 slug: horizontal-vs-vertical-scaling
 ---
 
-# [BEE-301] Horizontal vs Vertical Scaling
+# [BEE-13002] Horizontal vs Vertical Scaling
 
 :::info
 Vertical scaling is simpler — reach for it first. Horizontal scaling is more powerful — but it requires stateless design to work correctly.
@@ -207,7 +207,7 @@ In-process caches, local rate-limit counters, and in-memory queues must all beco
 
 ## Related BEPs
 
-- [BEE-51 — Load Balancers](51.md): routing traffic across horizontal instances
-- [BEE-121 — Replication](121.md): horizontal read scaling at the data layer
-- [BEE-123 — Sharding](123.md): horizontal write scaling at the data layer
-- [BEE-300 — Back-of-Envelope Estimation](300.md): knowing when to scale
+- [BEE-3002 — Load Balancers](51.md): routing traffic across horizontal instances
+- [BEE-6002 — Replication](121.md): horizontal read scaling at the data layer
+- [BEE-6004 — Sharding](123.md): horizontal write scaling at the data layer
+- [BEE-13001 — Back-of-Envelope Estimation](300.md): knowing when to scale

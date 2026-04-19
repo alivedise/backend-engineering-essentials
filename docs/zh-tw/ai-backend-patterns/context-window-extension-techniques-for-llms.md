@@ -5,7 +5,7 @@ state: draft
 slug: context-window-extension-techniques-for-llms
 ---
 
-# [BEE-571] LLM 上下文窗口擴展技術
+# [BEE-30069] LLM 上下文窗口擴展技術
 
 :::info
 使用固定上下文窗口訓練的 LLM 在被要求處理更長序列時會災難性地退化，因為其位置嵌入會產生超出分布的旋轉角度。一系列技術——位置插值、NTK 感知縮放、YaRN、LongLoRA 和 ALiBi——可將可用上下文從 4K 擴展到 128K 以上 token，各自在計算成本、品質和是否需要微調之間做出不同的取捨。

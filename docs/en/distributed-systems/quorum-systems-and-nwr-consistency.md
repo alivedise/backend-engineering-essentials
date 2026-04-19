@@ -5,7 +5,7 @@ state: draft
 slug: quorum-systems-and-nwr-consistency
 ---
 
-# [BEE-433] Quorum Systems and NWR Consistency
+# [BEE-19014] Quorum Systems and NWR Consistency
 
 :::info
 The NWR model — N total replicas, W acknowledgments required for a write, R responses required for a read — gives system designers a single dial to slide between maximum availability and strong consistency by enforcing that the write and read quorums overlap: W + R > N guarantees at least one replica in any read set has seen the latest write.

@@ -5,7 +5,7 @@ state: draft
 slug: skip-lists
 ---
 
-# [BEE-444] 跳躍串列
+# [BEE-19025] 跳躍串列
 
 :::info
 跳躍串列（skip list）是一種機率性資料結構，透過在完整排序鏈結串列之上疊加「快速通道」鏈結串列，以 O(log n) 期望時間維護排序序列的搜尋、插入與刪除——比平衡樹更易實作、更易實現無鎖並行存取，並且是 Redis Sorted Sets 與 LSM-tree 記憶體表（memtable）的主要有序結構。

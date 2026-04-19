@@ -5,7 +5,7 @@ state: draft
 slug: producer-consumer-and-worker-pool-patterns
 ---
 
-# [BEE-244] 生產者-消費者與工作池模式
+# [BEE-11005] 生產者-消費者與工作池模式
 
 :::info
 透過有界共享佇列將生產者與消費者解耦，再以固定數量的工作者提供服務。這對模式為任何任務驅動的工作負載提供流量控制、有界資源使用與可預測的吞吐量。

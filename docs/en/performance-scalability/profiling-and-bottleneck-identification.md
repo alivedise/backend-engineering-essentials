@@ -5,7 +5,7 @@ state: draft
 slug: profiling-and-bottleneck-identification
 ---
 
-# [BEE-303] Profiling and Bottleneck Identification
+# [BEE-13004] Profiling and Bottleneck Identification
 
 :::info
 Measure first. Profile the right thing. Fix the actual bottleneck.

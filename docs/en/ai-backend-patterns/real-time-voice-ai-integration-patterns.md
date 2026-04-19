@@ -5,7 +5,7 @@ state: draft
 slug: real-time-voice-ai-integration-patterns
 ---
 
-# [BEE-582] Real-Time Voice AI Integration Patterns
+# [BEE-30080] Real-Time Voice AI Integration Patterns
 
 :::info
 A real-time voice AI pipeline translates spoken input to text, generates a response, and synthesizes speech — targeting a total round-trip under 300ms. The primary engineering challenge is latency: each stage (VAD, STT, LLM, TTS) accumulates delay, and only pipelining the LLM-to-TTS boundary without waiting for full LLM completion makes sub-second conversation feel natural.

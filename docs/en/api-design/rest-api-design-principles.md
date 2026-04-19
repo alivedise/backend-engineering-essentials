@@ -5,7 +5,7 @@ state: draft
 slug: rest-api-design-principles
 ---
 
-# [BEE-70] REST API Design Principles
+# [BEE-4001] REST API Design Principles
 
 :::info
 REST architectural constraints, resource-oriented design, HTTP method semantics, and status code usage.

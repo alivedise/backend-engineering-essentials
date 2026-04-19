@@ -5,7 +5,7 @@ state: draft
 slug: rlhf-and-alignment-training-infrastructure
 ---
 
-# [BEE-573] RLHF and Alignment Training Infrastructure
+# [BEE-30071] RLHF and Alignment Training Infrastructure
 
 :::info
 PPO-based RLHF requires four simultaneous model copies — actor, critic, reward model, and reference model — consuming more than 3× the GPU memory of supervised fine-tuning alone. DPO eliminates the reward model and critic, reducing to two copies and dropping training complexity to a single binary cross-entropy loss on preference pairs, at the cost of offline-only optimization.

@@ -5,7 +5,7 @@ state: draft
 slug: delivery-guarantees
 ---
 
-# [BEE-222] Delivery Guarantees
+# [BEE-10003] Delivery Guarantees
 
 :::info
 At-most-once, at-least-once, and exactly-once semantics — what each costs, when each is appropriate, and why "exactly-once" is more nuanced than it sounds.

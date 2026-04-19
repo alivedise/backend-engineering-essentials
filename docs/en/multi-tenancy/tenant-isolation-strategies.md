@@ -5,7 +5,7 @@ state: draft
 slug: tenant-isolation-strategies
 ---
 
-# [BEE-401] Tenant Isolation Strategies
+# [BEE-18002] Tenant Isolation Strategies
 
 :::info
 Tenant isolation is the set of technical mechanisms that prevent one tenant's data, compute, or requests from affecting another — spanning database policies, infrastructure boundaries, and application-layer enforcement.
@@ -13,7 +13,7 @@ Tenant isolation is the set of technical mechanisms that prevent one tenant's da
 
 ## Context
 
-BEE-400 describes the three deployment models (silo, pool, bridge) and when to choose each. This article covers how isolation is actually enforced within those models. Choosing a model is a design decision; enforcing isolation correctly is an implementation discipline.
+BEE-18001 describes the three deployment models (silo, pool, bridge) and when to choose each. This article covers how isolation is actually enforced within those models. Choosing a model is a design decision; enforcing isolation correctly is an implementation discipline.
 
 The fundamental challenge is that isolation failures are silent. A missing WHERE clause or a misconfigured policy does not throw an exception — it returns data that should not be visible, or allows a write that should not succeed. Isolation bugs are among the most severe class of SaaS vulnerability because the customer impact is data exposure across tenant boundaries.
 
@@ -67,7 +67,7 @@ Database and infrastructure isolation are the enforcement ground truth, but appl
 
 **Repository / data access layer pattern**: Wrap all data access in repository classes that inject `tenant_id` into every query. Direct database access outside these repositories is prohibited by code review policy. This ensures that even before RLS fires, the query is structurally correct.
 
-**Middleware**: Authenticate tenant identity on every request (see BEE-10 and BEE-400). The middleware sets tenant context on the request object and on the database connection before handing off to the handler. No handler code should derive tenant identity from request parameters — only from the authenticated identity.
+**Middleware**: Authenticate tenant identity on every request (see BEE-1001 and BEE-18001). The middleware sets tenant context on the request object and on the database connection before handing off to the handler. No handler code should derive tenant identity from request parameters — only from the authenticated identity.
 
 **Audit logging**: Log every cross-tenant access attempt — both successful (for authorized admin operations) and failed (for policy violations). Database-level audit logging (PostgreSQL `pgaudit`, SQL Server Audit) captures failed RLS checks and superuser bypasses that application logs would not see.
 

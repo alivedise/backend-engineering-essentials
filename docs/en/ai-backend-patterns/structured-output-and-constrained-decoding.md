@@ -5,7 +5,7 @@ state: draft
 slug: structured-output-and-constrained-decoding
 ---
 
-# [BEE-508] Structured Output and Constrained Decoding
+# [BEE-30006] Structured Output and Constrained Decoding
 
 :::info
 LLMs generate free-form text by default, making reliable schema-compliant JSON a parsing problem at scale. Constrained decoding solves this at the token level, eliminating the 8–15% JSON parse failure rate that naive "prompt for JSON" approaches produce in production.

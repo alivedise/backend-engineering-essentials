@@ -5,7 +5,7 @@ state: draft
 slug: llm-multi-provider-resilience-and-api-fallback-patterns
 ---
 
-# [BEE-555] LLM 多供應商韌性與 API 備援模式
+# [BEE-30053] LLM 多供應商韌性與 API 備援模式
 
 :::info
 依賴單一 LLM 供應商會產生單點故障 — 服務中斷、速率限制耗盡和模型棄用會在毫無警告的情況下影響生產環境。帶有斷路器、供應商正規化客戶端和健康感知備援佇列的多供應商路由，將供應商風險從服務依賴關係轉換為路由決策。

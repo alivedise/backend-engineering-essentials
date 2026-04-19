@@ -5,7 +5,7 @@ state: draft
 slug: service-discovery
 ---
 
-# [BEE-426] 服務發現
+# [BEE-19007] 服務發現
 
 :::info
 服務發現是客戶端定位網路端點的機制，這些服務的 IP 地址和端口會動態變更——可通過客戶端直接查詢注冊表，或將所有流量路由到代表客戶端解析地址的中介來解決。
@@ -131,7 +131,7 @@ _payments._tcp.internal.example.com. 30 IN SRV 20  0 8080 payments-3.internal.ex
 // T=10s：第二次檢查失敗 → 實例標記為「嚴重」
 // T=2m：deregister_critical_service_after 觸發 → 實例從注冊表中移除
 // T=2m：新客戶端不再收到此實例的地址
-// 間隔：客戶端可能遭遇連接錯誤達 2 分鐘；使用重試（BEE-261）緩解
+// 間隔：客戶端可能遭遇連接錯誤達 2 分鐘；使用重試（BEE-12002）緩解
 ```
 
 **Envoy xDS 端點發現（EDS）：**

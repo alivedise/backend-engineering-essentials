@@ -5,7 +5,7 @@ state: draft
 slug: race-conditions-and-data-races
 ---
 
-# [BEE-241] Race Conditions and Data Races
+# [BEE-11002] Race Conditions and Data Races
 
 :::info
 Race conditions and data races are distinct bugs. Conflating them leads to incomplete fixes. Understand both to write correct concurrent code.

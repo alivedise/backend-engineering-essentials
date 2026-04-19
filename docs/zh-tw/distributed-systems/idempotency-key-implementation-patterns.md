@@ -5,7 +5,7 @@ state: draft
 slug: idempotency-key-implementation-patterns
 ---
 
-# [BEE-473] 冪等鍵實作模式
+# [BEE-19054] 冪等鍵實作模式
 
 :::info
 冪等鍵（Idempotency Key）是一個由客戶端提供的令牌，讓伺服器能夠識別重複的請求並返回快取的回應，而非再次處理——將支付收費等本質上不具冪等性的操作轉變為可安全重試的操作。

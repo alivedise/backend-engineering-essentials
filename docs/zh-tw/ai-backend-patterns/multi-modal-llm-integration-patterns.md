@@ -5,7 +5,7 @@ state: draft
 slug: multi-modal-llm-integration-patterns
 ---
 
-# [BEE-521] 多模態 LLM 整合模式
+# [BEE-30019] 多模態 LLM 整合模式
 
 :::info
 多模態 LLM 接受圖片、音訊和文件作為文字之外的輸入。正確整合它們需要了解每種模態如何被 Token 化、計價、預處理及傳遞給 API——因為在攝取層做出的決策決定了模型輸出的品質和每次請求的成本。

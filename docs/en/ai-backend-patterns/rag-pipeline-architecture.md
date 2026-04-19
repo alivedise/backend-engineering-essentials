@@ -5,7 +5,7 @@ state: draft
 slug: rag-pipeline-architecture
 ---
 
-# [BEE-509] RAG Pipeline Architecture
+# [BEE-30007] RAG Pipeline Architecture
 
 :::info
 Retrieval-Augmented Generation solves the knowledge problem in LLM applications: instead of relying on a model's frozen training weights, inject relevant documents at inference time. Getting the pipeline right requires making dozens of concrete engineering decisions — chunking strategy, embedding model, retrieval method, reranking, and context injection — each of which has measurable production impact.
@@ -15,7 +15,7 @@ Retrieval-Augmented Generation solves the knowledge problem in LLM applications:
 
 Patrick Lewis et al. introduced Retrieval-Augmented Generation in "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (arXiv:2005.11401, NeurIPS 2020). The paper showed that combining a pre-trained LLM with a non-parametric retrieval component — a differentiable document index — dramatically improved factual accuracy on open-domain question answering without retraining the model. The key insight was that LLMs store factual knowledge in their weights but lack a precise mechanism to access and update that knowledge. An external retrieval layer solves both problems: it provides access to documents not in the training corpus, and the index can be updated without touching the model.
 
-By 2023, RAG had become the dominant pattern for grounding LLM responses in organizational knowledge. The use cases are precise: any scenario where the model needs access to information created after its training cutoff, proprietary data that was never in the training corpus, or sources that must be cited explicitly. RAG is not a cure for model incapability — a model that produces wrong output format or inconsistent behavior needs prompt engineering or fine-tuning (BEE-507), not retrieval augmentation.
+By 2023, RAG had become the dominant pattern for grounding LLM responses in organizational knowledge. The use cases are precise: any scenario where the model needs access to information created after its training cutoff, proprietary data that was never in the training corpus, or sources that must be cited explicitly. RAG is not a cure for model incapability — a model that produces wrong output format or inconsistent behavior needs prompt engineering or fine-tuning (BEE-30005), not retrieval augmentation.
 
 The engineering challenge is that RAG looks simple in a proof-of-concept (embed documents, embed query, fetch top-K, stuff into prompt) and becomes a multi-component production system where each component has its own failure modes. Context that is retrieved incorrectly, compressed destructively, or injected in the wrong position produces answers that are confident and wrong. A working RAG pipeline requires deliberate decisions at every stage.
 
@@ -136,7 +136,7 @@ Query pipeline (online):
 
 ### Evaluate Each Pipeline Stage Independently
 
-**MUST** use RAGAS (BEE-506) to measure retrieval and generation failures separately:
+**MUST** use RAGAS (BEE-30004) to measure retrieval and generation failures separately:
 
 | Metric | What it measures | Low score means |
 |--------|-----------------|-----------------|
@@ -145,7 +145,7 @@ Query pipeline (online):
 | Faithfulness | Are claims grounded in context? | Fix generator prompt / context injection |
 | Answer Relevance | Does the answer address the question? | Fix query understanding / routing |
 
-**SHOULD** build a golden dataset from real production queries where the system failed (BEE-506). Synthetic test queries miss the long tail of real-world vocabulary, document formats, and edge cases that appear in production.
+**SHOULD** build a golden dataset from real production queries where the system failed (BEE-30004). Synthetic test queries miss the long tail of real-world vocabulary, document formats, and edge cases that appear in production.
 
 ## Failure Modes
 

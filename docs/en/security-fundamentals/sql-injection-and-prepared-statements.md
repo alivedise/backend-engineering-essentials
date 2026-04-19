@@ -5,7 +5,7 @@ state: draft
 slug: sql-injection-and-prepared-statements
 ---
 
-# [BEE-492] SQL Injection and Prepared Statements
+# [BEE-2012] SQL Injection and Prepared Statements
 
 :::info
 SQL injection exploits the absence of a structural boundary between query logic and user-supplied data — prepared statements solve it completely by transmitting query structure and parameter values through entirely separate protocol channels.

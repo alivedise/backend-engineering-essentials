@@ -5,7 +5,7 @@ state: draft
 slug: choreography-vs-orchestration-in-distributed-workflows
 ---
 
-# [BEE-471] Choreography vs Orchestration in Distributed Workflows
+# [BEE-19052] Choreography vs Orchestration in Distributed Workflows
 
 :::info
 Choreography and orchestration are two models for coordinating work across distributed services: in choreography, each service reacts to events and decides its own next action; in orchestration, a central coordinator explicitly directs each service step-by-step.
@@ -57,7 +57,7 @@ Orchestration fits when:
 
 ### The Saga Connection
 
-The Saga pattern (BEE-163) can be implemented with either model. A choreography-based saga uses events: `PaymentCompleted` triggers inventory reservation, `InventoryReserved` triggers fulfillment, and compensating events (`PaymentRefunded`, `InventoryReleased`) flow in reverse on failure. An orchestration-based saga uses an orchestrator that explicitly calls each step and issues compensating calls on failure. The orchestration-based saga is simpler to reason about and is the model used by systems like Temporal and Netflix Conductor.
+The Saga pattern (BEE-8004) can be implemented with either model. A choreography-based saga uses events: `PaymentCompleted` triggers inventory reservation, `InventoryReserved` triggers fulfillment, and compensating events (`PaymentRefunded`, `InventoryReleased`) flow in reverse on failure. An orchestration-based saga uses an orchestrator that explicitly calls each step and issues compensating calls on failure. The orchestration-based saga is simpler to reason about and is the model used by systems like Temporal and Netflix Conductor.
 
 ### Hybrid Approaches
 
@@ -75,7 +75,7 @@ Large systems rarely use one model exclusively. A common pattern: use orchestrat
 
 **SHOULD assign a correlation ID to every distributed workflow and propagate it through all events and service calls.** The correlation ID ties together all the events, logs, and traces for a single workflow instance. Without it, debugging a choreography-based failure requires joining across multiple service logs with timestamps — a painful exercise at 3 AM.
 
-**SHOULD define event contracts explicitly and version them.** In choreography, an event is a public API consumed by unknown listeners. Changing its schema is a breaking change. Apply the same schema evolution discipline to events that you apply to REST APIs (BEE-71) and Protocol Buffers (BEE-468): add fields, never remove or rename them without a versioned migration path.
+**SHOULD define event contracts explicitly and version them.** In choreography, an event is a public API consumed by unknown listeners. Changing its schema is a breaking change. Apply the same schema evolution discipline to events that you apply to REST APIs (BEE-4002) and Protocol Buffers (BEE-19049): add fields, never remove or rename them without a versioned migration path.
 
 **MAY use choreography for side-effect fan-out and orchestration for the primary workflow path.** When an order is confirmed, the primary path (payment → inventory → fulfillment) can be orchestrated; the side effects (analytics event, notification email, fraud signal) can be choreographed listeners on the `OrderConfirmed` event. This gives visibility where it matters and extensibility where teams need autonomy.
 

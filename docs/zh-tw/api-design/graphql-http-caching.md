@@ -5,7 +5,7 @@ state: draft
 slug: graphql-http-caching
 ---
 
-# [BEE-596] GraphQL 的 HTTP 層快取
+# [BEE-4010] GraphQL 的 HTTP 層快取
 
 :::info
 GraphQL 並非以 HTTP 快取為前提設計，但仍可參與其中。可行路徑包含三步：透過 persisted query 改用 GET、為回應加上快取指令、使用 ETag 進行條件式重新驗證。前提是先理解預設的 `POST /graphql` 為什麼會讓 CDN 失去作用。

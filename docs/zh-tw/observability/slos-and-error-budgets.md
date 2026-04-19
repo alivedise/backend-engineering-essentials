@@ -5,7 +5,7 @@ state: draft
 slug: slos-and-error-budgets
 ---
 
-# [BEE-324] SLO 與錯誤預算
+# [BEE-14005] SLO 與錯誤預算
 
 :::info
 用 SLO 定義可靠性目標，再用錯誤預算決定何時發布功能、何時專注於可靠性改善。

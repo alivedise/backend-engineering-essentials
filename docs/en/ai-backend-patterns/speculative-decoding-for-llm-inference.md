@@ -5,7 +5,7 @@ state: draft
 slug: speculative-decoding-for-llm-inference
 ---
 
-# [BEE-561] Speculative Decoding for LLM Inference
+# [BEE-30059] Speculative Decoding for LLM Inference
 
 :::info
 Autoregressive LLM decoding generates one token per forward pass, leaving the GPU underutilized between passes while weights are loaded from memory. Speculative decoding amortizes this cost: a cheap draft model proposes multiple tokens in sequence, and the large target model verifies all of them in a single parallel forward pass using modified rejection sampling that provably preserves the target distribution.
@@ -76,7 +76,7 @@ speculative_config={
 
 ### Deploy EAGLE for highest single-user latency reduction
 
-**SHOULD** use EAGLE or EAGLE-2 when optimizing for single-user p50 and p99 TTFT and ITL (see BEE-560) on generation-heavy workloads. EAGLE requires a pre-trained draft head — official heads are released for LLaMA-2, LLaMA-3, Mistral, and Vicuna families.
+**SHOULD** use EAGLE or EAGLE-2 when optimizing for single-user p50 and p99 TTFT and ITL (see BEE-30058) on generation-heavy workloads. EAGLE requires a pre-trained draft head — official heads are released for LLaMA-2, LLaMA-3, Mistral, and Vicuna families.
 
 ```python
 # EAGLE-2 with dynamic draft tree in vLLM

@@ -5,7 +5,7 @@ state: draft
 slug: model-explainability-in-production
 ---
 
-# [BEE-588] Model Explainability in Production
+# [BEE-30086] Model Explainability in Production
 
 :::info
 Model explainability translates a trained model's internal decision logic into human-readable attribution scores that answer "why did the model predict this?" for a specific input. Production explainability has two requirements that conflict: explanations must be accurate enough to satisfy regulatory audits (EU AI Act, GDPR Article 22) and fast enough to sit in a serving path without degrading latency budgets. Naive implementations fail both.
@@ -238,10 +238,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-585 ML Monitoring and Drift Detection](585) — population-level drift complements per-prediction explanation drift
-- [BEE-584 Shadow Mode and Canary Deployment for ML Models](584) — champion/challenger comparison should include explanation comparison
-- [BEE-586 ML Experiment Tracking and Model Registry](586) — link explanation artifacts to MLflow runs via `mlflow.log_artifact()`
-- [BEE-506 Evaluating and Testing LLM Applications](506) — LLM-specific evaluation patterns distinct from classical ML explainability
+- [BEE-30083 ML Monitoring and Drift Detection](585) — population-level drift complements per-prediction explanation drift
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — champion/challenger comparison should include explanation comparison
+- [BEE-30084 ML Experiment Tracking and Model Registry](586) — link explanation artifacts to MLflow runs via `mlflow.log_artifact()`
+- [BEE-30004 Evaluating and Testing LLM Applications](506) — LLM-specific evaluation patterns distinct from classical ML explainability
 
 ## References
 

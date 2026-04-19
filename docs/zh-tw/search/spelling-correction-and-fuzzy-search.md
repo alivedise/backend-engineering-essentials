@@ -5,7 +5,7 @@ state: draft
 slug: spelling-correction-and-fuzzy-search
 ---
 
-# [BEE-387] 拼寫校正與模糊搜尋
+# [BEE-17008] 拼寫校正與模糊搜尋
 
 :::info
 模糊搜尋尋找與查詢大致匹配的結果，能夠容忍錯字和拼寫錯誤——代價是更高的查詢延遲，而延遲由索引中唯一詞彙的數量決定，而非文件數量。

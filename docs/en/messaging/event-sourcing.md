@@ -5,7 +5,7 @@ state: draft
 slug: event-sourcing
 ---
 
-# [BEE-223] Event Sourcing
+# [BEE-10004] Event Sourcing
 
 :::info
 Store state as an immutable sequence of events, reconstruct current state by replaying them, and build any number of projections without touching the event log.
@@ -193,7 +193,7 @@ The event log did not change. The new projector is run from position 0, and the 
 - **Temporal queries are needed** — "what was the account balance at noon on March 3rd?" is a first-class operation.
 - **Debugging production issues matters** — you can replay the exact sequence of events that led to an incorrect state.
 - **Multiple read models are needed** — different consumers need different views of the same data. Each adds a projector without touching others.
-- **Used alongside CQRS (BEE-102)** — event sourcing is the natural write-side complement to CQRS's read/write separation.
+- **Used alongside CQRS (BEE-5003)** — event sourcing is the natural write-side complement to CQRS's read/write separation.
 - **Business events are the primary language** — the domain speaks in events (order placed, shipment dispatched, payment received). Event sourcing makes that model explicit.
 
 ## When NOT to Use Event Sourcing

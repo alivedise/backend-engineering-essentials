@@ -5,7 +5,7 @@ state: draft
 slug: graceful-shutdown-and-connection-draining
 ---
 
-# [BEE-453] 優雅關閉與連線排空
+# [BEE-19034] 優雅關閉與連線排空
 
 :::info
 優雅關閉（graceful shutdown）是在不丟棄進行中請求的情況下停止服務的過程：完成正在進行的工作、拒絕新工作、乾淨地關閉連線，然後退出。在 Kubernetes 中，正確實作這一過程需要理解平台工作方式中一個根本性的競態條件——並使用 preStop 休眠來修補它。

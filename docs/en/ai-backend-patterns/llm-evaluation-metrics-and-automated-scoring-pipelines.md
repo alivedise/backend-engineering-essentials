@@ -5,7 +5,7 @@ state: draft
 slug: llm-evaluation-metrics-and-automated-scoring-pipelines
 ---
 
-# [BEE-551] LLM Evaluation Metrics and Automated Scoring Pipelines
+# [BEE-30049] LLM Evaluation Metrics and Automated Scoring Pipelines
 
 :::info
 Production LLM quality assurance requires a layered evaluation pipeline — fast code-based graders on every commit, model-based scoring (G-Eval, LLM-as-judge) on pull requests, and sampled production monitoring — with statistical rigor to distinguish genuine regressions from measurement noise, and bias controls to prevent LLM judges from rewarding verbosity over accuracy.

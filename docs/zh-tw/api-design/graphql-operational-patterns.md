@@ -5,7 +5,7 @@ state: draft
 slug: graphql-operational-patterns
 ---
 
-# [BEE-599] GraphQL 營運模式
+# [BEE-4013] GraphQL 營運模式
 
 :::info
 決定 GraphQL 部署能否在生產環境存活的三個營運模式：把 persisted query 允許清單當成安全邊界、把 query complexity 治理當成組織紀律、用 additive schema 演進取代 REST 風格的版本控制。本系列共四篇文章，這是探討 GraphQL HTTP 生態缺口的最後一篇。
@@ -130,7 +130,7 @@ flowchart LR
 2. **伺服器強制執行 schema；客戶端用 query 強制執行對 schema 的引用。** 移除沒有客戶端選的欄位是非破壞性的。Schema registry 可以透過檢查每個現役客戶端的 operation manifest 來回答「這個移除安全嗎？」。
 3. **Federation 讓每個團隊獨立演進。** 一個 subgraph 可以在不與 gateway 團隊或其他 subgraph 協調的情況下，為 federated 型別新增欄位（[BEE-4008](graphql-federation.md) 涵蓋 federation 機制）。
 
-與 REST 的對比：BEE-71 記錄四種版本控制策略（URL 路徑、自訂 header、query 參數、內容協商）以及 Stripe 的日期版本模型。它們都是*管理* breaking change 的機制，給消費者一個過渡期間的穩定介面。GraphQL 翻轉問題：與其管理 breaking change，不如把它們設計掉。代價是紀律（只能 additive、移除前必先 deprecate）與基礎設施（schema registry、operation manifest）。好處是沒有面向消費者的版本協商、沒有 `Sunset` header、沒有 `/v1/` 與 `/v2/` 並行運作。[GraphQL Foundation 的最佳實踐指引](https://graphql.org/learn/best-practices/) 明確採取這個立場。
+與 REST 的對比：BEE-4002 記錄四種版本控制策略（URL 路徑、自訂 header、query 參數、內容協商）以及 Stripe 的日期版本模型。它們都是*管理* breaking change 的機制，給消費者一個過渡期間的穩定介面。GraphQL 翻轉問題：與其管理 breaking change，不如把它們設計掉。代價是紀律（只能 additive、移除前必先 deprecate）與基礎設施（schema registry、operation manifest）。好處是沒有面向消費者的版本協商、沒有 `Sunset` header、沒有 `/v1/` 與 `/v2/` 並行運作。[GraphQL Foundation 的最佳實踐指引](https://graphql.org/learn/best-practices/) 明確採取這個立場。
 
 這在類別上不同。它不是「REST 版本控制的更好版本」；它是同一個底層問題（API 安全演進）的不同解法類別。
 
@@ -194,7 +194,7 @@ Mobile 合約只發出含 `id` 與 `name` 的 schema；partner 合約類似；in
 
 ```mermaid
 flowchart TB
-    subgraph REST["REST versioning timeline (BEE-71)"]
+    subgraph REST["REST versioning timeline (BEE-4002)"]
         direction LR
         R0[t=0<br/>v1 stable<br/>name field] --> R1[t=1<br/>v2 ships<br/>v1 + v2 in parallel<br/>Sunset header on v1]
         R1 --> R2[t=2<br/>v1 deprecated<br/>migration guide published]
@@ -216,7 +216,7 @@ flowchart TB
 - **Federation 合約取代 per-version 維護。** 在 REST 中跑多個消費者版本（`/v1/`、`/v2/`、`/v3/`）的團隊通常為每個版本維護平行的 codebase。Federation 合約讓一個 schema 投影所有變體。v1 mobile schema 是與 v2 web schema 同一個 supergraph 的標籤子集。代價是 tagging 上的前期紀律；好處是沒有平行 codebase。
 - **Deprecation 的移除是難的部分，不是 deprecation 本身。** 加 `@deprecated` 容易，做得到。移除 deprecated 欄位才是紀律。它需要持續的使用率測量、追蹤低優先客戶端、願意打破長尾的落後者。沒有完成移除的組織承諾，schema 會累積死欄位，deprecation 指令會變成願望清單而不是合約。[Marc-André Giroux 的「How Should We Version GraphQL APIs?」](https://productionreadygraphql.com/blog/2019-11-06-how-should-we-version-graphql-apis/) 是對 deprecation-as-contract 紀律的詳盡實踐處理。
 - **欄位重命名是最誘人的非 additive 變更。** 一個事後發現混亂的欄位名稱是持續的重命名誘惑。Additive 路徑（`add givenName`、`deprecate name`、等待、`remove name`）緩慢且讓人覺得官僚。為「就這一次」繞過這條路的團隊會養成下次也繞過的習慣。紀律是永不繞過；重命名永遠走 deprecation 週期。
-- **與 BEE-71 的交叉連結。** 讀本節的 REST 團隊應該理解 GraphQL 的演進模型把版本控制議題從 URL 層級重新定位到欄位層級的 deprecation 追蹤。問題仍然是「我們什麼時候可以移除這個？」與「誰還在用它？」；機制不同。
+- **與 BEE-4002 的交叉連結。** 讀本節的 REST 團隊應該理解 GraphQL 的演進模型把版本控制議題從 URL 層級重新定位到欄位層級的 deprecation 追蹤。問題仍然是「我們什麼時候可以移除這個？」與「誰還在用它？」；機制不同。
 
 ## 常見錯誤
 
@@ -226,7 +226,7 @@ Auto-register 流程接受客戶端在第一個請求送來的任何 query，並
 
 **2. 關閉 introspection 卻沒啟用允許清單。**
 
-常見的部分修復：生產拒絕 `__schema` introspection 但仍接受客戶端送來的任何 query。攻擊者沒辦法直接列舉 schema，但可以靠送出猜測的 query 來探測；auto-register 流程接受它們。兩個控制都必要；單獨任何一個都漏。[BEE-499（BOLA）](../Security Fundamentals/499.md) 是這個分層防禦論點的 per-object 對應。
+常見的部分修復：生產拒絕 `__schema` introspection 但仍接受客戶端送來的任何 query。攻擊者沒辦法直接列舉 schema，但可以靠送出猜測的 query 來探測；auto-register 流程接受它們。兩個控制都必要；單獨任何一個都漏。[BEE-2016（BOLA）](../Security Fundamentals/499.md) 是這個分層防禦論點的 per-object 對應。
 
 **3. 把 query complexity 預算設定一次後就不再測量。**
 

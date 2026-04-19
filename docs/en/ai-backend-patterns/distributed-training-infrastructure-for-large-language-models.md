@@ -5,7 +5,7 @@ state: draft
 slug: distributed-training-infrastructure-for-large-language-models
 ---
 
-# [BEE-572] Distributed Training Infrastructure for Large Language Models
+# [BEE-30070] Distributed Training Infrastructure for Large Language Models
 
 :::info
 Training a 70B-parameter model requires ~1.4 TB of GPU memory per replica — more than any single cluster of A100s in existence. ZeRO optimizer sharding, gradient checkpointing, and mixed-precision training are the three orthogonal techniques that make trillion-parameter training feasible, each attacking a different component of the memory budget.

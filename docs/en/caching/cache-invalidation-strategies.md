@@ -5,7 +5,7 @@ state: draft
 slug: cache-invalidation-strategies
 ---
 
-# [BEE-201] Cache Invalidation Strategies
+# [BEE-9002] Cache Invalidation Strategies
 
 :::info
 TTL, event-driven invalidation, write-through, versioned keys -- how to keep cached data consistent with the source of truth without destroying cache utility.

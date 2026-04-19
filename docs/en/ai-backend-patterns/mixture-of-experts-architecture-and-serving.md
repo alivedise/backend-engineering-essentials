@@ -5,7 +5,7 @@ state: draft
 slug: mixture-of-experts-architecture-and-serving
 ---
 
-# [BEE-566] Mixture of Experts Architecture and Serving
+# [BEE-30064] Mixture of Experts Architecture and Serving
 
 :::info
 Mixture of Experts (MoE) replaces dense feed-forward layers with a collection of specialist sub-networks (experts) and a router that selects only a small subset per token. The result is a model with large total parameter count but far fewer active parameters per forward pass — delivering dense-model quality at a fraction of the inference compute.

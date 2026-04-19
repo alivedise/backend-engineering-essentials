@@ -5,7 +5,7 @@ state: draft
 slug: llm-self-consistency-and-ensemble-sampling
 ---
 
-# [BEE-543] LLM Self-Consistency and Ensemble Sampling
+# [BEE-30041] LLM Self-Consistency and Ensemble Sampling
 
 :::info
 Sampling the same prompt multiple times and aggregating results — through majority voting, a verifier model, or an ensemble of diverse LLMs — trades compute for accuracy on reasoning tasks, achieving 6–18% gains over single-pass greedy decoding at the cost of N× token consumption and latency.

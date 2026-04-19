@@ -5,7 +5,7 @@ state: draft
 slug: cap-theorem-and-the-consistency-availability-tradeoff
 ---
 
-# [BEE-420] CAP Theorem and the Consistency-Availability Tradeoff
+# [BEE-19001] CAP Theorem and the Consistency-Availability Tradeoff
 
 :::info
 The CAP theorem proves that a distributed system facing a network partition must choose between returning a consistent answer and returning any answer at all — and understanding what that choice actually entails is prerequisite to reasoning correctly about databases, caches, queues, and every other distributed component.

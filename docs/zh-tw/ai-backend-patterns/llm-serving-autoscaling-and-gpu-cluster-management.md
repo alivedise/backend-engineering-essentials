@@ -5,7 +5,7 @@ state: draft
 slug: llm-serving-autoscaling-and-gpu-cluster-management
 ---
 
-# [BEE-570] LLM 服務的自動擴縮與 GPU 叢集管理
+# [BEE-30068] LLM 服務的自動擴縮與 GPU 叢集管理
 
 :::info
 LLM 服務的 GPU 自動擴縮與 CPU 自動擴縮有根本性差異：GPU 節點的預置需要數分鐘而非數秒，模型載入又額外增加 1–10 分鐘的冷啟動延遲，而閒置 GPU 的成本是閒置 CPU 的 3–10 倍。有效的 GPU 叢集管理需要專為此場景打造的工具棧——用 GPU Operator 管理運行時配置、Karpenter 快速預置節點、KEDA 根據佇列深度擴縮，並配合暖池策略使縮容至零在經濟上可行。

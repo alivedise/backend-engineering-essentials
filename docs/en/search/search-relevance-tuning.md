@@ -5,7 +5,7 @@ state: draft
 slug: search-relevance-tuning
 ---
 
-# [BEE-381] Search Relevance Tuning
+# [BEE-17002] Search Relevance Tuning
 
 :::info
 Relevance tuning is the discipline of measuring and improving why the right documents rank at the top — starting with BM25 parameters and field weights, validated by offline metrics before any change reaches production.

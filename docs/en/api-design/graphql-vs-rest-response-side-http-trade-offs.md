@@ -5,7 +5,7 @@ state: draft
 slug: graphql-vs-rest-response-side-http-trade-offs
 ---
 
-# [BEE-598] GraphQL vs REST: Response-Side HTTP Trade-offs
+# [BEE-4012] GraphQL vs REST: Response-Side HTTP Trade-offs
 
 :::info
 REST inherits status-code-driven errors, per-route observability, and URL-based authorization from HTTP itself. GraphQL collapses all three to a single endpoint and must rebuild each at the schema or middleware layer. This article covers the three response-side gaps and the default mitigations.
@@ -31,7 +31,7 @@ The rest of this article expands each row of the table below. Each section follo
 
 | Concern | REST inherits from HTTP | GraphQL must build it |
 |---|---|---|
-| **Error semantics** | HTTP status code + RFC 9457 Problem Details (BEE-75) | GraphQL-over-HTTP status code mapping + `errors[].extensions.code` + partial-success contract |
+| **Error semantics** | HTTP status code + RFC 9457 Problem Details (BEE-4006) | GraphQL-over-HTTP status code mapping + `errors[].extensions.code` + partial-success contract |
 | **Observability** | Per-route metrics, traces, logs labeled by URL pattern | Operation-name tagging + per-resolver spans + schema-aware metrics |
 | **Authorization** | URL/method ACLs at the gateway (RBAC/ABAC) | Schema directives + centralized policy engine + per-resolver enforcement |
 
@@ -117,7 +117,7 @@ Pros: consistency across REST and GraphQL surfaces, audit-friendly, supports com
 
 **REST baseline.** HTTP status code is the canonical failure signal: 4xx for client errors, 5xx for server errors, with [RFC 9457 Problem Details](https://www.rfc-editor.org/rfc/rfc9457.html) ([BEE-4006](api-error-handling-and-problem-details.md)) providing the machine-readable error body in the `application/problem+json` media type. The status code drives every HTTP-aware tool: load balancer health checks, retry libraries, monitoring dashboards, CDN logs. The body provides field-level detail and a correlation ID. The two channels — status code for category, body for detail — are the contract HTTP infrastructure depends on.
 
-**GraphQL gap.** Default behavior is `200 OK` regardless of failure mode, with errors in `data.errors[]`. This is the same "200 with success flag in body" anti-pattern BEE-75 calls out as the most damaging error-handling mistake, because it breaks every HTTP-aware tool simultaneously.
+**GraphQL gap.** Default behavior is `200 OK` regardless of failure mode, with errors in `data.errors[]`. This is the same "200 with success flag in body" anti-pattern BEE-4006 calls out as the most damaging error-handling mistake, because it breaks every HTTP-aware tool simultaneously.
 
 Three sub-problems compound:
 
@@ -164,7 +164,7 @@ flowchart TD
 - Critical fields should be marked non-nullable in the schema (`String!` not `String`). A non-nullable field's failure propagates upward to the nearest nullable ancestor and nulls the whole subtree, communicating "this part of the response is unusable."
 - In a federated GraphQL setup (multiple subgraphs joined by a router), errors from one subgraph propagate to the federated response in `errors[]` for that subgraph's fields; the rest of the response continues. The exact propagation behavior is router-specific.
 
-**Recommendation.** Adopt the GraphQL-over-HTTP status code mapping for new APIs and during major version bumps; the operational benefit is recovering the HTTP-aware tools (load balancers, monitoring, retries, CDN logs) that the legacy 200-only behavior disables. Always emit `extensions.code` on every error. Make it a server-middleware default that no resolver can bypass. Design schemas with deliberate non-null usage: critical, must-have fields are non-null; partial-success-friendly fields are nullable. For partial-success responses, document the contract explicitly: clients must inspect `errors[]` regardless of `data` shape. Cross-link to BEE-75 for the REST treatment of error design. The principles transfer; only the wire format differs.
+**Recommendation.** Adopt the GraphQL-over-HTTP status code mapping for new APIs and during major version bumps; the operational benefit is recovering the HTTP-aware tools (load balancers, monitoring, retries, CDN logs) that the legacy 200-only behavior disables. Always emit `extensions.code` on every error. Make it a server-middleware default that no resolver can bypass. Design schemas with deliberate non-null usage: critical, must-have fields are non-null; partial-success-friendly fields are nullable. For partial-success responses, document the contract explicitly: clients must inspect `errors[]` regardless of `data` shape. Cross-link to BEE-4006 for the REST treatment of error design. The principles transfer; only the wire format differs.
 
 ## Common Mistakes
 

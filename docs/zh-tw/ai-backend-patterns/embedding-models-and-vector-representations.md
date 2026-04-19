@@ -5,7 +5,7 @@ state: draft
 slug: embedding-models-and-vector-representations
 ---
 
-# [BEE-516] 嵌入模型與向量表示
+# [BEE-30014] 嵌入模型與向量表示
 
 :::info
 嵌入模型將文字轉換為稠密的數值向量，使語義相似的文字產生幾何上接近的向量。選擇正確的模型、維度、距離度量和快取策略，決定了依賴它的 RAG 管線、語義搜尋和推薦功能的檢索品質。

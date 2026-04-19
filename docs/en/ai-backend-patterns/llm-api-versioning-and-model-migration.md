@@ -5,7 +5,7 @@ state: draft
 slug: llm-api-versioning-and-model-migration
 ---
 
-# [BEE-538] LLM API Versioning and Model Migration
+# [BEE-30036] LLM API Versioning and Model Migration
 
 :::info
 LLM model upgrades are not library upgrades: output behavior is non-deterministic, prompts are model-specific contracts, and benchmark improvements on standard datasets do not predict task-specific production behavior. Safe migration requires dated snapshot pinning, golden-dataset regression testing, and a canary ramp with an active rollback path.

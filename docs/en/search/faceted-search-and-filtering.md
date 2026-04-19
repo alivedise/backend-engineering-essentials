@@ -5,7 +5,7 @@ state: draft
 slug: faceted-search-and-filtering
 ---
 
-# [BEE-382] Faceted Search and Filtering
+# [BEE-17003] Faceted Search and Filtering
 
 :::info
 Faceted search lets users iteratively narrow large result sets by selecting attribute values — a pattern pioneered by UC Berkeley's Flamenco project and now standard on every e-commerce, library, and enterprise search interface.

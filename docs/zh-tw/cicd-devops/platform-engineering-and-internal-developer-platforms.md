@@ -5,7 +5,7 @@ state: draft
 slug: platform-engineering-and-internal-developer-platforms
 ---
 
-# [BEE-483] 平台工程與內部開發者平台
+# [BEE-16009] 平台工程與內部開發者平台
 
 :::info
 平台工程是建立和維護自助式內部開發者平台（IDP）的學科，旨在減少應用程式團隊的認知負擔——讓開發者無需等待維運人員，即可自行配置基礎設施、建立服務和部署軟體。

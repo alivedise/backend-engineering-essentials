@@ -5,7 +5,7 @@ state: draft
 slug: connection-pooling-and-query-optimization
 ---
 
-# [BEE-125] Connection Pooling and Query Optimization
+# [BEE-6006] Connection Pooling and Query Optimization
 
 :::info
 Reduce database overhead through connection reuse and eliminate inefficient query patterns before they reach production.

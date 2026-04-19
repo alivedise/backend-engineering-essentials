@@ -5,7 +5,7 @@ state: draft
 slug: ai-workflow-orchestration
 ---
 
-# [BEE-529] AI Workflow Orchestration
+# [BEE-30027] AI Workflow Orchestration
 
 :::info
 AI workflow orchestration turns a sequence of LLM calls into a durable, resumable process — the key engineering decisions are how to model the control flow (state machine, DAG, or event-driven graph), where to persist state so the workflow survives failures, and how to instrument each step for latency and cost accountability.
@@ -202,7 +202,7 @@ class ResearchWorkflow:
 
 **MUST** emit a trace span for each node or activity execution, including: step name, duration, input token count, output token count, model name, and any error. A single trace ID that spans the full workflow invocation enables reconstructing cost and latency breakdowns per user session.
 
-**SHOULD** use OpenTelemetry (BEE-475) as the tracing substrate, with LLM-specific attributes following the OpenTelemetry GenAI semantic conventions:
+**SHOULD** use OpenTelemetry (BEE-19056) as the tracing substrate, with LLM-specific attributes following the OpenTelemetry GenAI semantic conventions:
 
 ```python
 from opentelemetry import trace

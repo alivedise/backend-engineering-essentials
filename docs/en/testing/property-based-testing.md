@@ -5,7 +5,7 @@ state: draft
 slug: property-based-testing
 ---
 
-# [BEE-346] Property-Based Testing
+# [BEE-15007] Property-Based Testing
 
 :::info
 Property-based testing replaces manually chosen examples with automatically generated inputs checked against a general claim — then automatically finds the smallest input that breaks it.
@@ -13,7 +13,7 @@ Property-based testing replaces manually chosen examples with automatically gene
 
 ## Context
 
-Example-based testing (the dominant form in BEE-340's Testing Pyramid) has a structural weakness: you can only test what you think to write. A developer writing `assert sort([3,1,2]) == [1,2,3]` has chosen a specific input and expected output. If the sort algorithm works for that input but fails for an input with duplicate elements, an empty list, or a list of a million identical values, the test passes and the bug ships.
+Example-based testing (the dominant form in BEE-15001's Testing Pyramid) has a structural weakness: you can only test what you think to write. A developer writing `assert sort([3,1,2]) == [1,2,3]` has chosen a specific input and expected output. If the sort algorithm works for that input but fails for an input with duplicate elements, an empty list, or a list of a million identical values, the test passes and the bug ships.
 
 Property-based testing (PBT) was invented by Koen Claessen and John Hughes as QuickCheck, presented at ICFP 2000 ("QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs," ACM SIGPLAN Notices). The paper received the ACM SIGPLAN Most Influential ICFP Paper award in 2010. The key insight: instead of specifying *examples*, specify *properties* — universally quantified claims that must hold for all valid inputs. The framework generates hundreds or thousands of random inputs, checks whether the property holds for each, and upon finding a counterexample, automatically shrinks it to the minimal failing case.
 

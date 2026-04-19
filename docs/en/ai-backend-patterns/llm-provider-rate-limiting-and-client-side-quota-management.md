@@ -5,7 +5,7 @@ state: draft
 slug: llm-provider-rate-limiting-and-client-side-quota-management
 ---
 
-# [BEE-541] LLM Provider Rate Limiting and Client-Side Quota Management
+# [BEE-30039] LLM Provider Rate Limiting and Client-Side Quota Management
 
 :::info
 LLM providers enforce multi-dimensional rate limits (requests per minute, input tokens per minute, output tokens per minute) using token bucket algorithms that punish bursts rather than averages — managing them requires pre-flight token estimation, provider-header-aware retry with full-jitter backoff, client-side token buckets that mirror provider enforcement, and priority queuing that gates on all limit dimensions simultaneously.

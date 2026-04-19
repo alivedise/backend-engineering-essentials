@@ -5,7 +5,7 @@ state: draft
 slug: integration-testing-for-backend-services
 ---
 
-# [BEE-341] Integration Testing for Backend Services
+# [BEE-15002] Integration Testing for Backend Services
 
 :::info
 Integration tests verify that real components work together correctly. Use real databases via Testcontainers, stub external APIs at the boundary, and manage test data with explicit setup and teardown.

@@ -5,7 +5,7 @@ state: draft
 slug: llm-caching-strategies
 ---
 
-# [BEE-526] LLM 快取策略
+# [BEE-30024] LLM 快取策略
 
 :::info
 LLM 快取在三個層次上運作——精確匹配、語意和供應商前綴快取——每個層次都有不同的命中率、失效邏輯和成本特性。依序建立這三層可以將重複性工作負載的有效 Token 支出減少 70-95%。
@@ -300,7 +300,7 @@ flowchart TD
 
 ## 相關 BEE
 
-- [BEE-9001](../caching/caching-fundamentals-and-cache-hierarchy.md) -- 快取基礎與快取層次結構：BEE-200 中描述的驅逐策略、快取雪崩預防和 TTL 策略直接適用於此處的精確匹配和語意快取層
+- [BEE-9001](../caching/caching-fundamentals-and-cache-hierarchy.md) -- 快取基礎與快取層次結構：BEE-9001 中描述的驅逐策略、快取雪崩預防和 TTL 策略直接適用於此處的精確匹配和語意快取層
 - [BEE-30001](llm-api-integration-patterns.md) -- LLM API 整合模式：供應商呼叫的重試和超時邏輯；供應商前綴快取與那裡討論的串流回應互動
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG 管道架構：注入系統提示的 RAG 上下文是前綴快取的最大單一候選；語料庫版本必須反映在快取鍵中
 - [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI 成本優化與模型路由：供應商前綴快取是主要成本降低杠桿之一，與模型路由和批次處理並列

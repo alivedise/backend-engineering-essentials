@@ -5,7 +5,7 @@ state: draft
 slug: serverless-architecture-patterns
 ---
 
-# [BEE-484] Serverless Architecture Patterns
+# [BEE-5007] Serverless Architecture Patterns
 
 :::info
 Serverless architecture shifts operational responsibility for provisioning, scaling, and infrastructure management to the cloud provider. Developers deploy code in response to discrete events; the platform handles everything else — including scaling to zero when idle.

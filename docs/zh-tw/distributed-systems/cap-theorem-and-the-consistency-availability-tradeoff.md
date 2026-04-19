@@ -5,7 +5,7 @@ state: draft
 slug: cap-theorem-and-the-consistency-availability-tradeoff
 ---
 
-# [BEE-420] CAP 定理與一致性-可用性取捨
+# [BEE-19001] CAP 定理與一致性-可用性取捨
 
 :::info
 CAP 定理證明了在遭遇網路分區的分散式系統中，必須在「返回一致的答案」和「返回任何答案」之間做出選擇——理解這個選擇的真實含義，是正確推理資料庫、快取、訊息佇列及每個分散式元件的先決條件。

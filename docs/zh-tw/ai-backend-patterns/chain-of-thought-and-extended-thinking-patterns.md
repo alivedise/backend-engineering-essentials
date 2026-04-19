@@ -5,7 +5,7 @@ state: draft
 slug: chain-of-thought-and-extended-thinking-patterns
 ---
 
-# [BEE-525] 思維鏈與擴展思考模式
+# [BEE-30023] 思維鏈與擴展思考模式
 
 :::info
 思維鏈提示與擴展思考模型都以推理成本換取推理品質——關鍵的工程決策在於知道何時這個交換是值得的、如何呼叫各種方法，以及如何根據任務複雜度在它們之間路由。

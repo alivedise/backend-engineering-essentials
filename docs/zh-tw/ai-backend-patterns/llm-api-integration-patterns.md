@@ -5,7 +5,7 @@ state: draft
 slug: llm-api-integration-patterns
 ---
 
-# [BEE-503] LLM API 整合模式
+# [BEE-30001] LLM API 整合模式
 
 :::info
 將大型語言模型（LLM）API 整合到後端服務中，會引入一類獨特的營運問題：無狀態的上下文管理、基於令牌的計費、機率性輸出，以及全新的攻擊面。將 LLM 呼叫視為一般 HTTP 請求，將產生不可靠、昂貴且不安全的系統。

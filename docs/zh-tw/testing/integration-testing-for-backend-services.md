@@ -5,7 +5,7 @@ state: draft
 slug: integration-testing-for-backend-services
 ---
 
-# [BEE-341] 後端服務的整合測試
+# [BEE-15002] 後端服務的整合測試
 
 :::info
 整合測試驗證真實元件能否正確協同運作。透過 Testcontainers 使用真實資料庫、在邊界處 stub 外部 API，並在每次測試之間明確清理測試資料。

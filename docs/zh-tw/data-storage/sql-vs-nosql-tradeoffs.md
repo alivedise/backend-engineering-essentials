@@ -5,7 +5,7 @@ state: draft
 slug: sql-vs-nosql-tradeoffs
 ---
 
-# [BEE-120] SQL vs NoSQL 的權衡
+# [BEE-6001] SQL vs NoSQL 的權衡
 
 :::info
 關聯式、文件、鍵值、欄族、圖形 — 根據資料形狀與存取模式選擇，而非流行趨勢。

@@ -5,7 +5,7 @@ state: draft
 slug: prompt-management-and-versioning
 ---
 
-# [BEE-530] 提示詞管理與版本控制
+# [BEE-30028] 提示詞管理與版本控制
 
 :::info
 提示詞是生產 LLM 系統的主要控制介面——它們需要與應用程式碼相同的運營紀律：版本控制、自動化測試、分階段部署，以及無需完整應用程式發布即可即時回退。
@@ -267,9 +267,9 @@ flowchart TD
 
 ## 相關 BEE
 
-- [BEE-30004](evaluating-and-testing-llm-applications.md) -- 評估和測試 LLM 應用：BEE-506 中描述的黃金資料集構建和 LLM 作為評審員模式直接饋入此處的 Promptfoo 評估套件
+- [BEE-30004](evaluating-and-testing-llm-applications.md) -- 評估和測試 LLM 應用：BEE-30004 中描述的黃金資料集構建和 LLM 作為評審員模式直接饋入此處的 Promptfoo 評估套件
 - [BEE-30009](llm-observability-and-monitoring.md) -- LLM 可觀察性與監控：觸發金絲雀回退的每版本指標（成本、延遲、錯誤率）由可觀察性層收集
-- [BEE-16004](../cicd-devops/feature-flags.md) -- 功能標誌：金絲雀路由機制使用 BEE-363 中描述的相同功能標誌基礎設施
+- [BEE-16004](../cicd-devops/feature-flags.md) -- 功能標誌：金絲雀路由機制使用 BEE-16004 中描述的相同功能標誌基礎設施
 - [BEE-16002](../cicd-devops/deployment-strategies.md) -- 部署策略：提示詞金絲雀推廣遵循與應用程式金絲雀發布相同的模式——小百分比、監控、擴展或回退
 
 ## 參考資料

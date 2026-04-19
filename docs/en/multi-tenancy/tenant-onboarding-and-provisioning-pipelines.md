@@ -5,7 +5,7 @@ state: draft
 slug: tenant-onboarding-and-provisioning-pipelines
 ---
 
-# [BEE-403] Tenant Onboarding and Provisioning Pipelines
+# [BEE-18004] Tenant Onboarding and Provisioning Pipelines
 
 :::info
 Tenant onboarding is the operational pipeline that transforms a new customer into an active tenant — provisioning identity, infrastructure, isolation policies, and billing in a repeatable, automated, and fully observable sequence.

@@ -5,7 +5,7 @@ state: draft
 slug: dead-letter-queues-and-poison-messages
 ---
 
-# [BEE-224] Dead Letter Queues and Poison Messages
+# [BEE-10005] Dead Letter Queues and Poison Messages
 
 :::info
 Route unprocessable messages to a dedicated holding queue. Monitor it. Inspect it. Fix the root cause before replaying. Never let a single bad message block the flow of all the good ones.
@@ -220,7 +220,7 @@ A DLQ that no one watches is operationally equivalent to discarding the messages
 
 ### 3. Infinite Retries Without a DLQ
 
-Setting `maxReceiveCount` to a very large number (or no limit) is the same as having no DLQ. A poison message with 1,000 retry attempts will block the queue for hours before reaching the DLQ. Pair a finite retry count with exponential backoff (BEE-261).
+Setting `maxReceiveCount` to a very large number (or no limit) is the same as having no DLQ. A poison message with 1,000 retry attempts will block the queue for hours before reaching the DLQ. Pair a finite retry count with exponential backoff (BEE-12002).
 
 ### 4. No Failure Metadata in DLQ Messages
 

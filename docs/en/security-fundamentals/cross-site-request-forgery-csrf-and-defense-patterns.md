@@ -5,7 +5,7 @@ state: draft
 slug: cross-site-request-forgery-csrf-and-defense-patterns
 ---
 
-# [BEE-493] Cross-Site Request Forgery (CSRF) and Defense Patterns
+# [BEE-2013] Cross-Site Request Forgery (CSRF) and Defense Patterns
 
 :::info
 CSRF exploits the browser's automatic inclusion of session cookies in every request to a domain — defenses work by requiring proof of same-origin intent that a cross-origin attacker cannot forge.

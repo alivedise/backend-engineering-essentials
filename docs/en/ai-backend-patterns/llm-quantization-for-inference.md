@@ -5,7 +5,7 @@ state: draft
 slug: llm-quantization-for-inference
 ---
 
-# [BEE-563] LLM Quantization for Inference
+# [BEE-30061] LLM Quantization for Inference
 
 :::info
 Quantization reduces model weight precision from 16-bit floats to 4–8 bits, cutting memory footprint 2–4x and inference latency up to 4.5x on GPU — with perplexity degradation of less than one unit on most Llama-scale models. Choosing the right quantization method depends on hardware, whether activations are quantized alongside weights, and whether the deployment target is a GPU server or consumer CPU.
@@ -13,7 +13,7 @@ Quantization reduces model weight precision from 16-bit floats to 4–8 bits, cu
 
 ## Context
 
-A Llama-3.1-70B model in BF16 occupies 140 GB of GPU VRAM and requires two H100 80 GB GPUs to serve. Standard autoregressive decoding is memory-bandwidth-bound (see BEE-561): the GPU spends most of each forward pass loading weights from HBM, not computing. Reducing weight precision directly reduces the bytes loaded per token and therefore the time per token.
+A Llama-3.1-70B model in BF16 occupies 140 GB of GPU VRAM and requires two H100 80 GB GPUs to serve. Standard autoregressive decoding is memory-bandwidth-bound (see BEE-30059): the GPU spends most of each forward pass loading weights from HBM, not computing. Reducing weight precision directly reduces the bytes loaded per token and therefore the time per token.
 
 Quantization research accelerated in 2022–2024 as models grew past single-GPU capacity. Three distinct families emerged, each solving a different constraint:
 
@@ -245,7 +245,7 @@ flowchart TD
 
 **Setting `group_size=128` for all model sizes.** Group size is a quality-storage tradeoff: larger groups (fewer scales) save memory but accumulate more quantization error. For 70B+ models where the model is already large, `group_size=32` or `group_size=64` can meaningfully improve perplexity at the cost of a few percent more storage. For 7–13B models, `group_size=128` is generally sufficient.
 
-**Combining quantization with speculative decoding without testing.** EAGLE-based speculative decoding (BEE-561) uses a draft head trained on the base model's hidden states. If the target model is quantized (especially with AWQ or GPTQ), the hidden state distribution shifts. Always benchmark acceptance rate (BEE-561's `SpecDecMetrics`) after enabling quantization; an acceptance rate drop below 0.6 may require retraining the draft head on the quantized model.
+**Combining quantization with speculative decoding without testing.** EAGLE-based speculative decoding (BEE-30059) uses a draft head trained on the base model's hidden states. If the target model is quantized (especially with AWQ or GPTQ), the hidden state distribution shifts. Always benchmark acceptance rate (BEE-30059's `SpecDecMetrics`) after enabling quantization; an acceptance rate drop below 0.6 may require retraining the draft head on the quantized model.
 
 ## Related BEEs
 

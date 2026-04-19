@@ -5,7 +5,7 @@ state: draft
 slug: log-structured-merge-trees
 ---
 
-# [BEE-443] Log-Structured Merge Trees
+# [BEE-19024] Log-Structured Merge Trees
 
 :::info
 Log-Structured Merge Trees (LSM Trees) achieve high write throughput by converting random in-place updates into sequential append-only writes — accumulating mutations in memory, flushing them as immutable sorted files, and merging those files in the background — trading higher read amplification for dramatically lower write amplification compared to B-trees.

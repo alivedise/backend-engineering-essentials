@@ -5,7 +5,7 @@ state: draft
 slug: tls-ssl-handshake
 ---
 
-# [BEE-53] TLS/SSL Handshake
+# [BEE-3004] TLS/SSL Handshake
 
 :::info
 How encrypted connections are established, certificate chains, and mTLS.

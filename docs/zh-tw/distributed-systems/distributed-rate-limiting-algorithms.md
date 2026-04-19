@@ -5,7 +5,7 @@ state: draft
 slug: distributed-rate-limiting-algorithms
 ---
 
-# [BEE-449] 分散式速率限制演算法
+# [BEE-19030] 分散式速率限制演算法
 
 :::info
 速率限制透過限制客戶端在時間窗口內可發出的請求數量來保護服務。五種標準演算法——固定窗口（fixed window）、滑動窗口日誌（sliding window log）、滑動窗口計數器（sliding window counter）、令牌桶（token bucket）和漏桶（leaky bucket）——在容許突發流量（burst）、記憶體消耗及邊界攻擊的抵抗力上各有差異。選擇正確的演算法需要理解這些權衡；選擇正確的實作方式則需要理解為什麼樸素的 Redis 腳本存在競態條件（race condition）。

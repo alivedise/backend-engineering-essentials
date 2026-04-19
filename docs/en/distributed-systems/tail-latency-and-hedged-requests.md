@@ -5,7 +5,7 @@ state: draft
 slug: tail-latency-and-hedged-requests
 ---
 
-# [BEE-451] Tail Latency and Hedged Requests
+# [BEE-19032] Tail Latency and Hedged Requests
 
 :::info
 In a large distributed system, the slowest request in a fan-out call — not the average — determines the user-visible response time. Jeff Dean and Luiz André Barroso's 2013 paper "The Tail at Scale" proved that optimizing mean latency is insufficient: at 99th percentile, a single slow sub-call will poison the response of almost every user.

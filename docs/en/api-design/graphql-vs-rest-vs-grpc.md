@@ -5,7 +5,7 @@ state: draft
 slug: graphql-vs-rest-vs-grpc
 ---
 
-# [BEE-74] GraphQL vs REST vs gRPC
+# [BEE-4005] GraphQL vs REST vs gRPC
 
 :::info
 Protocol comparison: REST, GraphQL, and gRPC — their strengths, trade-offs, and when to choose each.

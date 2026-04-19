@@ -5,7 +5,7 @@ state: draft
 slug: tls-ssl-handshake
 ---
 
-# [BEE-53] TLS/SSL 握手
+# [BEE-3004] TLS/SSL 握手
 
 :::info
 加密連線的建立過程、憑證鏈，以及 mTLS 雙向驗證。

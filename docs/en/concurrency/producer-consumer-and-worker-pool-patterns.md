@@ -5,7 +5,7 @@ state: draft
 slug: producer-consumer-and-worker-pool-patterns
 ---
 
-# [BEE-244] Producer-Consumer and Worker Pool Patterns
+# [BEE-11005] Producer-Consumer and Worker Pool Patterns
 
 :::info
 Decouple producers from consumers through a bounded shared queue, then serve that queue with a fixed pool of workers. This pair of patterns provides flow control, bounded resource use, and predictable throughput for any task-driven workload.
@@ -324,7 +324,7 @@ Do you have discrete units of work produced at variable rates?
 │       └── Use separate pools, one per workload type
 │
 └── No discrete tasks (streaming, continuous computation)?
-    └── Consider async I/O (BEE-243) or reactive streams (BEE-305)
+    └── Consider async I/O (BEE-11004) or reactive streams (BEE-13006)
 ```
 
 ## Related BEPs

@@ -5,7 +5,7 @@ state: draft
 slug: graphrag-and-knowledge-graph-augmented-generation
 ---
 
-# [BEE-554] GraphRAG 與知識圖譜增強生成
+# [BEE-30052] GraphRAG 與知識圖譜增強生成
 
 :::info
 標準向量 RAG 檢索孤立的文字片段 — 它無法遍歷多跳關係或對社群結構進行推理。GraphRAG 從來源文件建立知識圖譜，使用 Leiden 演算法檢測社群，並生成階層式摘要，讓系統能夠進行本地實體查詢和全局主題級別查詢，而這些是平面檢索無法回答的。
@@ -13,7 +13,7 @@ slug: graphrag-and-knowledge-graph-augmented-generation
 
 ## 背景脈絡
 
-具有密集向量搜尋的檢索增強生成（BEE-509）可以檢索語義相似的文字片段，但將每個片段視為獨立單元。當查詢需要跨多個文件聚合資訊時 — 「這個語料庫的主要主題是什麼？」或「實體 A 如何通過中間實體與實體 B 相關？」— 向量相似性單獨無法遍歷關係圖。
+具有密集向量搜尋的檢索增強生成（BEE-30007）可以檢索語義相似的文字片段，但將每個片段視為獨立單元。當查詢需要跨多個文件聚合資訊時 — 「這個語料庫的主要主題是什麼？」或「實體 A 如何通過中間實體與實體 B 相關？」— 向量相似性單獨無法遍歷關係圖。
 
 Edge、Trinh、Cheng、Bradley、Chao、Mody、Truitt 和 Larson（arXiv:2404.16130，Microsoft Research，2024）介紹了 GraphRAG，這是一個從來源文字中使用 LLM 提取實體-關係三元組、建立屬性圖、應用 Leiden 社群檢測演算法（Traag、Waltman 和 van Eck，arXiv:1810.08473）將實體劃分為階層式社群，並生成與原始文字片段一起索引的社群摘要的管道。在查詢時，GraphRAG 路由到本地搜尋（實體查詢、鄰域擴展）或全局搜尋（社群摘要聚合），根據查詢類型匹配檢索策略。
 

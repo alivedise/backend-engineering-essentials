@@ -5,7 +5,7 @@ state: draft
 slug: multimodal-embeddings-and-cross-modal-retrieval
 ---
 
-# [BEE-557] Multimodal Embeddings and Cross-Modal Retrieval
+# [BEE-30055] Multimodal Embeddings and Cross-Modal Retrieval
 
 :::info
 Multimodal embedding models project images, text, and other modalities into a shared vector space, enabling cross-modal retrieval: find images that match a text query, or find text documents similar to an image. The key architectural challenge is aligning embedding spaces across modalities so that semantically equivalent representations land near each other, regardless of the source modality.
@@ -13,7 +13,7 @@ Multimodal embedding models project images, text, and other modalities into a sh
 
 ## Context
 
-Single-modal embeddings (BEE-516) operate on one input type: text-to-text similarity requires text embeddings, image-to-image similarity requires image embeddings. Cross-modal retrieval — finding images from a text query, or text from an image — requires a shared embedding space where representations from different modalities are geometrically aligned.
+Single-modal embeddings (BEE-30014) operate on one input type: text-to-text similarity requires text embeddings, image-to-image similarity requires image embeddings. Cross-modal retrieval — finding images from a text query, or text from an image — requires a shared embedding space where representations from different modalities are geometrically aligned.
 
 Radford, Kim, Hallacy, Ramesh, Goh, Agarwal, Sastry, Askell, Mishkin, Clark, Krueger, and Sutskever (arXiv:2103.00020, "Learning Transferable Visual Models From Natural Language Supervision", ICML 2021) introduced CLIP (Contrastive Language-Image Pre-Training). CLIP trains an image encoder and a text encoder jointly using a contrastive loss: for a batch of (image, text) pairs, the model maximizes cosine similarity between matching pairs and minimizes it between non-matching pairs. After training on 400 million (image, text) pairs from the web, CLIP's shared embedding space enables zero-shot cross-modal retrieval with no task-specific fine-tuning.
 

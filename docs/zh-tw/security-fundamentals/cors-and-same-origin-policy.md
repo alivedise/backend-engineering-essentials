@@ -5,7 +5,7 @@ state: draft
 slug: cors-and-same-origin-policy
 ---
 
-# [BEE-33] CORS 與同源政策
+# [BEE-2004] CORS 與同源政策
 
 :::info
 同源政策（Same-Origin Policy）是瀏覽器防禦跨站請求攻擊的主要機制。CORS（Cross-Origin Resource Sharing，跨來源資源共用）是有條件放寬該政策的標準化協議——而錯誤設定 CORS 是最常見的安全漏洞之一。

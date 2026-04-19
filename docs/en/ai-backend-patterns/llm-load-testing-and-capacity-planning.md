@@ -5,7 +5,7 @@ state: draft
 slug: llm-load-testing-and-capacity-planning
 ---
 
-# [BEE-560] LLM Load Testing and Capacity Planning
+# [BEE-30058] LLM Load Testing and Capacity Planning
 
 :::info
 LLM-backed services break the assumptions of traditional load testing: responses are priced and rate-limited by token count rather than request count, streaming responses require decomposing latency into distinct phases, and GPU KV cache memory — not CPU threads — is the binding concurrency constraint. Tools like JMeter and Locust measure the wrong things by default; capacity planning must be done in tokens, not requests.

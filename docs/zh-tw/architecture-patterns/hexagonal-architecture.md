@@ -5,7 +5,7 @@ state: draft
 slug: hexagonal-architecture
 ---
 
-# [BEE-103] 六角形架構
+# [BEE-5004] 六角形架構
 
 :::info
 Ports and Adapters -- 透過依賴反轉，實現可測試、可替換的基礎設施。

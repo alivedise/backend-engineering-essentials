@@ -5,7 +5,7 @@ state: draft
 slug: mixture-of-agents-architecture
 ---
 
-# [BEE-578] Mixture of Agents Architecture
+# [BEE-30076] Mixture of Agents Architecture
 
 :::info
 Mixture of Agents (MoA) routes a single user query to multiple LLMs in parallel, then uses a final model to synthesize their responses into a single answer. By exploiting the empirical observation that LLMs produce higher-quality output when shown other models' responses, MoA achieves quality above any single model in the configuration — at the cost of higher latency and proportionally more API calls.
@@ -295,7 +295,7 @@ flowchart TD
 
 ## Common Mistakes
 
-**Using the same model as multiple proposers.** Running four instances of the same model at varying temperatures provides much less benefit than four genuinely different models. The quality improvement comes from diverse perspectives synthesized together, not from ensemble variance. If you only have access to one model, self-consistency (BEE-543) with majority voting is a simpler alternative.
+**Using the same model as multiple proposers.** Running four instances of the same model at varying temperatures provides much less benefit than four genuinely different models. The quality improvement comes from diverse perspectives synthesized together, not from ensemble variance. If you only have access to one model, self-consistency (BEE-30041) with majority voting is a simpler alternative.
 
 **Applying MoA to latency-sensitive interactive UX.** The time-to-first-token for a 2-layer MoA with 4 proposers is typically 10–20 seconds — the sum of at least two rounds of parallel API calls. This is fine for document processing pipelines and batch jobs; it is not acceptable for chat UIs where users expect streaming to begin within 2–3 seconds. Route interactively to a single model; use MoA offline or in background queues.
 

@@ -5,7 +5,7 @@ state: draft
 slug: http-security-headers
 ---
 
-# [BEE-489] HTTP Security Headers
+# [BEE-2009] HTTP Security Headers
 
 :::info
 HTTP security response headers instruct the browser how to handle rendering, resource loading, framing, and transport — forming a defense-in-depth layer that hardens the client-side surface of any web-facing backend service.

@@ -5,7 +5,7 @@ state: draft
 slug: service-discovery
 ---
 
-# [BEE-426] Service Discovery
+# [BEE-19007] Service Discovery
 
 :::info
 Service discovery is the mechanism by which clients locate network endpoints for services whose IP addresses and ports change dynamically — solved either by having clients query a registry directly, or by routing all traffic through an intermediary that resolves addresses on the client's behalf.
@@ -131,7 +131,7 @@ _payments._tcp.internal.example.com. 30 IN SRV 20  0 8080 payments-3.internal.ex
 // T=10s: Second check fails → instance marked "critical"
 // T=2m:  deregister_critical_service_after fires → instance removed from registry
 // T=2m:  New clients no longer receive this instance's address
-// Gap: clients may get connection errors for up to 2m; mitigate with retries (BEE-261)
+// Gap: clients may get connection errors for up to 2m; mitigate with retries (BEE-12002)
 ```
 
 **Envoy xDS endpoint discovery (EDS):**

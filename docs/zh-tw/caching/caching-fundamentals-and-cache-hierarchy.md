@@ -5,7 +5,7 @@ state: draft
 slug: caching-fundamentals-and-cache-hierarchy
 ---
 
-# [BEE-200] 快取基礎與快取層次
+# [BEE-9001] 快取基礎與快取層次
 
 :::info
 CPU 快取、應用程式快取、CDN 快取——理解完整的快取層次堆疊，以及串聯各層的設計模式。

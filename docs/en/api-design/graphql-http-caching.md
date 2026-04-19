@@ -5,7 +5,7 @@ state: draft
 slug: graphql-http-caching
 ---
 
-# [BEE-596] GraphQL HTTP-Layer Caching
+# [BEE-4010] GraphQL HTTP-Layer Caching
 
 :::info
 GraphQL was not designed around HTTP caching, but it can participate in it. The path runs through GET-via-persisted-queries, response cache directives, and ETag revalidation, and through understanding why naive `POST /graphql` defeats every CDN.

@@ -5,7 +5,7 @@ state: draft
 slug: long-polling-sse-and-websocket-architecture
 ---
 
-# [BEE-456] Long-Polling, SSE, and WebSocket Architecture
+# [BEE-19037] Long-Polling, SSE, and WebSocket Architecture
 
 :::info
 Real-time communication between clients and servers requires choosing among three persistence models — long-polling, Server-Sent Events, and WebSockets — each with fundamentally different connection lifetimes, directionality, and scaling properties. The choice determines whether load balancers need sticky sessions, how graceful shutdown works, and how many simultaneous clients a server can hold.
@@ -286,7 +286,7 @@ server {
 
 ## Related BEEs
 
-- [BEE-19034](graceful-shutdown-and-connection-draining.md) -- Graceful Shutdown and Connection Draining: WebSocket connections require a longer drain window than HTTP requests; the shutdown sequencing in BEE-453 applies directly, with a higher `terminationGracePeriodSeconds`
+- [BEE-19034](graceful-shutdown-and-connection-draining.md) -- Graceful Shutdown and Connection Draining: WebSocket connections require a longer drain window than HTTP requests; the shutdown sequencing in BEE-19034 applies directly, with a higher `terminationGracePeriodSeconds`
 - [BEE-11004](../concurrency/async-i-o-and-event-loops.md) -- Async I/O and Event Loops: WebSocket servers are I/O-bound and benefit from async event loops; holding thousands of idle connections is feasible only with non-blocking I/O
 - [BEE-11005](../concurrency/producer-consumer-and-worker-pool-patterns.md) -- Producer-Consumer and Worker Pool Patterns: message fan-out from a pub/sub broker to WebSocket connections is a producer-consumer problem
 - [BEE-19036](api-gateway-patterns.md) -- API Gateway Patterns: WebSocket connections typically pass through the API Gateway, which must be configured to pass through the Upgrade handshake and support long-lived connections

@@ -5,7 +5,7 @@ state: draft
 slug: b-tree-internals
 ---
 
-# [BEE-446] B-Tree Internals
+# [BEE-19027] B-Tree Internals
 
 :::info
 A B-tree is a self-balancing, multi-way search tree that keeps data sorted and allows searches, insertions, and deletions in O(log n) time; by using wide nodes sized to match disk or memory pages, it minimizes the number of I/O operations needed to traverse a large sorted dataset — making it the dominant index structure for relational databases for over fifty years.

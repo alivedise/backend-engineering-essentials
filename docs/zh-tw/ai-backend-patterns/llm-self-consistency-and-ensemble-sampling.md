@@ -5,7 +5,7 @@ state: draft
 slug: llm-self-consistency-and-ensemble-sampling
 ---
 
-# [BEE-543] LLM 自我一致性與集成採樣
+# [BEE-30041] LLM 自我一致性與集成採樣
 
 :::info
 對同一提示詞多次採樣並彙整結果——透過多數決、驗證器模型或多樣化 LLM 集成——以 N 倍的 Token 消耗和延遲換取準確率，在推理任務上比單次貪婪解碼提升 6–18%。

@@ -5,7 +5,7 @@ state: draft
 slug: grpc-streaming-patterns
 ---
 
-# [BEE-465] gRPC 串流模式
+# [BEE-19046] gRPC 串流模式
 
 :::info
 gRPC 提供四種 RPC 類型——單一（unary）、伺服器串流（server streaming）、用戶端串流（client streaming）和雙向串流（bidirectional streaming）——每種類型適用於不同的通訊模式；選錯類型會浪費連線、破壞流量控制，或在應該使用推送的地方強迫使用輪詢。

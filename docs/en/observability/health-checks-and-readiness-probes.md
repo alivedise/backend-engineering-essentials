@@ -5,7 +5,7 @@ state: draft
 slug: health-checks-and-readiness-probes
 ---
 
-# [BEE-325] Health Checks and Readiness Probes
+# [BEE-14006] Health Checks and Readiness Probes
 
 :::info
 Liveness, readiness, and startup probes serve different purposes. Use the wrong probe for the wrong job and you get cascading restarts, dropped traffic, or undetected failures.

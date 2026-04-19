@@ -5,7 +5,7 @@ state: draft
 slug: two-phase-locking
 ---
 
-# [BEE-440] Two-Phase Locking
+# [BEE-19021] Two-Phase Locking
 
 :::info
 Two-Phase Locking (2PL) guarantees serializability by enforcing a simple rule: a transaction may not acquire any new lock after releasing its first lock — separating execution into a growing phase (locks only acquired) and a shrinking phase (locks only released) — making it the classical proof that pessimistic concurrency control can produce correct concurrent schedules.

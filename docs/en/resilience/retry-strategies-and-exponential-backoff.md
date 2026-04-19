@@ -5,7 +5,7 @@ state: draft
 slug: retry-strategies-and-exponential-backoff
 ---
 
-# [BEE-261] Retry Strategies and Exponential Backoff
+# [BEE-12002] Retry Strategies and Exponential Backoff
 
 :::info
 Retry budgets, jitter, and when NOT to retry.
@@ -246,8 +246,8 @@ A single user request that fails at Service C generates 27 attempts against it. 
 
 1. **Retry only at the outermost layer** — inner services propagate errors without retrying; only the edge service or API gateway retries
 2. **Coordinate retry budgets** — pass retry context through headers so downstream services know a request is already a retry
-3. **Use circuit breakers** (BEE-260) — stop retrying entirely when a downstream service is confirmed down
-4. **Fail fast with timeouts** (BEE-261) — bounded timeouts prevent retries from accumulating latency
+3. **Use circuit breakers** (BEE-12001) — stop retrying entirely when a downstream service is confirmed down
+4. **Fail fast with timeouts** (BEE-12002) — bounded timeouts prevent retries from accumulating latency
 
 ---
 
@@ -268,7 +268,7 @@ Always honor `Retry-After` when present. Do not apply your own backoff calculati
 
 ### 1. Retrying non-idempotent operations
 
-Adding retry logic to a payment or order creation endpoint without an idempotency key results in duplicate transactions. Always confirm idempotency before retrying (BEE-71, [BEE-16](16.md)1).
+Adding retry logic to a payment or order creation endpoint without an idempotency key results in duplicate transactions. Always confirm idempotency before retrying (BEE-4002, [BEE-16](16.md)1).
 
 ### 2. No jitter
 

@@ -5,7 +5,7 @@ state: draft
 slug: audit-logging-architecture
 ---
 
-# [BEE-462] Audit Logging Architecture
+# [BEE-19043] Audit Logging Architecture
 
 :::info
 An audit log is an append-only, tamper-evident record of who performed what action on which resource and when — serving compliance, security investigation, and accountability rather than operational observability.

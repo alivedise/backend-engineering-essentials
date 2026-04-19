@@ -5,7 +5,7 @@ state: draft
 slug: n-plus-1-query-batching
 ---
 
-# [BEE-461] The N+1 Query Problem and Batch Loading
+# [BEE-19042] The N+1 Query Problem and Batch Loading
 
 :::info
 The N+1 query problem occurs when fetching a list of N records triggers one additional database query per record to load a related entity — producing N+1 total queries where one or two would suffice — and is the most common performance anti-pattern in ORM-based applications.

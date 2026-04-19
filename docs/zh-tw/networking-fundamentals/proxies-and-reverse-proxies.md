@@ -5,7 +5,7 @@ state: draft
 slug: proxies-and-reverse-proxies
 ---
 
-# [BEE-55] 代理與反向代理
+# [BEE-3006] 代理與反向代理
 
 :::info
 正向代理（forward proxy）vs 反向代理（reverse proxy）、使用情境、SSL 終止、請求路由、邊車代理模式，以及常見的設定陷阱。

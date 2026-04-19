@@ -5,7 +5,7 @@ state: draft
 slug: tensor-parallelism-and-pipeline-parallelism-for-llm-inference
 ---
 
-# [BEE-568] LLM 推論的張量平行與流水線平行
+# [BEE-30066] LLM 推論的張量平行與流水線平行
 
 :::info
 當大型語言模型超出單張 GPU 的記憶體容量時，必須將其切分至多個裝置。張量平行（Tensor Parallelism）將單個權重矩陣切分至同一節點內的多張 GPU；流水線平行（Pipeline Parallelism）將模型層切分至跨節點的多個階段。正確選擇並組合這些策略，決定了你能從硬體中榨取 90% 還是 50% 的理論吞吐量。

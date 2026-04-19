@@ -5,7 +5,7 @@ state: draft
 slug: ai-memory-systems-for-long-running-agents
 ---
 
-# [BEE-519] AI Memory Systems for Long-Running Agents
+# [BEE-30017] AI Memory Systems for Long-Running Agents
 
 :::info
 The context window is the agent's entire working memory — bounded, ephemeral, and lost between sessions. Giving agents durable memory requires explicitly storing episodic records, extracted facts, and retrieved context outside the context window, then loading only what is relevant at query time.

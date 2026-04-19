@@ -5,7 +5,7 @@ state: draft
 slug: schema-evolution-and-backward-compatibility
 ---
 
-# [BEE-142] 結構演進與向後相容
+# [BEE-7003] 結構演進與向後相容
 
 :::info
 設計能夠安全演進的結構。新增選填欄位；先棄用再移除；絕不在原地修改欄位型別或編號。

@@ -5,7 +5,7 @@ state: draft
 slug: rate-limiting-and-throttling
 ---
 
-# [BEE-266] Rate Limiting and Throttling
+# [BEE-12007] Rate Limiting and Throttling
 
 :::info
 Protect services from abuse, ensure fairness, and prevent overload by controlling how many requests a client can make over time. Choose the right algorithm for your traffic pattern and communicate limits clearly to clients.

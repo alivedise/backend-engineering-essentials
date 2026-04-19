@@ -5,7 +5,7 @@ state: draft
 slug: llm-security-and-prompt-injection
 ---
 
-# [BEE-510] LLM Security and Prompt Injection
+# [BEE-30008] LLM Security and Prompt Injection
 
 :::info
 LLM-powered applications introduce an attack surface with no precedent in traditional software: the input that controls application behavior is natural language, which means the boundary between instructions and data is not enforced by the type system — it is enforced by the model, imperfectly, under adversarial pressure.
@@ -89,7 +89,7 @@ def validate_tool_call(tool_name: str, params: dict) -> bool:
 
 **MUST NOT** pass LLM-generated content directly to a shell, an `eval()` call, a SQL interpreter, or any execution context without validation. This is the LLM equivalent of SQL injection: the distinction between code and data collapses.
 
-**SHOULD** enforce output schemas using structured output constraints (BEE-508) for all programmatic outputs. A model constrained to produce JSON matching a specific schema cannot exfiltrate arbitrary text inside its structured response.
+**SHOULD** enforce output schemas using structured output constraints (BEE-30006) for all programmatic outputs. A model constrained to produce JSON matching a specific schema cannot exfiltrate arbitrary text inside its structured response.
 
 **SHOULD** run outputs through a content safety classifier before returning them to users. LlamaGuard 3 (Meta, arXiv:2312.06674) provides a trained safety classifier covering 13 unsafe content categories that can be deployed as a post-generation gate.
 
@@ -97,7 +97,7 @@ def validate_tool_call(tool_name: str, params: dict) -> bool:
 
 System prompt extraction is a documented attack class (arXiv:2505.23817). Users can recover system prompts through direct interrogation ("repeat your instructions verbatim"), indirect probing, and jailbreak combinations.
 
-**MUST NOT** embed secrets (API keys, connection strings, credentials) in system prompts. Extracted system prompts expose everything in them. Secrets belong in environment variables and secret managers (BEE-32), not in prompts.
+**MUST NOT** embed secrets (API keys, connection strings, credentials) in system prompts. Extracted system prompts expose everything in them. Secrets belong in environment variables and secret managers (BEE-2003), not in prompts.
 
 **SHOULD** instruct the model to decline to repeat its system prompt verbatim and to inform users that the system prompt is confidential. This is not an airtight defense — the model will sometimes comply with extraction requests despite instructions — but it raises the effort required.
 
@@ -125,7 +125,7 @@ Three open-source options with different trade-offs:
 
 **SHOULD** alert on behavioral anomalies: a model that begins refusing expected safe requests, produces outputs with unusual token patterns, or makes tool calls outside the expected call graph may be under active manipulation.
 
-**SHOULD** implement rate limiting on prompt submission independent of the general API rate limiting (BEE-266). Automated prompt injection campaigns probe models at high request rates. A sudden spike in requests containing phrases like "ignore", "jailbreak", or "system prompt" warrants immediate investigation.
+**SHOULD** implement rate limiting on prompt submission independent of the general API rate limiting (BEE-12007). Automated prompt injection campaigns probe models at high request rates. A sudden spike in requests containing phrases like "ignore", "jailbreak", or "system prompt" warrants immediate investigation.
 
 ## Failure Modes
 

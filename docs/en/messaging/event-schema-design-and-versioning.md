@@ -5,7 +5,7 @@ state: draft
 slug: event-schema-design-and-versioning
 ---
 
-# [BEE-480] Event Schema Design and Versioning
+# [BEE-10008] Event Schema Design and Versioning
 
 :::info
 Event schemas are contracts between producers and consumers in event-driven systems — design them for evolution from day one, because every schema change is a distributed deployment that cannot be coordinated atomically across all services.

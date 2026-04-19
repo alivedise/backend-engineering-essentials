@@ -5,7 +5,7 @@ state: draft
 slug: timeouts-and-deadlines
 ---
 
-# [BEE-262] Timeouts and Deadlines
+# [BEE-12003] Timeouts and Deadlines
 
 :::info
 Every integration point must have a timeout. Deadlines must propagate across service boundaries so downstream work is abandoned when the upstream caller has already given up.

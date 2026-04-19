@@ -5,7 +5,7 @@ state: draft
 slug: consistent-hashing
 ---
 
-# [BEE-425] Consistent Hashing
+# [BEE-19006] Consistent Hashing
 
 :::info
 Consistent hashing maps both nodes and keys onto a circular hash ring so that when nodes are added or removed, only O(K/N) keys must be remapped — compared to O(K) for modular hashing — making it the foundational partitioning algorithm for distributed caches, key-value stores, and CDN request routing.
@@ -33,7 +33,7 @@ Two alternatives to Karger's ring algorithm are worth knowing. **Rendezvous hash
 
 **Virtual node count is a calibration between operational simplicity and load balance.** More vnodes mean smoother rebalancing — when a node is added, it steals a small slice from many predecessors instead of a large slice from one. The downside is that node failure redistributes load to many different successors, which can create many small movements that are hard to observe. Cassandra's recommendation of 256 vnodes per node balances these factors for typical workloads.
 
-**Consistent hashing is stateful infrastructure — the ring must be consistently replicated.** Every node in a cluster needs the same view of which virtual nodes exist. Disagreement about ring membership causes split-brain key routing. Production systems use gossip (BEE-423) or consensus (BEE-421) to propagate ring state and detect divergence.
+**Consistent hashing is stateful infrastructure — the ring must be consistently replicated.** Every node in a cluster needs the same view of which virtual nodes exist. Disagreement about ring membership causes split-brain key routing. Production systems use gossip (BEE-19004) or consensus (BEE-19002) to propagate ring state and detect divergence.
 
 ## Visual
 

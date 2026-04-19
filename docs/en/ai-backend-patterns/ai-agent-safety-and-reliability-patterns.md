@@ -5,7 +5,7 @@ state: draft
 slug: ai-agent-safety-and-reliability-patterns
 ---
 
-# [BEE-537] AI Agent Safety and Reliability Patterns
+# [BEE-30035] AI Agent Safety and Reliability Patterns
 
 :::info
 Production LLM agents fail at rates of 41–87% across real deployments, with failure modes spanning runaway token spend, cascading tool timeouts, coordination deadlocks, and irreversible side effects. Preventing them requires budget controls, layered timeouts, reversibility-first tool design, automated policy gates, and schema-validated inter-agent messaging.
@@ -149,7 +149,7 @@ def run_agent_with_budget(
     raise RuntimeError(f"Agent did not terminate within {max_steps} steps")
 
 def _append_tool_results(messages, response):
-    """Placeholder — see BEE-520 for tool dispatch pattern."""
+    """Placeholder — see BEE-30018 for tool dispatch pattern."""
     return messages
 ```
 

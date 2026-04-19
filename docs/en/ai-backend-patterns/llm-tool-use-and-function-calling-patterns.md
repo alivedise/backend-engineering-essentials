@@ -5,7 +5,7 @@ state: draft
 slug: llm-tool-use-and-function-calling-patterns
 ---
 
-# [BEE-520] LLM Tool Use and Function Calling Patterns
+# [BEE-30018] LLM Tool Use and Function Calling Patterns
 
 :::info
 Tool use transforms an LLM from a text generator into an agent that can act on the world. Understanding the protocol mechanics — how tool calls are encoded, how results flow back, how errors are handled, and how parallel execution works — is prerequisite to building reliable AI features on top of any provider's API.
@@ -321,7 +321,7 @@ sequenceDiagram
 
 ## Related BEEs
 
-- [BEE-30002](ai-agent-architecture-patterns.md) -- AI Agent Architecture Patterns: tool use is the mechanism through which agents act; this BEE covers protocol mechanics while BEE-504 covers orchestration, planning, and multi-agent topologies
+- [BEE-30002](ai-agent-architecture-patterns.md) -- AI Agent Architecture Patterns: tool use is the mechanism through which agents act; this BEE covers protocol mechanics while BEE-30002 covers orchestration, planning, and multi-agent topologies
 - [BEE-30006](structured-output-and-constrained-decoding.md) -- Structured Output and Constrained Decoding: strict mode and guided decoding for tool arguments use the same constrained decoding infrastructure as structured JSON output
 - [BEE-30008](llm-security-and-prompt-injection.md) -- LLM Security and Prompt Injection: tool parameter injection is a specific attack vector enabled by tool use; indirect prompt injection via tool results is a first-class threat
 - [BEE-30016](llm-streaming-patterns.md) -- LLM Streaming Patterns: tool call arguments stream incrementally and must be accumulated before parsing; stop_reason signals are the same in streaming and batch modes

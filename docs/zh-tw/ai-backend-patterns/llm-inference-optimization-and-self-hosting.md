@@ -5,7 +5,7 @@ state: draft
 slug: llm-inference-optimization-and-self-hosting
 ---
 
-# [BEE-523] LLM 推論優化與自架部署
+# [BEE-30021] LLM 推論優化與自架部署
 
 :::info
 自架開放權重 LLM 需要理解將原始模型權重轉化為低延遲、高吞吐量服務的演算法——連續批次處理、推測解碼、量化，以及決定模型是否能夠放入的 VRAM 運算。

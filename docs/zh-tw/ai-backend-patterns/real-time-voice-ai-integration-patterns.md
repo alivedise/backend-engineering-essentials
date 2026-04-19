@@ -5,7 +5,7 @@ state: draft
 slug: real-time-voice-ai-integration-patterns
 ---
 
-# [BEE-582] 即時語音 AI 整合模式
+# [BEE-30080] 即時語音 AI 整合模式
 
 :::info
 即時語音 AI 流水線將語音輸入轉換為文字、生成回應並合成語音——目標是將總往返延遲控制在 300 毫秒以內。主要的工程挑戰在於延遲：每個階段（VAD、STT、LLM、TTS）都會累積延遲，唯有在 LLM 完成輸出之前就開始 TTS 生成（流水線化），才能讓低於一秒的對話感覺自然。

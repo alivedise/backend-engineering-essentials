@@ -5,7 +5,7 @@ state: draft
 slug: llm-tokenization-internals-and-token-budget-management
 ---
 
-# [BEE-553] LLM Tokenization Internals and Token Budget Management
+# [BEE-30051] LLM Tokenization Internals and Token Budget Management
 
 :::info
 Every LLM API call is priced in tokens, not characters or words — understanding how tokenizers convert text to integer sequences, why CJK languages cost 2–3× more than English for equivalent content, and how to count tokens before sending requests prevents budget overruns, context-window overflows, and silent truncation bugs.

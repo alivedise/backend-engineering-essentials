@@ -5,7 +5,7 @@ state: draft
 slug: llm-guardrails-and-content-safety
 ---
 
-# [BEE-522] LLM Guardrails and Content Safety
+# [BEE-30020] LLM Guardrails and Content Safety
 
 :::info
 Guardrails are the pre- and post-processing checks that sit between users and LLM-generated content — detecting toxic input, redacting PII before it reaches the model, classifying harmful output, and verifying factual grounding — tasks that the model itself cannot be relied upon to perform consistently.
@@ -13,7 +13,7 @@ Guardrails are the pre- and post-processing checks that sit between users and LL
 
 ## Context
 
-An LLM that passes all unit tests can still produce harmful, fabricated, or privacy-violating output in production. The source of these failures is not adversarial intent (covered in BEE-510) but ordinary model behavior: LLMs are statistical predictors that will occasionally generate content that violates policy, hallucinate facts not in any training set, or reflect user PII back in unexpected places.
+An LLM that passes all unit tests can still produce harmful, fabricated, or privacy-violating output in production. The source of these failures is not adversarial intent (covered in BEE-30008) but ordinary model behavior: LLMs are statistical predictors that will occasionally generate content that violates policy, hallucinate facts not in any training set, or reflect user PII back in unexpected places.
 
 The field coalesced around two distinct problems. First, content safety: classifying inputs and outputs along dimensions like toxicity, harassment, and self-harm. Google's Perspective API (Jigsaw, 2017) pioneered production-scale toxicity scoring. Meta's Llama Guard (Chi et al., arXiv:2312.06674, 2023) reframed safety classification as an LLM task itself — a fine-tuned model that reasons about whether a given prompt-response pair violates a taxonomy of hazards, now aligned to the MLCommons standard of 13 hazard categories.
 
@@ -343,9 +343,9 @@ flowchart TD
 
 ## Related BEEs
 
-- [BEE-2017](../security-fundamentals/data-privacy-and-pii-handling.md) -- Data Privacy and PII Handling: PII redaction at the guardrail layer enforces the privacy principles defined in BEE-501; same entities, same sensitivity classifications
+- [BEE-2017](../security-fundamentals/data-privacy-and-pii-handling.md) -- Data Privacy and PII Handling: PII redaction at the guardrail layer enforces the privacy principles defined in BEE-2017; same entities, same sensitivity classifications
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG Pipeline Architecture: faithfulness scoring and grounding checks are quality gates specific to RAG pipelines; the retrieved context is what the model's claims are checked against
-- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM Security and Prompt Injection: BEE-510 covers adversarial attacks; BEE-522 covers content safety for non-adversarial production traffic — they are complementary layers
+- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM Security and Prompt Injection: BEE-30008 covers adversarial attacks; BEE-30020 covers content safety for non-adversarial production traffic — they are complementary layers
 - [BEE-30009](llm-observability-and-monitoring.md) -- LLM Observability and Monitoring: guardrail violation rates, faithfulness score distributions, and PII detection counts are operational metrics that belong in the LLM observability stack
 - [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI Cost Optimization and Model Routing: running Llama Guard on every output adds inference cost; the fail-open/async pattern balances safety coverage against cost
 

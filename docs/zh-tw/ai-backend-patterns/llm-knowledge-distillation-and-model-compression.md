@@ -5,7 +5,7 @@ state: draft
 slug: llm-knowledge-distillation-and-model-compression
 ---
 
-# [BEE-550] LLM 知識蒸餾與模型壓縮
+# [BEE-30048] LLM 知識蒸餾與模型壓縮
 
 :::info
 在生產環境中部署前沿 LLM，意味著在按 token 計費的 API 成本與運行更小、更快、更廉價的壓縮模型之間做出選擇——知識蒸餾將教師模型的行為遷移至較小的學生模型，而後訓練量化則在不重新訓練的情況下降低權重精度，每種技術在壓縮比、準確率保留和基礎設施成本之間有不同的取捨。

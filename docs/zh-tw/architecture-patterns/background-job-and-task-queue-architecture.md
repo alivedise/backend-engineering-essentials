@@ -5,7 +5,7 @@ state: draft
 slug: background-job-and-task-queue-architecture
 ---
 
-# [BEE-487] 背景作業與任務佇列架構
+# [BEE-5009] 背景作業與任務佇列架構
 
 :::info
 任務佇列（Task Queue）透過同步接受作業描述、將其持久化到中介層（broker），並由一或多個工作者程序非同步執行，來解耦 HTTP 請求週期與實際工作執行，使得計算密集、耗時或受外部速率限制的操作得以水平擴展，而不必阻塞客戶端。

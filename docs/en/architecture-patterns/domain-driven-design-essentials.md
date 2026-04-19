@@ -5,7 +5,7 @@ state: draft
 slug: domain-driven-design-essentials
 ---
 
-# [BEE-101] Domain-Driven Design Essentials
+# [BEE-5002] Domain-Driven Design Essentials
 
 :::info
 Bounded contexts, ubiquitous language, and strategic DDD patterns for drawing service and module boundaries.

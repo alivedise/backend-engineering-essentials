@@ -5,7 +5,7 @@ state: draft
 slug: retrieval-reranking-and-hybrid-search
 ---
 
-# [BEE-517] Retrieval Reranking and Hybrid Search
+# [BEE-30015] Retrieval Reranking and Hybrid Search
 
 :::info
 Single-stage dense retrieval misses exact keyword matches; BM25 misses paraphrased queries; combining both with Reciprocal Rank Fusion and a cross-encoder reranker in a two-stage pipeline recovers the best of each, typically reducing retrieval failures by 30–50% compared to either method alone.
@@ -98,7 +98,7 @@ def rerank(query: str, candidate_docs: list[dict], top_n: int = 10) -> list[dict
 | cross-encoder/ms-marco-MiniLM-L6-v2 | Self-hosted | — | Fast CPU inference; English; low memory |
 | Jina Reranker v2 | API + Self-hosted | — | 100+ languages; function-calling support |
 
-**SHOULD** rerank to top 5–10 documents for injection into the LLM context window. Injecting more than 10 retrieved chunks degrades LLM performance due to the U-shaped recall curve described in BEE-512.
+**SHOULD** rerank to top 5–10 documents for injection into the LLM context window. Injecting more than 10 retrieved chunks degrades LLM performance due to the U-shaped recall curve described in BEE-30010.
 
 **MAY** use Cohere Rerank via API for rapid prototyping before investing in self-hosted infrastructure. The API adds one network round-trip (~50–100ms) but requires no GPU:
 

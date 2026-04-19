@@ -5,7 +5,7 @@ state: draft
 slug: llm-batch-processing-patterns
 ---
 
-# [BEE-527] LLM Batch Processing Patterns
+# [BEE-30025] LLM Batch Processing Patterns
 
 :::info
 Batch processing APIs from OpenAI and Anthropic offer 50% cost discounts in exchange for up to 24-hour completion windows — the key engineering work is structuring JSONL inputs for idempotency, mapping custom IDs back to source records, and building retry logic that resubmits only failed items.
@@ -344,9 +344,9 @@ flowchart TD
 ## Related BEEs
 
 - [BEE-30001](llm-api-integration-patterns.md) -- LLM API Integration Patterns: retry and timeout patterns for the submission and polling steps; structured error handling for batch API responses
-- [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI Cost Optimization and Model Routing: batch processing is the primary cost lever for offline workloads; the routing layer in BEE-513 should direct non-interactive requests to the batch path
+- [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI Cost Optimization and Model Routing: batch processing is the primary cost lever for offline workloads; the routing layer in BEE-30011 should direct non-interactive requests to the batch path
 - [BEE-30024](llm-caching-strategies.md) -- LLM Caching Strategies: prompt caching stacks with batch discounts on Anthropic; the two layers together can reach 90-95% savings on repeated prompts at batch scale
-- [BEE-5009](../architecture-patterns/background-job-and-task-queue-architecture.md) -- Background Job and Task Queue Architecture: batch job orchestration follows the same durable job queue principles; batch_id tracking maps to job state machine patterns in BEE-487
+- [BEE-5009](../architecture-patterns/background-job-and-task-queue-architecture.md) -- Background Job and Task Queue Architecture: batch job orchestration follows the same durable job queue principles; batch_id tracking maps to job state machine patterns in BEE-5009
 
 ## References
 

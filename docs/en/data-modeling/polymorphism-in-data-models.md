@@ -5,7 +5,7 @@ state: draft
 slug: polymorphism-in-data-models
 ---
 
-# [BEE-145] Polymorphism in Data Models
+# [BEE-7006] Polymorphism in Data Models
 
 :::info
 Choose an inheritance mapping strategy deliberately. The wrong choice creates either a table bloated with nullable columns or a query plan drowning in joins.
@@ -194,7 +194,7 @@ CREATE INDEX ON notifications ((attributes->>'device_token'))
 
 **Cons:** Sub-type-specific `NOT NULL` constraints cannot be enforced at the DB level. Type safety lives entirely in the application layer. JSONB queries are less readable than column-based queries. Aggregations over JSONB fields are more complex.
 
-**When to use:** Sub-type attributes are highly variable and evolve frequently, you need schema flexibility without migrations, or you're already in a document-store context (BEE-120). Also well-suited when the number of sub-type variants is large and poorly bounded.
+**When to use:** Sub-type attributes are highly variable and evolve frequently, you need schema flexibility without migrations, or you're already in a document-store context (BEE-6001). Also well-suited when the number of sub-type variants is large and poorly bounded.
 
 ---
 

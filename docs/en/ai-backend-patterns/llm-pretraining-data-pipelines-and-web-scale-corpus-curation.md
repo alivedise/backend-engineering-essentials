@@ -5,7 +5,7 @@ state: draft
 slug: llm-pretraining-data-pipelines-and-web-scale-corpus-curation
 ---
 
-# [BEE-575] LLM Pretraining Data Pipelines and Web-Scale Corpus Curation
+# [BEE-30073] LLM Pretraining Data Pipelines and Web-Scale Corpus Curation
 
 :::info
 The quality of the pretraining corpus determines the ceiling of what any LLM can learn — more so than model architecture or even compute budget. Processing a petabyte-scale web crawl into a training-ready token stream requires a multi-stage pipeline: HTML extraction, language identification, heuristic filtering, fuzzy deduplication, and quality-based selection, each capable of eliminating 50–90% of the raw input.

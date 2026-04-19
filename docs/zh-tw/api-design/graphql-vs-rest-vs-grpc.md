@@ -5,7 +5,7 @@ state: draft
 slug: graphql-vs-rest-vs-grpc
 ---
 
-# [BEE-74] GraphQL vs REST vs gRPC
+# [BEE-4005] GraphQL vs REST vs gRPC
 
 :::info
 協定比較：REST、GraphQL 與 gRPC 的優勢、取捨，以及何時選擇各自的協定。

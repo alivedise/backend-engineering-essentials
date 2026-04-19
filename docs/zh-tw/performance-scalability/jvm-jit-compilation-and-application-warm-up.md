@@ -5,7 +5,7 @@ state: draft
 slug: jvm-jit-compilation-and-application-warm-up
 ---
 
-# [BEE-496] JVM JIT 編譯與應用程式預熱
+# [BEE-13008] JVM JIT 編譯與應用程式預熱
 
 :::info
 JVM 的即時編譯器（Just-In-Time compiler）啟動時速度慢，但隨著觀察到的執行期行為增加而持續優化——理解這個管線，就能解釋為什麼 Java 服務在冷啟動時會有延遲尖峰，以及如何應對。

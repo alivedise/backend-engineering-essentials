@@ -5,7 +5,7 @@ state: draft
 slug: storage-engines
 ---
 
-# [BEE-124] Storage Engines
+# [BEE-6005] Storage Engines
 
 :::info
 How databases translate logical reads and writes into physical disk I/O — and why the choice between B-tree and LSM-tree engines matters at scale.
@@ -246,9 +246,9 @@ MVCC interacts with the storage engine:
 
 ## Related BEPs
 
-- [BEE-120 — SQL vs NoSQL](./120.md): The database category often determines which storage engine is available.
-- [BEE-121 — Indexing Deep Dive](./121.md): B-tree index internals, when indexes help and when they hurt.
-- [BEE-122 — Replication Strategies](./122.md): WAL shipping and logical replication depend directly on the storage engine's WAL format.
+- [BEE-6001 — SQL vs NoSQL](./120.md): The database category often determines which storage engine is available.
+- [BEE-6002 — Indexing Deep Dive](./121.md): B-tree index internals, when indexes help and when they hurt.
+- [BEE-6003 — Replication Strategies](./122.md): WAL shipping and logical replication depend directly on the storage engine's WAL format.
 
 ## References
 

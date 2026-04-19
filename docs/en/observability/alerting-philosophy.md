@@ -5,7 +5,7 @@ state: draft
 slug: alerting-philosophy
 ---
 
-# [BEE-323] Alerting Philosophy
+# [BEE-14004] Alerting Philosophy
 
 :::info
 Symptom-based vs cause-based alerts, alert fatigue, SLO-driven burn rate alerting, and the discipline of keeping on-call rotations sane.

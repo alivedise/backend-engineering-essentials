@@ -5,7 +5,7 @@ state: draft
 slug: llm-model-merging-and-weight-space-composition
 ---
 
-# [BEE-576] LLM Model Merging and Weight-Space Composition
+# [BEE-30074] LLM Model Merging and Weight-Space Composition
 
 :::info
 Merging two fine-tuned models by averaging their weights produces a single model with the combined capabilities of both — and the same memory footprint and inference latency as either constituent alone. Unlike classical ensembles that require N forward passes, a merged model requires exactly one, making weight-space merging the most compute-efficient form of multi-model combination.

@@ -5,7 +5,7 @@ state: draft
 slug: cors-and-same-origin-policy
 ---
 
-# [BEE-33] CORS and Same-Origin Policy
+# [BEE-2004] CORS and Same-Origin Policy
 
 :::info
 Same-Origin Policy is the browser's primary defense against cross-site request attacks. CORS is the standardized mechanism for controlled relaxation of that policy — and misconfiguring it is one of the most common ways to accidentally reopen the door.

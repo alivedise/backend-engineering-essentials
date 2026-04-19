@@ -5,7 +5,7 @@ state: draft
 slug: graphql-federation
 ---
 
-# [BEE-485] GraphQL 聯合（Federation）
+# [BEE-4008] GraphQL 聯合（Federation）
 
 :::info
 GraphQL Federation 是一套協議與架構，將多個獨立擁有的 GraphQL 服務（子圖，subgraph）組合成單一統一的 API 介面（超圖，supergraph），並透過路由器提供服務，無需中央 Schema 團隊擁有所有型別。

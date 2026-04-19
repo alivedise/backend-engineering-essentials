@@ -5,7 +5,7 @@ state: draft
 slug: model-context-protocol-mcp
 ---
 
-# [BEE-505] 模型上下文協定（MCP）
+# [BEE-30003] 模型上下文協定（MCP）
 
 :::info
 模型上下文協定是一個用於連接 AI 模型與外部工具和資料來源的開放標準——將 N×M 自訂整合問題（N 個模型 × M 個資料來源）替換為單一、可重用的伺服器-客戶端介面。

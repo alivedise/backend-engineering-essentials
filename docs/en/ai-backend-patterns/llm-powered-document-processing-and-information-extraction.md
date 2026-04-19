@@ -5,7 +5,7 @@ state: draft
 slug: llm-powered-document-processing-and-information-extraction
 ---
 
-# [BEE-532] LLM-Powered Document Processing and Information Extraction
+# [BEE-30030] LLM-Powered Document Processing and Information Extraction
 
 :::info
 LLM-powered information extraction turns unstructured documents — invoices, contracts, forms, research papers — into structured records; the critical engineering decisions are how to define output schemas, how to validate and correct extracted fields, and how to pipeline the work at the volume that production workloads require.
@@ -324,7 +324,7 @@ flowchart TD
 - [BEE-30006](structured-output-and-constrained-decoding.md) -- Structured Output and Constrained Decoding: the decoding-level mechanisms (grammar constraints, function calling) that enforce schema compliance at the token level
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG Pipeline Architecture: document parsing and chunking in this article feed directly into the indexing stage of a RAG pipeline
 - [BEE-30025](llm-batch-processing-patterns.md) -- LLM Batch Processing Patterns: the OpenAI and Anthropic batch APIs described there apply directly to high-volume document extraction workloads
-- [BEE-30022](human-in-the-loop-ai-patterns.md) -- Human-in-the-Loop AI Patterns: the human review routing pattern here is an instance of the confidence-gated human review pattern from BEE-524
+- [BEE-30022](human-in-the-loop-ai-patterns.md) -- Human-in-the-Loop AI Patterns: the human review routing pattern here is an instance of the confidence-gated human review pattern from BEE-30022
 
 ## References
 

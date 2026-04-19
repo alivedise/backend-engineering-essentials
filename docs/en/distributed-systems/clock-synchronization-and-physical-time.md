@@ -5,7 +5,7 @@ state: draft
 slug: clock-synchronization-and-physical-time
 ---
 
-# [BEE-427] Clock Synchronization and Physical Time
+# [BEE-19008] Clock Synchronization and Physical Time
 
 :::info
 Physical clocks in distributed systems drift independently and cannot be perfectly synchronized — forcing engineers to choose between accepting bounded uncertainty (NTP, PTP), bounding and exposing uncertainty explicitly (TrueTime), or combining physical and logical clocks to get both causality and time semantics (Hybrid Logical Clocks).
@@ -15,7 +15,7 @@ Physical clocks in distributed systems drift independently and cannot be perfect
 
 Every computer has a crystal oscillator that drives its clock. Crystal oscillators drift — a typical server-grade quartz crystal drifts 20–50 ppm (parts per million), which translates to 1.7–4.3 seconds of divergence per day. Two servers that never communicate will have clocks that diverge by seconds within weeks. This is not a failure condition — it is the physical baseline.
 
-Leslie Lamport established the theoretical foundation in 1978 in "Time, Clocks, and the Ordering of Events in a Distributed System" (Communications of the ACM, July 1978). His central observation: a distributed system cannot rely on synchronized physical clocks for determining event ordering, because processes have no shared notion of time. His proposed solution — logical clocks based on the happens-before relationship — sidesteps physical time entirely (see BEE-422 for the full treatment). But logical clocks carry no information about wall-clock time, which matters when you need to answer questions like "what was the state of this system at 14:00:00 UTC?" or "did this commit happen before or after that one in calendar time?"
+Leslie Lamport established the theoretical foundation in 1978 in "Time, Clocks, and the Ordering of Events in a Distributed System" (Communications of the ACM, July 1978). His central observation: a distributed system cannot rely on synchronized physical clocks for determining event ordering, because processes have no shared notion of time. His proposed solution — logical clocks based on the happens-before relationship — sidesteps physical time entirely (see BEE-19003 for the full treatment). But logical clocks carry no information about wall-clock time, which matters when you need to answer questions like "what was the state of this system at 14:00:00 UTC?" or "did this commit happen before or after that one in calendar time?"
 
 The practical solution for most systems is NTP (Network Time Protocol), designed by David Mills at the University of Delaware, with the protocol first published in RFC 958 (1985) and the current version NTPv4 specified in RFC 5905 (2010). NTP organizes time sources into a **stratum hierarchy**: stratum 0 comprises GPS receivers and atomic clocks; stratum 1 servers synchronize directly from stratum 0; stratum 2 servers synchronize from stratum 1, and so on. On a well-configured LAN, NTP achieves synchronization within hundreds of microseconds; over the internet, accuracy degrades to 1–10 milliseconds. NTP uses Marzullo's algorithm (Keith Marzullo, 1984) to select among multiple time sources: each source reports a confidence interval `[c-r, c+r]`; the algorithm finds the smallest intersection consistent with the most sources, rejecting outliers that are likely faulty clocks.
 

@@ -5,7 +5,7 @@ state: draft
 slug: database-migrations
 ---
 
-# [BEE-126] Database Migrations
+# [BEE-6007] Database Migrations
 
 :::info
 Schema evolution without downtime and backward-compatible changes.
@@ -252,6 +252,6 @@ A migration that runs in 50 ms on a development database with 500 rows may take 
 
 ## Related BEPs
 
-- **[BEE-104] Strangler Fig** — the same incremental, parallel-operation philosophy applied to service decomposition; expand-contract is its database equivalent.
-- **[BEE-142] Schema Evolution** — deeper treatment of schema versioning contracts between services.
-- **[BEE-361] Deployment Strategies** — rolling deploys, blue-green, and canary patterns that interact with migration sequencing.
+- **[BEE-5005] Strangler Fig** — the same incremental, parallel-operation philosophy applied to service decomposition; expand-contract is its database equivalent.
+- **[BEE-7003] Schema Evolution** — deeper treatment of schema versioning contracts between services.
+- **[BEE-16002] Deployment Strategies** — rolling deploys, blue-green, and canary patterns that interact with migration sequencing.

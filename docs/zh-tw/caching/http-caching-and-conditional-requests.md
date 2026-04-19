@@ -5,7 +5,7 @@ state: draft
 slug: http-caching-and-conditional-requests
 ---
 
-# [BEE-205] HTTP 快取與條件式請求
+# [BEE-9006] HTTP 快取與條件式請求
 
 :::info
 Cache-Control 指令決定回應可被儲存多久、由誰儲存。條件式請求讓客戶端以低成本重新驗證過期項目，通常只需收到 304 Not Modified 而不傳輸任何主體。在 HTTP 層面，同時做好這兩件事是效能改善投資報酬率最高的手段。
@@ -362,9 +362,9 @@ ETag: "product-42-v9"
 
 ## 相關 BEE
 
-- [BEE-52: HTTP 基礎](52.md) -- 請求/回應模型、狀態碼與標頭
-- [BEE-200: 快取基礎與快取層級](./200.md) -- TTL、逐出與一致性概念，是本文的基礎
-- [BEE-304: CDN 架構](304.md) -- CDN 節點如何消費並傳播 `Cache-Control` 指令
+- [BEE-3003: HTTP 基礎](52.md) -- 請求/回應模型、狀態碼與標頭
+- [BEE-9001: 快取基礎與快取層級](./200.md) -- TTL、逐出與一致性概念，是本文的基礎
+- [BEE-13005: CDN 架構](304.md) -- CDN 節點如何消費並傳播 `Cache-Control` 指令
 
 ## 參考資料
 

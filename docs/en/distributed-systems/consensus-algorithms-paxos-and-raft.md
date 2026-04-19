@@ -5,7 +5,7 @@ state: draft
 slug: consensus-algorithms-paxos-and-raft
 ---
 
-# [BEE-421] Consensus Algorithms: Paxos and Raft
+# [BEE-19002] Consensus Algorithms: Paxos and Raft
 
 :::info
 Consensus algorithms allow a cluster of nodes to agree on a sequence of values despite node failures and network partitions — they are the mechanism that makes distributed systems act like a single reliable machine, and underpin every coordination service engineers depend on: etcd, ZooKeeper, and distributed databases.
@@ -34,7 +34,7 @@ The leader handles all client writes. It appends each command to its local log a
 
 Adding nodes increases fault tolerance but also increases commit latency, since the leader must wait for more acknowledgments. Most production deployments use 3 or 5 nodes — 7 is rare except for very high availability requirements.
 
-**Minority partitions are read-only at best.** When a network partition isolates a minority of nodes, those nodes cannot elect a leader (they lack a quorum). They cannot commit writes. If they were previously followers, they eventually expire their election timeouts and repeatedly fail to form a quorum — they make no progress. The majority partition elects a new leader and continues serving. When the partition heals, minority nodes catch up from the new leader's log, discarding any uncommitted entries they held. This is CP behavior (BEE-420): the system sacrifices availability in the minority partition to maintain consistency.
+**Minority partitions are read-only at best.** When a network partition isolates a minority of nodes, those nodes cannot elect a leader (they lack a quorum). They cannot commit writes. If they were previously followers, they eventually expire their election timeouts and repeatedly fail to form a quorum — they make no progress. The majority partition elects a new leader and continues serving. When the partition heals, minority nodes catch up from the new leader's log, discarding any uncommitted entries they held. This is CP behavior (BEE-19001): the system sacrifices availability in the minority partition to maintain consistency.
 
 **Leader elections mean brief unavailability.** When a leader crashes or a network partition removes it from the majority, followers detect the absence (no AppendEntries heartbeats within the election timeout) and start an election. This introduces a window of unavailability — typically one to two election timeout periods (300–600 ms at default settings). During this window, client writes are rejected or queued. Tuning election timeouts is a latency vs. detection speed tradeoff: shorter timeouts trigger elections faster after real failures but also trigger spurious elections under transient network jitter.
 

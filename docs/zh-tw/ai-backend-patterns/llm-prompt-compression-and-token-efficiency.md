@@ -5,7 +5,7 @@ state: draft
 slug: llm-prompt-compression-and-token-efficiency
 ---
 
-# [BEE-549] LLM 提示壓縮與 Token 效率
+# [BEE-30047] LLM 提示壓縮與 Token 效率
 
 :::info
 上下文視窗有限、昂貴，且注意力在各位置分佈不均——提示壓縮在保留模型所需語義內容的前提下，減少 token 數量。技術從困惑度引導的 token 選擇到學習壓縮嵌入，壓縮比因可接受的準確率取捨而異，範圍從 2× 到 20×。

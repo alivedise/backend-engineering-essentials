@@ -5,7 +5,7 @@ state: draft
 slug: fencing-tokens
 ---
 
-# [BEE-447] Fencing Tokens
+# [BEE-19028] Fencing Tokens
 
 :::info
 A fencing token is a monotonically increasing number issued by a lock service on each lock acquisition; the protected resource rejects any write whose token is lower than the highest it has already accepted, preventing a stale lock holder from corrupting shared state even after its lease has silently expired.

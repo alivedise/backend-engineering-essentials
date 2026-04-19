@@ -5,7 +5,7 @@ state: draft
 slug: llm-planning-and-task-decomposition
 ---
 
-# [BEE-546] LLM 規劃與任務分解
+# [BEE-30044] LLM 規劃與任務分解
 
 :::info
 複雜的多步驟任務需要 LLM 在行動前明確規劃——將工作分解為原子子任務、以有向無環圖（DAG）表示依賴關係，並在子任務失敗時重新規劃——而非嘗試在單次前向傳遞中完成長任務，那樣的話錯誤會悄無聲息地累積。

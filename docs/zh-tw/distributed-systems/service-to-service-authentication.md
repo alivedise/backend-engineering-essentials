@@ -5,7 +5,7 @@ state: draft
 slug: service-to-service-authentication
 ---
 
-# [BEE-467] 服務間身份驗證
+# [BEE-19048] 服務間身份驗證
 
 :::info
 服務間身份驗證（Service-to-service authentication）確立呼叫服務就是其聲稱的身份——有別於使用者身份驗證——是零信任網路（zero-trust networking）的基礎，在零信任架構中，沒有任何內部請求僅因來自私有網路內部就被默認信任。

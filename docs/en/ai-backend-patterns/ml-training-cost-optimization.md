@@ -5,7 +5,7 @@ state: draft
 slug: ml-training-cost-optimization
 ---
 
-# [BEE-593] ML Training Cost Optimization
+# [BEE-30091] ML Training Cost Optimization
 
 :::info
 ML training cost optimization reduces GPU-hours and cloud spend by maximizing GPU utilization through mixed precision, gradient checkpointing, efficient data loading, and spot instance checkpointing — techniques that can cut training cost by 60–90% without degrading model quality.
@@ -280,10 +280,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-590 ML Model Serving Infrastructure](590) — inference cost optimization with dynamic batching complements training cost optimization
-- [BEE-586 ML Experiment Tracking and Model Registry](586) — log cost-per-run metrics to MLflow alongside model quality for cost/accuracy trade-off analysis
-- [BEE-572 Distributed Training Infrastructure for Large Language Models](572) — DeepSpeed ZeRO and tensor parallelism for training costs at LLM scale
-- [BEE-303 Profiling and Bottleneck Identification](303) — general profiling principles that apply to GPU training profiling
+- [BEE-30088 ML Model Serving Infrastructure](590) — inference cost optimization with dynamic batching complements training cost optimization
+- [BEE-30084 ML Experiment Tracking and Model Registry](586) — log cost-per-run metrics to MLflow alongside model quality for cost/accuracy trade-off analysis
+- [BEE-30070 Distributed Training Infrastructure for Large Language Models](572) — DeepSpeed ZeRO and tensor parallelism for training costs at LLM scale
+- [BEE-13004 Profiling and Bottleneck Identification](303) — general profiling principles that apply to GPU training profiling
 
 ## References
 

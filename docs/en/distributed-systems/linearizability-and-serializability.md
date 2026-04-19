@@ -5,7 +5,7 @@ state: draft
 slug: linearizability-and-serializability
 ---
 
-# [BEE-428] Linearizability and Serializability
+# [BEE-19009] Linearizability and Serializability
 
 :::info
 Linearizability and serializability are two distinct consistency guarantees — linearizability concerns the real-time ordering of individual operations on a shared object; serializability concerns whether the outcome of concurrent transactions is equivalent to some serial execution — and conflating them explains most consistency bugs in distributed systems.
@@ -23,7 +23,7 @@ The difference matters in practice. Consider a key-value store with linearizabil
 
 Serializability without linearizability is easy to construct: a database that processes all transactions on a single thread is serializable (execution is literally serial) but if that database has read replicas that lag behind the primary, reads from replicas are not linearizable — they may not reflect the most recent committed state. Many relational databases operating in "read committed" or "repeatable read" mode are not serializable at all (only serializable isolation level guarantees it), and even those that are serializable are not automatically linearizable across replicas.
 
-**Strict serializability** — the combination of both — means transactions execute in a serial order that is consistent with real-time ordering. If transaction A's commit precedes transaction B's start in real time, the serializable order must place A before B. Google Spanner achieves strict serializability using TrueTime (BEE-427) to bound commit timestamps within a real-time interval. CockroachDB and FoundationDB make similar claims. etcd, which provides linearizable reads on individual keys, is linearizable but not serializable (individual key operations, not multi-key transactions, unless you use its transactional API).
+**Strict serializability** — the combination of both — means transactions execute in a serial order that is consistent with real-time ordering. If transaction A's commit precedes transaction B's start in real time, the serializable order must place A before B. Google Spanner achieves strict serializability using TrueTime (BEE-19008) to bound commit timestamps within a real-time interval. CockroachDB and FoundationDB make similar claims. etcd, which provides linearizable reads on individual keys, is linearizable but not serializable (individual key operations, not multi-key transactions, unless you use its transactional API).
 
 Kyle Kingsbury's Jepsen project (jepsen.io) has empirically tested dozens of production databases for linearizability violations since 2013. His methodology: deploy a cluster, inject network partitions and node faults, write to the database, read back the values, and use the Knossos linearizability checker to verify that the observed read/write history is consistent with some linearizable execution. His findings revealed that MongoDB, Cassandra, Redis, RethinkDB, and others violated their stated consistency guarantees under real failure conditions. The Jepsen analyses are the most rigorous publicly available empirical evidence of the gap between consistency claims and consistency reality.
 

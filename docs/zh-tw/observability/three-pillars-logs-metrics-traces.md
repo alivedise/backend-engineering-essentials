@@ -5,7 +5,7 @@ state: draft
 slug: three-pillars-logs-metrics-traces
 ---
 
-# [BEE-320] 三大支柱：日誌、指標、追蹤
+# [BEE-14001] 三大支柱：日誌、指標、追蹤
 
 :::info
 日誌、指標與追蹤各自提供什麼、為何三者缺一不可，以及如何在事故中串聯使用。

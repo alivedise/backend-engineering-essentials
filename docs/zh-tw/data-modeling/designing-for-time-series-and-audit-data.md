@@ -5,7 +5,7 @@ state: draft
 slug: designing-for-time-series-and-audit-data
 ---
 
-# [BEE-144] 時序與稽核資料設計
+# [BEE-7005] 時序與稽核資料設計
 
 :::info
 以附加寫入（append）而非覆蓋（overwrite）來記錄歷史。需同時追蹤「事實為真的時間」與「系統得知的時間」時，使用雙時態模型。所有時間戳記儲存為 UTC，依時間分區以提升效能，並在儲存空間無限膨脹之前執行保留政策。

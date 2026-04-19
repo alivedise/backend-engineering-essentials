@@ -5,7 +5,7 @@ state: draft
 slug: api-key-management
 ---
 
-# [BEE-15] API 金鑰管理
+# [BEE-1006] API 金鑰管理
 
 :::info
 API 金鑰（API key）是用來識別客戶端應用程式的長期憑證，而非識別使用者。應將其視同密碼對待：以密碼學安全的方式產生、雜湊（hash）後再存入資料庫、嚴格限縮權限範圍，並定期輪換。
@@ -197,10 +197,10 @@ Host: api.example.com
 
 ## 相關 BEE
 
-- [BEE-10: Authentication vs Authorization](10.md) — 身份識別與授權之間的概念邊界
-- [BEE-11: Token-Based Authentication](11.md) — 用於使用者委派存取的短期 token
-- [BEE-31: Secrets Management](31.md) — 在正式環境中儲存與輪換憑證
-- [BEE-71: Rate Limiting and Throttling](71.md) — 每個金鑰的速率限制策略
+- [BEE-1001: Authentication vs Authorization](10.md) — 身份識別與授權之間的概念邊界
+- [BEE-1002: Token-Based Authentication](11.md) — 用於使用者委派存取的短期 token
+- [BEE-2002: Secrets Management](31.md) — 在正式環境中儲存與輪換憑證
+- [BEE-4002: Rate Limiting and Throttling](71.md) — 每個金鑰的速率限制策略
 
 ## 參考資料
 

@@ -5,7 +5,7 @@ state: draft
 slug: authentication-vs-authorization
 ---
 
-# [BEE-10] Authentication vs Authorization
+# [BEE-1001] Authentication vs Authorization
 
 :::info
 Authentication establishes who you are; authorization determines what you are allowed to do. Conflating the two is one of the most common causes of broken access control.
@@ -135,11 +135,11 @@ Internal APIs, background job handlers, and admin-only routes are common blind s
 
 ## Related BEPs
 
-- [BEE-11: Token-Based Authentication](11.md) — how tokens establish identity
-- [BEE-12: OAuth 2.0 and OpenID Connect](12.md) — delegation vs. authentication
-- [BEE-13: Session Management](13.md) — maintaining authenticated state
-- [BEE-14: RBAC vs ABAC](14.md) — permission models in depth
-- [BEE-15: API Key Management](15.md) — API credential patterns
+- [BEE-1002: Token-Based Authentication](11.md) — how tokens establish identity
+- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — delegation vs. authentication
+- [BEE-1004: Session Management](13.md) — maintaining authenticated state
+- [BEE-1005: RBAC vs ABAC](14.md) — permission models in depth
+- [BEE-1006: API Key Management](15.md) — API credential patterns
 
 ## References
 

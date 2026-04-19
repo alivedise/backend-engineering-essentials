@@ -5,7 +5,7 @@ state: draft
 slug: load-balancers
 ---
 
-# [BEE-54] Load Balancers
+# [BEE-3005] Load Balancers
 
 :::info
 L4 vs L7 load balancing, algorithms, health checks, connection draining, and high availability.

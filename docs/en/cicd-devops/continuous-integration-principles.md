@@ -5,7 +5,7 @@ state: draft
 slug: continuous-integration-principles
 ---
 
-# [BEE-360] Continuous Integration Principles
+# [BEE-16001] Continuous Integration Principles
 
 :::info
 Integrate code frequently, verify every change with automated builds and tests, and treat a broken build as the team's highest-priority problem.

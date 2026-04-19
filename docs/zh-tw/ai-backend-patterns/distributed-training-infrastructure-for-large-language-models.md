@@ -5,7 +5,7 @@ state: draft
 slug: distributed-training-infrastructure-for-large-language-models
 ---
 
-# [BEE-572] 大型語言模型的分散式訓練基礎設施
+# [BEE-30070] 大型語言模型的分散式訓練基礎設施
 
 :::info
 訓練一個 70B 參數的模型每個副本需要約 1.4 TB 的 GPU 記憶體——超過任何現有 A100 叢集的單機容量。ZeRO 優化器分片、梯度檢查點和混合精度訓練是三種正交技術，使兆參數訓練成為可能，每種技術針對記憶體預算的不同組成部分。

@@ -5,7 +5,7 @@ state: draft
 slug: distributed-unique-id-generation
 ---
 
-# [BEE-450] Distributed Unique ID Generation
+# [BEE-19031] Distributed Unique ID Generation
 
 :::info
 Every distributed system needs globally unique identifiers. The challenge is generating them without a central coordinator — and doing so in a way that does not destroy database write performance, leak sensitive information, or break natural sort order.

@@ -5,7 +5,7 @@ state: draft
 slug: cache-invalidation-strategies
 ---
 
-# [BEE-201] 快取失效策略
+# [BEE-9002] 快取失效策略
 
 :::info
 TTL、事件驅動失效、寫入穿透、版本化金鑰 -- 如何在不破壞快取效益的前提下，讓快取資料與來源資料保持一致。

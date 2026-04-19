@@ -5,7 +5,7 @@ state: draft
 slug: webhooks-and-callback-patterns
 ---
 
-# [BEE-76] Webhooks and Callback Patterns
+# [BEE-4007] Webhooks and Callback Patterns
 
 :::info
 Push-based server-to-server integration: payload design, signature verification, retry policies, and delivery guarantees.

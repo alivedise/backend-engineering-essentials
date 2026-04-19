@@ -5,7 +5,7 @@ state: draft
 slug: llm-observability-and-monitoring
 ---
 
-# [BEE-511] LLM Observability and Monitoring
+# [BEE-30009] LLM Observability and Monitoring
 
 :::info
 HTTP 200 OK means the network call succeeded — it says nothing about whether the model hallucinated, selected the wrong tool, or consumed ten times the expected tokens. LLM observability requires a second layer of instrumentation that tracks quality, cost, and model-specific latency alongside the operational signals traditional monitoring already captures.
@@ -13,7 +13,7 @@ HTTP 200 OK means the network call succeeded — it says nothing about whether t
 
 ## Context
 
-Traditional observability (BEE-320) operates on the premise that a well-behaved system is one that responds quickly and without errors. An LLM-integrated system breaks this premise: the same prompt submitted twice produces different outputs; both may be 200 OK, one factually correct and one not. The "silent failure" problem is unique to probabilistic systems — an agent can return in 1.2 seconds with a hallucinated answer that satisfies the content-length check, then trigger expensive retries downstream before the error surfaces.
+Traditional observability (BEE-14001) operates on the premise that a well-behaved system is one that responds quickly and without errors. An LLM-integrated system breaks this premise: the same prompt submitted twice produces different outputs; both may be 200 OK, one factually correct and one not. The "silent failure" problem is unique to probabilistic systems — an agent can return in 1.2 seconds with a hallucinated answer that satisfies the content-length check, then trigger expensive retries downstream before the error surfaces.
 
 The industry has converged on two complementary metric categories. Operational metrics — TTFT (time-to-first-token), inter-token latency, error rates, token counts — tell you how the system is running. Quality metrics — faithfulness, hallucination rate, relevance, user correction signals — tell you whether the system is producing value. A system that is operationally healthy can be quality-degraded: model update changed a behavior, a prompt regression increased hallucination rate, a RAG pipeline started retrieving stale chunks. Neither signal alone is sufficient.
 
@@ -116,7 +116,7 @@ Record `cost_usd` as a span attribute alongside token counts. Dashboard by `feat
 
 **SHOULD** run asynchronous quality scoring on 1–5% of production traffic. Scoring 100% of traffic is expensive; sampling at 2% on a system handling 10,000 requests per hour evaluates 200 interactions per hour — sufficient for trend detection.
 
-For RAG systems, run RAGAS metrics (BEE-506) on sampled traces: faithfulness, context recall, and answer relevance diagnose different failure modes independently.
+For RAG systems, run RAGAS metrics (BEE-30004) on sampled traces: faithfulness, context recall, and answer relevance diagnose different failure modes independently.
 
 **SHOULD** collect user feedback signals and align them with evaluation scores. Thumbs-down clicks, correction messages, and session abandonment are leading indicators of quality degradation that appear before structured metrics catch up.
 
@@ -134,7 +134,7 @@ Hallucination rate by prompt version:
   order-extractor@v2.3  →  4.1%   ← regression, roll back
 ```
 
-**SHOULD** gate prompt changes through a canary rollout: send 5% of traffic to the new prompt version for 24 hours, compare quality metrics against the control, then promote or roll back based on measured outcomes. This is the LLM equivalent of a staged deployment (BEE-361).
+**SHOULD** gate prompt changes through a canary rollout: send 5% of traffic to the new prompt version for 24 hours, compare quality metrics against the control, then promote or roll back based on measured outcomes. This is the LLM equivalent of a staged deployment (BEE-16002).
 
 ### Log Asynchronously and Scrub PII Before Sending
 

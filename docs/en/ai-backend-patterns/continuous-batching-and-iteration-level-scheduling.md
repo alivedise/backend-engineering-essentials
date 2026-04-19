@@ -5,7 +5,7 @@ state: draft
 slug: continuous-batching-and-iteration-level-scheduling
 ---
 
-# [BEE-567] Continuous Batching and Iteration-Level Scheduling
+# [BEE-30065] Continuous Batching and Iteration-Level Scheduling
 
 :::info
 Continuous batching schedules LLM inference at the granularity of a single decode iteration rather than at the granularity of a full request. When a sequence finishes, its slot is immediately reassigned to the next waiting request — eliminating the idle-GPU problem that plagues static batching and lifting throughput by 2–36× at equivalent latency.

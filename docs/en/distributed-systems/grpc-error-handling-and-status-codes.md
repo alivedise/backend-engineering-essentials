@@ -5,7 +5,7 @@ state: draft
 slug: grpc-error-handling-and-status-codes
 ---
 
-# [BEE-479] gRPC Error Handling and Status Codes
+# [BEE-19059] gRPC Error Handling and Status Codes
 
 :::info
 gRPC defines 17 canonical status codes that replace HTTP status codes for RPC semantics, plus a two-layer error model — a basic status (code + message) and rich structured details — that enables clients to take programmatic action on errors without parsing free-text messages.

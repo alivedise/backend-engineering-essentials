@@ -5,7 +5,7 @@ state: draft
 slug: fine-tuning-and-peft-patterns
 ---
 
-# [BEE-514] 微調與 PEFT 模式
+# [BEE-30012] 微調與 PEFT 模式
 
 :::info
 微調（Fine-tuning）將預訓練模型調整至特定風格、領域或任務。參數高效微調（Parameter-Efficient Fine-Tuning，PEFT）方法 —— 尤其是 LoRA 與 QLoRA —— 讓這在單張 GPU 上切實可行：1,000 個高品質訓練範例加上一張 48 GB VRAM 的 GPU，就能產出一個媲美完整微調品質、卻只需一小部分費用的微調 65B 參數模型。

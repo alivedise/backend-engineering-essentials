@@ -5,7 +5,7 @@ state: draft
 slug: token-based-authentication
 ---
 
-# [BEE-11] Token-Based Authentication
+# [BEE-1002] Token-Based Authentication
 
 :::info
 Token-based authentication replaces server-side session state with self-contained or server-verifiable credentials that travel with every request, enabling stateless, horizontally scalable services.
@@ -162,11 +162,11 @@ An access token issued for `api-a.example.com` presented to `api-b.example.com` 
 
 ## Related BEPs
 
-- [BEE-10: Authentication vs Authorization](10.md) — the conceptual boundary between identity and permission
-- [BEE-11: OAuth 2.0 and OpenID Connect](11.md) — token issuance and delegation flows
-- [BEE-13: Session Management](13.md) — server-side sessions as an alternative to tokens
-- [BEE-30: OWASP Top 10 Mapping](30.md) — security vulnerability context
-- [BEE-31: Cryptographic Primitives](31.md) — signing algorithms and key management basics
+- [BEE-1001: Authentication vs Authorization](10.md) — the conceptual boundary between identity and permission
+- [BEE-1002: OAuth 2.0 and OpenID Connect](11.md) — token issuance and delegation flows
+- [BEE-1004: Session Management](13.md) — server-side sessions as an alternative to tokens
+- [BEE-2001: OWASP Top 10 Mapping](30.md) — security vulnerability context
+- [BEE-2002: Cryptographic Primitives](31.md) — signing algorithms and key management basics
 
 ## References
 

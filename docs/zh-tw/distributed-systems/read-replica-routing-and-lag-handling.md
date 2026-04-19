@@ -5,7 +5,7 @@ state: draft
 slug: read-replica-routing-and-lag-handling
 ---
 
-# [BEE-463] 讀取副本路由與延遲處理
+# [BEE-19044] 讀取副本路由與延遲處理
 
 :::info
 讀取副本路由（Read replica routing）將 SELECT 查詢導向副本以降低主節點負載，但複寫延遲（replication lag）——寫入在主節點提交後出現在副本上的時間差——會破壞「讀取自身寫入（read-your-writes）」一致性。在應用層設計以偵測、容忍並補償延遲，是核心工程挑戰。

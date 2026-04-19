@@ -5,7 +5,7 @@ state: draft
 slug: publish-subscribe-pattern
 ---
 
-# [BEE-221] Publish-Subscribe Pattern
+# [BEE-10002] Publish-Subscribe Pattern
 
 :::info
 Fan-out, topic-based routing, and decoupling producers from consumers — publishers send messages without knowing who, or how many, will receive them.

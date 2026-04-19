@@ -5,7 +5,7 @@ state: draft
 slug: webhooks-and-callback-patterns
 ---
 
-# [BEE-76] Webhook 與回呼模式
+# [BEE-4007] Webhook 與回呼模式
 
 :::info
 伺服器對伺服器的推送式整合：Payload 設計、簽章驗證、重試策略與交付保證。

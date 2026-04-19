@@ -5,7 +5,7 @@ state: draft
 slug: skip-lists
 ---
 
-# [BEE-444] Skip Lists
+# [BEE-19025] Skip Lists
 
 :::info
 A skip list is a probabilistic data structure that maintains a sorted sequence with O(log n) expected search, insert, and delete by layering "express lane" linked lists atop a full sorted list — simpler to implement than balanced trees, easier to make lock-free under concurrent access, and the primary in-memory sorted structure behind Redis Sorted Sets and LSM-tree memtables.

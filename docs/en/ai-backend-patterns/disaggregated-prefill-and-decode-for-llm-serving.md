@@ -5,7 +5,7 @@ state: draft
 slug: disaggregated-prefill-and-decode-for-llm-serving
 ---
 
-# [BEE-569] Disaggregated Prefill and Decode for LLM Serving
+# [BEE-30067] Disaggregated Prefill and Decode for LLM Serving
 
 :::info
 Prefill (processing the input prompt) and decode (generating output tokens one at a time) have opposite hardware utilization profiles — compute-bound vs memory-bandwidth-bound. Running them on the same GPU forces each to compromise. Disaggregated serving assigns them to separate instances, independently optimizing each phase and enabling a Pareto improvement in both throughput and tail latency.
@@ -17,7 +17,7 @@ LLM inference consists of two distinct phases. **Prefill** processes the entire 
 
 **Decode** generates output tokens one at a time, each requiring a forward pass that attends over the full KV cache of the prompt plus all previously generated tokens. This is memory-bandwidth-bound: the KV cache must be read from HBM for each decode step, and the working compute per token is small regardless of batch size. Roofline analysis shows that for batch sizes below ~32 on an H100, decode throughput is limited entirely by memory bandwidth, not compute.
 
-Running both phases on the same GPU creates structural interference. A large prefill request blocks decode steps for other sequences (head-of-line blocking), inflating TTFT. Decode-heavy workloads hold the GPU in a memory-bandwidth-bound regime, starving the compute capacity that prefill requires. Chunked prefill (BEE-567) mitigates the worst TTFT spikes but does not eliminate the fundamental resource contention.
+Running both phases on the same GPU creates structural interference. A large prefill request blocks decode steps for other sequences (head-of-line blocking), inflating TTFT. Decode-heavy workloads hold the GPU in a memory-bandwidth-bound regime, starving the compute capacity that prefill requires. Chunked prefill (BEE-30065) mitigates the worst TTFT spikes but does not eliminate the fundamental resource contention.
 
 Three papers in 2023–2024 formalized the case for **prefill-decode (P/D) disaggregation**:
 

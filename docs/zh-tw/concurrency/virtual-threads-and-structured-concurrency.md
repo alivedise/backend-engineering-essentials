@@ -5,7 +5,7 @@ state: draft
 slug: virtual-threads-and-structured-concurrency
 ---
 
-# [BEE-246] 虛擬執行緒與結構化並發
+# [BEE-11007] 虛擬執行緒與結構化並發
 
 :::info
 Java 的 Project Loom 讓簡單的執行緒-每請求（thread-per-request）模型能像響應式程式設計一樣擴展——透過讓執行緒便宜到可以阻塞而不浪費 OS 資源——同時結構化並發（Structured Concurrency）強制執行生命週期規則以防止執行緒洩漏。

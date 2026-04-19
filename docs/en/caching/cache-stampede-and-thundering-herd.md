@@ -5,7 +5,7 @@ state: draft
 slug: cache-stampede-and-thundering-herd
 ---
 
-# [BEE-204] Cache Stampede and Thundering Herd
+# [BEE-9005] Cache Stampede and Thundering Herd
 
 :::info
 When a cache key expires under heavy load, many concurrent requests can race to regenerate it, overwhelming the database. This article defines the problem and covers the mitigation strategies every backend engineer should know.
@@ -356,10 +356,10 @@ For most production systems, apply **jittered TTL** universally and add **single
 
 ## Related BEPs
 
-- [BEE-200: Caching Fundamentals](./200.md) -- foundational concepts: TTL, eviction, consistency
-- [BEE-201: Cache Invalidation](./201.md) -- invalidation events are the primary stampede trigger
-- [BEE-203: Distributed Cache](./203.md) -- stampede propagation across cache nodes
-- [BEE-266: Rate Limiting](266.md) -- last-resort DB protection when stampedes do occur
+- [BEE-9001: Caching Fundamentals](./200.md) -- foundational concepts: TTL, eviction, consistency
+- [BEE-9002: Cache Invalidation](./201.md) -- invalidation events are the primary stampede trigger
+- [BEE-9004: Distributed Cache](./203.md) -- stampede propagation across cache nodes
+- [BEE-12007: Rate Limiting](266.md) -- last-resort DB protection when stampedes do occur
 
 ## References
 

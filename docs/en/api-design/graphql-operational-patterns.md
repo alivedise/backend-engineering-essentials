@@ -5,7 +5,7 @@ state: draft
 slug: graphql-operational-patterns
 ---
 
-# [BEE-599] GraphQL Operational Patterns
+# [BEE-4013] GraphQL Operational Patterns
 
 :::info
 Three operational patterns that determine whether a GraphQL deployment survives production: persisted-query allowlisting as a security boundary, query complexity governance as an organizational discipline, and additive schema evolution as the GraphQL alternative to REST-style versioning. The closing article in the four-part series on GraphQL's HTTP-ecosystem gap.
@@ -130,7 +130,7 @@ flowchart LR
 2. **The server enforces the schema; clients enforce their query against it.** Removing a field that no client selects is non-breaking. The schema registry can answer "is this removal safe?" by checking the operation manifest of every active client.
 3. **Federation makes per-team evolution independent.** A subgraph can add fields to a federated type without coordinating with the gateway team or other subgraphs ([BEE-4008](graphql-federation.md) covers federation mechanics).
 
-The contrast with REST: BEE-71 documents four versioning strategies (URL path, custom header, query param, content negotiation) and Stripe's date-based model. All are mechanisms to *manage* breaking changes by giving consumers a stable surface during a transition window. GraphQL flips the question: instead of managing breaking changes, design them out. The cost is discipline (additive only, deprecate before remove) and infrastructure (schema registry, operation manifests). The benefit is no consumer-facing version negotiation, no `Sunset` header, no `/v1/` and `/v2/` running in parallel. The [GraphQL Foundation's best-practices guidance](https://graphql.org/learn/best-practices/) takes this position explicitly.
+The contrast with REST: BEE-4002 documents four versioning strategies (URL path, custom header, query param, content negotiation) and Stripe's date-based model. All are mechanisms to *manage* breaking changes by giving consumers a stable surface during a transition window. GraphQL flips the question: instead of managing breaking changes, design them out. The cost is discipline (additive only, deprecate before remove) and infrastructure (schema registry, operation manifests). The benefit is no consumer-facing version negotiation, no `Sunset` header, no `/v1/` and `/v2/` running in parallel. The [GraphQL Foundation's best-practices guidance](https://graphql.org/learn/best-practices/) takes this position explicitly.
 
 This is genuinely different. It is not "REST versioning, but better"; it is a different category of solution to the same underlying problem of safe API evolution.
 
@@ -194,7 +194,7 @@ This works because the persisted-query allowlist gives the server precise knowle
 
 ```mermaid
 flowchart TB
-    subgraph REST["REST versioning timeline (BEE-71)"]
+    subgraph REST["REST versioning timeline (BEE-4002)"]
         direction LR
         R0[t=0<br/>v1 stable<br/>name field] --> R1[t=1<br/>v2 ships<br/>v1 + v2 in parallel<br/>Sunset header on v1]
         R1 --> R2[t=2<br/>v1 deprecated<br/>migration guide published]
@@ -216,7 +216,7 @@ flowchart TB
 - **Federation contracts replace per-version maintenance.** Teams running multiple consumer versions in REST (`/v1/`, `/v2/`, `/v3/`) typically have parallel codebases for each. Federation contracts let one schema project all variants. The v1 mobile schema is a tagged subset of the same supergraph as the v2 web schema. The cost is up-front discipline in tagging; the benefit is no parallel codebases.
 - **Deprecation removal is the hard part, not deprecation itself.** Adding `@deprecated` is easy and gets done. Removing the deprecated field is the discipline. It requires ongoing measurement of usage, follow-up with low-priority clients, and willingness to break a long-tail of stragglers. Without organizational commitment to actually completing removals, the schema accumulates dead fields, and the deprecation directive becomes a wishlist instead of a contract. [Marc-André Giroux's "How Should We Version GraphQL APIs?"](https://productionreadygraphql.com/blog/2019-11-06-how-should-we-version-graphql-apis/) is a thorough practitioner treatment of the deprecation-as-contract discipline.
 - **Field renames are the most tempting non-additive change.** A field name that turns out to be confusing is a constant temptation to rename. The additive path (`add givenName`, `deprecate name`, `wait`, `remove name`) is slow and feels bureaucratic. Teams that bypass it for "just this one rename" build the habit of bypassing it for the next one. The discipline is to never bypass; rename always runs through the deprecation cycle.
-- **Cross-link to BEE-71.** REST teams reading this section should understand that GraphQL's evolution model relocates versioning concerns from URL-level versioning to field-level deprecation tracking. The questions are still "when can we remove this?" and "who is still using it?"; the mechanisms are different.
+- **Cross-link to BEE-4002.** REST teams reading this section should understand that GraphQL's evolution model relocates versioning concerns from URL-level versioning to field-level deprecation tracking. The questions are still "when can we remove this?" and "who is still using it?"; the mechanisms are different.
 
 ## Common Mistakes
 
@@ -226,7 +226,7 @@ The auto-register flow accepts any query the client sends on the first request a
 
 **2. Disabling introspection without enabling allowlisting.**
 
-A common partial fix: production rejects `__schema` introspection but still accepts any query the client sends. The attacker cannot enumerate the schema directly, but they can probe by sending guessed queries; the auto-register flow accepts them. Both controls are necessary; either alone is leaky. [BEE-499 (BOLA)](../Security Fundamentals/499.md) is the per-object analog of this layered-defense argument.
+A common partial fix: production rejects `__schema` introspection but still accepts any query the client sends. The attacker cannot enumerate the schema directly, but they can probe by sending guessed queries; the auto-register flow accepts them. Both controls are necessary; either alone is leaky. [BEE-2016 (BOLA)](../Security Fundamentals/499.md) is the per-object analog of this layered-defense argument.
 
 **3. Setting a query complexity budget once and never re-measuring.**
 

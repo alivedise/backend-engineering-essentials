@@ -5,7 +5,7 @@ state: draft
 slug: api-idempotency
 ---
 
-# [BEE-72] API 中的冪等性
+# [BEE-4003] API 中的冪等性
 
 :::info
 冪等性金鑰、安全方法 vs 冪等方法，以及可安全重試的 API 設計。

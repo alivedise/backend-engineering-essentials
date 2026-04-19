@@ -5,7 +5,7 @@ state: draft
 slug: process-reward-models-and-test-time-compute-scaling
 ---
 
-# [BEE-574] Process Reward Models and Test-Time Compute Scaling
+# [BEE-30072] Process Reward Models and Test-Time Compute Scaling
 
 :::info
 Scaling inference compute — generating more candidate solutions and selecting the best using a verifier — can outperform scaling training compute. A small model with 64x more inference budget can surpass a model 14x larger; the key bottleneck is having a reliable verifier to distinguish correct from incorrect outputs.
@@ -166,7 +166,7 @@ def generate_with_budget_forcing(
 
 ## GRPO: Training Reasoning Models Without a Critic
 
-Training reasoning models with PPO requires four model copies — actor, critic, reward model, and reference — consuming 3× the GPU memory of SFT (see BEE-573). **GRPO (Group Relative Policy Optimization)**, introduced in DeepSeekMath (arXiv:2402.03300) and scaled in DeepSeek-R1 (arXiv:2501.12948), eliminates the critic by estimating the baseline from a group of sampled outputs:
+Training reasoning models with PPO requires four model copies — actor, critic, reward model, and reference — consuming 3× the GPU memory of SFT (see BEE-30071). **GRPO (Group Relative Policy Optimization)**, introduced in DeepSeekMath (arXiv:2402.03300) and scaled in DeepSeek-R1 (arXiv:2501.12948), eliminates the critic by estimating the baseline from a group of sampled outputs:
 
 ```python
 def grpo_loss(
@@ -229,7 +229,7 @@ def generate_with_budget(model, prompt: str, budget: int = 2048) -> str:
 
 ### Use disaggregated prefill-decode for long-CoT serving
 
-**SHOULD** deploy reasoning models with disaggregated prefill and decode hardware when serving at scale (see BEE-569). Reasoning models exhibit extreme prefill-decode asymmetry: the thinking token generation is a pure high-throughput decode phase, while visible response generation is a separate, shorter phase. Separating prefill GPUs from decode GPUs allows allocating specialized hardware to each phase and avoids the memory pressure of long KV caches competing with prefill compute. DistServe (arXiv:2401.09670) reports serving 7.4× more requests at the same SLO with this approach.
+**SHOULD** deploy reasoning models with disaggregated prefill and decode hardware when serving at scale (see BEE-30067). Reasoning models exhibit extreme prefill-decode asymmetry: the thinking token generation is a pure high-throughput decode phase, while visible response generation is a separate, shorter phase. Separating prefill GPUs from decode GPUs allows allocating specialized hardware to each phase and avoids the memory pressure of long KV caches competing with prefill compute. DistServe (arXiv:2401.09670) reports serving 7.4× more requests at the same SLO with this approach.
 
 ### Train PRMs with LLM-as-judge rather than MC rollouts for step-level labels
 

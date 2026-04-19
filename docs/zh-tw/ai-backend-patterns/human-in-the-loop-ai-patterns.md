@@ -5,7 +5,7 @@ state: draft
 slug: human-in-the-loop-ai-patterns
 ---
 
-# [BEE-524] 人工介入 AI 模式
+# [BEE-30022] 人工介入 AI 模式
 
 :::info
 人工介入（HITL）是一個架構層，當模型信心不足、動作不可逆，或合規稽核要求時，將 AI 輸出路由給人工審核員——並將審核結果作為標記資料回饋，以持續改進。
@@ -155,7 +155,7 @@ async def process_sla_violations(review_queue, fallback_policy: str):
 
 ### 為高風險代理動作建立核准工作流
 
-當 AI 代理即將採取不可逆的動作——發送訊息、執行資料庫寫入、收取付款——它應該暫停並請求人工核准，而不是自主繼續。BEE-504 確立了原則；這是實現：
+當 AI 代理即將採取不可逆的動作——發送訊息、執行資料庫寫入、收取付款——它應該暫停並請求人工核准，而不是自主繼續。BEE-30002 確立了原則；這是實現：
 
 ```python
 import asyncio
@@ -279,8 +279,8 @@ stateDiagram-v2
 
 ## 相關 BEE
 
-- [BEE-30002](ai-agent-architecture-patterns.md) -- AI 代理架構模式：BEE-504 確立了高風險代理動作的人工檢查點原則；BEE-524 提供這些檢查點背後的佇列和工作流實現
-- [BEE-30004](evaluating-and-testing-llm-applications.md) -- 評估和測試 LLM 應用：稽核採樣和覆蓋率追蹤是饋入 BEE-506 中描述的持續評估迴路的評估信號
+- [BEE-30002](ai-agent-architecture-patterns.md) -- AI 代理架構模式：BEE-30002 確立了高風險代理動作的人工檢查點原則；BEE-30022 提供這些檢查點背後的佇列和工作流實現
+- [BEE-30004](evaluating-and-testing-llm-applications.md) -- 評估和測試 LLM 應用：稽核採樣和覆蓋率追蹤是饋入 BEE-30004 中描述的持續評估迴路的評估信號
 - [BEE-30017](ai-memory-systems-for-long-running-agents.md) -- 長運行代理的 AI 記憶體系統：人工更正的輸出是一種情節記憶，可以存儲和檢索以改進未來的回應
 - [BEE-30020](llm-guardrails-and-content-safety.md) -- LLM 護欄與內容安全：安全違規是饋入 HITL 佇列的主要升級觸發器之一
 

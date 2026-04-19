@@ -5,7 +5,7 @@ state: draft
 slug: llm-inference-on-edge-and-mobile-devices
 ---
 
-# [BEE-577] LLM 邊緣裝置與行動裝置上的推論
+# [BEE-30075] LLM 邊緣裝置與行動裝置上的推論
 
 :::info
 在裝置端執行 LLM 推論可消除雲端 API 的來回延遲、讓敏感資料不離開裝置，並支援離線運作——代價是量化（quantization）帶來的精確度損失，以及與伺服器端部署根本不同的熱節流（thermal throttling）限制。

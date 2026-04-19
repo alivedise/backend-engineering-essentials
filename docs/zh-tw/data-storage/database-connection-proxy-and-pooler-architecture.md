@@ -5,7 +5,7 @@ state: draft
 slug: database-connection-proxy-and-pooler-architecture
 ---
 
-# [BEE-481] 資料庫連線代理與連線池架構
+# [BEE-6008] 資料庫連線代理與連線池架構
 
 :::info
 資料庫連線代理位於應用程式實例和資料庫之間，維護少量長存的伺服器連線供多個應用程式執行緒共享——將會壓垮資料庫的 O(應用程式實例 × 執行緒) 連線數轉換為資料庫設計所支援的 O(資料庫核心) 數量。

@@ -5,7 +5,7 @@ state: draft
 slug: ai-cost-optimization-and-model-routing
 ---
 
-# [BEE-513] AI Cost Optimization and Model Routing
+# [BEE-30011] AI Cost Optimization and Model Routing
 
 :::info
 LLM API costs scale with token volume, output tokens cost 4–5× more than input tokens, and most queries do not require the most capable model — routing, caching, and batching together can cut costs by 50–98% without measurable quality loss for the workload that does not need heavy models.
@@ -197,7 +197,7 @@ compressed_context = compressor.compress_prompt(
 
 **MUST** attribute API cost to business dimensions — feature, user, tenant, experiment — from the first day of production. Costs that are not attributed have no owner and grow silently until they appear on a cloud billing invoice.
 
-**SHOULD** compute and record `cost_usd` for every request as a metric (covered in BEE-511). Aggregate by `feature` to identify which parts of the application drive spend. Aggregate by `user_id` to detect per-user anomalies.
+**SHOULD** compute and record `cost_usd` for every request as a metric (covered in BEE-30009). Aggregate by `feature` to identify which parts of the application drive spend. Aggregate by `user_id` to detect per-user anomalies.
 
 **SHOULD** set soft budget alerts and hard limits per tier:
 - Alert when a feature's daily cost exceeds 2× its baseline

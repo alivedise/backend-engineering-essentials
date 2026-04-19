@@ -5,7 +5,7 @@ state: draft
 slug: api-gateway-patterns
 ---
 
-# [BEE-455] API Gateway Patterns
+# [BEE-19036] API Gateway Patterns
 
 :::info
 An API gateway is the single entry point for client traffic into a microservice architecture — a reverse proxy that operates at Layer 7 to enforce authentication, rate limiting, routing, and observability in one place rather than duplicating that logic in every service.
@@ -224,9 +224,9 @@ services:
 
 ## Related BEEs
 
-- [BEE-3006](../networking-fundamentals/proxies-and-reverse-proxies.md) -- Proxies and Reverse Proxies: the gateway is a specialized reverse proxy; BEE-55 covers the networking layer; this article covers the application-layer concerns built on top
+- [BEE-3006](../networking-fundamentals/proxies-and-reverse-proxies.md) -- Proxies and Reverse Proxies: the gateway is a specialized reverse proxy; BEE-3006 covers the networking layer; this article covers the application-layer concerns built on top
 - [BEE-1001](../auth/authentication-vs-authorization.md) -- Authentication vs Authorization: the gateway enforces coarse-grained authentication (valid JWT?) and scope-level authorization; fine-grained authorization (can this user read this record?) remains in the service
-- [BEE-12007](../resilience/rate-limiting-and-throttling.md) -- Rate Limiting and Throttling: gateway rate limiting applies at the edge; BEE-266 covers the algorithms behind it
+- [BEE-12007](../resilience/rate-limiting-and-throttling.md) -- Rate Limiting and Throttling: gateway rate limiting applies at the edge; BEE-12007 covers the algorithms behind it
 - [BEE-12001](../resilience/circuit-breaker-pattern.md) -- Circuit Breaker Pattern: circuit breakers at the gateway prevent upstream failures from cascading to all gateway clients
 - [BEE-5006](../architecture-patterns/sidecar-and-service-mesh-concepts.md) -- Sidecar and Service Mesh Concepts: a service mesh handles East-West (service-to-service) traffic with mTLS and observability; the API gateway handles North-South (client-to-service) traffic; they are complementary, not alternatives
 

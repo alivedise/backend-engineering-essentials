@@ -5,7 +5,7 @@ state: draft
 slug: acid-properties
 ---
 
-# [BEE-160] ACID Properties
+# [BEE-8001] ACID Properties
 
 :::info
 ACID is not just a database feature -- it is a contract between your application and the database. Understanding it shapes every design decision you make around data integrity.
@@ -205,10 +205,10 @@ Use database transactions for any multi-step write that must succeed or fail as 
 
 ## Related BEPs
 
-- [BEE-161: Isolation Levels and Their Anomalies](./161.md) -- deep dive into isolation levels and which anomalies each allows
-- [BEE-162: Distributed Transactions and Two-Phase Commit](./162.md) -- coordinating transactions across services
-- [BEE-163: Saga Pattern](./163.md) -- compensating transactions for long-running distributed workflows
-- [BEE-165: Eventual Consistency Patterns](./165.md) -- when to trade ACID guarantees for availability
+- [BEE-8002: Isolation Levels and Their Anomalies](./161.md) -- deep dive into isolation levels and which anomalies each allows
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) -- coordinating transactions across services
+- [BEE-8004: Saga Pattern](./163.md) -- compensating transactions for long-running distributed workflows
+- [BEE-8006: Eventual Consistency Patterns](./165.md) -- when to trade ACID guarantees for availability
 
 ## References
 

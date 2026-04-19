@@ -5,7 +5,7 @@ state: draft
 slug: gossip-protocols
 ---
 
-# [BEE-423] Gossip Protocols
+# [BEE-19004] Gossip Protocols
 
 :::info
 Gossip protocols propagate state across a cluster by having each node periodically exchange information with a randomly chosen peer — achieving O(log N) convergence to all N nodes with no central coordinator, making them the primary mechanism for cluster membership, failure detection, and configuration propagation in large distributed systems.
@@ -27,7 +27,7 @@ Cassandra uses gossip for cluster membership and token ring information, integra
 
 ## Design Thinking
 
-**Gossip is the right tool for eventual propagation, not for strong consistency.** It delivers state to all nodes *eventually* — convergence is probabilistic and takes O(log N) rounds. During those rounds, nodes hold different views of cluster state. This is acceptable for membership information (knowing a node is joining or leaving can lag by a second), failure detection (a brief window of uncertainty before marking a node failed), and configuration propagation (a rolling update of configuration values). It is not acceptable for coordination decisions that require all nodes to agree on a value at the same instant — use consensus (BEE-421) for that.
+**Gossip is the right tool for eventual propagation, not for strong consistency.** It delivers state to all nodes *eventually* — convergence is probabilistic and takes O(log N) rounds. During those rounds, nodes hold different views of cluster state. This is acceptable for membership information (knowing a node is joining or leaving can lag by a second), failure detection (a brief window of uncertainty before marking a node failed), and configuration propagation (a rolling update of configuration values). It is not acceptable for coordination decisions that require all nodes to agree on a value at the same instant — use consensus (BEE-19002) for that.
 
 **Fanout and round interval are the primary tuning levers.** Fanout — the number of random peers contacted per round — directly controls how quickly information spreads but also controls network load. A fanout of 1 gives O(log N) convergence; higher fanout accelerates convergence at the cost of more messages per round. Round interval controls the latency-to-detection tradeoff: shorter intervals detect failures faster but produce more background traffic. Cassandra's defaults (fanout 1–3, round interval 1 second) balance these for clusters up to hundreds of nodes.
 

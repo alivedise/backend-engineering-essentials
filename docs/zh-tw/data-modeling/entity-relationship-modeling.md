@@ -5,7 +5,7 @@ state: draft
 slug: entity-relationship-modeling
 ---
 
-# [BEE-140] 實體關係建模
+# [BEE-7001] 實體關係建模
 
 :::info
 先對領域建模，再對資料表建模。ER 圖首先是溝通工具，其次才是實作藍圖。
@@ -224,10 +224,10 @@ CREATE TABLE order_items (
 
 ## 相關 BEE
 
-- [BEE-101: Domain-Driven Design](101.md) — 限界上下文 (Bounded Context) 與聚合 (Aggregate) 決定哪些實體屬於同一個模型。
-- [BEE-120: SQL vs NoSQL](./120.md) — ER 模型適用於關聯式資料庫；文件型儲存需要不同的建模策略。
-- [BEE-141: 正規化](./141.md) — 將 ER 轉換為資料表後，正規化規則進一步精化實體設計。
-- [BEE-145: Schema 設計中的多型](./145.md) — 當實體有子類型時，ER 建模必須在每類型一表、每繼承層級一表等策略間做出決定。
+- [BEE-5002: Domain-Driven Design](101.md) — 限界上下文 (Bounded Context) 與聚合 (Aggregate) 決定哪些實體屬於同一個模型。
+- [BEE-6001: SQL vs NoSQL](./120.md) — ER 模型適用於關聯式資料庫；文件型儲存需要不同的建模策略。
+- [BEE-7002: 正規化](./141.md) — 將 ER 轉換為資料表後，正規化規則進一步精化實體設計。
+- [BEE-7006: Schema 設計中的多型](./145.md) — 當實體有子類型時，ER 建模必須在每類型一表、每繼承層級一表等策略間做出決定。
 
 ---
 

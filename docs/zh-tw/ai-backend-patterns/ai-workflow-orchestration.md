@@ -5,7 +5,7 @@ state: draft
 slug: ai-workflow-orchestration
 ---
 
-# [BEE-529] AI 工作流協作編排
+# [BEE-30027] AI 工作流協作編排
 
 :::info
 AI 工作流編排將一連串 LLM 呼叫轉化為持久且可恢復的流程——關鍵的工程決策是如何建模控制流（狀態機、DAG 或事件驅動圖）、在哪裡持久化狀態以使工作流能從失敗中恢復，以及如何對每個步驟進行延遲和成本問責的儀器化。
@@ -202,7 +202,7 @@ class ResearchWorkflow:
 
 **MUST** 為每個節點或活動執行發出追蹤跨度，包括：步驟名稱、持續時間、輸入 Token 計數、輸出 Token 計數、模型名稱以及任何錯誤。跨越整個工作流呼叫的單個追蹤 ID 能夠重建每個使用者會話的成本和延遲分解。
 
-**SHOULD** 使用 OpenTelemetry（BEE-475）作為追蹤基底，LLM 特定屬性遵循 OpenTelemetry GenAI 語意慣例：
+**SHOULD** 使用 OpenTelemetry（BEE-19056）作為追蹤基底，LLM 特定屬性遵循 OpenTelemetry GenAI 語意慣例：
 
 ```python
 from opentelemetry import trace

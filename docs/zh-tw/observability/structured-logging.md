@@ -5,7 +5,7 @@ state: draft
 slug: structured-logging
 ---
 
-# [BEE-321] 結構化日誌
+# [BEE-14002] 結構化日誌
 
 :::info
 為何非結構化日誌在規模下失效、日誌層級、關聯 ID，以及絕對不該記錄的內容。

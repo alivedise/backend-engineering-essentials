@@ -5,7 +5,7 @@ state: draft
 slug: llm-guardrails-and-content-safety
 ---
 
-# [BEE-522] LLM 護欄與內容安全
+# [BEE-30020] LLM 護欄與內容安全
 
 :::info
 護欄是位於使用者和 LLM 生成內容之間的前後處理檢查——偵測有毒輸入、在到達模型前刪除 PII、對有害輸出進行分類，以及驗證事實依據——這些任務都是模型本身無法持續可靠執行的。
@@ -13,7 +13,7 @@ slug: llm-guardrails-and-content-safety
 
 ## 背景
 
-通過所有單元測試的 LLM 在生產環境中仍可能產生有害、虛構或侵犯隱私的輸出。這些失敗的根源不是惡意意圖（BEE-510 已涵蓋），而是普通的模型行為：LLM 是統計預測器，偶爾會生成違反政策的內容、產生任何訓練集中都不存在的事實幻覺，或在意外地方反映使用者的 PII。
+通過所有單元測試的 LLM 在生產環境中仍可能產生有害、虛構或侵犯隱私的輸出。這些失敗的根源不是惡意意圖（BEE-30008 已涵蓋），而是普通的模型行為：LLM 是統計預測器，偶爾會生成違反政策的內容、產生任何訓練集中都不存在的事實幻覺，或在意外地方反映使用者的 PII。
 
 該領域圍繞兩個不同的問題整合。第一，內容安全：按毒性、騷擾和自我傷害等維度對輸入和輸出進行分類。Google 的 Perspective API（Jigsaw，2017）開創了生產規模的毒性評分。Meta 的 Llama Guard（Chi 等人，arXiv:2312.06674，2023）將安全分類重新框架為 LLM 任務本身——一個微調模型，能夠推理給定的提示-回應對是否違反危害分類法，現在符合 MLCommons 的 13 個危害類別標準。
 
@@ -341,9 +341,9 @@ flowchart TD
 
 ## 相關 BEE
 
-- [BEE-2017](../security-fundamentals/data-privacy-and-pii-handling.md) -- 資料隱私與 PII 處理：護欄層的 PII 刪除強制執行 BEE-501 中定義的隱私原則；相同的實體，相同的敏感度分類
+- [BEE-2017](../security-fundamentals/data-privacy-and-pii-handling.md) -- 資料隱私與 PII 處理：護欄層的 PII 刪除強制執行 BEE-2017 中定義的隱私原則；相同的實體，相同的敏感度分類
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG 管道架構：忠實度評分和依據檢查是 RAG 管道特有的品質關卡；檢索到的上下文是用於驗證模型聲明的依據
-- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM 安全性與提示注入：BEE-510 涵蓋對抗性攻擊；BEE-522 涵蓋非對抗性生產流量的內容安全——它們是互補的層次
+- [BEE-30008](llm-security-and-prompt-injection.md) -- LLM 安全性與提示注入：BEE-30008 涵蓋對抗性攻擊；BEE-30020 涵蓋非對抗性生產流量的內容安全——它們是互補的層次
 - [BEE-30009](llm-observability-and-monitoring.md) -- LLM 可觀測性與監控：護欄違規率、忠實度分數分佈和 PII 偵測計數是屬於 LLM 可觀測性堆疊的運營指標
 - [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI 成本優化與模型路由：在每個輸出上運行 Llama Guard 會增加推論成本；失敗開放/非同步模式在安全覆蓋與成本之間取得平衡
 

@@ -5,7 +5,7 @@ state: draft
 slug: data-augmentation-strategies-for-ml-training
 ---
 
-# [BEE-595] Data Augmentation Strategies for ML Training
+# [BEE-30093] Data Augmentation Strategies for ML Training
 
 :::info
 Data augmentation synthetically expands training datasets by applying label-preserving transformations, reducing overfitting without collecting new data — but augmentation strategies are domain-specific, and applying the wrong transforms or excessive strength can degrade performance rather than improve it.
@@ -340,10 +340,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-587 ML Data Validation and Pipeline Quality Gates](587) — validating that augmented examples still satisfy schema and distribution constraints
-- [BEE-591 Testing Machine Learning Pipelines](591) — behavioral tests for augmentation pipelines (invariance tests: prediction SHOULD be stable under label-preserving augmentations)
-- [BEE-593 ML Training Cost Optimization](593) — DataLoader `num_workers`, `pin_memory`, and `prefetch_factor` settings that determine augmentation throughput
-- [BEE-594 Transfer Learning and Fine-Tuning Patterns](594) — augmentation strategy must match the pre-training augmentation when fine-tuning (use the backbone's `weights.transforms()` as the base)
+- [BEE-30085 ML Data Validation and Pipeline Quality Gates](587) — validating that augmented examples still satisfy schema and distribution constraints
+- [BEE-30089 Testing Machine Learning Pipelines](591) — behavioral tests for augmentation pipelines (invariance tests: prediction SHOULD be stable under label-preserving augmentations)
+- [BEE-30091 ML Training Cost Optimization](593) — DataLoader `num_workers`, `pin_memory`, and `prefetch_factor` settings that determine augmentation throughput
+- [BEE-30092 Transfer Learning and Fine-Tuning Patterns](594) — augmentation strategy must match the pre-training augmentation when fine-tuning (use the backbone's `weights.transforms()` as the base)
 
 ## References
 

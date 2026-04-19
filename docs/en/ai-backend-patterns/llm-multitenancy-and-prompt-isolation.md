@@ -5,7 +5,7 @@ state: draft
 slug: llm-multitenancy-and-prompt-isolation
 ---
 
-# [BEE-542] LLM Multitenancy and Prompt Isolation
+# [BEE-30040] LLM Multitenancy and Prompt Isolation
 
 :::info
 Serving multiple tenants from a shared LLM infrastructure requires layered isolation — security guarantees cannot be delegated to the model itself. Safe LLM multitenancy combines infrastructure-level network isolation, tenant-scoped vector database namespaces, validated prompt construction that delimitates user content from system directives, per-tenant token quota enforcement, and structured audit logging with a tenant identifier on every call.

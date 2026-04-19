@@ -5,7 +5,7 @@ state: draft
 slug: database-bulk-operations-and-upsert-patterns
 ---
 
-# [BEE-469] 資料庫批次操作與 UPSERT 模式
+# [BEE-19050] 資料庫批次操作與 UPSERT 模式
 
 :::info
 批次操作（bulk operation）——在單次資料庫往返中插入或更新多列——將客戶端與資料庫之間的延遲從 O(N) 降低到 O(1)，並可將寫入吞吐量提升 10–100 倍；UPSERT 模式在此基礎上進一步實現冪等寫入，能安全處理重複鍵而無需應用層的「先讀後寫」邏輯。

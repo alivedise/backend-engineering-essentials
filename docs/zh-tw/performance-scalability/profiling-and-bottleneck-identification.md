@@ -5,7 +5,7 @@ state: draft
 slug: profiling-and-bottleneck-identification
 ---
 
-# [BEE-303] 效能剖析與瓶頸辨識
+# [BEE-13004] 效能剖析與瓶頸辨識
 
 :::info
 先測量，再剖析正確的對象，最後修正真正的瓶頸。

@@ -5,7 +5,7 @@ state: draft
 slug: slos-and-error-budgets
 ---
 
-# [BEE-324] SLOs and Error Budgets
+# [BEE-14005] SLOs and Error Budgets
 
 :::info
 Define reliability targets with SLOs. Use error budgets to decide when to ship features and when to focus on reliability.

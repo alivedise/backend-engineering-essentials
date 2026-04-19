@@ -5,7 +5,7 @@ state: draft
 slug: memory-management-and-garbage-collection
 ---
 
-# [BEE-495] Memory Management and Garbage Collection
+# [BEE-13007] Memory Management and Garbage Collection
 
 :::info
 Every backend runtime reclaims memory through one of three strategies — reference counting, tracing collection, or compile-time ownership — and each imposes distinct throughput, latency, and operability trade-offs that matter as much as algorithm choice.
@@ -214,7 +214,7 @@ flowchart TD
 
 **Tuning GC parameters without profiling first**. Changing `-XX:MaxGCPauseMillis`, `GOGC`, or GC generation sizes before establishing a baseline from GC logs and profiling data is speculation. Measure GC pause times and allocation rates; then tune with a specific objective.
 
-**Creating excessive goroutine or thread count**. Goroutines are cheap (2 KB initial stack), but creating millions of long-lived goroutines with captured closures creates heap pressure from the stack payloads and closure objects. Use worker pools (BEE-244) to bound concurrency.
+**Creating excessive goroutine or thread count**. Goroutines are cheap (2 KB initial stack), but creating millions of long-lived goroutines with captured closures creates heap pressure from the stack payloads and closure objects. Use worker pools (BEE-11005) to bound concurrency.
 
 ## Related BEEs
 

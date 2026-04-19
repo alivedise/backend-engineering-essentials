@@ -5,7 +5,7 @@ state: draft
 slug: data-augmentation-strategies-for-ml-training
 ---
 
-# [BEE-595] ML 訓練的資料增強策略
+# [BEE-30093] ML 訓練的資料增強策略
 
 :::info
 資料增強（Data Augmentation）透過套用保留標籤的轉換，合成擴充訓練資料集，在不收集新資料的情況下降低過擬合——但增強策略具有領域特定性，套用錯誤的轉換或過強的強度反而會降低效能。
@@ -315,10 +315,10 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-587 ML 資料驗證與管道品質閘控](587) — 驗證增強樣本仍滿足 schema 和分佈約束
-- [BEE-591 測試機器學習管道](591) — 增強管道的行為測試（不變性測試：預測應該（SHOULD）在保留標籤的增強下保持穩定）
-- [BEE-593 ML 訓練成本最佳化](593) — 決定增強吞吐量的 DataLoader `num_workers`、`pin_memory` 和 `prefetch_factor` 設定
-- [BEE-594 遷移學習與微調模式](594) — 微調時增強策略必須符合預訓練增強（使用主幹的 `weights.transforms()` 作為基礎）
+- [BEE-30085 ML 資料驗證與管道品質閘控](587) — 驗證增強樣本仍滿足 schema 和分佈約束
+- [BEE-30089 測試機器學習管道](591) — 增強管道的行為測試（不變性測試：預測應該（SHOULD）在保留標籤的增強下保持穩定）
+- [BEE-30091 ML 訓練成本最佳化](593) — 決定增強吞吐量的 DataLoader `num_workers`、`pin_memory` 和 `prefetch_factor` 設定
+- [BEE-30092 遷移學習與微調模式](594) — 微調時增強策略必須符合預訓練增強（使用主幹的 `weights.transforms()` 作為基礎）
 
 ## 參考文獻
 

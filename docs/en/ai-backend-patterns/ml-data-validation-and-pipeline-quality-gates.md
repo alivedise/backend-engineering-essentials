@@ -5,7 +5,7 @@ state: draft
 slug: ml-data-validation-and-pipeline-quality-gates
 ---
 
-# [BEE-587] ML Data Validation and Pipeline Quality Gates
+# [BEE-30085] ML Data Validation and Pipeline Quality Gates
 
 :::info
 Data validation enforces explicit assertions about data — schema, statistical properties, freshness, completeness — before that data enters a training pipeline, feature store, or model. A pipeline quality gate is a decision point that blocks or reroutes execution when validation fails. Without these gates, bad data reaches models silently, producing degraded predictions that are expensive to diagnose weeks later.
@@ -352,11 +352,11 @@ with mlflow.start_run():
 
 ## Related BEEs
 
-- [BEE-583 AI Feature Stores for ML Inference](583) — feature infrastructure where validation gates are applied before materialization
-- [BEE-585 ML Monitoring and Drift Detection](585) — reactive monitoring of distribution changes in production (distinct from proactive validation)
-- [BEE-586 ML Experiment Tracking and Model Registry](586) — linking validation results to training runs via MLflow tags
-- [BEE-126 Database Migrations](126) — schema evolution that must be paired with validation suite updates
-- [BEE-529 AI Workflow Orchestration](529) — orchestration frameworks where quality gates are embedded
+- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure where validation gates are applied before materialization
+- [BEE-30083 ML Monitoring and Drift Detection](585) — reactive monitoring of distribution changes in production (distinct from proactive validation)
+- [BEE-30084 ML Experiment Tracking and Model Registry](586) — linking validation results to training runs via MLflow tags
+- [BEE-6007 Database Migrations](126) — schema evolution that must be paired with validation suite updates
+- [BEE-30027 AI Workflow Orchestration](529) — orchestration frameworks where quality gates are embedded
 
 ## References
 

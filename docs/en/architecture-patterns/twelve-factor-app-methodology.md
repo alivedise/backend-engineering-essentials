@@ -5,7 +5,7 @@ state: draft
 slug: twelve-factor-app-methodology
 ---
 
-# [BEE-486] The Twelve-Factor App Methodology
+# [BEE-5008] The Twelve-Factor App Methodology
 
 :::info
 The Twelve-Factor App is a methodology for building software-as-a-service applications that are portable across execution environments, deployable without server administration, and horizontally scalable — distilled from patterns observed across thousands of applications deployed to the Heroku platform.

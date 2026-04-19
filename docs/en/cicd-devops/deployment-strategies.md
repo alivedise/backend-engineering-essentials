@@ -5,7 +5,7 @@ state: draft
 slug: deployment-strategies
 ---
 
-# [BEE-361] Deployment Strategies
+# [BEE-16002] Deployment Strategies
 
 :::info
 Choosing the right deployment strategy determines your blast radius, rollback speed, and infrastructure cost during a release. Blue-green, canary, rolling update, and recreate each make different trade-offs.
@@ -108,7 +108,7 @@ Step 4: Rollback if needed — flip LB back to Blue in seconds
 | Infrastructure cost | 2x during the switch window |
 | Blast radius | 100% of traffic is on new version immediately after switch |
 
-**Database consideration:** If v2 includes schema changes, the green environment must use a schema that v1 can also read (expand-before-contract pattern). See [BEE-123](#) for database migration alignment.
+**Database consideration:** If v2 includes schema changes, the green environment must use a schema that v1 can also read (expand-before-contract pattern). See [BEE-6004](#) for database migration alignment.
 
 ---
 
@@ -153,7 +153,7 @@ A/B deployment routes traffic based on **user or request attributes** (header va
 | Routing basis | Random % of traffic | User segment or attribute |
 | Goal | Reduce risk of a bad release | Measure feature impact on a segment |
 | Traffic control | Increases over time | Stable split for measurement period |
-| Related BEE | — | [BEE-363 Feature Flags](#) |
+| Related BEE | — | [BEE-16004 Feature Flags](#) |
 
 A/B deployment is a feature-management concern. Canary is a release-safety concern. Both can run simultaneously on the same service.
 
@@ -237,7 +237,7 @@ Database changes are the most common reason a rollback fails. The schema must be
 1. Release N: Add new column (nullable), migrate data, dual-write in code.
 2. Release N+1: Remove old column after all old code is gone.
 
-See [BEE-123](#) for the full expand-before-contract migration pattern.
+See [BEE-6004](#) for the full expand-before-contract migration pattern.
 
 ---
 
@@ -285,7 +285,7 @@ During a rolling update, old and new pods serve traffic simultaneously. If v2 re
 
 ## Related BEPs
 
-- [BEE-123: Database Migrations](#) — Schema migration patterns that align with deployment strategy; expand-before-contract
-- [BEE-345: Testing in Production](#) — Smoke tests, synthetic traffic, and observability requirements that gate deployment progression
-- [BEE-360: Continuous Integration](#) — CI pipeline gates that must pass before any deployment strategy is invoked
-- [BEE-363: Feature Flags](#) — Decoupling code deployment from feature release; complements canary and A/B patterns
+- [BEE-6004: Database Migrations](#) — Schema migration patterns that align with deployment strategy; expand-before-contract
+- [BEE-15006: Testing in Production](#) — Smoke tests, synthetic traffic, and observability requirements that gate deployment progression
+- [BEE-16001: Continuous Integration](#) — CI pipeline gates that must pass before any deployment strategy is invoked
+- [BEE-16004: Feature Flags](#) — Decoupling code deployment from feature release; complements canary and A/B patterns

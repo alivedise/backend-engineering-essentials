@@ -5,7 +5,7 @@ state: draft
 slug: multi-lora-serving-and-adapter-management
 ---
 
-# [BEE-562] Multi-LoRA 服務與適配器管理
+# [BEE-30060] Multi-LoRA 服務與適配器管理
 
 :::info
 LoRA 微調產生緊湊的適配器權重（10–100 MB），使基礎模型能夠針對特定領域或租戶進行專門化。將每個適配器作為獨立模型副本部署在規模化場景下不可行。專用的 Multi-LoRA 服務系統在數千個並發適配器之間共享基礎模型，使用自定義 GPU 核心跨異構適配器批量計算，並通過 GPU/CPU/磁盤快取層級分頁管理適配器權重——吞吐量可達到單模型服務器的 90% 以上。

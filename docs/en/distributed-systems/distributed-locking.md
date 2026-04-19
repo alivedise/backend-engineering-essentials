@@ -5,7 +5,7 @@ state: draft
 slug: distributed-locking
 ---
 
-# [BEE-424] Distributed Locking
+# [BEE-19005] Distributed Locking
 
 :::info
 Distributed locking provides mutual exclusion across processes on separate machines — preventing concurrent writes to shared resources — but the core challenge is not acquiring the lock: it is ensuring that a process whose lock has silently expired cannot corrupt data it believes it still protects.
@@ -45,7 +45,7 @@ The Lua script prevents the race where process A reads its value, decides it mat
 
 **Match lock TTL to the expected critical section duration, not to network timeouts.** A lock TTL shorter than the critical section causes self-expiry under load. A lock TTL much longer than the critical section means failures take longer to recover. Measure the p99 duration of the critical section under load and set TTL to 5–10× that value, with explicit lease renewal (keepalive) if the section can exceed it.
 
-**Prefer idempotent operations over distributed locks where possible.** If the protected operation is idempotent — writing a record with a known ID, updating a counter with a conditional check — you can often eliminate the lock entirely with database-level `INSERT ON CONFLICT DO NOTHING` or optimistic concurrency control (BEE-245). Locks are a correctness mechanism of last resort when the operation itself cannot be made idempotent.
+**Prefer idempotent operations over distributed locks where possible.** If the protected operation is idempotent — writing a record with a known ID, updating a counter with a conditional check — you can often eliminate the lock entirely with database-level `INSERT ON CONFLICT DO NOTHING` or optimistic concurrency control (BEE-11006). Locks are a correctness mechanism of last resort when the operation itself cannot be made idempotent.
 
 ## Visual
 

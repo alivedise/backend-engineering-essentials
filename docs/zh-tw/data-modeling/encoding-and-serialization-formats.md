@@ -5,7 +5,7 @@ state: draft
 slug: encoding-and-serialization-formats
 ---
 
-# [BEE-143] 編碼與序列化格式
+# [BEE-7004] 編碼與序列化格式
 
 :::info
 根據資料的消費者、吞吐量需求及 Schema 演進要求來選擇編碼格式。JSON 用於公開 API 與人類可讀的設定；Protobuf 用於高效能 RPC；Avro 用於需要 Schema 演進的事件串流；MessagePack 用於需要二進位壓縮但不需 Schema 額外負擔的情境。

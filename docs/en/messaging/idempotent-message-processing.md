@@ -5,7 +5,7 @@ state: draft
 slug: idempotent-message-processing
 ---
 
-# [BEE-226] Idempotent Message Processing
+# [BEE-10007] Idempotent Message Processing
 
 :::info
 Designing consumers that tolerate duplicate delivery.

@@ -5,7 +5,7 @@ state: draft
 slug: alerting-philosophy
 ---
 
-# [BEE-323] 告警哲學
+# [BEE-14004] 告警哲學
 
 :::info
 以症狀為基礎的告警與以原因為基礎的告警、告警疲勞、SLO 燃燒率告警，以及維持值班輪換健全的紀律。

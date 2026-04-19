@@ -5,7 +5,7 @@ state: draft
 slug: continuous-profiling-in-production
 ---
 
-# [BEE-326] Continuous Profiling in Production
+# [BEE-14007] Continuous Profiling in Production
 
 :::info
 Continuous profiling runs always-on sampling across every service in a fleet, stores profiles with deployment metadata, and enables before/after diff analysis — answering not just "what is slow" but "which code change made it slow."
@@ -13,7 +13,7 @@ Continuous profiling runs always-on sampling across every service in a fleet, st
 
 ## Context
 
-The three-pillar observability model (BEE-320: logs, metrics, traces) answers "what happened," "how much," and "where in the request path." None of these answers "why is this function consuming 40% of CPU?" or "which line of code is generating GC pressure?" Profiling is the fourth pillar that fills this gap.
+The three-pillar observability model (BEE-14001: logs, metrics, traces) answers "what happened," "how much," and "where in the request path." None of these answers "why is this function consuming 40% of CPU?" or "which line of code is generating GC pressure?" Profiling is the fourth pillar that fills this gap.
 
 Traditional profiling is a manual, one-shot operation run against a single process in a staging environment. The fundamental problem is that production workloads are not reproducible: the data distribution, the JIT compilation state, the OS scheduler behavior, and the load shape all differ from staging. Profiling staging tells you about staging performance, not production performance.
 

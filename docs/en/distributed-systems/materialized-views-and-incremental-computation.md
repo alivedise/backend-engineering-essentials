@@ -5,7 +5,7 @@ state: draft
 slug: materialized-views-and-incremental-computation
 ---
 
-# [BEE-470] Materialized Views and Incremental Computation
+# [BEE-19051] Materialized Views and Incremental Computation
 
 :::info
 A materialized view stores the result of a query on disk and serves it as a table — trading staleness for speed; incremental computation extends this by recomputing only the changed portion of the result instead of rebuilding the entire view from scratch.

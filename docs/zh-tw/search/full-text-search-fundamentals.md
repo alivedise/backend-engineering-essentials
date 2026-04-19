@@ -5,7 +5,7 @@ state: draft
 slug: full-text-search-fundamentals
 ---
 
-# [BEE-380] 全文搜尋基礎
+# [BEE-17001] 全文搜尋基礎
 
 :::info
 全文搜尋引擎如何將原始文件轉換為倒排索引、使用 BM25 對結果評分，以及為何 SQL `LIKE` 不適合用於相關性排名搜尋。

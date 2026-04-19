@@ -5,7 +5,7 @@ state: draft
 slug: owasp-api-security-top-10
 ---
 
-# [BEE-488] OWASP API Security Top 10
+# [BEE-2008] OWASP API Security Top 10
 
 :::info
 The OWASP API Security Top 10 is a prioritized list of the most critical security risks specific to APIs — distinct from the general OWASP Top 10 — published to help teams identify and remediate the vulnerabilities that disproportionately affect REST, GraphQL, gRPC, and other structured API surfaces.

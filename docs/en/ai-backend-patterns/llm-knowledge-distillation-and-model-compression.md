@@ -5,7 +5,7 @@ state: draft
 slug: llm-knowledge-distillation-and-model-compression
 ---
 
-# [BEE-550] LLM Knowledge Distillation and Model Compression
+# [BEE-30048] LLM Knowledge Distillation and Model Compression
 
 :::info
 Deploying a frontier LLM in production means choosing between paying per-token API costs or running a compressed model that is smaller, faster, and cheaper — knowledge distillation transfers a teacher model's behavior to a smaller student, while post-training quantization reduces weight precision without retraining, with each technique making different tradeoffs between compression ratio, accuracy retention, and infrastructure cost.

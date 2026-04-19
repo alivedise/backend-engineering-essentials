@@ -5,7 +5,7 @@ state: draft
 slug: structured-logging
 ---
 
-# [BEE-321] Structured Logging
+# [BEE-14002] Structured Logging
 
 :::info
 Why unstructured logs fail at scale, log levels, correlation IDs, and what never to log.
