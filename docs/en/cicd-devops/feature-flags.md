@@ -65,7 +65,6 @@ Permission toggles control access to features based on user identity, plan tier,
 - **Who controls it:** Product and business operations.
 - **Example:** An analytics dashboard is visible only to users on an enterprise plan. The toggle checks the user's plan at runtime.
 
----
 
 ## Feature Flag Lifecycle
 
@@ -97,7 +96,6 @@ flowchart LR
 
 **The remove stage is mandatory.** A flag that reaches 100% and is never removed becomes dead weight — it adds a branch that is always taken, confuses new engineers, and contributes to combinatorial explosion when multiple stale flags interact.
 
----
 
 ## Worked Example: Launching a New Checkout Flow
 
@@ -137,7 +135,6 @@ After the fix: canary 5% passes → expand to 10% → 25% → 50% → 100%. Each
 
 Once at 100% for 48 hours with no incidents: delete the flag configuration, remove the `if (checkout_v2_enabled)` conditional from the code, delete the old checkout code path. The new checkout is now the only checkout.
 
----
 
 ## Progressive Rollout Percentages
 
@@ -155,7 +152,6 @@ Each stage has a hold period (typically 15–60 minutes for synchronous services
 
 Do not advance stages manually by checking dashboards. Define the promotion criteria before the rollout starts, then automate the check.
 
----
 
 ## Kill Switches
 
@@ -182,7 +178,6 @@ request arrives
 
 Kill switches complement graceful degradation (see [BEE-12005](#)) — the flag disables the feature, the fallback behavior keeps the service responding.
 
----
 
 ## Flag Evaluation: Server-Side vs. Client-Side
 
@@ -196,7 +191,6 @@ Kill switches complement graceful degradation (see [BEE-12005](#)) — the flag 
 
 For backend services, always evaluate flags server-side. Client-side evaluation is appropriate for pure UI experiments where the server does not need to know which variant was shown.
 
----
 
 ## Common Mistakes
 
@@ -228,7 +222,6 @@ pricing_experiment_cta_ab   # experiment toggle — remove after analysis
 
 Flag A requires Flag B to be enabled. Flag B requires Flag C. This creates combinatorial complexity: `2^3 = 8` states, most of which are never tested. If a feature requires another feature, promote both to production together or design around the dependency. Never create a flag that has a hard runtime dependency on another flag's state.
 
----
 
 ## Related BEPs
 

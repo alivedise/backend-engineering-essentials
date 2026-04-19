@@ -215,7 +215,6 @@ on:
 
 The goal: each service pipeline runs only when relevant code changes, while shared library changes propagate to all dependents automatically.
 
----
 
 ## Full Pipeline: Reference Architecture
 
@@ -279,7 +278,6 @@ flowchart TD
     Q -->|PASS| S([Deployment complete\nUpdate deployment record])
 ```
 
----
 
 ## Worked Example: Backend Service Pipeline
 
@@ -316,7 +314,6 @@ Automated checks: staging has been stable for 10+ minutes, error rate < 0.1%, no
 
 The same `:a3f9c21` image is pulled and deployed to the production Kubernetes namespace. Smoke tests pass. Deployment complete.
 
----
 
 ## Common Mistakes
 
@@ -352,7 +349,6 @@ This secret is now in version control history permanently (even after deletion).
 
 Teams with no pipeline metrics don't know their P50 build time until a developer complains it's slow. By then it has been slow for months. They don't know their flaky test rate until someone manually counts re-run attempts. They cannot make the case for infrastructure investment because they have no baseline. Instrument the pipeline from day one. The data is cheap to collect and expensive to reconstruct.
 
----
 
 ## Related BEPs
 

@@ -32,7 +32,6 @@ In practice this means:
 2. When forward compatibility is also required, only make fully compatible changes.
 3. Treat schema changes with the same review discipline as API contract changes — because they are API contract changes.
 
----
 
 ## Compatibility Definitions
 
@@ -81,7 +80,6 @@ flowchart LR
     style C_new fill:#fff3e0,stroke:#ff9800
 ```
 
----
 
 ## Breaking vs. Non-Breaking Changes
 
@@ -106,7 +104,6 @@ flowchart LR
 | Change the semantics of a field (same name, different meaning) | Silent data corruption; no format error, wrong business logic |
 | Reuse a deleted field number (Protobuf) | Binary decodes into the wrong field |
 
----
 
 ## Rules for Safe Evolution
 
@@ -186,7 +183,6 @@ message Order {
 }
 ```
 
----
 
 ## How Different Formats Handle Evolution
 
@@ -219,7 +215,6 @@ JSON has no built-in schema enforcement on the wire. Additional discipline is re
 - Use JSON Schema or OpenAPI to formally describe and validate the contract.
 - Maintain an `$schema` or version header so consumers can detect the schema version.
 
----
 
 ## API Contract Evolution
 
@@ -255,7 +250,6 @@ Old clients that read `name` now receive `null` or throw a deserialization error
 
 See [BEE-4002](../api-design/api-versioning-strategies.md) (API Versioning) for the broader versioning strategy when a clean break is unavoidable.
 
----
 
 ## Database Schema Evolution
 
@@ -267,7 +261,6 @@ Best practices:
 - Never drop a column in the same migration that removes application code references to it — deploy the application change first, then drop the column after confirming no active queries reference it.
 - Rename via a multi-step process: add the new column, backfill data, update application code, deprecate the old column, drop after a waiting period.
 
----
 
 ## Common Mistakes
 
@@ -291,7 +284,6 @@ Teams often treat internal gRPC or Kafka schemas as informal. When an internal s
 
 In reality, canary deployments, mobile app release cycles, and third-party integrations mean multiple schema versions coexist for days or months. Design every schema change to survive that overlap window.
 
----
 
 ## Checklist
 
@@ -306,7 +298,6 @@ Before merging a schema change:
 - [ ] Are all active consumers known and able to handle this change?
 - [ ] Is there a rollback plan if an incompatible change is detected post-deploy?
 
----
 
 ## Related BEPs
 

@@ -40,7 +40,6 @@ In practice this means:
 6. Partition time-series tables by time and define a retention policy; unbounded growth is not a valid design.
 7. Index time range columns explicitly; point-in-time and range queries will not be fast without them.
 
----
 
 ## Temporal Data Fundamentals
 
@@ -117,7 +116,6 @@ SELECT * FROM employees;
 
 A separate `employees_audit` table that logs every change (including the final deletion) is the complement to soft deletes. Soft deletes let you filter active records; the audit log tells you who deleted it and when.
 
----
 
 ## Bi-Temporal Modeling
 
@@ -195,7 +193,6 @@ SELECT amount, valid_from, valid_to
    AND superseded_at IS NULL;   -- latest recorded belief
 ```
 
----
 
 ## Audit Trails
 
@@ -251,7 +248,6 @@ CREATE TRIGGER trg_audit_immutable
   FOR EACH ROW EXECUTE FUNCTION prevent_audit_modification();
 ```
 
----
 
 ## Event Sourcing as a Temporal Pattern
 
@@ -276,7 +272,6 @@ The projection (current state) is maintained in a separate table updated by a co
 
 Event sourcing is suited to domains where history is the primary artifact (financial ledgers, compliance systems, CQRS-based microservices). It adds significant complexity — full replay time, snapshot management, projection consistency — and should not be adopted lightly. See [BEE-10004](../messaging/event-sourcing.md).
 
----
 
 ## Time-Series Data Characteristics
 
@@ -334,7 +329,6 @@ CREATE INDEX idx_metrics_time
 
 Without explicit indexes on the time column, range scans over large partitions will be sequential. See [BEE-6002](../data-storage/indexing-deep-dive.md).
 
----
 
 ## Retention Policies
 
@@ -370,7 +364,6 @@ END;
 $$;
 ```
 
----
 
 ## Common Mistakes
 
@@ -394,7 +387,6 @@ Adding `recorded_at TIMESTAMPTZ DEFAULT now()` to every table without a correspo
 
 Temporal queries are almost always range queries: `WHERE recorded_at BETWEEN '2025-01-01' AND '2025-01-31'`. Without an index on the time column, every query is a sequential scan. For partitioned tables, ensure the index is defined on each partition (or defined on the parent, which PostgreSQL propagates automatically). See [BEE-6002](../data-storage/indexing-deep-dive.md).
 
----
 
 ## Related BEPs
 

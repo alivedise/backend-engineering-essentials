@@ -25,7 +25,6 @@ slug: cryptographic-basics-for-engineers
 
 **使用經過驗證的函式庫中已建立的演算法，且僅用於其設計的用途。選擇能解決問題的最簡單基礎元件，絕不自創協議，並將金鑰管理視為一等重要的工程課題。**
 
----
 
 ## 選擇正確的基礎元件
 
@@ -47,7 +46,6 @@ flowchart TD
 
 以下各節詳細說明每個分支。
 
----
 
 ## 雜湊（Hashing）
 
@@ -65,7 +63,6 @@ flowchart TD
 
 純雜湊（即使是 SHA-256）不適合儲存密碼。密碼的熵值（entropy）偏低，容易遭受預先計算的彩虹表（rainbow table）攻擊與 GPU 暴力破解。密碼儲存需要**緩慢、加鹽（salted）、記憶體困難（memory-hard）**的演算法，詳見下方密碼雜湊章節。
 
----
 
 ## 對稱加密（Symmetric Encryption）
 
@@ -102,7 +99,6 @@ BLOCK 2: "Hello, World!!!" → R2  ← 每次產生不同密文
 
 請務必使用驗證模式（GCM、CCM），或 CBC 搭配 HMAC（先加密再 MAC，Encrypt-then-MAC）。絕不使用 ECB。
 
----
 
 ## 非對稱加密（Asymmetric Encryption）
 
@@ -131,7 +127,6 @@ BLOCK 2: "Hello, World!!!" → R2  ← 每次產生不同密文
 | ECDH | P-256 | X25519 |
 | AES | 128-bit | 256-bit |
 
----
 
 ## 密碼雜湊（Password Hashing）
 
@@ -164,7 +159,6 @@ function verify_password(plaintext_password, stored_hash):
 
 argon2id、scrypt 和 bcrypt 產生的雜湊格式已內嵌演算法、參數與 salt——不需要額外儲存 salt。
 
----
 
 ## 訊息認證碼（MAC / HMAC）
 
@@ -190,7 +184,6 @@ function verify_webhook_payload(payload_bytes, received_signature, secret_key):
 
 驗證 MAC 時請使用常數時間比較（constant-time comparison）。一般的 `==` 運算子可能在第一個不匹配的 byte 就短路返回，洩漏時序資訊，使攻擊者可逐字節偽造簽章（時序攻擊，timing attack）。
 
----
 
 ## 數位簽章（Digital Signature）
 
@@ -221,7 +214,6 @@ function verify_payload(payload, signature_b64):
 
 數位簽章是 JWT（JWS）、TLS 憑證、程式碼簽署，以及 HTTPS 憑證鏈的基礎。JWT 相關的具體指引請見 [BEE-1002](../auth/token-based-authentication.md)。
 
----
 
 ## TLS 作為應用密碼學
 
@@ -236,7 +228,6 @@ TLS 1.3（RFC 8446）是目前的標準。TLS 1.2 仍廣泛部署。TLS 1.0 和 
 
 後端 TLS 設定請見 [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md)。
 
----
 
 ## 編碼不等於加密
 
@@ -251,7 +242,6 @@ TLS 1.3（RFC 8446）是目前的標準。TLS 1.2 仍廣泛部署。TLS 1.0 和 
 
 不要儲存加密資料後稱之為「base64 編碼」。不要把 base64 解碼後的內容稱為「解密」。
 
----
 
 ## 常見錯誤
 
@@ -283,7 +273,6 @@ ECB 對每個區塊獨立加密，洩漏結構性模式。[ECB 企鵝圖](https:
 
 字串或位元組陣列的相等運算子並非常數時間。驗證 MAC 和簽章時，請務必使用常數時間比較函式，以防止時序攻擊（timing attack）。
 
----
 
 ## 相關 BEE
 

@@ -36,6 +36,7 @@ title: BEE list
 - [3004.TLS/SSL Handshake](/networking-fundamentals/tls-ssl-handshake)
 - [3005.Load Balancers](/networking-fundamentals/load-balancers)
 - [3006.Proxies and Reverse Proxies](/networking-fundamentals/proxies-and-reverse-proxies)
+- [3007.Mutual TLS (mTLS) Handshake and Server Configuration](/networking-fundamentals/mutual-tls-handshake-and-server-configuration)
 - [4001.REST API Design Principles](/api-design/rest-api-design-principles)
 - [4002.API Versioning Strategies](/api-design/api-versioning-strategies)
 - [4003.Idempotency in APIs](/api-design/api-idempotency)

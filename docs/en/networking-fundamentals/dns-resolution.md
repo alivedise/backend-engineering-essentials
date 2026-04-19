@@ -22,7 +22,6 @@ This article covers how DNS resolution works end-to-end, the record types backen
 - [Julia Evans — "DNS propagation is actually caches expiring"](https://jvns.ca/blog/2021/12/06/dns-doesn-t-propagate/)
 - [Cloudflare — What is DNS-based load balancing?](https://www.cloudflare.com/learning/performance/what-is-dns-load-balancing/)
 
----
 
 ## Principle
 
@@ -30,7 +29,6 @@ This article covers how DNS resolution works end-to-end, the record types backen
 
 DNS is the phonebook of the internet. Every time you use a hostname instead of an IP address, you gain the ability to change the destination without modifying your clients. That flexibility is the basis of service discovery, blue/green deployments, and DNS-based failover. The cost is a layer of indirection with its own latency, caching, and failure modes. Understanding those costs lets you design around them rather than being surprised by them.
 
----
 
 ## How DNS Resolution Works
 
@@ -75,7 +73,6 @@ sequenceDiagram
 
 **Authoritative nameserver:** The server that holds the actual DNS zone file for a domain. It gives the definitive answer. When you configure records in your domain registrar or DNS provider (Route 53, Cloudflare, Google Cloud DNS), you are editing the zone served by your authoritative nameservers.
 
----
 
 ## DNS Record Types
 
@@ -90,7 +87,6 @@ sequenceDiagram
 | **NS** | Specifies the authoritative nameservers for a domain. The top-level nameservers you register with your domain registrar are NS records. |
 | **SOA** | Start of Authority. One per zone. Contains the primary nameserver, responsible party email, serial number (for zone transfer synchronization), and refresh/retry/expire intervals. |
 
----
 
 ## TTL and Caching
 
@@ -109,7 +105,6 @@ A TTL of `300` means resolvers and OS caches may serve the record for up to 5 mi
 
 **DNS propagation is a misnomer.** There is no push mechanism that broadcasts record changes to all resolvers. What actually happens is that cached records expire according to their TTL, and resolvers re-query at that point. If your TTL is 3600, some clients will use the old record for up to an hour after you update it. Lower the TTL well before a planned change; raise it again afterward.
 
----
 
 ## Key System Files
 
@@ -137,7 +132,6 @@ options ndots:5                 # Try adding search domains if name has < 5 dots
 
 The `search` and `ndots` settings matter in Kubernetes. A lookup for `redis` becomes up to 6 queries (`redis.default.svc.cluster.local`, `redis.svc.cluster.local`, etc.) before falling through to a plain lookup. This adds latency on every connection when the search domain does not match. Use fully-qualified domain names (trailing dot, e.g. `redis.default.svc.cluster.local.`) to skip the search list.
 
----
 
 ## Inspecting DNS with `dig`
 
@@ -187,7 +181,6 @@ curl -H 'accept: application/dns-json' \
   'https://cloudflare-dns.com/dns-query?name=api.example.com&type=A'
 ```
 
----
 
 ## DNS-Based Load Balancing
 
@@ -229,7 +222,6 @@ This is one of the most important patterns to understand for backend reliability
 
 Additionally, **application-level DNS caching can override the TTL.** Many HTTP clients, JVM-based services, and connection pools cache DNS results indefinitely or for a fixed duration unrelated to the DNS TTL. Those clients will not see the updated record until their internal cache expires—even if the OS cache has already refreshed. This is addressed in the Common Mistakes section.
 
----
 
 ## DNS Failure Modes
 
@@ -250,7 +242,6 @@ dig +time=1 +retry=0 @192.0.2.1 example.com # Timeout (black-hole IP)
 
 **DNS timeouts deserve special attention.** DNS queries use UDP by default. If a UDP response is lost, the client retries after a short interval (typically 1–5 s per attempt, 2–3 retries). DNS responses larger than 512 bytes (EDNS0 raised this to 4096 bytes) may force a fallback to TCP, adding a full TCP handshake before the DNS response arrives. In environments with firewalls that block DNS over TCP (port 53/TCP), large responses cause silent failures.
 
----
 
 ## DNS Propagation
 
@@ -272,7 +263,6 @@ T+300s  All resolver caches for this record have expired. New queries return the
 3. Wait one new-TTL interval (60 s) for the change to fully propagate.
 4. Raise the TTL back to its normal value.
 
----
 
 ## DNS over HTTPS (DoH) and DNS over TLS (DoT)
 
@@ -292,7 +282,6 @@ Traditional DNS queries are sent in plaintext over UDP/TCP port 53. Anyone on th
 
 **Backend relevance:** Your services' outbound DNS queries may bypass corporate or VPC DNS resolvers if the language runtime or container image uses a hardcoded DoH provider. This can break service discovery in environments that rely on internal DNS (e.g., Kubernetes `kube-dns`, AWS VPC DNS at `169.254.169.253`). Verify that DoH is not inadvertently enabled in your container base images or language runtimes.
 
----
 
 ## DNS and Service Discovery
 
@@ -305,7 +294,6 @@ In microservice architectures, DNS is a common service discovery mechanism:
 
 When a service crashes and restarts with a new IP, DNS-based discovery updates the record automatically. Clients that cache the old DNS result will fail until their cache expires—this is why short TTLs (10–60 s) are used for service discovery records, and why connection pools must be designed to detect dead connections (TCP keepalive, health probes) rather than relying solely on DNS freshness.
 
----
 
 ## Common Mistakes
 
@@ -339,7 +327,6 @@ Backend engineers measure database query time, HTTP request time, and service pr
 
 **Fix:** Add DNS resolution time to your observability. Measure time-to-first-byte including the DNS phase. Use connection pooling to amortize DNS cost over many requests. In high-throughput systems, consider a local DNS caching daemon (e.g., `nscd`, `dnsmasq`, `systemd-resolved`) to keep the resolver latency at sub-millisecond levels for hot entries.
 
----
 
 ## Related BEPs
 

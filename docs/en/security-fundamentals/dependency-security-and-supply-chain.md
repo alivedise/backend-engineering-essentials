@@ -36,7 +36,6 @@ Authoritative frameworks that address this threat:
 
 **Treat every dependency as untrusted code that you are choosing to execute in production. Maintain a complete inventory, scan continuously for known vulnerabilities, pin or lock versions for reproducibility, and apply the minimal dependency principle — add a package only when the cost of owning it forever is worth the benefit.**
 
----
 
 ## Attack Vectors
 
@@ -86,7 +85,6 @@ flowchart LR
 
 **Vector 4 — Maintainer takeover:** An attacker compromises the credentials of a legitimate package maintainer and publishes a new version with malicious additions. The package name, publisher account, and version bump all appear normal.
 
----
 
 ## Lock Files and Reproducible Builds
 
@@ -100,7 +98,6 @@ Lock files must be:
 
 Integrity hashes in lock files (`integrity: sha512-...` in npm, `hash:` in pip-tools) allow the installer to verify that the package content matches what was recorded when the lock was created. If an attacker replaces the content of a published version on a registry, the hash check fails.
 
----
 
 ## Vulnerability Scanning (SCA)
 
@@ -124,7 +121,6 @@ Scanning produces findings; acting on findings is the actual work. Establish a s
 - **Medium / CVSS 4.0–6.9** — patch within 30 days
 - **Low** — track and address in next planned maintenance cycle
 
----
 
 ## Software Bill of Materials (SBOM)
 
@@ -138,7 +134,6 @@ Why SBOMs matter:
 
 Generate SBOMs as part of the build pipeline using tools such as `syft` (for container images and source trees) or `cdxgen` (for language-specific manifests). Attach the SBOM to the release artifact.
 
----
 
 ## Typosquatting and Dependency Confusion Prevention
 
@@ -153,7 +148,6 @@ Generate SBOMs as part of the build pipeline using tools such as `syft` (for con
 - Use a private registry proxy (Artifactory, Nexus, AWS CodeArtifact) configured to block public resolution for names that match internal package patterns.
 - Ensure internal package versions are always higher than any version that exists on the public registry. Some teams use an internal version prefix that is semantically higher than any public version (e.g., `1000.x.x`).
 
----
 
 ## Minimal Dependency Principle
 
@@ -167,7 +161,6 @@ Every dependency you add becomes your responsibility forever. Before adding a pa
 
 A dependency is not free. Its maintenance cost, vulnerability exposure, and license obligations are paid by your team for as long as it is in the tree.
 
----
 
 ## Update Strategy: Pinning vs. Ranges
 
@@ -192,7 +185,6 @@ The practical recommendation:
 
 Automated update tools open PRs; your CI pipeline is what validates them. The quality of your test suite directly determines how confidently you can merge dependency updates.
 
----
 
 ## Example: Audit Workflow and Dependency Confusion
 
@@ -254,7 +246,6 @@ npm audit --audit-level=high  # Should exit 0 (no findings at or above threshold
 
 Additional defense: configure the internal registry to block incoming requests for names under your internal scopes. Even if `.npmrc` is misconfigured, the internal registry refuses to proxy-fetch names it owns.
 
----
 
 ## Common Mistakes
 
@@ -278,7 +269,6 @@ A direct dependency with a clean audit result can pull in a transitive dependenc
 
 A dependency that was clean at deploy time may have a CVE published the following week. Vulnerability management is not a one-time gate at CI — it requires continuous monitoring against the deployed artifact's SBOM throughout its lifetime in production.
 
----
 
 ## Related BEPs
 

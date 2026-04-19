@@ -60,7 +60,6 @@ CREATE TABLE notifications (
 
 **When to use:** Few sub-types (2–5), attribute overlap is high, sub-types are queried together frequently. STI is a pragmatic first choice for small hierarchies.
 
----
 
 ### Strategy 2: Class Table Inheritance (CTI)
 
@@ -108,7 +107,6 @@ WHERE n.id = $1;
 
 **When to use:** Sub-types have many unique attributes, data integrity matters (lots of `NOT NULL`/`UNIQUE`/`FK` constraints), and most queries target a specific sub-type rather than all types together. See also: [Baeldung SQL Inheritance](https://www.baeldung.com/sql/database-inheritance).
 
----
 
 ### Strategy 3: Concrete Table Inheritance (CTI-Leaf)
 
@@ -146,7 +144,6 @@ CREATE TABLE notifications_push (
 
 **When to use:** Sub-types are truly independent (rarely queried together), shared attributes are minimal, and you never need a single FK that references the whole hierarchy. Often the right answer when "inheritance" is the wrong mental model — these are just separate entities.
 
----
 
 ### Strategy 4: Document Embedding (JSONB / Document Store)
 
@@ -196,7 +193,6 @@ CREATE INDEX ON notifications ((attributes->>'device_token'))
 
 **When to use:** Sub-type attributes are highly variable and evolve frequently, you need schema flexibility without migrations, or you're already in a document-store context (BEE-6001). Also well-suited when the number of sub-type variants is large and poorly bounded.
 
----
 
 ## Mermaid Diagram: Payment Hierarchy Side-by-Side
 
@@ -292,7 +288,6 @@ WHERE user_id = 1 AND type = 'email';
 
 Query complexity: low. Storage: 5 NULL columns per email row, 4 per SMS row, 5 per push row.
 
----
 
 ### Class-Table Approach
 
@@ -344,7 +339,6 @@ WHERE user_id = 1 ORDER BY created_at DESC LIMIT 20;
 
 Query complexity: moderate (join for typed reads, `UNION ALL` for polymorphic reads). Storage: zero NULL columns.
 
----
 
 ### Document-Embedding Approach
 
@@ -376,7 +370,6 @@ WHERE type = 'email' AND attrs->>'to_address' = 'alice@example.com';
 
 Query complexity: low. Storage: compact. Constraint enforcement: application-side only.
 
----
 
 ### Comparison
 

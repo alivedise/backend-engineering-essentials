@@ -36,6 +36,7 @@ title: BEE 全列表
 - [3004.TLS/SSL Handshake](/zh-tw/networking-fundamentals/tls-ssl-handshake)
 - [3005.Load Balancers](/zh-tw/networking-fundamentals/load-balancers)
 - [3006.Proxies and Reverse Proxies](/zh-tw/networking-fundamentals/proxies-and-reverse-proxies)
+- [3007.Mutual TLS (mTLS) Handshake and Server Configuration](/zh-tw/networking-fundamentals/mutual-tls-handshake-and-server-configuration)
 - [4001.REST API Design Principles](/zh-tw/api-design/rest-api-design-principles)
 - [4002.API Versioning Strategies](/zh-tw/api-design/api-versioning-strategies)
 - [4003.Idempotency in APIs](/zh-tw/api-design/api-idempotency)

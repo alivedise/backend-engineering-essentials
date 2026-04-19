@@ -52,7 +52,6 @@ HTTP defines status code semantics in RFC 9110. Status codes are not optional me
 
 The distinction between `400` and `422` matters: `400` is for structurally malformed requests (unparseable JSON, wrong content type); `422` is for requests that parse correctly but violate a business rule or semantic constraint.
 
----
 
 ### RFC 9457 Problem Details Format
 
@@ -74,7 +73,6 @@ The media type for a problem details response is:
 Content-Type: application/problem+json
 ```
 
----
 
 ### Validation Errors: Field-Level Detail
 
@@ -109,7 +107,6 @@ Content-Type: application/problem+json
 
 The `code` field in each error item is machine-readable and stable across API versions. Client code can `switch` on `errors[n].code` without parsing the human-readable `message`.
 
----
 
 ### Business Logic Errors: Semantic Failures
 
@@ -132,7 +129,6 @@ Content-Type: application/problem+json
 
 The extension fields `task_id` and `completed_at` give the client everything it needs to surface a meaningful message or take corrective action — without any string parsing.
 
----
 
 ### Internal Errors: Do Not Leak Stack Traces
 
@@ -161,7 +157,6 @@ Content-Type: application/problem+json
 
 Log the full error (exception, stack trace, request context) internally, keyed to the same `correlation_id`. When a client reports an error, the correlation ID is the only piece of information needed to find the full diagnostic trail. See [BEE-14002](../observability/structured-logging.md) for structured logging conventions.
 
----
 
 ### Correlation IDs
 
@@ -179,7 +174,6 @@ X-Correlation-ID: req-7f3a9b21-4e2d-11ef-8c3a-0a9b1c2d3e4f
 
 Some APIs use `X-Request-ID` or embed the ID in the `instance` field. The exact mechanism matters less than the guarantee: every error response contains a traceable identifier.
 
----
 
 ### Rate Limiting: Retry-After
 
@@ -203,7 +197,6 @@ Retry-After: 30
 
 `Retry-After` accepts either a delta-seconds integer or an HTTP-date. Use delta-seconds for simplicity.
 
----
 
 ### Machine-Readable vs Human-Readable Errors
 
@@ -217,7 +210,6 @@ Every error response serves two audiences simultaneously:
 
 The `type` URI and error `code` values are the machine-readable contract. They MUST NOT change once published (treat them like API paths). The `detail` string and `message` strings are human-readable and may be localized or improved over time.
 
----
 
 ## Visual
 
@@ -243,7 +235,6 @@ flowchart TD
     R500 --> LOG
 ```
 
----
 
 ## Example
 
@@ -340,7 +331,6 @@ Content-Type: application/json
 
 This exposes class names, line numbers, database type, and query failure details. An attacker uses this to map the codebase and identify injection targets.
 
----
 
 ## Common Mistakes
 
@@ -364,7 +354,6 @@ Without a correlation ID, tracing an error across service boundaries requires ma
 
 "Something went wrong" or "Internal error" tell the developer nothing. At minimum, for 4xx errors, tell them: what was wrong, which field or parameter caused it, and what a valid value looks like. For 5xx errors, give them the correlation ID so they can file a meaningful support ticket.
 
----
 
 ## Related BEPs
 
@@ -372,7 +361,6 @@ Without a correlation ID, tracing an error across service boundaries requires ma
 - [BEE-2002](../security-fundamentals/input-validation-and-sanitization.md) Input Validation
 - [BEE-14002](../observability/structured-logging.md) Structured Logging
 
----
 
 ## References
 

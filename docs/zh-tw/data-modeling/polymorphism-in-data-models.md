@@ -60,7 +60,6 @@ CREATE TABLE notifications (
 
 **適用時機：** 子型別數量少（2–5 種）、屬性重疊程度高、且子型別經常一起查詢。對於小型層級結構，STI 是務實的第一選擇。
 
----
 
 ### 策略二：Class Table Inheritance（CTI，類別表繼承）
 
@@ -108,7 +107,6 @@ WHERE n.id = $1;
 
 **適用時機：** 子型別有許多獨特屬性、資料完整性至關重要（需要大量 `NOT NULL`/`UNIQUE`/FK 約束），且大多數查詢針對特定子型別而非所有型別。另見：[Baeldung SQL Inheritance](https://www.baeldung.com/sql/database-inheritance)。
 
----
 
 ### 策略三：Concrete Table Inheritance（具體表繼承，又稱葉節點繼承）
 
@@ -146,7 +144,6 @@ CREATE TABLE notifications_push (
 
 **適用時機：** 子型別真正獨立（很少一起查詢）、共用屬性極少，且不需要跨整個層級的外鍵參照。通常在「繼承」並非正確思維模式時最適用——這些只是分開的實體。
 
----
 
 ### 策略四：文件嵌入（JSONB / 文件儲存）
 
@@ -196,7 +193,6 @@ CREATE INDEX ON notifications ((attributes->>'device_token'))
 
 **適用時機：** 子型別屬性高度可變且頻繁演進、需要不經過遷移就能彈性調整結構描述，或已處於文件儲存的情境（[BEE-6001](../data-storage/sql-vs-nosql-tradeoffs.md)）。也適用於子型別變體數量龐大且難以預先定義的情況。
 
----
 
 ## Mermaid 圖表：付款層級的三種策略並排
 
@@ -292,7 +288,6 @@ WHERE user_id = 1 AND type = 'email';
 
 查詢複雜度：低。儲存：每筆 email 列有 5 個 NULL 欄位，每筆 SMS 列有 4 個，每筆 push 列有 5 個。
 
----
 
 ### 類別表方式
 
@@ -344,7 +339,6 @@ WHERE user_id = 1 ORDER BY created_at DESC LIMIT 20;
 
 查詢複雜度：中等（讀取特定型別需要 JOIN，多型讀取需要 `UNION ALL`）。儲存：零個 NULL 欄位。
 
----
 
 ### 文件嵌入方式
 
@@ -376,7 +370,6 @@ WHERE type = 'email' AND attrs->>'to_address' = 'alice@example.com';
 
 查詢複雜度：低。儲存：緊湊。約束強制執行：僅限應用程式層。
 
----
 
 ### 比較
 

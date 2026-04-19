@@ -26,7 +26,6 @@ Misidentifying which kind of proxy you are operating — or neglecting the failu
 
 **Understand which principal a proxy serves — the client or the server — and configure it accordingly: forward client IP, align timeouts with backend reality, size buffers for your payload distribution, and treat the proxy as a failure domain that must be designed for HA from day one.**
 
----
 
 ## Forward Proxy vs Reverse Proxy
 
@@ -90,7 +89,6 @@ flowchart LR
 | Deployment location | Client network edge | Server network edge |
 | Trust boundary | Separates client from internet | Separates internet from backend |
 
----
 
 ## Transparent vs Explicit Proxies
 
@@ -102,7 +100,6 @@ A proxy can be **explicit** (the client is configured to use it via browser sett
 
 The CONNECT tunnel method enables clients behind an HTTP proxy to establish a TCP tunnel for HTTPS: the client sends `CONNECT target-host:443 HTTP/1.1`, and the proxy blindly forwards bytes in both directions without decrypting them.
 
----
 
 ## Reverse Proxy as API Gateway
 
@@ -116,7 +113,6 @@ A reverse proxy with routing and policy capabilities is commonly called an **API
 
 The key architectural consequence: **cross-cutting concerns are handled once at the gateway** instead of being reimplemented in every backend service. Backend services receive pre-authenticated, pre-validated requests and can focus on business logic.
 
----
 
 ## Request Routing
 
@@ -181,7 +177,6 @@ rate-limit /auth/*  → 20 req/min per client-ip
 
 The principle: routing rules, header injection, and rate limiting are co-located at the proxy layer. Each upstream service receives a consistent set of context headers without having to generate them itself.
 
----
 
 ## SSL Termination at the Proxy
 
@@ -203,7 +198,6 @@ TLS termination at the reverse proxy means:
 | Re-encryption | Proxy decrypts then re-encrypts to backends | Compliance requires encryption in transit throughout |
 | TLS pass-through | Proxy forwards encrypted bytes; no inspection | mTLS required end-to-end; proxy cannot inspect payload |
 
----
 
 ## Caching at the Proxy Layer
 
@@ -224,7 +218,6 @@ Cache behavior is governed by HTTP cache-control headers on the response:
 - Session tokens and credentials
 - Responses to POST, PUT, DELETE — these are not idempotent and must not be replayed
 
----
 
 ## Rate Limiting at the Proxy Layer
 
@@ -240,7 +233,6 @@ Rate limiting at the proxy is more effective than in the application because:
 - It applies consistently across all instances of a multi-replica backend
 - It can shed load during a spike without any backend change
 
----
 
 ## Request and Response Modification
 
@@ -268,7 +260,6 @@ The proxy should remove headers that clients should not be able to set and pass 
 
 Some proxy configurations rewrite response bodies: injecting analytics scripts into HTML, rewriting absolute URLs in redirects to use the public hostname rather than internal hostnames, or transforming API response format for backward compatibility. Body rewriting is expensive (the proxy must buffer and parse the full body) and should be avoided unless no alternative exists.
 
----
 
 ## Sidecar Proxy Pattern (Service Mesh)
 
@@ -304,7 +295,6 @@ Each sidecar receives its configuration from a **control plane** (e.g., Istio's 
 
 See [BEE-5006](../architecture-patterns/sidecar-and-service-mesh-concepts.md) for the full service mesh treatment.
 
----
 
 ## Common Mistakes
 
@@ -338,7 +328,6 @@ If a response containing personal data, session tokens, or authorization-specifi
 
 **Fix:** Audit every route that touches user-specific data and verify that its responses include `Cache-Control: private` or `Cache-Control: no-store`. Treat caching as opt-in at the proxy: default to no-cache, enable it only for explicitly identified safe responses.
 
----
 
 ## Related BEPs
 

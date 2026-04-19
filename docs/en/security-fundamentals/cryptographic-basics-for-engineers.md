@@ -25,7 +25,6 @@ Reference materials:
 
 **Use established algorithms from vetted libraries for the exact purpose they were designed for. Choose the simplest primitive that solves your problem, never invent your own protocol, and treat key management as a first-class concern.**
 
----
 
 ## Choosing the Right Primitive
 
@@ -47,7 +46,6 @@ flowchart TD
 
 The sections below explain each branch in detail.
 
----
 
 ## Hashing
 
@@ -65,7 +63,6 @@ Broken algorithms — do not use for any security purpose:
 
 Plain hashing (even with SHA-256) is unsuitable for passwords. Passwords have low entropy and are vulnerable to precomputed rainbow tables and GPU brute-force. Password storage requires a **slow, salted, memory-hard** algorithm. See the Password Hashing section below.
 
----
 
 ## Symmetric Encryption
 
@@ -102,7 +99,6 @@ BLOCK 2: "Hello, World!!!" → R2  ← different ciphertext every time
 
 Always use an authenticated mode (GCM, CCM) or CBC combined with HMAC (Encrypt-then-MAC). Never use ECB.
 
----
 
 ## Asymmetric Encryption
 
@@ -131,7 +127,6 @@ For establishing a shared secret over an untrusted channel:
 | ECDH | P-256 | X25519 |
 | AES | 128-bit | 256-bit |
 
----
 
 ## Password Hashing
 
@@ -164,7 +159,6 @@ function verify_password(plaintext_password, stored_hash):
 
 The hash format produced by argon2id, scrypt, and bcrypt embeds the algorithm, parameters, and salt — you do not need to store the salt separately.
 
----
 
 ## Message Authentication Codes (HMAC)
 
@@ -190,7 +184,6 @@ function verify_webhook_payload(payload_bytes, received_signature, secret_key):
 
 Use constant-time comparison when checking MACs. A regular `==` operator may short-circuit on the first mismatched byte, leaking timing information that allows an attacker to forge signatures byte by byte.
 
----
 
 ## Digital Signatures
 
@@ -221,7 +214,6 @@ function verify_payload(payload, signature_b64):
 
 Digital signatures are the foundation of JWT (JWS), TLS certificates, code signing, and HTTPS certificate chains. See [BEE-1002](../auth/token-based-authentication.md) for JWT-specific guidance.
 
----
 
 ## TLS as Applied Cryptography
 
@@ -236,7 +228,6 @@ TLS 1.3 (RFC 8446) is the current standard. TLS 1.2 is still widely deployed. TL
 
 For backend TLS configuration, see [BEE-3004](../networking-fundamentals/tls-ssl-handshake.md).
 
----
 
 ## Encoding Is Not Encryption
 
@@ -251,7 +242,6 @@ For backend TLS configuration, see [BEE-3004](../networking-fundamentals/tls-ssl
 
 Do not store encrypted data and call it "base64-encoded." Do not call base64-decoded content "decrypted."
 
----
 
 ## Common Mistakes
 
@@ -283,7 +273,6 @@ Reusing an IV with the same key in AES-GCM completely breaks confidentiality and
 
 String or byte-array equality operators are not constant-time. Always use a constant-time comparison function when verifying MACs and signatures to prevent timing attacks.
 
----
 
 ## Related BEPs
 

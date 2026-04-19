@@ -26,7 +26,6 @@ Every HTTP request you make to a production service travels over TLS. The browse
 
 TLS is not magic. It is a precisely defined protocol with negotiated parameters, certificate hierarchies, and key derivation functions. Engineers who treat it as a black box misconfigure cipher suites, miss certificate expiries, and inadvertently expose internal traffic after terminating TLS at the load balancer.
 
----
 
 ## What TLS Provides
 
@@ -40,7 +39,6 @@ TLS (Transport Layer Security) provides three security properties (RFC 8446, Sec
 
 SSL (Secure Sockets Layer) is the predecessor to TLS. The name "SSL" is still used colloquially, but SSLv2 and SSLv3 are broken and must not be used. The current standards are TLS 1.2 and TLS 1.3.
 
----
 
 ## TLS 1.2 vs TLS 1.3 Handshake
 
@@ -118,7 +116,6 @@ sequenceDiagram
 | Cipher suite negotiation | Combined (key + auth + AEAD) | Separated (AEAD + KDF hash) |
 | 0-RTT resumption | No | Yes (PSK, with caveats) |
 
----
 
 ## Cipher Suites
 
@@ -144,7 +141,6 @@ TLS_CHACHA20_POLY1305_SHA256
 
 **OWASP recommendation**: Disable null ciphers, anonymous ciphers, EXPORT ciphers, and RC4. Prefer GCM-based suites.
 
----
 
 ## Certificate Chains
 
@@ -204,7 +200,6 @@ When a TLS client validates a certificate, it checks:
 4. **Revocation** — via OCSP (Online Certificate Status Protocol) or CRL (Certificate Revocation List)
 5. **Key usage extensions** — certificate must be authorized for the purpose it is being used
 
----
 
 ## ALPN (Application-Layer Protocol Negotiation)
 
@@ -221,7 +216,6 @@ ServerHello (EncryptedExtensions in TLS 1.3):
 
 This is how HTTP/2 is negotiated over TLS (see [BEE-3](../bee-overall/glossary.md)2). Without ALPN, an extra round trip would be needed to switch protocols after the connection is established.
 
----
 
 ## Mutual TLS (mTLS)
 
@@ -255,7 +249,6 @@ sequenceDiagram
 - Certificate rotation must be automated — manual rotation across hundreds of services is not viable
 - Sidecar proxies (Envoy in a service mesh) can handle mTLS transparently without application code changes
 
----
 
 ## Let's Encrypt and the ACME Protocol
 
@@ -268,7 +261,6 @@ sequenceDiagram
 
 The ACME DNS-01 challenge is the only option for wildcard certificates and for domains not reachable from the public internet (useful for internal services with public DNS).
 
----
 
 ## Certificate Rotation
 
@@ -286,7 +278,6 @@ Certificates have a finite validity period (Let's Encrypt: 90 days; commercial C
 
 **Zero-downtime rotation**: Deploy new certificate and key first, keep old one valid until all in-flight connections drain, then remove old.
 
----
 
 ## TLS Termination
 
@@ -324,7 +315,6 @@ Internet --[TLS]--> Load Balancer --[TLS (unchanged)]--> Backend
 
 **Recommendation**: For any service handling sensitive data or operating in a zero-trust environment, use re-encryption or pass-through. Do not rely on the internal network being trusted.
 
----
 
 ## Common Mistakes
 
@@ -375,7 +365,6 @@ openssl x509 -enddate -noout -in /etc/ssl/certs/service.pem
 
 Terminating TLS at the load balancer and sending plaintext to backends is common but dangerous in shared or cloud environments. If you terminate at the edge, at minimum use private networking and firewall rules to limit blast radius — but prefer re-encryption for sensitive services.
 
----
 
 ## Related BEPs
 

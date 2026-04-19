@@ -26,7 +26,6 @@ Query efficiency compounds the problem. An application that issues 101 queries t
 
 > Reuse connections through a pool sized to your actual concurrency, and design queries that do exactly one job — no more, no less.
 
----
 
 ## Connection Pooling
 
@@ -112,7 +111,6 @@ flowchart TD
     L --> B
 ```
 
----
 
 ## The N+1 Query Problem
 
@@ -173,7 +171,6 @@ N+1 queries are often invisible during development (small datasets, fast local D
 - **Slow query log:** If individual queries are fast but count is high, check for repeated patterns.
 - **Bullet gem (Rails):** Notifies in development when N+1 or unused eager loads are detected.
 
----
 
 ## Reading EXPLAIN Plans
 
@@ -203,7 +200,6 @@ Look at **rows** (estimated vs. actual) and **cost** values. A large discrepancy
 For database-level query optimization and execution plan analysis, see [DEE Query and Performance series](https://alivedise.github.io/database-engineering-essentials/200).
 :::
 
----
 
 ## Query Optimization Strategies
 
@@ -260,7 +256,6 @@ SELECT * FROM users WHERE email = 'user@example.com';
 
 Parameterized queries allow the database to cache execution plans, reducing planning overhead on repeated queries.
 
----
 
 ## Common Mistakes
 
@@ -272,7 +267,6 @@ Parameterized queries allow the database to cache execution plans, reducing plan
 | N+1 queries in ORM code | 100x–1000x more queries than necessary | Eager load with JOIN or batch with IN clause |
 | `SELECT *` when only 2 columns needed | Prevents covering indexes; excess data transfer | Select explicit columns |
 
----
 
 ## Related BEPs
 

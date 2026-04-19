@@ -22,7 +22,6 @@ Understanding what containers actually are -- isolated Linux processes, not mini
 
 **A container is an isolated process on the host kernel -- not a virtual machine. Build images small, run as non-root, enforce resource limits, and never store state in the container filesystem.**
 
----
 
 ## What a Container Actually Is
 
@@ -103,7 +102,6 @@ graph TD
 
 VMs remain the right choice when you need strong hardware-level isolation (multi-tenant hosting, different OS families). Containers are the right choice for running many instances of the same application on shared infrastructure.
 
----
 
 ## OCI: The Standard
 
@@ -115,7 +113,6 @@ The **Open Container Initiative (OCI)** defines the portable standards that make
 
 Because Docker, Kubernetes, and cloud registries all implement OCI, an image built with `docker build` runs identically on any OCI-compliant runtime.
 
----
 
 ## Image Layers and Copy-on-Write
 
@@ -132,7 +129,6 @@ A container image is a stack of read-only layers. Each `RUN`, `COPY`, and `ADD` 
 
 **Layer caching**: Docker hashes each instruction + context. If nothing changed, it reuses the cached layer and skips the step. Cache invalidation is sequential -- changing layer N invalidates all layers below N. This has a direct consequence for how you order Dockerfile instructions.
 
----
 
 ## Dockerfile: Bad vs. Good
 
@@ -206,7 +202,6 @@ coverage/
 
 Resulting image size: ~180 MB -- an 83% reduction. The runtime stage contains no compiler, no build tools, and no root access.
 
----
 
 ## Container Networking Basics
 
@@ -223,7 +218,6 @@ Common network modes:
 
 In Kubernetes, each Pod gets its own network namespace. The CNI plugin (Flannel, Calico, Cilium) handles IP assignment and inter-node routing.
 
----
 
 ## Resource Limits in Orchestration
 
@@ -241,7 +235,6 @@ resources:
 
 Without limits, a single pod can starve its node. Without requests, the scheduler cannot bin-pack pods correctly and nodes become over-committed.
 
----
 
 ## Image Security Scanning
 
@@ -256,7 +249,6 @@ Scanning rules:
 2. Rebuild and re-push images when base image updates are available (use Renovate or Dependabot for base image pinning)
 3. Pin base images to a digest, not a tag: `FROM node:20-alpine@sha256:abc123...`
 
----
 
 ## Common Mistakes
 
@@ -295,7 +287,6 @@ echo "important-data" > /app/data/results.json
 
 The writable container layer is ephemeral. It disappears when the container is removed or replaced. Persist state in volumes (`docker run -v /host/path:/app/data`) or external storage (databases, object storage).
 
----
 
 ## Summary
 

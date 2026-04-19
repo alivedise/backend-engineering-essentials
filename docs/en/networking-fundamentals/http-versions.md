@@ -27,7 +27,6 @@ Understanding the differences lets you make informed decisions about where to te
 
 **Match the HTTP version to the latency and reliability characteristics of the path. Do not assume the CDN edge handles everything — enable HTTP/2 on every internal hop where persistent connections are reused.**
 
----
 
 ## HTTP/1.1
 
@@ -53,7 +52,6 @@ Browsers work around HOL blocking by opening up to **six parallel TCP connection
 
 Splitting resources across subdomains (e.g. `static1.example.com`, `static2.example.com`) lets browsers open more than six parallel connections per page. This was a valid HTTP/1.1 optimisation. **It becomes counterproductive under HTTP/2** — see Common Mistakes below.
 
----
 
 ## HTTP/2
 
@@ -104,7 +102,6 @@ Clients may assign each stream a weight (1–256) and declare dependency relatio
 
 HTTP/2 is negotiated during the TLS handshake via the **Application-Layer Protocol Negotiation (ALPN)** extension. The client offers `h2` (and optionally `http/1.1`) in the ALPN list; the server selects `h2` if it supports it. No additional round trips are required. This is why HTTP/2 effectively requires TLS in practice, even though the spec allows cleartext `h2c`.
 
----
 
 ## HTTP/3
 
@@ -143,7 +140,6 @@ HTTP/3 uses the ALPN token `h3`. Servers advertise HTTP/3 support via the `Alt-S
 
 QUIC runs on UDP. Many corporate firewalls and middleboxes block or rate-limit UDP on port 443. When QUIC is blocked, clients fall back to HTTP/2 over TCP. This fallback is correct and expected — but it means HTTP/3 cannot be relied upon end-to-end in enterprise or restricted network environments. Always ensure HTTP/2 is available as a fallback.
 
----
 
 ## Side-by-Side Comparison
 
@@ -190,7 +186,6 @@ sequenceDiagram
 - **HTTP/2**: all three start on the same connection; orders and inventory complete at ~20 ms; users completes at ~500 ms. No HOL delay between them.
 - **HTTP/3**: same as HTTP/2, but a lost packet during the users response does not delay orders or inventory at all.
 
----
 
 ## Protocol Comparison Table
 
@@ -209,7 +204,6 @@ sequenceDiagram
 | Connection migration | No | No | Yes (QUIC Connection ID) |
 | ALPN token | `http/1.1` | `h2` | `h3` |
 
----
 
 ## When Each Version Matters for Backend Services
 
@@ -240,7 +234,6 @@ Do not enable HTTP/3 on purely internal service-to-service traffic unless all fi
 
 HTTP/2 and HTTP/3 support **connection coalescing**: if two origins resolve to the same IP and share a TLS certificate (e.g. a wildcard cert), the client may reuse an existing connection rather than opening a new one. This is transparent but important for CDN architectures — it reduces the connection count further than simple per-hostname pooling.
 
----
 
 ## Common Mistakes
 
@@ -264,7 +257,6 @@ UDP port 443 is frequently blocked or rate-limited by enterprise firewalls, secu
 
 Domain sharding (splitting assets across multiple subdomains) was a valid HTTP/1.1 workaround. Under HTTP/2 it is **actively harmful**: it forces multiple connections where one would suffice, defeats connection coalescing, and increases TLS handshake cost. Remove domain sharding when upgrading to HTTP/2.
 
----
 
 ## Related BEPs
 

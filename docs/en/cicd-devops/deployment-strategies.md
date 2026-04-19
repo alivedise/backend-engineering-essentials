@@ -50,7 +50,6 @@ All running instances of the old version are stopped, then all instances of the 
 
 Never use recreate for user-facing services unless planned maintenance windows are acceptable.
 
----
 
 ### 2. Rolling Update
 
@@ -77,7 +76,6 @@ Key Kubernetes parameters:
 
 **Critical constraint:** Rolling update requires that v1 and v2 are API-compatible. If v2 breaks a contract that v1 clients depend on, requests hitting v1 pods will succeed while requests hitting v2 pods fail — a split-brain failure that is hard to diagnose.
 
----
 
 ### 3. Blue-Green Deployment
 
@@ -110,7 +108,6 @@ Step 4: Rollback if needed — flip LB back to Blue in seconds
 
 **Database consideration:** If v2 includes schema changes, the green environment must use a schema that v1 can also read (expand-before-contract pattern). See [BEE-6004](#) for database migration alignment.
 
----
 
 ### 4. Canary Deployment
 
@@ -142,7 +139,6 @@ Stage 4: 100% → v2             (old instances terminated)
 
 **Do not run canary deployments with only manual metric review.** Automated analysis (error rate thresholds, SLO breach alerts) is required; manual review is too slow to prevent widespread impact.
 
----
 
 ### 5. A/B Deployment (vs. Canary)
 
@@ -157,7 +153,6 @@ A/B deployment routes traffic based on **user or request attributes** (header va
 
 A/B deployment is a feature-management concern. Canary is a release-safety concern. Both can run simultaneously on the same service.
 
----
 
 ## Strategy Comparison at a Glance
 
@@ -191,7 +186,6 @@ flowchart LR
 | Blue-Green | Yes | Instant | 2x | 100% at switch |
 | Canary | Yes | Fast (0% route) | ~1.1x | Limited % |
 
----
 
 ## Worked Example: Deploying v2 of an API Service
 
@@ -219,7 +213,6 @@ flowchart LR
 6. Scale to 20 pods (100%), terminate v1 pods.
 7. **Rollback at any stage:** scale canary pods to 0, redirect all traffic to v1.
 
----
 
 ## Database Migrations and Deployment Strategy
 
@@ -239,7 +232,6 @@ Database changes are the most common reason a rollback fails. The schema must be
 
 See [BEE-6004](#) for the full expand-before-contract migration pattern.
 
----
 
 ## Zero-Downtime Requirements
 
@@ -251,7 +243,6 @@ Zero-downtime deployment is only achievable when all of the following are true:
 4. **No breaking API changes** are deployed via rolling update (v1 and v2 clients will mix).
 5. **Connection pools and caches** are pre-warmed before traffic is shifted.
 
----
 
 ## Rollback Strategies by Deployment Type
 
@@ -262,7 +253,6 @@ Zero-downtime deployment is only achievable when all of the following are true:
 | Blue-green | Flip LB to blue environment | < 30 seconds | Medium if DB schema changed |
 | Canary | Set canary weight to 0% | < 60 seconds | Low — only partial traffic affected |
 
----
 
 ## Common Mistakes
 
@@ -281,7 +271,6 @@ Blue-green requires running two full production environments simultaneously. In 
 **5. Rolling update with breaking API changes.**
 During a rolling update, old and new pods serve traffic simultaneously. If v2 removes a field that v1 consumers require, or changes an error format, consumers that hit v1 pods get one behavior and consumers that hit v2 pods get another. Use blue-green or canary for breaking changes.
 
----
 
 ## Related BEPs
 

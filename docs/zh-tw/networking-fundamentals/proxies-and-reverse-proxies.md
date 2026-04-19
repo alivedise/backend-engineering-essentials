@@ -26,7 +26,6 @@ slug: proxies-and-reverse-proxies
 
 **搞清楚代理服務的主體是客戶端還是伺服器，並據此正確設定：轉送客戶端 IP、對齊後端實際的逾時時間、依照請求體積分佈調整緩衝區大小，並且從第一天起就將代理本身視為需要設計高可用的故障域（failure domain）。**
 
----
 
 ## 正向代理（Forward Proxy）vs 反向代理（Reverse Proxy）
 
@@ -90,7 +89,6 @@ flowchart LR
 | 部署位置 | 客戶端網路邊緣 | 伺服器網路邊緣 |
 | 信任邊界 | 隔離客戶端與網際網路 | 隔離網際網路與後端 |
 
----
 
 ## 透明代理（Transparent Proxy）vs 顯式代理（Explicit Proxy）
 
@@ -102,7 +100,6 @@ flowchart LR
 
 `CONNECT` 隧道方法讓位於 HTTP 代理後方的客戶端能為 HTTPS 建立 TCP 隧道：客戶端發送 `CONNECT target-host:443 HTTP/1.1`，代理在不解密的情況下雙向轉送位元組。
 
----
 
 ## 反向代理作為 API 閘道（API Gateway）
 
@@ -116,7 +113,6 @@ flowchart LR
 
 關鍵架構意涵：**橫切關注點（cross-cutting concerns）只需在閘道層處理一次**，不必在每個後端服務中重複實作。後端服務收到的是已通過驗證、已完成預先校驗的請求，可以專注在業務邏輯上。
 
----
 
 ## 請求路由（Request Routing）
 
@@ -181,7 +177,6 @@ rate-limit /auth/*  → 20 req/min per client-ip
 
 原則：路由規則、header 注入、速率限制集中在代理層設定。每個上游服務接收一組一致的 context header，不需要自行產生。
 
----
 
 ## SSL 在代理層的終止（SSL Termination）
 
@@ -203,7 +198,6 @@ rate-limit /auth/*  → 20 req/min per client-ip
 | 重新加密（Re-encryption） | 代理解密後再加密轉送至後端 | 法規要求傳輸全程加密 |
 | TLS 穿透（Pass-through） | 代理轉送加密位元組，不做解密 | 端對端 mTLS 必要；代理不能檢查 payload |
 
----
 
 ## 在代理層進行快取（Caching at the Proxy Layer）
 
@@ -224,7 +218,6 @@ rate-limit /auth/*  → 20 req/min per client-ip
 - Session token 與憑證
 - POST、PUT、DELETE 的回應——這些操作不具冪等性，不能被重播
 
----
 
 ## 在代理層進行速率限制（Rate Limiting at the Proxy Layer）
 
@@ -240,7 +233,6 @@ rate-limit /auth/*  → 20 req/min per client-ip
 - 跨多副本後端一致套用
 - 在流量尖峰時可以不修改後端就卸載請求
 
----
 
 ## 請求與回應的修改
 
@@ -268,7 +260,6 @@ Forwarded: for=1.2.3.4;proto=https;host=api.example.com
 
 部分代理設定會改寫回應主體：在 HTML 中注入分析腳本、將重新導向中的絕對 URL 改寫為公開主機名稱，或是為向下相容而轉換 API 回應格式。主體改寫的代價高昂（代理必須緩衝並解析完整主體），除非別無選擇，否則應避免使用。
 
----
 
 ## 邊車代理模式（Sidecar Proxy Pattern）與服務網格（Service Mesh）
 
@@ -304,7 +295,6 @@ flowchart LR
 
 詳見 [BEE-5006](../architecture-patterns/sidecar-and-service-mesh-concepts.md) 對服務網格的完整介紹。
 
----
 
 ## 常見錯誤
 
@@ -338,7 +328,6 @@ flowchart LR
 
 **修正方式：** 稽核所有涉及使用者特定資料的路由，確認其回應包含 `Cache-Control: private` 或 `Cache-Control: no-store`。將快取視為代理層的選擇性功能：預設不快取，只對明確識別為安全的回應啟用。
 
----
 
 ## 相關 BEE
 

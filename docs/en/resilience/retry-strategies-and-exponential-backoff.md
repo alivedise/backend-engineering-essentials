@@ -26,7 +26,6 @@ Getting retries right requires understanding four tensions: retrying too eagerly
 
 **Use exponential backoff with full jitter, cap the total number of retries, and never retry non-idempotent operations or client errors.**
 
----
 
 ## Retry Strategies
 
@@ -71,7 +70,6 @@ Where:
 
 This is the strategy recommended by AWS, Google Cloud, and the original Marc Brooker research. It achieves near-constant aggregate request rate during recovery, even with thousands of clients retrying simultaneously.
 
----
 
 ## Jitter Is Not Optional
 
@@ -81,7 +79,6 @@ Full jitter randomizes each client's delay independently. The aggregate load acr
 
 Marc Brooker's simulation showed that without jitter, P99 latency was 2600ms with a 17% error rate. With full jitter, P99 dropped to 1400ms and errors fell to 6% under the same conditions.
 
----
 
 ## Exponential Backoff with Jitter: Visualized
 
@@ -121,7 +118,6 @@ gantt
 
 Each client draws a different random delay from the same formula. Retry attempts are spread across time rather than synchronized.
 
----
 
 ## Pseudocode: HTTP Client with Exponential Backoff + Full Jitter
 
@@ -160,7 +156,6 @@ Key points:
 - 4xx errors (except 429) are not retried
 - There is a hard cap on retry count
 
----
 
 ## What to Retry vs. What Not to Retry
 
@@ -187,7 +182,6 @@ Key points:
 
 The general rule: **4xx errors are the client's fault** and will not be resolved by retrying. **5xx errors are the server's fault** and may resolve as the server recovers.
 
----
 
 ## Idempotency Is a Prerequisite
 
@@ -203,7 +197,6 @@ Before adding retry logic to any operation, confirm:
 
 If neither condition is met, do not retry. Log the failure, surface it to the caller, and let a human decide.
 
----
 
 ## Retry Budgets
 
@@ -219,7 +212,6 @@ if retry_ratio > BUDGET_THRESHOLD:  # e.g., 10%
 
 This prevents a localized failure from cascading into system-wide overload. The retry budget is a system-level control; the per-request cap is a local control. Both are needed.
 
----
 
 ## Retry Amplification in Microservices
 
@@ -249,7 +241,6 @@ A single user request that fails at Service C generates 27 attempts against it. 
 3. **Use circuit breakers** (BEE-12001) — stop retrying entirely when a downstream service is confirmed down
 4. **Fail fast with timeouts** (BEE-12002) — bounded timeouts prevent retries from accumulating latency
 
----
 
 ## Retry-After Header
 
@@ -262,7 +253,6 @@ Retry-After: 30
 
 Always honor `Retry-After` when present. Do not apply your own backoff calculation on top of it — the server has told you exactly when to retry.
 
----
 
 ## Common Mistakes
 
@@ -294,7 +284,6 @@ Without a hard cap, a retry loop under sustained failure becomes an infinite loo
 
 Each service layer adding its own independent retry multiplies load geometrically. Coordinate retry strategy across the call graph, not just within a single service.
 
----
 
 ## Summary
 
@@ -317,7 +306,6 @@ sleep = random(0, min(cap, base * 2^attempt))
 - Honor `Retry-After` when present
 - In microservices: avoid retrying at every layer; use circuit breakers
 
----
 
 ## Related BEPs
 

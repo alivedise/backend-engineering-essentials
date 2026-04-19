@@ -19,7 +19,6 @@ This article focuses on the layers and mechanisms that backend code actually tou
 - [Julia Evans — "Networking! ACK!" zine](https://wizardzines.com/zines/networking/)
 - [Marc Brooker — "It's always TCP_NODELAY. Every damn time."](https://brooker.co.za/blog/2024/05/09/nagle.html)
 
----
 
 ## Principle
 
@@ -27,7 +26,6 @@ This article focuses on the layers and mechanisms that backend code actually tou
 
 TCP gives you a reliable, ordered, byte-stream connection between two endpoints. It delivers every byte in order, or it tells you the connection is broken. That guarantee has real overhead: handshakes, acknowledgements, retransmissions, and state machines on both ends. UDP gives you none of those guarantees and none of that overhead. Neither protocol is universally better; the right choice depends on what your application needs.
 
----
 
 ## The Layers That Matter
 
@@ -75,7 +73,6 @@ A **socket** is the OS abstraction for one end of a network connection. It is id
 
 When a backend service connects to a database, the OS picks an ephemeral source port. Each concurrent outbound connection consumes one ephemeral port until the connection is closed and the port is released (subject to TIME_WAIT, described below).
 
----
 
 ## The Connection Lifecycle
 
@@ -115,7 +112,6 @@ sequenceDiagram
 
 These distinctions matter for debugging. A refused connection points to a port/process problem. A timeout points to a network or firewall problem.
 
----
 
 ## Full Request Lifecycle Example
 
@@ -150,7 +146,6 @@ Timeline:
 
 If service B's DNS name were used instead of its IP, a DNS lookup (see [BEE-3002](dns-resolution.md)) would precede the SYN. That adds another round-trip unless the result is cached.
 
----
 
 ## Reading Connection State with `ss` / `netstat`
 
@@ -184,7 +179,6 @@ Key columns:
 - **Send-Q**: Bytes written by the application but not yet acknowledged by the remote. A persistently non-zero value means the network or remote is slow.
 - **State**: The TCP state machine state.
 
----
 
 ## TIME_WAIT: What It Is and Why It Matters
 
@@ -201,7 +195,6 @@ After the active closer sends the final ACK, the socket does not immediately dis
 3. Widen the ephemeral port range: `net.ipv4.ip_local_port_range = 1024 65535`.
 4. Do not enable `tcp_tw_recycle` — It was removed in Linux 4.12 because it broke connections through NAT.
 
----
 
 ## TCP Keepalive
 
@@ -233,7 +226,6 @@ sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, 5)     # give up after 5
 
 Application-level heartbeats (ping/pong messages) are an alternative that also works across load balancers that do not forward TCP options.
 
----
 
 ## Nagle's Algorithm
 
@@ -249,7 +241,6 @@ sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
 Most database drivers and HTTP client libraries that care about latency enable `TCP_NODELAY` by default. Check yours. As Marc Brooker documents in ["It's always TCP_NODELAY. Every damn time."](https://brooker.co.za/blog/2024/05/09/nagle.html), this is one of the most common sources of unexplained latency in distributed systems.
 
----
 
 ## Common Mistakes
 
@@ -275,7 +266,6 @@ If a backend sends a large response (e.g., a bulk export of 10 MB) and the netwo
 
 TCP is a byte stream. A single `send()` of 200 bytes does not guarantee the receiver gets 200 bytes in a single `recv()`. It may get 200 bytes, or 50+150, or 200 in 200 separate calls. Application protocols must define their own framing: a fixed-size header with a length field, a delimiter, or a predefined record size. This mistake causes subtle intermittent bugs that only surface under load when the kernel decides to coalesce or split segments differently.
 
----
 
 ## Related BEPs
 

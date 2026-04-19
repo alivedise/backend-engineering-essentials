@@ -27,7 +27,6 @@ Every production service that handles more traffic than a single server can abso
 
 A load balancer is not just a traffic splitter. It is the first line of fault isolation, the owner of client-IP metadata, the place where TLS terminates, and often the enforcer of timeouts and retry budgets. Getting it right from the start is far cheaper than retrofitting HA or debugging why clients always land on the same backend.
 
----
 
 ## L4 vs L7 Load Balancing
 
@@ -98,7 +97,6 @@ flowchart TB
 | Connection model | Pass-through or NAT | Terminate and re-originate |
 | Health check granularity | TCP connect | HTTP status codes |
 
----
 
 ## Load Balancing Algorithms
 
@@ -182,7 +180,6 @@ When Backend B is removed, keys 121–240 remap to Backend C. Keys served by A a
 | Cache clusters, stateful routing | Consistent Hashing |
 | Need simple affinity, stable pool | IP Hash |
 
----
 
 ## Health Checks
 
@@ -251,7 +248,6 @@ The `/healthz` or `/health` endpoint on each backend should:
 - Respond quickly (under 100 ms); slow health checks can themselves trigger false-positive unhealthy marks
 - Distinguish liveness (process is alive) from readiness (process is ready to serve) — Kubernetes distinguishes these; load balancers typically use readiness
 
----
 
 ## Connection Draining
 
@@ -290,7 +286,6 @@ In Kubernetes, the `preStop` lifecycle hook combined with a `terminationGracePer
 
 Always set a finite drain timeout. If in-flight requests do not complete within (e.g.) 30 seconds, forcibly terminate the connection. Long-running WebSocket or streaming connections may need a longer or separate drain budget.
 
----
 
 ## Session Affinity (Sticky Sessions)
 
@@ -316,7 +311,6 @@ Sticky sessions are a symptom of server-side state that is not properly external
 - WebSocket connections where the protocol requires a persistent connection to the same backend (coordinate with connection draining for deploys)
 - Very short-lived sessions where the cost of a session miss is low
 
----
 
 ## Client IP Preservation: X-Forwarded-For
 
@@ -344,7 +338,6 @@ proxy_set_header X-Real-IP       $remote_addr;
 - Trust XFF only from known trusted proxies (your own load balancers), not from arbitrary upstream hops
 - In AWS, use `X-Forwarded-For` from the ALB; in Cloudflare, use `CF-Connecting-IP`
 
----
 
 ## High Availability: Eliminating the LB as a Single Point of Failure
 
@@ -380,7 +373,6 @@ Active-active doubles throughput and provides redundancy, but requires that both
 
 Cloud providers (AWS ALB/NLB, GCP Load Balancing, Azure Load Balancer) handle HA internally. The underlying fleet is multi-node and geographically distributed. The tradeoff is reduced control over low-level behavior in exchange for operational simplicity.
 
----
 
 ## Direct Server Return (DSR)
 
@@ -405,7 +397,6 @@ DSR is implemented by the LB rewriting the destination MAC address (not the IP) 
 - Complex to operate; L7 features (header injection, TLS termination) are not possible in DSR mode
 - Used primarily in high-throughput, low-latency scenarios (CDN origin serving, gaming, financial trading)
 
----
 
 ## Common Mistakes
 
@@ -439,7 +430,6 @@ L7 load balancing introduces full request parsing on every hop. For a non-HTTP p
 
 **Fix:** Use L4 for TCP services that do not need content-aware routing (database proxies, message queues, raw TCP services). Reserve L7 for HTTP/gRPC workloads that benefit from header-based routing, TLS termination, or per-request retries.
 
----
 
 ## Related BEPs
 

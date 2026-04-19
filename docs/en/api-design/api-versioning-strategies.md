@@ -48,7 +48,6 @@ The first discipline is knowing what constitutes a breaking change. Not every ch
 
 The rule of thumb: if an existing client written against the current API can receive the new response and continue working without modification, the change is non-breaking. If the client would need to change code to handle the new response correctly, it is breaking.
 
----
 
 ### The Four Versioning Strategies
 
@@ -74,7 +73,6 @@ GET /v2/users/42
 
 **Best fit:** Public APIs, developer-facing APIs, APIs with infrequent major versions.
 
----
 
 #### 2. Custom Request Header Versioning
 
@@ -104,7 +102,6 @@ Stripe-Version: 2024-06-20
 
 **Best fit:** Partner APIs where consumers are developers with tooling; Stripe-style date-based versioning models.
 
----
 
 #### 3. Query Parameter Versioning
 
@@ -127,7 +124,6 @@ GET /users/42?version=2026-04-01
 
 **Best fit:** Internal APIs, Azure-style services (Azure DevOps uses `?api-version=`), tools where URL path changes are undesirable.
 
----
 
 #### 4. Accept Header Versioning (Content Negotiation)
 
@@ -151,7 +147,6 @@ Accept: application/vnd.myapi.v2+json
 
 **Best fit:** Hypermedia-driven APIs aiming for strict REST compliance; rarely appropriate for general-purpose developer APIs.
 
----
 
 ### Stripe's Date-Based Versioning Model
 
@@ -165,7 +160,6 @@ Stripe is the canonical example of production API versioning done at scale. Inst
 
 This model works because Stripe made versioning a first-class architectural concern from early on, not a retrofit. The lesson for new APIs: establish your versioning policy before the first external consumer, not after.
 
----
 
 ### Sunset Policies and Deprecation Communication
 
@@ -184,7 +178,6 @@ Introducing a new version without retiring old ones creates an unbounded mainten
 4. **Notify consumers directly** — email, changelog, or dashboard alerts; do not rely solely on passive header signals.
 5. **Enforce the sunset date** — return `410 Gone` after the declared end-of-life date; returning `200` indefinitely defeats the policy.
 
----
 
 ### Backward Compatibility Rules
 
@@ -196,7 +189,6 @@ Teams that want to minimize version bumps should adopt backward compatibility ru
 - **Do not tighten validation without notice** — making a previously accepted value invalid is a breaking change.
 - **Version your error contract** — changing error codes, error bodies, or the structure of problem details (see [BEE-7](7.md)5) is a breaking change.
 
----
 
 ## Visual
 
@@ -223,7 +215,6 @@ flowchart TD
     E --> J
 ```
 
----
 
 ## Example
 
@@ -249,7 +240,6 @@ Accept: application/vnd.myapi.v1+json
 
 All four request forms refer to the same logical resource. The difference is where the version signal lives.
 
----
 
 ### Version evolution: handling a breaking change correctly
 
@@ -281,7 +271,6 @@ The team decides to split `name` into `given_name` and `family_name`, and remove
 }
 ```
 
----
 
 ## Common Mistakes
 
@@ -305,7 +294,6 @@ Announcing deprecation without a concrete end-of-life date is not deprecation �
 
 Per-endpoint versioning (`/users/v2/42`, `/orders/v3/99`) creates an explosion of version combinations and makes it impossible to reason about which "version" of the API a client is on. Version the API surface as a whole, not individual endpoints. The exception is minor additive changes (non-breaking), which do not need a version bump at all.
 
----
 
 ## Related BEPs
 
@@ -314,7 +302,6 @@ Per-endpoint versioning (`/users/v2/42`, `/orders/v3/99`) creates an explosion o
 - [BEE-4006](api-error-handling-and-problem-details.md) API Error Handling and Problem Details
 - [BEE-7002](../data-modeling/normalization-and-denormalization.md) Schema Evolution
 
----
 
 ## References
 

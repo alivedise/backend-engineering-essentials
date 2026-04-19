@@ -26,7 +26,6 @@ Alex Xu's *System Design Interview* (Chapter 1, "Scale from Zero to Millions of 
 
 **Start vertical. Go horizontal only when you need to — but design your application to be stateless from the beginning so horizontal scaling remains an option.**
 
----
 
 ## Vertical Scaling
 

@@ -26,7 +26,6 @@ slug: connection-pooling-and-query-optimization
 
 > 透過連線池重用連線，池的大小應符合實際並發量；查詢設計應只做一件事，不多也不少。
 
----
 
 ## 連線池
 
@@ -112,7 +111,6 @@ flowchart TD
     L --> B
 ```
 
----
 
 ## N+1 查詢問題
 
@@ -173,7 +171,6 @@ N+1 查詢在開發環境中通常是隱形的（資料量小、本地 DB 速度
 - **慢查詢日誌：** 如果單次查詢很快但總次數很高，檢查是否有重複模式。
 - **Bullet gem（Rails）：** 在開發環境中偵測到 N+1 或未使用的預載入時發出通知。
 
----
 
 ## 讀懂 EXPLAIN 計畫
 
@@ -203,7 +200,6 @@ WHERE o.created_at > NOW() - INTERVAL '30 days';
 關於資料庫層級的查詢優化與執行計畫分析，請參閱 [DEE 查詢與效能系列](https://alivedise.github.io/database-engineering-essentials/200)。
 :::
 
----
 
 ## 查詢優化策略
 
@@ -260,7 +256,6 @@ SELECT * FROM users WHERE email = 'user@example.com';
 
 參數化查詢讓資料庫可以快取執行計畫，減少重複查詢的規劃開銷。
 
----
 
 ## 常見錯誤
 
@@ -272,7 +267,6 @@ SELECT * FROM users WHERE email = 'user@example.com';
 | ORM 程式碼中的 N+1 查詢 | 查詢次數比必要多 100–1000 倍 | 用 JOIN 預載入或用 IN 子句批次載入 |
 | 只需要 2 個欄位卻用 `SELECT *` | 阻止覆蓋索引；資料傳輸過多 | 明確指定所需欄位 |
 
----
 
 ## 相關 BEE
 

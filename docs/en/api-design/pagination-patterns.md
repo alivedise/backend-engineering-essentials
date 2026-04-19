@@ -25,7 +25,6 @@ Three major API platforms have published explicit, stable pagination contracts:
 
 **Paginate every list endpoint. Default to cursor-based pagination for mutable, high-volume collections. Reserve offset pagination for small, stable datasets where random access (jump to page N) is a genuine user need. Always enforce a server-side maximum page size.**
 
----
 
 ## Why Pagination Matters
 
@@ -38,7 +37,6 @@ An unbounded list endpoint is an outage waiting to happen. The failure modes are
 
 Pagination imposes a contract: every response has a bounded size, and navigation between pages is explicit. This is foundational to any API that expects production traffic.
 
----
 
 ## Offset-Based Pagination
 
@@ -90,7 +88,6 @@ SELECT * FROM orders ORDER BY created_at DESC LIMIT 20 OFFSET 100000;
 
 A second problem: if a new order is inserted while the client is paginating, every subsequent page shifts by one row. Items are skipped or duplicated. This is the "phantom read" problem.
 
----
 
 ## Cursor-Based Pagination (Keyset Pagination)
 
@@ -143,7 +140,6 @@ Cursors must be:
 - **Stateless** -- the cursor must encode everything the server needs to continue; it must not be a server-side session key.
 - **Short-lived when appropriate** -- cursors that encode a point-in-time snapshot should carry an expiry so stale navigation fails loudly rather than silently returning wrong results.
 
----
 
 ## Offset vs. Cursor: Comparison
 
@@ -160,7 +156,6 @@ Cursors must be:
 
 **Rule of thumb:** use cursor pagination unless you need random page access (e.g., a UI with numbered page buttons on a static dataset). For anything that mutates in real time — messages, events, transactions — cursor pagination is the correct choice.
 
----
 
 ## Visual: How Each Strategy Navigates
 
@@ -186,7 +181,6 @@ sequenceDiagram
 
 Both queries return the same 20 rows. The offset query discards 100,000 rows first; the cursor query seeks directly to the right position using the index.
 
----
 
 ## Page Token Pattern (Google-style)
 
@@ -209,7 +203,6 @@ GET /v1/projects/123/logs?page_size=50&page_token=ChBzdGFydF90b2tlbl92YWx1ZQ
 
 When `next_page_token` is absent or empty, the client has reached the end. The client passes the received token verbatim as the `page_token` of the next request. The token format is an implementation detail the server may change at any time.
 
----
 
 ## Response Envelope and Link Headers
 
@@ -241,7 +234,6 @@ Link: </api/v1/orders?cursor=eyJpZCI6MTIwfQ&limit=20>; rel="next",
 
 GitHub's REST API uses `Link` headers as the canonical pagination mechanism. Including both `Link` headers and body metadata is acceptable and improves interoperability.
 
----
 
 ## Total Count Considerations
 
@@ -259,7 +251,6 @@ On a large table with a complex `WHERE` clause this can take seconds. Strategies
 3. **Cache counts.** For high-traffic endpoints, cache the count with a short TTL and invalidate on write.
 4. **Return `has_more` instead.** For cursor-based APIs, `has_more: true/false` is usually sufficient. Clients only need to know whether there is a next page, not how many pages remain.
 
----
 
 ## Enforcing Maximum Page Size
 
@@ -276,7 +267,6 @@ def get_page_size(requested: int | None) -> int:
 
 Return an error (HTTP 400) if the client requests a size above the documented maximum rather than silently capping it. Silent capping confuses clients that expect exactly N records. A 400 response with a clear error message (`"max page size is 100"`) is honest and debuggable.
 
----
 
 ## Common Mistakes
 
@@ -300,7 +290,6 @@ A client sending `?size=1000000` either has a bug or is attempting to extract da
 
 Running `SELECT COUNT(*)` on every paginated request doubles the database load for list endpoints. This is rarely justified. Expose total count as an opt-in parameter, use approximate counts where exactness is not critical, or remove total counts entirely in favour of `has_more`.
 
----
 
 ## Related BEPs
 

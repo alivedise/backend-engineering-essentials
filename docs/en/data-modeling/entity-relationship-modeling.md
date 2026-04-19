@@ -31,7 +31,6 @@ The conceptual ER model is independent of technology. It does not contain primar
 
 Only after the conceptual model is agreed upon should you begin the physical design.
 
----
 
 ## Core Concepts
 
@@ -68,7 +67,6 @@ Relationships have three properties that must be explicitly modeled:
 
 A weak entity cannot be uniquely identified by its own attributes alone; it depends on a parent entity. An `OrderItem` line without its parent `Order` has no meaning. The weak entity's partial key (e.g., `line_number`) becomes meaningful only when combined with the parent's key. Weak entities are always in an identifying relationship with their owner.
 
----
 
 ## ER Diagrams as Communication Tools
 
@@ -82,7 +80,6 @@ Use ER diagrams to:
 - Decide the entity-vs-attribute boundary for contested concepts (is `Address` an attribute or an entity?)
 - Document time-sensitive relationships ("when did this relationship exist?")
 
----
 
 ## Worked Example: E-Commerce Domain
 
@@ -181,7 +178,6 @@ The translation is mechanical once the ER model is clear:
 3. M:N relationships become a junction table whose composite PK is the two foreign keys plus any surrogate key if rows are not unique per pair.
 4. Relationship attributes (quantity, unit_price_at_purchase) live on the junction table, not on either parent.
 
----
 
 ## Common Mistakes
 
@@ -220,7 +216,6 @@ The opposite failure: a `StatusEntity` table with one column and five rows inste
 
 **Fix:** Apply the identity test strictly. If the concept has no independent identity, no attributes beyond its name, and is never referenced from more than one place, keep it as an attribute or an enum.
 
----
 
 ## Related BEPs
 
@@ -229,7 +224,6 @@ The opposite failure: a `StatusEntity` table with one column and five rows inste
 - [BEE-7002: Normalization](./141.md) — After translating ER to tables, normalization rules refine the physical design.
 - [BEE-7006: Polymorphism in Schema Design](./145.md) — When an entity has subtypes, ER modeling must decide between table-per-type, table-per-hierarchy, and other strategies.
 
----
 
 ## References
 

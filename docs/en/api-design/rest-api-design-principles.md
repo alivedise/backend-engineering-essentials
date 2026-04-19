@@ -56,7 +56,6 @@ A client MUST NOT be able to tell whether it is connected directly to the end se
 
 Servers MAY extend client functionality by sending executable code (e.g., JavaScript). This is the only optional constraint.
 
----
 
 ### Resource-Oriented Design
 
@@ -77,7 +76,6 @@ Resources are the nouns of a REST API. Design resources around the domain entiti
 | `DELETE /tasks/{id}` | `POST /deleteTask` |
 | `GET /users/{id}/orders` | `GET /getOrdersByUser?userId={id}` |
 
----
 
 ### HTTP Methods and Their Semantics
 
@@ -102,7 +100,6 @@ RFC 9110 (HTTP Semantics) defines method properties: **safe** methods have no ob
 - DELETE SHOULD be idempotent: deleting an already-deleted resource SHOULD return `404` or `204`, not `500`.
 - POST MUST NOT be used as a catch-all for operations that fit other methods.
 
----
 
 ### HTTP Status Code Categories
 
@@ -131,7 +128,6 @@ RFC 9110 (HTTP Semantics) defines method properties: **safe** methods have no ob
 | 500 | Internal Server Error | Unexpected server-side failure |
 | 503 | Service Unavailable | Server temporarily unable to handle requests |
 
----
 
 ### Richardson Maturity Model
 
@@ -154,7 +150,6 @@ graph LR
 
 Most production REST APIs operate at Level 2. Level 3 (HATEOAS) is theoretically the "true REST" but is rarely implemented in full due to client complexity.
 
----
 
 ### HATEOAS
 
@@ -176,7 +171,6 @@ Example response for `GET /tasks/42`:
 }
 ```
 
----
 
 ### Content Negotiation
 
@@ -193,7 +187,6 @@ Accept: application/json
 
 If the server cannot produce any of the requested formats, it MUST return `406 Not Acceptable`.
 
----
 
 ## Visual
 
@@ -212,7 +205,6 @@ graph TD
     end
 ```
 
----
 
 ## Example
 
@@ -323,7 +315,6 @@ Content-Type: application/json
 }
 ```
 
----
 
 ## Common Mistakes
 
@@ -383,7 +374,6 @@ GET /tasks/generateReport
 
 Returning `200` for every success (ignoring `201`, `204`) and `500` for every server-side issue (ignoring `503`, `409`, `422`) deprives clients of information they need to make decisions.
 
----
 
 ## Related BEPs
 
@@ -393,7 +383,6 @@ Returning `200` for every success (ignoring `201`, `204`) and `500` for every se
 - [BEE-4004](pagination-patterns.md) Pagination Patterns
 - [BEE-4006](api-error-handling-and-problem-details.md) API Error Handling and Problem Details
 
----
 
 ## References
 

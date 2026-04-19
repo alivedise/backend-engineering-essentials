@@ -38,7 +38,6 @@ See [BEE-4001](rest-api-design-principles.md) for the full treatment of REST arc
 - Under-fetching: complex data graphs may require N sequential requests (`/users/1`, then `/users/1/orders`, then `/orders/42/items`).
 - No standard for real-time: polling and webhooks are workarounds, not native capabilities.
 
----
 
 ### GraphQL
 
@@ -106,7 +105,6 @@ GraphQL's flexibility shifts the performance problem inward. When the server res
 - No standard HTTP caching (POST requests are not cached by CDNs); caching requires persisted queries or a CDN-aware GraphQL layer.
 - Overhead is not worth it for simple CRUD with 1–2 entity types.
 
----
 
 ### gRPC
 
@@ -170,7 +168,6 @@ Streaming is built into the protocol over HTTP/2, not bolted on.
 - Proto schema changes require coordinating client and server deployments carefully (though protobuf has backward-compatible evolution rules).
 - Higher initial setup cost: protobuf toolchain, code generation, build pipeline integration.
 
----
 
 ### WebSocket and SSE (Real-Time Fourth Option)
 
@@ -181,7 +178,6 @@ For scenarios requiring low-latency server-to-client push (live dashboards, coll
 
 Both protocols are outside the REST/GraphQL/gRPC decision, but mentioning them prevents teams from reaching for polling as the only alternative.
 
----
 
 ## Visual
 
@@ -209,7 +205,6 @@ flowchart TD
     K -- No --> D
 ```
 
----
 
 ## Example
 
@@ -250,7 +245,6 @@ Content-Type: application/json
 
 Two round trips. The user response includes `email` even if the client does not need it.
 
----
 
 ### GraphQL
 
@@ -291,7 +285,6 @@ Content-Type: application/json
 
 One round trip. Only `name` is returned (not `email`). The response shape is exactly what the client asked for.
 
----
 
 ### gRPC
 
@@ -320,7 +313,6 @@ resp, err := client.GetUserWithOrders(ctx, &pb.GetUserRequest{UserId: "1"})
 
 One RPC call. Binary wire format. Strongly typed at compile time. No JSON parsing.
 
----
 
 ## Common Mistakes
 
@@ -344,7 +336,6 @@ gRPC is excellent for internal microservice communication with tight latency bud
 
 Running REST, GraphQL, and gRPC endpoints from different services without an API gateway (e.g., Kong, Apigee, AWS API Gateway) means authentication, rate limiting, observability, and routing are implemented independently in each service. Centralize cross-cutting concerns at the gateway layer.
 
----
 
 ## Related BEPs
 
@@ -352,7 +343,6 @@ Running REST, GraphQL, and gRPC endpoints from different services without an API
 - [BEE-4001](rest-api-design-principles.md) REST API Design Principles
 - [BEE-4007](webhooks-and-callback-patterns.md) Webhooks and Callback Patterns (async communication)
 
----
 
 ## References
 

@@ -31,7 +31,6 @@ BOLA is the API-specific name for what is called IDOR (Insecure Direct Object Re
 
 **Prevention**: Implement authorization checks *inside* the business logic layer on every function that accesses a database object using a client-supplied identifier — not just at the route or middleware layer. Use unpredictable identifiers (UUIDs v4) rather than sequential integers as a defense-in-depth measure, but not as a substitute for authorization. Write automated tests that attempt cross-user access and fail deployments that pass them.
 
----
 
 ### API2:2023 — Broken Authentication
 
@@ -41,7 +40,6 @@ Authentication mechanisms are exposed to all users by definition, making them hi
 
 **Prevention**: Treat password recovery, email verification, and account update endpoints with the same security rigor as login. Require re-authentication for sensitive operations (changing email, phone, payment method). Never use API keys for user authentication — use standardized protocols (OAuth 2.0, OpenID Connect). Apply GraphQL-aware rate limiting that counts individual operations within batched requests, not just HTTP requests.
 
----
 
 ### API3:2023 — Broken Object Property Level Authorization
 
@@ -53,7 +51,6 @@ Merged from two 2019 categories (Excessive Data Exposure, Mass Assignment) under
 
 **Prevention**: Explicitly enumerate which fields each endpoint exposes in responses — do not use generic model serialization. Maintain an allowlist of client-modifiable properties per endpoint; reject or ignore properties outside that allowlist. Disable framework-level mass assignment features (`attr_protected` is insufficient; use `attr_accessible` whitelists or equivalent).
 
----
 
 ### API4:2023 — Unrestricted Resource Consumption
 
@@ -63,7 +60,6 @@ APIs that lack limits on the resources consumed per request — CPU, memory, net
 
 **Prevention**: Enforce maximum sizes for strings, arrays, uploaded files, and response payloads. Set explicit limits on GraphQL query depth, breadth, and batch size. Apply container or serverless CPU/memory constraints. Configure spending alerts and hard caps on all third-party service integrations. Set execution timeouts. Validate pagination parameters — a `limit=1000000` query parameter should be rejected, not honored.
 
----
 
 ### API5:2023 — Broken Function Level Authorization
 
@@ -73,7 +69,6 @@ Distinct from BOLA (which is about accessing the wrong *object*), this is about 
 
 **Prevention**: Implement a single, centralized authorization module invoked for every business function — not per-controller one-off checks. Default to denying all access; require explicit role grants for each endpoint. Audit all API endpoints systematically, not just during development — enumerate which roles are permitted for every verb × path combination and verify that enforcement matches the specification.
 
----
 
 ### API6:2023 — Unrestricted Access to Sensitive Business Flows
 
@@ -83,7 +78,6 @@ A new 2023 category addressing a class of risk that is not a traditional securit
 
 **Prevention**: Identify during design which workflows are sensitive to automation abuse, not just which data is sensitive. Apply device fingerprinting to detect non-browser clients on endpoints that should only be called by legitimate users. Require CAPTCHA or friction mechanisms on conversion-critical paths. Rate-limit by business units — by number of items purchased per account or IP, not just HTTP requests per second. Monitor for behavioral anomalies: timing patterns, IP diversity, conversion rates.
 
----
 
 ### API7:2023 — Server Side Request Forgery (SSRF)
 
@@ -95,7 +89,6 @@ This is precisely how the Capital One breach occurred in 2019. Paige Thompson ex
 
 **Prevention**: Implement a URL allowlist that restricts the destination origin, scheme, port, and media type. Block RFC 1918 addresses (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) and the link-local range (`169.254.0.0/16`). Disable HTTP redirects, or validate the redirect destination against the allowlist before following. Never return raw fetch responses to clients. Enforce IMDSv2 on all EC2 instances — IMDSv2 requires a preliminary PUT request to obtain a session token, and rejects PUT requests containing `X-Forwarded-For`, making SSRF-based credential theft non-functional.
 
----
 
 ### API8:2023 — Security Misconfiguration
 
@@ -105,7 +98,6 @@ Misconfiguration at any layer — network, OS, web server, application framework
 
 **Prevention**: Apply a repeatable hardening checklist across all stack layers at deployment time. Enforce TLS on all API communications including internal service-to-service traffic. Define an explicit allowlist of permitted HTTP methods per endpoint. Set restrictive CORS policies and validate them. Validate `Content-Type` headers and reject mismatched bodies. Ensure all servers in a request chain parse requests identically to prevent HTTP request smuggling.
 
----
 
 ### API9:2023 — Improper Inventory Management
 
@@ -115,7 +107,6 @@ APIs accumulate versions, environments, and integrations over time. Without a ma
 
 **Prevention**: Maintain a complete inventory of all API hosts, versions, and environments — including who can reach them. Generate API documentation automatically from code (OpenAPI/Swagger in CI/CD) to keep the inventory current. Apply identical security controls to all versions of an API, including deprecated versions that have not yet been retired. Perform explicit risk analysis before deprecating a version and define a sunset timeline with announced dates.
 
----
 
 ### API10:2023 — Unsafe Consumption of APIs
 
@@ -125,7 +116,6 @@ A new 2023 entry. Developers apply weaker input validation to data received from
 
 **Prevention**: Treat all data received from third-party APIs as untrusted input — validate and sanitize it with the same rigor applied to direct user input. Enforce TLS for all API-to-API communications. Maintain an allowlist of permitted redirect destinations; never blindly follow HTTP redirects. Evaluate third-party API providers' security posture, incident history, and data handling policies before integration.
 
----
 
 ## What Changed from 2019 to 2023
 

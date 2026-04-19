@@ -23,13 +23,11 @@ The core insight from Martin Kleppmann's *Designing Data-Intensive Applications*
 - [AWS: MongoDB vs PostgreSQL](https://aws.amazon.com/compare/the-difference-between-mongodb-and-postgresql/)
 - [Bytebase: Postgres vs MongoDB — a Complete Comparison](https://www.bytebase.com/blog/postgres-vs-mongodb/)
 
----
 
 :::tip Deep Dive
 For database-level implementation details on relational vs non-relational design, see [DEE-14: Relational vs Non-Relational](https://alivedise.github.io/database-engineering-essentials/12).
 :::
 
----
 
 ## Principle
 
@@ -41,7 +39,6 @@ Choose based on:
 3. Consistency and durability requirements (ACID transactions vs eventual consistency).
 4. Scale requirements and operational maturity of the team.
 
----
 
 ## Database Families
 
@@ -63,7 +60,6 @@ Relational databases (PostgreSQL, MySQL, Oracle, SQL Server) store data in norma
 
 **Reach for SQL when:** your data is naturally relational with many-to-many relationships, you need multi-row/multi-table transactions, or compliance mandates strong consistency.
 
----
 
 ### Document Stores
 
@@ -82,7 +78,6 @@ Document databases (MongoDB, CouchDB, Firestore) store self-contained JSON/BSON 
 
 **Reach for document stores when:** your data looks like a tree of one-to-many relationships, you load the whole tree at once, and the top-level entity (e.g. a blog post with its comments) is a natural aggregate boundary.
 
----
 
 ### Key-Value Stores
 
@@ -100,7 +95,6 @@ Key-value databases (Redis, DynamoDB in pure KV mode, Memcached) store opaque va
 
 **Reach for key-value stores when:** access is almost always a single-key lookup at high throughput, or as a caching layer in front of a primary database.
 
----
 
 ### Column-Family Stores
 
@@ -118,7 +112,6 @@ Column-family databases (Apache Cassandra, HBase, Google Bigtable) store data in
 
 **Reach for column-family stores when:** you have high-volume write workloads, time-series data, or append-heavy event logs where queries are predictable and access patterns are designed up front.
 
----
 
 ### Graph Databases
 
@@ -136,7 +129,6 @@ Graph databases (Neo4j, Amazon Neptune, ArangoDB) model data as nodes and edges.
 
 **Reach for graph databases when:** the primary query is "traverse relationships to N degrees," such as social graphs, dependency graphs, or access control hierarchies.
 
----
 
 ## Decision Tree
 
@@ -155,7 +147,6 @@ flowchart TD
     J -- No --> L[Re-evaluate data model\nand access patterns]
 ```
 
----
 
 ## Concrete Example: User with Orders
 
@@ -216,7 +207,6 @@ db.users.findOne(
 
 **Rule of thumb:** embed when you always load the parent and child together, and the child data is owned exclusively by the parent. Reference (normalize) when the child has independent identity or is shared across multiple parents.
 
----
 
 ## Polyglot Persistence
 
@@ -232,7 +222,6 @@ Real production systems rarely use a single database for everything. A mature ar
 
 The key discipline in polyglot persistence is defining clear **aggregate boundaries** — which system owns each piece of data — and synchronizing across stores via events or background jobs rather than cross-database joins.
 
----
 
 ## Common Mistakes
 
@@ -256,7 +245,6 @@ Forcing all data into a single database type leads to awkward modeling. User ses
 
 A database your team cannot operate safely in production is a liability. Consider: Does your team have backup and restore procedures tested? Can you monitor slow queries? Do you understand the replication lag characteristics? Newer or exotic databases often lack the depth of tooling, documentation, and community knowledge that PostgreSQL or MySQL have accumulated over decades.
 
----
 
 ## Related BEPs
 

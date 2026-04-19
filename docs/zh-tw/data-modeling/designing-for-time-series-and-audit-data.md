@@ -40,7 +40,6 @@ slug: designing-for-time-series-and-audit-data
 6. 對時序資料表依時間分區，並定義保留政策；無限制地持續成長不是有效的設計。
 7. 明確建立時間範圍欄位的索引；若沒有索引，時間點和範圍查詢將無法有效率地執行。
 
----
 
 ## 時態資料基礎
 
@@ -117,7 +116,6 @@ SELECT * FROM employees;
 
 記錄每次變更（包含最終刪除）的獨立 `employees_audit` 資料表是軟刪除的配套做法。軟刪除讓你能過濾有效記錄；稽核日誌則告訴你是誰刪除的、何時刪除的。
 
----
 
 ## 雙時態模型
 
@@ -195,7 +193,6 @@ SELECT amount, valid_from, valid_to
    AND superseded_at IS NULL;   -- 最新記錄的認知
 ```
 
----
 
 ## 稽核軌跡
 
@@ -251,7 +248,6 @@ CREATE TRIGGER trg_audit_immutable
   FOR EACH ROW EXECUTE FUNCTION prevent_audit_modification();
 ```
 
----
 
 ## 事件溯源作為時態模式
 
@@ -276,7 +272,6 @@ CREATE INDEX idx_order_events_order ON order_events (order_id, sequence_num);
 
 事件溯源適合以歷史記錄為主要產出的領域（金融分類帳、合規系統、基於 CQRS 的微服務）。它帶來相當大的複雜性——完整重播時間、快照管理、投影一致性——不應輕率採用。詳見 [BEE-10004](../messaging/event-sourcing.md)。
 
----
 
 ## 時序資料特性
 
@@ -334,7 +329,6 @@ CREATE INDEX idx_metrics_time
 
 若時間欄位沒有明確的索引，在大型分區上的範圍掃描將會是循序掃描。詳見 [BEE-6002](../data-storage/indexing-deep-dive.md)。
 
----
 
 ## 保留政策
 
@@ -370,7 +364,6 @@ END;
 $$;
 ```
 
----
 
 ## 常見錯誤
 
@@ -394,7 +387,6 @@ $$;
 
 時態查詢幾乎都是範圍查詢：`WHERE recorded_at BETWEEN '2025-01-01' AND '2025-01-31'`。若時間欄位上沒有索引，每個查詢都是循序掃描。對於已分區的資料表，確保在每個分區上都有定義索引（或在父資料表上定義，PostgreSQL 會自動傳播至子分區）。詳見 [BEE-6002](../data-storage/indexing-deep-dive.md)。
 
----
 
 ## 相關 BEE
 

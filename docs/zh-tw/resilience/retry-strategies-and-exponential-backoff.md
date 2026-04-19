@@ -26,7 +26,6 @@ slug: retry-strategies-and-exponential-backoff
 
 **使用完整抖動的指數退避（full jitter exponential backoff），限制重試總次數，並且絕不對非冪等操作或客戶端錯誤進行重試。**
 
----
 
 ## 重試策略
 
@@ -71,7 +70,6 @@ sleep = random(0, min(cap, base * 2^attempt))
 
 這是 AWS、Google Cloud 以及 Marc Brooker 的研究所共同推薦的策略。即使有數千個客戶端同時重試，也能維持近似穩定的聚合請求率，讓服務有機會真正恢復。
 
----
 
 ## 抖動不是可選項
 
@@ -81,7 +79,6 @@ sleep = random(0, min(cap, base * 2^attempt))
 
 Marc Brooker 的模擬顯示：在相同條件下，沒有抖動時 P99 延遲為 2600ms、錯誤率 17%；加入完整抖動後，P99 降至 1400ms、錯誤率降至 6%。
 
----
 
 ## 指數退避加抖動：視覺化
 
@@ -121,7 +118,6 @@ gantt
 
 每個客戶端從相同公式中抽取不同的隨機延遲。重試嘗試分散在時間軸上，而非同步發生。
 
----
 
 ## 虛擬碼：HTTP 客戶端加上指數退避與完整抖動
 
@@ -160,7 +156,6 @@ RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 - 4xx 錯誤（除 429 外）不重試
 - 重試次數有硬性上限
 
----
 
 ## 應該重試 vs. 不應該重試
 
@@ -187,7 +182,6 @@ RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 **基本規則：4xx 錯誤是客戶端的問題**，重試無法解決；**5xx 錯誤是伺服器的問題**，可能隨著伺服器恢復而自行消失。
 
----
 
 ## 冪等性是前提
 
@@ -203,7 +197,6 @@ RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 若兩個條件都不符合，請勿重試。記錄失敗、將錯誤向上拋出，讓人工介入判斷。
 
----
 
 ## 重試預算
 
@@ -219,7 +212,6 @@ if retry_ratio > BUDGET_THRESHOLD:  # 例如 10%
 
 這能防止局部失敗演變為全系統過載。重試預算是系統層級的控制；每請求上限是本地控制。兩者都不可缺少。
 
----
 
 ## 微服務中的重試放大效應
 
@@ -249,7 +241,6 @@ if retry_ratio > BUDGET_THRESHOLD:  # 例如 10%
 3. **使用斷路器**（[BEE-12001](circuit-breaker-pattern.md)）— 當下游服務確認故障時，完全停止重試
 4. **搭配逾時限制**（[BEE-12002](retry-strategies-and-exponential-backoff.md)）— 有界的逾時設定可防止重試堆疊延遲
 
----
 
 ## Retry-After 標頭
 
@@ -262,7 +253,6 @@ Retry-After: 30
 
 有 `Retry-After` 標頭時，務必遵守。不要在其基礎上再疊加自己的退避計算——伺服器已明確告知重試時間。
 
----
 
 ## 常見錯誤
 
@@ -294,7 +284,6 @@ delay = random(0, min(CAP, BASE_DELAY * (2 ** attempt)))
 
 每個服務層各自獨立加入重試，負載會呈幾何級數增長。重試策略需要在整個呼叫圖中協調，而非只在單一服務內部考慮。
 
----
 
 ## 總結
 
@@ -317,7 +306,6 @@ sleep = random(0, min(cap, base * 2^attempt))
 - 有 `Retry-After` 標頭時予以遵守
 - 微服務中：避免在每一層都重試；搭配使用斷路器
 
----
 
 ## 相關 BEE
 

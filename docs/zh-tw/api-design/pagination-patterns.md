@@ -25,7 +25,6 @@ slug: pagination-patterns
 
 **對每個列表端點實施分頁。對於可變、高流量的集合，優先採用基於游標的分頁。對於隨機存取（跳到第 N 頁）是真實使用者需求的小型穩定資料集，才保留位移分頁。始終強制執行伺服器端最大頁面大小限制。**
 
----
 
 ## 為什麼分頁很重要
 
@@ -38,7 +37,6 @@ slug: pagination-patterns
 
 分頁強制建立一個契約：每個回應都有有界的大小，頁面之間的導覽是明確的。這是任何預期生產流量的 API 的基礎。
 
----
 
 ## 位移式分頁（Offset-Based Pagination）
 
@@ -90,7 +88,6 @@ SELECT * FROM orders ORDER BY created_at DESC LIMIT 20 OFFSET 100000;
 
 第二個問題：如果在客戶端分頁過程中插入了新記錄，每個後續頁面都會偏移一行。項目會被跳過或重複出現。這就是「幻讀」問題。
 
----
 
 ## 游標式分頁（Cursor-Based Pagination / Keyset Pagination）
 
@@ -143,7 +140,6 @@ LIMIT 20;
 - **無狀態** -- 游標必須編碼伺服器繼續所需的一切；它不得是伺服器端的 session 鍵。
 - **適時設定有效期** -- 編碼了時間點快照的游標應攜帶過期時間，以便過期導覽明確失敗，而不是靜默回傳錯誤結果。
 
----
 
 ## 位移 vs. 游標：比較
 
@@ -160,7 +156,6 @@ LIMIT 20;
 
 **經驗法則：** 除非需要隨機頁面存取（例如在靜態資料集上顯示頁碼按鈕的 UI），否則使用游標分頁。對於任何即時變動的資料——訊息、事件、交易——游標分頁是正確的選擇。
 
----
 
 ## 視覺化：兩種策略如何導覽
 
@@ -186,7 +181,6 @@ sequenceDiagram
 
 兩個查詢回傳相同的 20 行。位移查詢先捨棄 100,000 行；游標查詢使用索引直接定位到正確位置。
 
----
 
 ## Page Token 模式（Google 風格）
 
@@ -209,7 +203,6 @@ GET /v1/projects/123/logs?page_size=50&page_token=ChBzdGFydF90b2tlbl92YWx1ZQ
 
 當 `next_page_token` 不存在或為空時，客戶端已到達末尾。客戶端將收到的 token 原封不動地作為下一個請求的 `page_token` 傳入。Token 格式是伺服器可以隨時更改的實作細節。
 
----
 
 ## 回應信封與 Link 標頭
 
@@ -241,7 +234,6 @@ Link: </api/v1/orders?cursor=eyJpZCI6MTIwfQ&limit=20>; rel="next",
 
 GitHub 的 REST API 使用 `Link` 標頭作為規範的分頁機制。同時包含 `Link` 標頭和回應體元資料是可接受的，並能提高互通性。
 
----
 
 ## 總數統計的考量
 
@@ -259,7 +251,6 @@ SELECT COUNT(*) FROM orders WHERE user_id = 42;
 3. **快取計數。** 對於高流量端點，以短 TTL 快取計數，並在寫入時使其失效。
 4. **改用 `has_more`。** 對於游標式 API，`has_more: true/false` 通常已足夠。客戶端只需要知道是否有下一頁，而不需要知道剩餘幾頁。
 
----
 
 ## 強制執行最大頁面大小
 
@@ -276,7 +267,6 @@ def get_page_size(requested: int | None) -> int:
 
 如果客戶端請求超過文件記載最大值的大小，應回傳錯誤（HTTP 400），而不是靜默地截斷。靜默截斷會讓期望恰好 N 筆記錄的客戶端感到困惑。帶有清楚錯誤訊息的 400 回應（`"max page size is 100"`）是誠實且可除錯的。
 
----
 
 ## 常見錯誤
 
@@ -300,7 +290,6 @@ def get_page_size(requested: int | None) -> int:
 
 在每個分頁請求上執行 `SELECT COUNT(*)` 會使列表端點的資料庫負載加倍。這幾乎從不合理。將總數計算作為選用參數公開、在精確度不重要的地方使用近似計數，或完全移除總數改用 `has_more`。
 
----
 
 ## 相關 BEE
 

@@ -25,7 +25,6 @@ Reference specifications:
 
 **Implement the narrowest CORS policy your application requires, validate every origin before reflecting it, and never mistake CORS for a server-side security control — it only constrains browser-side reads.**
 
----
 
 ## Same-Origin Policy
 
@@ -43,7 +42,6 @@ What SOP protects against: a malicious page at `evil.com` cannot silently read t
 
 What SOP does **not** protect against: the browser still *sends* the request. SOP blocks the *read*, not the *send*. This distinction matters for state-changing endpoints (see preflight, below).
 
----
 
 ## CORS as a Controlled Relaxation
 
@@ -51,7 +49,6 @@ CORS adds a negotiation layer on top of SOP. The browser includes an `Origin` he
 
 CORS is enforced by the **browser** on behalf of the user. A server cannot bypass a browser's enforcement, and a non-browser client (curl, server-to-server) is unaffected by CORS headers. CORS is **not** a server authentication mechanism.
 
----
 
 ## Simple vs. Preflighted Requests
 
@@ -95,7 +92,6 @@ sequenceDiagram
 
 The preflight response can be cached by the browser for `Access-Control-Max-Age` seconds (default: 5 seconds; Firefox caps at 86400s, Chrome at 7200s).
 
----
 
 ## Access-Control-* Headers Reference
 
@@ -118,7 +114,6 @@ The preflight response can be cached by the browser for `Access-Control-Max-Age`
 | `Access-Control-Request-Method` | (Preflight only) The method of the intended actual request. |
 | `Access-Control-Request-Headers` | (Preflight only) The custom headers of the intended actual request. |
 
----
 
 ## Wildcard (`*`) Limitations
 
@@ -130,7 +125,6 @@ The restriction extends to other wildcard values:
 - `Access-Control-Allow-Headers: *` does not cover `Authorization` — that must be listed explicitly.
 - `Access-Control-Allow-Methods: *` and `Access-Control-Expose-Headers: *` are similarly restricted for credentialed requests.
 
----
 
 ## The `Vary: Origin` Header
 
@@ -142,7 +136,6 @@ Vary: Origin
 
 Without this, a CDN or shared cache may store the response for origin A and serve it to origin B, which either leaks data or breaks legitimate cross-origin access. `Vary: Origin` instructs caches to key responses by the value of the `Origin` request header.
 
----
 
 ## Configuration Examples
 
@@ -211,7 +204,6 @@ Access-Control-Max-Age: 3600
 Vary: Origin
 ```
 
----
 
 ## Common Misconfigurations
 
@@ -262,7 +254,6 @@ Using regex or string matching like `endsWith("example.com")` can authorize unin
 
 Always use exact-match comparison against a set of known-good origins.
 
----
 
 ## Related BEPs
 

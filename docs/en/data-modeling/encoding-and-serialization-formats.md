@@ -37,7 +37,6 @@ In practice this means:
 4. Use MessagePack only when you need binary compactness and already have a well-understood structure that does not require a formal schema.
 5. Never mix formats at a single boundary without documenting the reason and providing conversion tooling.
 
----
 
 ## Format Taxonomy
 
@@ -68,7 +67,6 @@ Binary formats encode data as compact byte sequences. Field names or type inform
 | Apache Thrift | Yes (`.thrift` IDL) | No | ~2-4x smaller | Similar to Protobuf; less common in new systems |
 | MessagePack | No | Yes | ~1.5-2x smaller | Binary JSON; type-tagged values; no schema |
 
----
 
 ## Format Deep Dives
 
@@ -90,7 +88,6 @@ Weaknesses:
 
 **When to use JSON:** External REST APIs, webhook payloads, configuration files, log lines, any context where a human or unfamiliar tool may need to read the data.
 
----
 
 ### Protocol Buffers (Protobuf)
 
@@ -122,7 +119,6 @@ Weaknesses:
 
 **When to use Protobuf:** Internal gRPC services, performance-critical internal APIs, any synchronous RPC path where both sides control the schema. See [BEE-4005](../api-design/graphql-vs-rest-vs-grpc.md).
 
----
 
 ### Apache Avro
 
@@ -157,7 +153,6 @@ Weaknesses:
 
 **When to use Avro:** Kafka topics, data pipeline events, batch data formats (Hadoop, Spark), any high-volume asynchronous stream where schema evolution and storage efficiency are both critical. See [BEE-10001](../messaging/message-queues-vs-event-streams.md).
 
----
 
 ### MessagePack
 
@@ -177,7 +172,6 @@ Weaknesses:
 
 **When to use MessagePack:** Internal caches (Redis values), session stores, any scenario where you want binary compactness and already rely on convention rather than formal schema, and where Protobuf/Avro overhead is not justified.
 
----
 
 ## Worked Example: Same Data, Four Encodings
 
@@ -235,7 +229,6 @@ No schema definition needed. The object is encoded as a fixmap with 3 entries; e
 
 These numbers scale with message count. At 10,000 messages/second, the difference between JSON and Avro is roughly 230 KB/s per topic for this payload alone.
 
----
 
 ## Schema Evolution Comparison
 
@@ -250,7 +243,6 @@ These numbers scale with message count. At 10,000 messages/second, the differenc
 
 See [BEE-7003](schema-evolution-and-backward-compatibility.md) for the full rules of safe schema evolution regardless of format.
 
----
 
 ## Decision Tree
 
@@ -269,7 +261,6 @@ flowchart TD
     J -->|No| K[MessagePack]
 ```
 
----
 
 ## Common Mistakes
 
@@ -293,7 +284,6 @@ Teams often choose a format for its size or speed properties and discover only l
 
 A system that uses JSON on some Kafka topics and Avro on others, with no documented policy, creates operational confusion. Consumers must inspect envelope headers to determine how to decode, monitoring tools need format-aware parsers, and onboarding new engineers takes longer. Establish a clear format policy per communication type and enforce it in code review.
 
----
 
 ## Related BEPs
 

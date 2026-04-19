@@ -229,7 +229,6 @@ Here the primary query retrieves candidates quickly. The rescore query runs an e
 
 Use rescore for: phrase proximity boosts, script-based signals, vector similarity re-ranking (hybrid search).
 
----
 
 ## Relevance Tuning Workflow
 
@@ -270,7 +269,6 @@ flowchart TD
     M -->|Yes| O([Roll out to 100%\nDocument the change])
 ```
 
----
 
 ## Worked Example: E-commerce Product Search
 
@@ -312,7 +310,6 @@ The combined change (field weights + popularity boost) runs as a 50/50 A/B test 
 
 All three metrics move in the same direction. The team rolls out at 100%.
 
----
 
 ## Common Mistakes
 
@@ -340,7 +337,6 @@ A product with 1,000,000 purchases getting a `field_value_factor` with `modifier
 
 Corpus composition changes. User intent shifts. New document types are added. A relevance configuration tuned for the corpus of 18 months ago may be wrong for today's corpus. Revisit offline metrics quarterly, especially after major catalog or content changes.
 
----
 
 ## Related BEPs
 
