@@ -41,3 +41,29 @@ export function blockForSource(sourceFolder) {
   }
   return BLOCK_ALLOCATION.find(b => b.source === sourceFolder);
 }
+
+// assignNewIds: given a source folder name and an array of articles
+// (each with { current_id, title }), return new array with new_id assigned
+// in current_id ascending order starting from the block's start.
+//
+// Throws if the source folder has no block allocation, or if the article
+// count exceeds the block's size.
+export function assignNewIds(sourceFolder, articles) {
+  const block = blockForSource(sourceFolder);
+  if (!block) {
+    throw new Error(`no block allocation for source: ${sourceFolder}`);
+  }
+
+  const blockSize = block.end - block.start + 1;
+  if (articles.length > blockSize) {
+    throw new Error(
+      `${articles.length} articles exceeds block size ${blockSize} for ${block.slug}`
+    );
+  }
+
+  const sorted = [...articles].sort((a, b) => a.current_id - b.current_id);
+  return sorted.map((article, i) => ({
+    ...article,
+    new_id: block.start + i,
+  }));
+}
