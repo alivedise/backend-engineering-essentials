@@ -63,7 +63,7 @@ Common terms used across BEE documents.
 | **Error Budget** | The allowed amount of unreliability within an SLO period |
 | **Dead Letter Queue** | A queue for messages that cannot be processed successfully |
 
-## Related BEPs
+## Related BEEs
 
-- [BEE-2](bee-overview.md) BEE Overview
+- [BEE-1](bee-overview.md) BEE Overview
 - [BEE-2](how-to-read-bee.md) How to Read BEE

@@ -65,5 +65,5 @@ BEE 文件中使用的常見術語。
 
 ## 相關 BEE
 
-- [BEE-2](bee-overview.md) BEE 總覽
+- [BEE-1](bee-overview.md) BEE 總覽
 - [BEE-2](how-to-read-bee.md) 如何閱讀 BEE

@@ -44,7 +44,7 @@ Optional sections (included when they add value):
 
 ## Cross-References
 
-BEE articles link to related BEPs, and where topics overlap with ADE or DEE, a tip block provides the cross-reference:
+BEE articles link to related BEEs, and where topics overlap with ADE or DEE, a tip block provides the cross-reference:
 
 > :::tip Deep Dive
 > For database-level implementation details, see DEE-100: Normalization.
@@ -54,6 +54,6 @@ BEE articles link to related BEPs, and where topics overlap with ADE or DEE, a t
 
 - Bradner, S. 1997. "Key words for use in RFCs to Indicate Requirement Levels". RFC 2119. https://www.rfc-editor.org/rfc/rfc2119
 
-## Related BEPs
+## Related BEEs
 
-- [BEE-2](bee-overview.md) BEE Overview
+- [BEE-1](bee-overview.md) BEE Overview
