@@ -15,18 +15,6 @@ How encrypted connections are established, certificate chains, and mTLS.
 
 Every HTTP request you make to a production service travels over TLS. The browser address bar shows a padlock, the load balancer terminates HTTPS, and internal services call each other with mutual TLS. But what actually happens during that handshake? Why does TLS 1.3 matter, and why do certificate chains break at 2 AM in production?
 
-**References:**
-- RFC 8446 — The TLS 1.3 specification: <https://www.rfc-editor.org/rfc/rfc8446>
-- OWASP Transport Layer Security Cheat Sheet: <https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html>
-- Cloudflare: TLS Protocol Overview: <https://developers.cloudflare.com/ssl/reference/protocols/>
-
-## Principle
-
-**Understand the full TLS stack — from handshake mechanics to certificate chains to termination topology — so you can configure, debug, and secure encrypted connections correctly.**
-
-TLS is not magic. It is a precisely defined protocol with negotiated parameters, certificate hierarchies, and key derivation functions. Engineers who treat it as a black box misconfigure cipher suites, miss certificate expiries, and inadvertently expose internal traffic after terminating TLS at the load balancer.
-
-
 ## What TLS Provides
 
 TLS (Transport Layer Security) provides three security properties (RFC 8446, Section 1):
@@ -373,3 +361,9 @@ Terminating TLS at the load balancer and sending plaintext to backends is common
 - [BEE-3003](http-versions.md) — HTTP/2 and HTTP/3: ALPN negotiates HTTP/2 over TLS; HTTP/3 uses QUIC which has TLS 1.3 built-in
 - [BEE-3005](load-balancers.md) — Load Balancers: TLS termination strategies, SNI-based routing, and certificate management at scale
 - [BEE-3007](mutual-tls-handshake-and-server-configuration.md) — Mutual TLS (mTLS) Handshake and Server Configuration: deep mechanics of client-cert mTLS, server verification, and practical setup; extends the base handshake covered here
+
+## References
+
+- [RFC 8446 — The TLS 1.3 specification](https://www.rfc-editor.org/rfc/rfc8446)
+- [OWASP Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)
+- [Cloudflare: TLS Protocol Overview](https://developers.cloudflare.com/ssl/reference/protocols/)

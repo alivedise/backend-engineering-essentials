@@ -15,18 +15,6 @@ slug: tls-ssl-handshake
 
 每一個對正式環境服務發出的 HTTP 請求，都經由 TLS 傳輸。瀏覽器顯示鎖頭圖示，負載均衡器終止 HTTPS，服務之間以 mTLS（Mutual TLS）互相呼叫。但握手過程中究竟發生了什麼？為什麼 TLS 1.3 很重要，憑證鏈為何會在凌晨兩點斷掉？
 
-**參考資料：**
-- RFC 8446 — TLS 1.3 規格書：<https://www.rfc-editor.org/rfc/rfc8446>
-- OWASP Transport Layer Security Cheat Sheet：<https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html>
-- Cloudflare：TLS 協定概覽：<https://developers.cloudflare.com/ssl/reference/protocols/>
-
-## 原則
-
-**完整理解 TLS 技術棧 — 從握手機制到憑證鏈再到終止拓撲 — 才能正確設定、除錯和保護加密連線。**
-
-TLS 不是魔法，而是一個定義精確的協定，具有協商參數、憑證階層和金鑰衍生函數。把它當黑盒子的工程師，會錯誤設定 cipher suite（密碼套件）、漏掉憑證到期，並在負載均衡器終止 TLS 後讓內部流量暴露在明文中。
-
-
 ## TLS 提供什麼保障
 
 TLS（Transport Layer Security，傳輸層安全協定）提供三項安全屬性（RFC 8446, Section 1）：
@@ -373,3 +361,9 @@ openssl x509 -enddate -noout -in /etc/ssl/certs/service.pem
 - [BEE-3003](http-versions.md) — HTTP/2 與 HTTP/3：ALPN 在 TLS 上協商 HTTP/2；HTTP/3 使用內建 TLS 1.3 的 QUIC
 - [BEE-3005](load-balancers.md) — 負載均衡器：大規模環境的 TLS 終止策略、SNI 路由和憑證管理
 - [BEE-3007](mutual-tls-handshake-and-server-configuration.md) — Mutual TLS (mTLS) 握手與伺服器設定：用戶端憑證 mTLS 的協定機制、伺服器端驗證與實務設定細節；延伸本文涵蓋的基礎握手
+
+## 參考資料
+
+- [RFC 8446 — TLS 1.3 規格書](https://www.rfc-editor.org/rfc/rfc8446)
+- [OWASP Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)
+- [Cloudflare：TLS 協定概覽](https://developers.cloudflare.com/ssl/reference/protocols/)
