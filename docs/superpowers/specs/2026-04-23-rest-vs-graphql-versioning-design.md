@@ -49,7 +49,15 @@ Five subsections:
       on FIELD_DEFINITION | ENUM_VALUE
     ```
 
-    Callout box: argument and input-field deprecation exists in the working draft and in Apollo Server / graphql-js, but NOT in the October 2021 published edition. Introspection surface: `__Field.isDeprecated`, `__Field.deprecationReason`, `__Type.fields(includeDeprecated: false)`. Short SDL example showing a deprecated field with a migration message.
+    Callout box: argument and input-field deprecation exists in the working draft and in Apollo Server / graphql-js, but NOT in the October 2021 published edition. Introspection surface: `__Field.isDeprecated`, `__Field.deprecationReason`, `__Type.fields(includeDeprecated: false)`. SDL example:
+
+    ```graphql
+    type User {
+      id: ID!
+      phone: String @deprecated(reason: "Use contact.phone instead. Removed 2026-10-01.")
+      contact: Contact!
+    }
+    ```
 
 4. **When schema evolution isn't enough — calendar versioning (~150 words).**
    - Shopify Admin GraphQL: quarterly releases `2026-04` / `2026-07`; URL path `/admin/api/{version}/graphql.json`; 12-month support minimum; 9-month overlap; fall-forward after retirement.
@@ -100,7 +108,7 @@ Update the closing paragraph of Context: "on all three axes" → "on all four ax
 
 - **REST baseline.** Any of the four strategies makes the version visible to HTTP intermediaries. Gateway can route per version; CDN caches per version; deprecation shows up in `Sunset`/`Deprecation` headers (RFC 8594) on a per-URL basis. Link to BEE-4002.
 - **GraphQL gap.** `POST /graphql` flattens every version of every operation to one URL. Quote from graphql.org/learn/schema-design/: *"GraphQL takes a strong opinion on avoiding versioning by providing the tools for the continuous evolution of a GraphQL schema."*
-- **Mitigation pattern 1 — additive-only + `@deprecated`.** Exact directive syntax from October 2021 spec. Callout: argument/input-field deprecation is in the working draft and Apollo/graphql-js but not in the October 2021 edition. Short SDL example. Introspection behavior: `isDeprecated` + `deprecationReason` surface to tooling.
+- **Mitigation pattern 1 — additive-only + `@deprecated`.** Exact directive syntax from October 2021 spec. Callout: argument/input-field deprecation is in the working draft and Apollo/graphql-js but not in the October 2021 edition. Reuse the same SDL example as BEE-4002 (deprecated `phone` field pointing to `contact.phone`). Introspection behavior: `isDeprecated` + `deprecationReason` surface to tooling (GraphiQL, codegen, linters).
 - **Mitigation pattern 2 — calendar-versioned schema cuts.** Shopify Admin: `/admin/api/2026-04/graphql.json`, 12-month support, 9-month overlap, fall-forward. GitHub: single schema, quarterly breaking-change windows announced ≥3 months ahead.
 - **Recommendation.** Default additive + `@deprecated`. Lift to calendar versioning only when coordinated deprecation won't scale to the consumer base. Never remove a field in place without a deprecation cycle — the spec's Field Deprecation section (§3.6.2) explicitly keeps deprecated fields selectable.
 
@@ -117,7 +125,7 @@ Compact three-row table:
 | Protocol | Primary mechanism | Breaking-change discipline | Enforcement |
 |---|---|---|---|
 | REST | URL path / header / `Accept` / date header (BEE-4002) | Per-version sunset window; `Sunset` + `Deprecation` headers (RFC 8594) | Per-URL at the gateway |
-| GraphQL | Additive schema evolution + `@deprecated`; calendar cuts when needed (Shopify) | Deprecation shows in introspection; removal after overlap window | In schema + CI schema-diff tooling |
+| GraphQL | Additive schema evolution + `@deprecated`; calendar cuts when needed (Shopify) | Deprecation shows in introspection; removal after overlap window | In schema + CI schema-diff (GraphQL Inspector, Apollo `rover graph check`) |
 | gRPC / protobuf | `v1alpha1` / `v1beta1` / `v1` package suffixes (Google AIP-181); field numbers are the identity | Protobuf update rules: never change field numbers; use `reserved`; never retype in place | `buf breaking` (`WIRE` / `WIRE_JSON` / `PACKAGE` / `FILE`) |
 
 **Paragraph (~150 words).** Frame the commonality — all three converge on additive-within-a-major-version — and the divergence: REST uses HTTP carriers (link to BEE-4002), GraphQL rebuilds evolution inside the schema (link to BEE-4011), gRPC/protobuf enforces field-number stability mechanically via tooling. Takeaway: "All three protocols make 'evolve additively, break only at a major boundary' the default; they differ in *where* the version signal lives and *how* violations are caught."
