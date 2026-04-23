@@ -8,7 +8,7 @@ slug: api-versioning-strategies
 # [BEE-4002] API Versioning Strategies
 
 :::info
-URL path, header, query param, and content negotiation versioning — when each is appropriate, how to manage breaking changes, and how to retire old versions.
+URL path, header, query param, and content negotiation versioning for REST; additive schema evolution with `@deprecated` and calendar-versioned schema cuts for GraphQL. When each is appropriate, how to manage breaking changes, and how to retire old versions.
 :::
 
 :::tip Deep Dive
@@ -148,6 +148,44 @@ Accept: application/vnd.myapi.v2+json
 **Best fit:** Hypermedia-driven APIs aiming for strict REST compliance; rarely appropriate for general-purpose developer APIs.
 
 
+### GraphQL: schema evolution instead of version bumps
+
+The four strategies above all assume a REST interface: a URL path, a set of verbs, a negotiable content type. GraphQL collapses that surface to a single endpoint, `POST /graphql`, so none of the four version carriers is available. The GraphQL Foundation's own guidance is that GraphQL APIs should evolve the schema in place rather than cut new versions: *"GraphQL takes a strong opinion on avoiding versioning by providing the tools for the continuous evolution of a GraphQL schema."* ([GraphQL — Schema Design](https://graphql.org/learn/schema-design/)). The schema is the contract; evolving the contract means evolving the schema.
+
+**The additive-only rule.** Adding fields, types, enum values, and optional arguments is safe: old clients ignore new fields, and GraphQL's response shape is driven by the client's selection set. Removing a field, renaming a field, or tightening a field's type is breaking. Adding a new non-null field to an input type is also breaking, the GraphQL equivalent of making a previously optional REST field required. Apollo's Principled GraphQL frames this as a continuous operation rather than a release cycle: *"Updating the graph should be a continuous process. Rather than releasing a new 'version' of the graph periodically, such as every 6 or 12 months, it should be possible to change the graph many times a day if necessary."* ([Principled GraphQL — Agility](https://principledgraphql.com/agility)).
+
+**The `@deprecated` directive.** When a field must be retired, mark it deprecated rather than removing it. The October 2021 edition of the GraphQL specification defines the built-in directive as:
+
+```graphql
+directive @deprecated(reason: String = "No longer supported")
+  on FIELD_DEFINITION | ENUM_VALUE
+```
+
+Introspection exposes `__Field.isDeprecated` and `__Field.deprecationReason`, so IDEs (GraphiQL), code generators, and linters can surface the signal to consumers without release notes. Field deprecation is non-breaking on the wire: the spec's Field Deprecation section (§3.6.2) states that deprecated fields remain legally selectable. That is the whole point — consumers migrate at their pace.
+
+:::warning Spec-version caveat
+The October 2021 published edition allows `@deprecated` only on `FIELD_DEFINITION | ENUM_VALUE`. Deprecation of arguments (`ARGUMENT_DEFINITION`) and input-object fields (`INPUT_FIELD_DEFINITION`) exists in the GraphQL working draft and in major implementations (Apollo Server, graphql-js). Confirm support before deprecating an argument in a published schema.
+:::
+
+Example:
+
+```graphql
+type User {
+  id: ID!
+  phone: String @deprecated(reason: "Use contact.phone instead. Removed 2026-10-01.")
+  contact: Contact!
+}
+```
+
+**When schema evolution is not enough: calendar-versioned schema cuts.** Some GraphQL deployments outgrow coordinated deprecation. When the consumer base is large enough that individual deprecation cycles cannot reach every integration, a calendar-versioned schema cut becomes the escape valve.
+
+- **Shopify Admin GraphQL.** Quarterly releases named by release date (`2026-04`, `2026-07`). The version is a URL path segment: `/admin/api/{version}/graphql.json`. Each stable version is supported for a minimum of 12 months, with at least nine months of overlap between consecutive versions. After retirement, Shopify falls forward to the oldest supported stable version. ([Shopify — API versioning](https://shopify.dev/docs/api/usage/versioning)).
+- **GitHub GraphQL.** Single continuously-evolving schema, but breaking changes are gated to calendar windows — January 1, April 1, July 1, or October 1 — and announced at least three months in advance via the public schema changelog. ([GitHub — Breaking changes](https://docs.github.com/en/graphql/overview/breaking-changes)).
+- **Meta Graph API.** Versioned URL path (`v25.0`), with each version guaranteed to work for at least two years from its release date, then falling forward to the next available version.
+
+**The rule in one line.** Default to additive changes plus `@deprecated`. Cut a calendar-named schema version only when the consumer base is too large for per-field coordination. Never rename a field in place without a deprecation cycle. The spec's insistence that deprecated fields remain selectable is the contract that makes continuous evolution safe.
+
+
 ### Stripe's Date-Based Versioning Model
 
 Stripe is the canonical example of production API versioning done at scale. Instead of incrementing a version number, Stripe names versions by release date (e.g., `2024-06-20`). Key properties:
@@ -196,8 +234,13 @@ Decision tree for selecting a versioning strategy based on API audience and requ
 
 ```mermaid
 flowchart TD
-    A[New API — choose versioning strategy] --> B{Who are the consumers?}
+    Z[New API — choose versioning strategy] --> Y{GraphQL or REST?}
+    Y -->|GraphQL| YG[Additive evolution + @deprecated]
+    YG --> YGQ{Consumer base too large\nfor coordinated deprecation?}
+    YGQ -->|No| YGA[Continuous schema evolution]
+    YGQ -->|Yes| YGB[Calendar-versioned schema cuts\nShopify 2026-04 model]
 
+    Y -->|REST| B{Who are the consumers?}
     B -->|Public / third-party developers| C{How frequently do\nmajor versions ship?}
     B -->|Partner / B2B integrations| D{Do partners have\ncustom tooling?}
     B -->|Internal services only| E[Query Parameter\nor URL Path]
@@ -213,6 +256,8 @@ flowchart TD
     H --> J
     I --> J
     E --> J
+    YGA --> J
+    YGB --> J
 ```
 
 
@@ -294,12 +339,17 @@ Announcing deprecation without a concrete end-of-life date is not deprecation �
 
 Per-endpoint versioning (`/users/v2/42`, `/orders/v3/99`) creates an explosion of version combinations and makes it impossible to reason about which "version" of the API a client is on. Version the API surface as a whole, not individual endpoints. The exception is minor additive changes (non-breaking), which do not need a version bump at all.
 
+**6. Treating GraphQL as "versionless" and skipping deprecation discipline**
+
+The "evolve the schema, not the version" model only works when deprecations are followed through: mark the field, communicate the retirement date, then remove it. Two failure modes are common. First, marking a field `@deprecated` and never removing it leaves a growing surface area of fields that consumers keep selecting because nothing stops them. Second, removing a field in place without a deprecation cycle breaks every client that still selects it. That is exactly the failure mode the directive exists to prevent. A GraphQL API without a removal policy is a REST API that pretends not to need one.
+
 
 ## Related BEPs
 
 - [BEE-4001](rest-api-design-principles.md) REST API Design Principles
-- [BEE-4002](api-versioning-strategies.md) Idempotency in APIs
+- [BEE-4005](graphql-vs-rest-vs-grpc.md) GraphQL vs REST vs gRPC
 - [BEE-4006](api-error-handling-and-problem-details.md) API Error Handling and Problem Details
+- [BEE-4011](graphql-vs-rest-request-side-http-trade-offs.md) GraphQL vs REST: Request-Side HTTP Trade-offs
 - [BEE-7002](../data-modeling/normalization-and-denormalization.md) Schema Evolution
 
 
@@ -313,3 +363,12 @@ Per-endpoint versioning (`/users/v2/42`, `/orders/v3/99`) creates an explosion o
 - Microsoft. "REST API Versioning for Azure DevOps". https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rest-api-versioning
 - Hunt, T. "Your API versioning is wrong, which is why I decided to do it 3 different wrong ways". https://www.troyhunt.com/your-api-versioning-is-wrong-which-is/
 - Nottingham, M. 2021. "The Sunset HTTP Header Field". RFC 8594. https://www.rfc-editor.org/rfc/rfc8594
+- GraphQL Foundation. "Schema Design". https://graphql.org/learn/schema-design/
+- GraphQL Foundation. "`@deprecated` directive". GraphQL Specification October 2021, §3.13.3. https://spec.graphql.org/October2021/#sec--deprecated
+- GraphQL Foundation. "Field Deprecation". GraphQL Specification October 2021, §3.6.2. https://spec.graphql.org/October2021/#sec-Field-Deprecation
+- Apollo. "Principled GraphQL — Agility". https://principledgraphql.com/agility
+- Apollo. "Schema deprecations". Apollo GraphOS docs. https://www.apollographql.com/docs/graphos/schema-design/guides/deprecations
+- Shopify. "About Shopify API versioning". https://shopify.dev/docs/api/usage/versioning
+- GitHub. "Breaking changes". GitHub GraphQL API docs. https://docs.github.com/en/graphql/overview/breaking-changes
+- GitHub. "Changelog". GitHub GraphQL API docs. https://docs.github.com/en/graphql/overview/changelog
+- Giroux, M-A. "How Should We Version GraphQL APIs?". Production Ready GraphQL. https://productionreadygraphql.com/blog/2019-11-06-how-should-we-version-graphql-apis/
