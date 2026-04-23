@@ -14,6 +14,7 @@ title: BEE list
 - [1006.API Key Management](/auth/api-key-management)
 - [1007.WebAuthn Fundamentals](/auth/webauthn-fundamentals)
 - [1008.Passkeys: Discoverable Credentials and UX Patterns](/auth/passkeys-discoverable-credentials)
+- [1009.Cross-Device Authentication (Hybrid Transport)](/auth/cross-device-authentication)
 - [2001.OWASP Top 10 for Backend](/security-fundamentals/owasp-top-10-for-backend)
 - [2002.Input Validation and Sanitization](/security-fundamentals/input-validation-and-sanitization)
 - [2003.Secrets Management](/security-fundamentals/secrets-management)
