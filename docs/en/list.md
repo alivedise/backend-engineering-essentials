@@ -16,6 +16,7 @@ title: BEE list
 - [1008.Passkeys: Discoverable Credentials and UX Patterns](/auth/passkeys-discoverable-credentials)
 - [1009.Cross-Device Authentication (Hybrid Transport)](/auth/cross-device-authentication)
 - [1010.FIDO2 Hardware Security Keys](/auth/fido2-hardware-security-keys)
+- [1011.Migrating from Passwords to Passkeys](/auth/migrating-from-passwords-to-passkeys)
 - [2001.OWASP Top 10 for Backend](/security-fundamentals/owasp-top-10-for-backend)
 - [2002.Input Validation and Sanitization](/security-fundamentals/input-validation-and-sanitization)
 - [2003.Secrets Management](/security-fundamentals/secrets-management)
