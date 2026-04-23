@@ -8,26 +8,27 @@ slug: graphql-vs-rest-request-side-http-trade-offs
 # [BEE-4011] GraphQL vs REST: Request-Side HTTP Trade-offs
 
 :::info
-REST inherits caching, idempotency, and rate limiting from HTTP itself. GraphQL gets none of them by default and must rebuild each at the schema or middleware layer. This article covers the three request-side gaps and the default mitigations.
+REST inherits caching, idempotency, rate limiting, and versioning affordances from HTTP itself. GraphQL gets none of them by default and must rebuild each at the schema or middleware layer. This article covers the four request-side gaps and the default mitigations.
 :::
 
 ## Context
 
-[BEE-4010](graphql-http-caching.md) established the framing: GraphQL was not designed around HTTP. Its canonical transport is `POST /graphql` with the operation in the request body, served from a single endpoint regardless of which logical resource is being read or mutated. That design buys schema-driven flexibility but spends three things REST gets for free from HTTP itself.
+[BEE-4010](graphql-http-caching.md) established the framing: GraphQL was not designed around HTTP. Its canonical transport is `POST /graphql` with the operation in the request body, served from a single endpoint regardless of which logical resource is being read or mutated. That design buys schema-driven flexibility but spends four things REST gets for free from HTTP itself.
 
 1. A **cacheable URL for every read.** REST's GET URL is the cache key; HTTP intermediaries cache responses without any application code.
 2. **Method-level idempotency semantics.** [RFC 9110 §9.2.2](https://httpwg.org/specs/rfc9110.html#idempotent.methods) declares GET, HEAD, OPTIONS, PUT, and DELETE idempotent by definition. Clients and proxies can reason about retry safety from the verb alone, without inspecting the request body.
 3. **Per-route rate-limiting affordances.** Gateways limit per IP × URL pattern. The URL is the natural rate-limit key, and cost-per-request is uniform within a route.
+4. **A URL-addressable version carrier.** REST's URL path, custom headers, and `Accept` media-type parameter are all reachable by HTTP intermediaries. A gateway can route `/v1/*` to one deployment and `/v2/*` to another; a CDN can key cache on `Accept: application/vnd.api.v2+json`; a rate limiter can apply different budgets per version. See [BEE-4002](api-versioning-strategies.md) for the four strategies.
 
-A `POST /graphql` request is opaque to any HTTP intermediary on all three axes. The verb tells you nothing about side effects (is this a query or a mutation?); the URL is identical for every operation, so per-route rate limiting collapses; and the cacheability story requires the persisted-query work covered in BEE-4010.
+A `POST /graphql` request is opaque to any HTTP intermediary on all four axes. The verb tells you nothing about side effects (is this a query or a mutation?); the URL is identical for every operation, so per-route rate limiting collapses; the cacheability story requires the persisted-query work covered in BEE-4010; and the version signal, if one exists, sits inside the JSON request body where gateways cannot route on it.
 
 The article walks through each request-side gap, shows what teams actually do to close it, and recommends a default per gap. It is not a vendor comparison and not an argument that REST is "better." It is an enumeration of what GraphQL must rebuild and the engineering shape of that rebuild.
 
 ## Principle
 
-Teams adopting GraphQL **MUST** implement idempotency, rate limiting, and cacheability as schema-level or middleware-level concerns; HTTP cannot do this work for them. Mutations **SHOULD** carry an idempotency identifier as a schema argument or a middleware-read header. Rate limits **SHOULD** be expressed in units that match the cost of the operation (query complexity points, not request count). Reads that benefit from CDN caching **SHOULD** follow the persisted-query pattern in [BEE-4010](graphql-http-caching.md). Treating these as transport-layer concerns rather than application-layer concerns leads to deployments that pass code review and fail under load.
+Teams adopting GraphQL **MUST** implement idempotency, rate limiting, cacheability, and schema evolution as schema-level or middleware-level concerns; HTTP cannot do this work for them. Mutations **SHOULD** carry an idempotency identifier as a schema argument or a middleware-read header. Rate limits **SHOULD** be expressed in units that match the cost of the operation (query complexity points, not request count). Reads that benefit from CDN caching **SHOULD** follow the persisted-query pattern in [BEE-4010](graphql-http-caching.md). Schema evolution **SHOULD** be additive with `@deprecated` for retirement; when the consumer base exceeds what coordinated deprecation can manage, a calendar-versioned schema cut ([BEE-4002](api-versioning-strategies.md)) is the escape valve. Treating these as transport-layer concerns rather than application-layer concerns leads to deployments that pass code review and fail under load.
 
-## The three gaps at a glance
+## The four gaps at a glance
 
 The rest of the article expands each row of the table below. The internal structure of each section is the same: REST baseline, GraphQL gap, mitigation pattern(s), recommendation.
 
@@ -36,6 +37,7 @@ The rest of the article expands each row of the table below. The internal struct
 | **Cacheable URL** | GET URL is the cache key; ETag/304 free at the edge | Persisted-query GET + `@cacheControl` + ETag (BEE-4010) |
 | **Idempotency** | RFC 9110 verbs + `Idempotency-Key` header | Idempotency key as schema argument or middleware-read header |
 | **Rate limiting** | Per-IP × URL pattern at the gateway | Query depth limit + complexity scoring + per-resolver limits |
+| **Versioning carrier** | URL path / header / `Accept` (BEE-4002) | Additive schema evolution + `@deprecated` + optional calendar-cut schema versions |
 
 ## Cacheability of reads
 
@@ -221,6 +223,31 @@ Library options are mature. Apollo's Demand Control covers Apollo Server and the
 
 **Recommendation.** All three layers stack. Depth limit catches accidental cycles cheaply (default 10–15). Complexity scoring is the load-bearing layer; pick the budget by measurement. Per-resolver limits handle the fields that fall outside the cost model. A per-IP request rate limit is still useful as a coarse outer envelope but does not replace any of the above. Persisted-query allowlists (deferred to a future article on operational patterns) bound the worst case but only work when the client surface is fully under your control. For public APIs accepting arbitrary client queries, layers 1 through 3 are mandatory; for internal APIs with a known client set, persisted-query allowlists can replace layers 1 and 2 and leave only layer 3 for known-expensive fields.
 
+## Versioning and schema evolution
+
+This is the fourth gap: the version signal that HTTP intermediaries can route on, cache on, and rate-limit on. The full treatment of versioning strategies lives in [BEE-4002](api-versioning-strategies.md); this section installs the gap and points to the mitigation.
+
+**REST baseline.** Any of the four strategies (URL path, custom header, query parameter, `Accept` media type) makes the version visible to HTTP intermediaries. A gateway can route `/v1/*` and `/v2/*` to different deployments; a CDN can cache per-version without a collision; a rate limiter can apply different budgets per version. Deprecation rides on HTTP as well, through the `Sunset` and `Deprecation` response headers defined in [RFC 8594](https://www.rfc-editor.org/rfc/rfc8594). Every version carrier is a URL or header field, visible to every tool that speaks HTTP.
+
+**GraphQL gap.** `POST /graphql` flattens every version of every operation to one URL. The GraphQL Foundation's guidance is to avoid URL versioning entirely: *"GraphQL takes a strong opinion on avoiding versioning by providing the tools for the continuous evolution of a GraphQL schema."* ([GraphQL — Schema Design](https://graphql.org/learn/schema-design/)). That moves evolution from the transport layer to the schema, which works until the consumer base outgrows what additive evolution can support.
+
+**Mitigation pattern 1 — additive-only + `@deprecated`.** The GraphQL specification defines a built-in directive for field and enum-value retirement:
+
+```graphql
+directive @deprecated(reason: String = "No longer supported")
+  on FIELD_DEFINITION | ENUM_VALUE
+```
+
+Introspection exposes `isDeprecated` and `deprecationReason` on `__Field` and `__EnumValue`, so GraphiQL, codegen, and linters surface the signal to consumers. Deprecated fields remain legally selectable per spec §3.6.2, which is the contract that lets consumers migrate at their own pace. Argument and input-field deprecation exist in the working draft and in Apollo Server / graphql-js but are NOT in the October 2021 published spec. Check your server before deprecating an argument.
+
+**Mitigation pattern 2 — calendar-versioned schema cuts.** When additive evolution isn't enough, cut a dated schema version.
+
+- Shopify Admin exposes versions as a URL path segment: `/admin/api/2026-04/graphql.json`. Each stable version is supported for at least 12 months with at least 9 months of overlap. After retirement, requests fall forward to the oldest supported stable version. ([Shopify — API versioning](https://shopify.dev/docs/api/usage/versioning)).
+- GitHub GraphQL runs a single schema but gates breaking changes to calendar windows (January 1, April 1, July 1, October 1), announced at least three months in advance. ([GitHub — Breaking changes](https://docs.github.com/en/graphql/overview/breaking-changes)).
+
+**Recommendation.** Default to additive evolution plus `@deprecated`. Lift to calendar-versioned schema cuts only when the consumer base is too large for coordinated deprecation to reach every integration. Never remove a field in place without a deprecation cycle. The spec's insistence that deprecated fields remain selectable is exactly the contract that makes continuous evolution safe. BEE-4002 has the full decision tree and cross-protocol comparison.
+
+
 ## Common Mistakes
 
 **1. Treating per-IP request rate limits as adequate protection for GraphQL.**
@@ -275,3 +302,7 @@ Cloudflare, CloudFront, or Akamai sit in front of the GraphQL endpoint; the team
 - [graphql-armor (Escape Technologies)](https://github.com/Escape-Technologies/graphql-armor) — MIT-licensed, actively maintained vendor-neutral middleware providing depth limit, complexity scoring, and rate limiting across Apollo Server, GraphQL Yoga, and Envelop-based servers.
 - [Envelop — useResourceLimitations plugin](https://the-guild.dev/graphql/envelop/plugins/use-resource-limitations) — non-Apollo cost analysis and rate limiting via The Guild's plugin system used by GraphQL Yoga.
 - [GitHub Docs — Rate limits and query limits for the GraphQL API](https://docs.github.com/en/graphql/overview/rate-limits-and-query-limits-for-the-graphql-api) — production reference: 5,000 points per hour per user, 2,000 points per minute secondary limit, public cost calculation formula.
+- [GraphQL — Schema Design](https://graphql.org/learn/schema-design/) — GraphQL Foundation's guidance on versionless continuous schema evolution.
+- [`@deprecated` directive — GraphQL Specification October 2021 §3.13.3](https://spec.graphql.org/October2021/#sec--deprecated) — canonical directive definition; locations limited to `FIELD_DEFINITION | ENUM_VALUE` in this edition.
+- [Shopify — API versioning](https://shopify.dev/docs/api/usage/versioning) — calendar-versioned GraphQL schema cuts; quarterly releases, 12-month support window, 9-month overlap.
+- [GitHub — Breaking changes](https://docs.github.com/en/graphql/overview/breaking-changes) — single-schema evolution with calendar-gated quarterly breaking-change windows announced ≥3 months ahead.
