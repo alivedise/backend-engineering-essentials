@@ -169,6 +169,19 @@ Streaming is built into the protocol over HTTP/2, not bolted on.
 - Higher initial setup cost: protobuf toolchain, code generation, build pipeline integration.
 
 
+### Versioning across the three protocols
+
+All three protocols converge on the same operational principle: evolve additively within a major version, break only at a named boundary. They diverge on where the version signal lives and how violations are caught.
+
+| Protocol | Primary mechanism | Breaking-change discipline | Enforcement |
+|---|---|---|---|
+| REST | URL path / header / `Accept` / date header (see [BEE-4002](api-versioning-strategies.md)) | Per-version sunset window; `Sunset` + `Deprecation` headers ([RFC 8594](https://www.rfc-editor.org/rfc/rfc8594)) | Per-URL at the gateway |
+| GraphQL | Additive schema evolution + `@deprecated` directive; calendar-versioned schema cuts when needed (Shopify model) | Deprecation appears in introspection; removal after an overlap window | In-schema + CI schema-diff ([GraphQL Inspector](https://the-guild.dev/graphql/inspector), Apollo `rover graph check`) |
+| gRPC / protobuf | `v1alpha1` / `v1beta1` / `v1` package suffixes ([Google AIP-181](https://google.aip.dev/181)); field numbers are the identity | Protobuf update rules: never change field numbers, mark removed numbers `reserved`, never retype in place ([protobuf.dev](https://protobuf.dev/programming-guides/proto3/#updating)) | `buf breaking` (WIRE / WIRE_JSON / PACKAGE / FILE categories) |
+
+REST leans on HTTP carriers; GraphQL rebuilds evolution inside the schema (see [BEE-4011](graphql-vs-rest-request-side-http-trade-offs.md) for the parallel with cache / idempotency / rate-limit gaps); gRPC/protobuf enforces field-number stability mechanically via tooling. The common failure mode across all three is the same: renaming, retyping, or removing an existing element without a deprecation cycle breaks consumers whose contracts still reference the old shape. The defenses differ in locus (URL vs schema vs `.proto` package) and in who notices first (gateway vs introspection diff vs `buf breaking`).
+
+
 ### WebSocket and SSE (Real-Time Fourth Option)
 
 For scenarios requiring low-latency server-to-client push (live dashboards, collaborative editing, notifications, multiplayer games), neither REST polling nor gRPC unary fits naturally.
@@ -341,7 +354,9 @@ Running REST, GraphQL, and gRPC endpoints from different services without an API
 
 - [BEE-3003](../networking-fundamentals/http-versions.md) HTTP/2 and Transport Fundamentals (underpins gRPC)
 - [BEE-4001](rest-api-design-principles.md) REST API Design Principles
+- [BEE-4002](api-versioning-strategies.md) API Versioning Strategies
 - [BEE-4007](webhooks-and-callback-patterns.md) Webhooks and Callback Patterns (async communication)
+- [BEE-4011](graphql-vs-rest-request-side-http-trade-offs.md) GraphQL vs REST: Request-Side HTTP Trade-offs
 
 
 ## References
@@ -353,3 +368,7 @@ Running REST, GraphQL, and gRPC endpoints from different services without an API
 - WunderGraph. "When to use GraphQL vs Federation vs tRPC vs REST vs gRPC vs AsyncAPI vs WebHooks — A 2024 Comparison". https://wundergraph.com/blog/graphql-vs-federation-vs-trpc-vs-rest-vs-grpc-vs-asyncapi-vs-webhooks
 - Arora, V. "REST vs. gRPC vs. GraphQL: A Comparative Analysis with Real-World Company Data". https://medium.com/@reachvivek.arora/rest-vs-grpc-vs-graphql-a-comparative-analysis-with-real-world-company-data-33ee430b7619
 - Java Code Geeks. "GraphQL vs. REST vs. gRPC: The 2026 API Architecture Decision". https://www.javacodegeeks.com/2026/02/graphql-vs-rest-vs-grpc-the-2026-api-architecture-decision.html
+- Google Protocol Buffers. "Updating A Message Type". https://protobuf.dev/programming-guides/proto3/#updating
+- Google AIP-180. "Backwards compatibility". https://google.aip.dev/180
+- Google AIP-181. "Stability levels". https://google.aip.dev/181
+- Buf. "Breaking rules and categories". https://buf.build/docs/breaking/rules/
