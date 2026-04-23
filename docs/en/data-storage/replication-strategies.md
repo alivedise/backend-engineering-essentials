@@ -208,7 +208,7 @@ Do not rely on automatic failover without split-brain protection. Fast failover 
 
 ## Related BEPs
 
-- [BEE-6001: SQL vs NoSQL](./120.md) — choosing storage engines that constrain replication options
-- [BEE-6004: Sharding](./123.md) — partitioning data across nodes, often combined with per-shard replication
-- [BEE-8001: ACID Transactions](./160.md) — how replication interacts with transaction isolation
-- [BEE-8006: Eventual Consistency](./165.md) — the consistency model that leaderless and async replication naturally provides
+- [BEE-6001: SQL vs NoSQL](sql-vs-nosql-tradeoffs.md) — choosing storage engines that constrain replication options
+- [BEE-6004: Sharding](partitioning-and-sharding.md) — partitioning data across nodes, often combined with per-shard replication
+- [BEE-8001: ACID Transactions](../transactions/acid-properties.md) — how replication interacts with transaction isolation
+- [BEE-8006: Eventual Consistency](../transactions/eventual-consistency-patterns.md) — the consistency model that leaderless and async replication naturally provides

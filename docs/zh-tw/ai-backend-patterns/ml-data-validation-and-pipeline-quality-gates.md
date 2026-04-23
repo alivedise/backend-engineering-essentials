@@ -352,11 +352,11 @@ with mlflow.start_run():
 
 ## 相關 BEE
 
-- [BEE-30081 AI 機器學習特徵倉庫](583) — 在物化之前應用驗證閘控的特徵基礎設施
-- [BEE-30083 ML 監控與漂移偵測](585) — 生產環境中分佈變化的反應性監控（與主動驗證不同）
-- [BEE-30084 ML 實驗追蹤與模型登錄庫](586) — 透過 MLflow 標籤將驗證結果連結到訓練運行
-- [BEE-6007 資料庫遷移](126) — 必須與驗證套件更新配對的結構描述演化
-- [BEE-30027 AI 工作流程編排](529) — 嵌入品質閘控的編排框架
+- [BEE-30081 AI 機器學習特徵倉庫](/zh-tw/ai-backend-patterns/ai-feature-stores-for-ml-inference) — 在物化之前應用驗證閘控的特徵基礎設施
+- [BEE-30083 ML 監控與漂移偵測](/zh-tw/ai-backend-patterns/ml-monitoring-and-drift-detection) — 生產環境中分佈變化的反應性監控（與主動驗證不同）
+- [BEE-30084 ML 實驗追蹤與模型登錄庫](/zh-tw/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — 透過 MLflow 標籤將驗證結果連結到訓練運行
+- [BEE-6007 資料庫遷移](/zh-tw/data-storage/database-migrations) — 必須與驗證套件更新配對的結構描述演化
+- [BEE-30027 AI 工作流程編排](/zh-tw/ai-backend-patterns/ai-workflow-orchestration) — 嵌入品質閘控的編排框架
 
 ## 參考資料
 

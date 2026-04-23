@@ -313,11 +313,11 @@ t_env.execute_sql("""
 
 ## 相關 BEE
 
-- [BEE-30001 LLM API 整合模式](503) — 從線上儲存消費特徵用於提示詞增強的 LLM 推論流水線
-- [BEE-30007 RAG 流水線架構](509) — 向量檢索作為一種按需特徵計算形式
-- [BEE-30027 AI 工作流程編排](529) — 將特徵流水線與訓練和服務工作流程一起編排
-- [BEE-6007 資料庫遷移](126) — 離線儲存中的結構演化（Parquet/Delta 結構更改）
-- [BEE-19018 變更數據捕獲](437) — CDC 作為即時特徵物化的來源串流
+- [BEE-30001 LLM API 整合模式](/zh-tw/ai-backend-patterns/llm-api-integration-patterns) — 從線上儲存消費特徵用於提示詞增強的 LLM 推論流水線
+- [BEE-30007 RAG 流水線架構](/zh-tw/ai-backend-patterns/rag-pipeline-architecture) — 向量檢索作為一種按需特徵計算形式
+- [BEE-30027 AI 工作流程編排](/zh-tw/ai-backend-patterns/ai-workflow-orchestration) — 將特徵流水線與訓練和服務工作流程一起編排
+- [BEE-6007 資料庫遷移](/zh-tw/data-storage/database-migrations) — 離線儲存中的結構演化（Parquet/Delta 結構更改）
+- [BEE-19018 變更數據捕獲](/zh-tw/distributed-systems/change-data-capture) — CDC 作為即時特徵物化的來源串流
 
 ## 參考資料
 

@@ -306,10 +306,10 @@ jobs:
 
 ## 相關 BEE
 
-- [BEE-30085 ML 資料驗證與管道品質閘控](587) — 驗證資料模式和統計屬性（互補：那裡是資料，這裡是程式碼）
-- [BEE-15001 測試金字塔](340) — 適用於單元/整合/冒煙測試結構的一般測試金字塔原則
-- [BEE-30084 ML 實驗追蹤與模型登錄庫](586) — 回歸測試中引用的基準模型製品存儲在 MLflow 中
-- [BEE-30087 線上學習與持續模型更新](589) — 序貫評估與先測試後訓練的規範共享
+- [BEE-30085 ML 資料驗證與管道品質閘控](/zh-tw/ai-backend-patterns/ml-data-validation-and-pipeline-quality-gates) — 驗證資料模式和統計屬性（互補：那裡是資料，這裡是程式碼）
+- [BEE-15001 測試金字塔](/zh-tw/testing/testing-pyramid) — 適用於單元/整合/冒煙測試結構的一般測試金字塔原則
+- [BEE-30084 ML 實驗追蹤與模型登錄庫](/zh-tw/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — 回歸測試中引用的基準模型製品存儲在 MLflow 中
+- [BEE-30087 線上學習與持續模型更新](/zh-tw/ai-backend-patterns/online-learning-and-continual-model-updates) — 序貫評估與先測試後訓練的規範共享
 
 ## 參考資料
 

@@ -246,10 +246,10 @@ The MEASURE function is where Fairlearn and `MetricFrame` fit directly. GOVERN m
 
 ## Related BEEs
 
-- [BEE-30086 Model Explainability in Production](588) — SHAP attribution scores complement fairness metrics by explaining individual decisions
-- [BEE-30085 ML Data Validation and Pipeline Quality Gates](587) — data validation enforces schema and completeness; fairness audits extend this to distributional properties
-- [BEE-30084 ML Experiment Tracking and Model Registry](586) — model cards attach to MLflow runs and model versions
-- [BEE-30079 AI Compliance and Governance Engineering](581) — broader AI governance framework that model cards feed into
+- [BEE-30086 Model Explainability in Production](/ai-backend-patterns/model-explainability-in-production) — SHAP attribution scores complement fairness metrics by explaining individual decisions
+- [BEE-30085 ML Data Validation and Pipeline Quality Gates](/ai-backend-patterns/ml-data-validation-and-pipeline-quality-gates) — data validation enforces schema and completeness; fairness audits extend this to distributional properties
+- [BEE-30084 ML Experiment Tracking and Model Registry](/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — model cards attach to MLflow runs and model versions
+- [BEE-30079 AI Compliance and Governance Engineering](/ai-backend-patterns/ai-compliance-and-governance-engineering) — broader AI governance framework that model cards feed into
 
 ## References
 

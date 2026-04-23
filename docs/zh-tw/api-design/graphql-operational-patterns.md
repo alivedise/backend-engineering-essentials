@@ -226,7 +226,7 @@ Auto-register 流程接受客戶端在第一個請求送來的任何 query，並
 
 **2. 關閉 introspection 卻沒啟用允許清單。**
 
-常見的部分修復：生產拒絕 `__schema` introspection 但仍接受客戶端送來的任何 query。攻擊者沒辦法直接列舉 schema，但可以靠送出猜測的 query 來探測；auto-register 流程接受它們。兩個控制都必要；單獨任何一個都漏。[BEE-2016（BOLA）](../Security Fundamentals/499.md) 是這個分層防禦論點的 per-object 對應。
+常見的部分修復：生產拒絕 `__schema` introspection 但仍接受客戶端送來的任何 query。攻擊者沒辦法直接列舉 schema，但可以靠送出猜測的 query 來探測；auto-register 流程接受它們。兩個控制都必要；單獨任何一個都漏。[BEE-2016（BOLA）](../security-fundamentals/broken-object-level-authorization-bola.md) 是這個分層防禦論點的 per-object 對應。
 
 **3. 把 query complexity 預算設定一次後就不再測量。**
 

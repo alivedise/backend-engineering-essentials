@@ -274,10 +274,10 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-30088 ML 模型服務基礎設施](590) — 具有動態批次的推論成本最佳化與訓練成本最佳化互補
-- [BEE-30084 ML 實驗追蹤與模型登錄庫](586) — 將每次運行的成本指標與模型品質一起記錄到 MLflow，進行成本/準確率權衡分析
-- [BEE-30070 大型語言模型的分散式訓練基礎設施](572) — LLM 規模訓練成本的 DeepSpeed ZeRO 和張量並行
-- [BEE-13004 性能分析與瓶頸識別](303) — 適用於 GPU 訓練性能分析的一般性能分析原則
+- [BEE-30088 ML 模型服務基礎設施](/zh-tw/ai-backend-patterns/ml-model-serving-infrastructure) — 具有動態批次的推論成本最佳化與訓練成本最佳化互補
+- [BEE-30084 ML 實驗追蹤與模型登錄庫](/zh-tw/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — 將每次運行的成本指標與模型品質一起記錄到 MLflow，進行成本/準確率權衡分析
+- [BEE-30070 大型語言模型的分散式訓練基礎設施](/zh-tw/ai-backend-patterns/distributed-training-infrastructure-for-large-language-models) — LLM 規模訓練成本的 DeepSpeed ZeRO 和張量並行
+- [BEE-13004 性能分析與瓶頸識別](/zh-tw/performance-scalability/profiling-and-bottleneck-identification) — 適用於 GPU 訓練性能分析的一般性能分析原則
 
 ## 參考資料
 

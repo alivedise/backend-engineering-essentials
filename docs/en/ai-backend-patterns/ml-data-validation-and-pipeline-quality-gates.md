@@ -352,11 +352,11 @@ with mlflow.start_run():
 
 ## Related BEEs
 
-- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure where validation gates are applied before materialization
-- [BEE-30083 ML Monitoring and Drift Detection](585) — reactive monitoring of distribution changes in production (distinct from proactive validation)
-- [BEE-30084 ML Experiment Tracking and Model Registry](586) — linking validation results to training runs via MLflow tags
-- [BEE-6007 Database Migrations](126) — schema evolution that must be paired with validation suite updates
-- [BEE-30027 AI Workflow Orchestration](529) — orchestration frameworks where quality gates are embedded
+- [BEE-30081 AI Feature Stores for ML Inference](/ai-backend-patterns/ai-feature-stores-for-ml-inference) — feature infrastructure where validation gates are applied before materialization
+- [BEE-30083 ML Monitoring and Drift Detection](/ai-backend-patterns/ml-monitoring-and-drift-detection) — reactive monitoring of distribution changes in production (distinct from proactive validation)
+- [BEE-30084 ML Experiment Tracking and Model Registry](/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — linking validation results to training runs via MLflow tags
+- [BEE-6007 Database Migrations](/data-storage/database-migrations) — schema evolution that must be paired with validation suite updates
+- [BEE-30027 AI Workflow Orchestration](/ai-backend-patterns/ai-workflow-orchestration) — orchestration frameworks where quality gates are embedded
 
 ## References
 

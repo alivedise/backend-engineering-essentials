@@ -362,9 +362,9 @@ ETag: "product-42-v9"
 
 ## 相關 BEE
 
-- [BEE-3003: HTTP 基礎](52.md) -- 請求/回應模型、狀態碼與標頭
-- [BEE-9001: 快取基礎與快取層級](./200.md) -- TTL、逐出與一致性概念，是本文的基礎
-- [BEE-13005: CDN 架構](304.md) -- CDN 節點如何消費並傳播 `Cache-Control` 指令
+- [BEE-3003: HTTP 基礎](../networking-fundamentals/http-versions.md) -- 請求/回應模型、狀態碼與標頭
+- [BEE-9001: 快取基礎與快取層級](../caching/caching-fundamentals-and-cache-hierarchy.md) -- TTL、逐出與一致性概念，是本文的基礎
+- [BEE-13005: CDN 架構](../performance-scalability/content-delivery-and-edge-computing.md) -- CDN 節點如何消費並傳播 `Cache-Control` 指令
 
 ## 參考資料
 

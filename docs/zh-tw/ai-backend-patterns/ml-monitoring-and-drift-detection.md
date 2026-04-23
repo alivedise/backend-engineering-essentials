@@ -270,11 +270,11 @@ AWS SageMaker Model Monitor 按可配置的排程運行，並將指標發送到 
 
 ## 相關 BEE
 
-- [BEE-30009 LLM 可觀測性與監控](511) — LLM 特有的可觀測性：Token 計數、延遲、輸出品質
-- [BEE-30034 AI 實驗與模型 A/B 測試](536) — ML 的統計實驗設計
-- [BEE-30081 AI 機器學習特徵倉庫](583) — 特徵基礎設施；特徵漂移通常源於此處
-- [BEE-30082 ML 模型的影子模式與金絲雀部署](584) — 持續監控之前的部署閘控
-- [BEE-14001 三大支柱：日誌、指標、追蹤](320) — 可觀測性基礎
+- [BEE-30009 LLM 可觀測性與監控](/zh-tw/ai-backend-patterns/llm-observability-and-monitoring) — LLM 特有的可觀測性：Token 計數、延遲、輸出品質
+- [BEE-30034 AI 實驗與模型 A/B 測試](/zh-tw/ai-backend-patterns/ai-experimentation-and-model-a-b-testing) — ML 的統計實驗設計
+- [BEE-30081 AI 機器學習特徵倉庫](/zh-tw/ai-backend-patterns/ai-feature-stores-for-ml-inference) — 特徵基礎設施；特徵漂移通常源於此處
+- [BEE-30082 ML 模型的影子模式與金絲雀部署](/zh-tw/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — 持續監控之前的部署閘控
+- [BEE-14001 三大支柱：日誌、指標、追蹤](/zh-tw/observability/three-pillars-logs-metrics-traces) — 可觀測性基礎
 
 ## 參考資料
 

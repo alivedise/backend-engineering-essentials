@@ -307,10 +307,10 @@ Gate the pipeline: unit tests MUST pass in < 2 minutes. The smoke test MUST comp
 
 ## Related BEEs
 
-- [BEE-30085 ML Data Validation and Pipeline Quality Gates](587) — validates data schema and statistical properties (complementary: data in, code here)
-- [BEE-15001 The Testing Pyramid](340) — general testing pyramid principles that apply to the unit/integration/smoke test structure
-- [BEE-30084 ML Experiment Tracking and Model Registry](586) — baseline model artifacts referenced in regression tests live in MLflow
-- [BEE-30087 Online Learning and Continual Model Updates](589) — prequential evaluation shares the test-then-train discipline
+- [BEE-30085 ML Data Validation and Pipeline Quality Gates](/ai-backend-patterns/ml-data-validation-and-pipeline-quality-gates) — validates data schema and statistical properties (complementary: data in, code here)
+- [BEE-15001 The Testing Pyramid](/testing/testing-pyramid) — general testing pyramid principles that apply to the unit/integration/smoke test structure
+- [BEE-30084 ML Experiment Tracking and Model Registry](/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — baseline model artifacts referenced in regression tests live in MLflow
+- [BEE-30087 Online Learning and Continual Model Updates](/ai-backend-patterns/online-learning-and-continual-model-updates) — prequential evaluation shares the test-then-train discipline
 
 ## References
 

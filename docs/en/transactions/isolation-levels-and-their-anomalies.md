@@ -327,9 +327,9 @@ Know your isolation level and know what it does not prevent. Default to Read Com
 
 ## Related BEPs
 
-- [BEE-8001: ACID Properties](./160.md) -- foundational transaction model
-- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) -- cross-service coordination
-- [BEE-11006: Optimistic vs. Pessimistic Concurrency](245.md) -- choosing a locking strategy
+- [BEE-8001: ACID Properties](acid-properties.md) -- foundational transaction model
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](distributed-transactions-and-two-phase-commit.md) -- cross-service coordination
+- [BEE-11006: Optimistic vs. Pessimistic Concurrency](../concurrency/optimistic-vs-pessimistic-concurrency-control.md) -- choosing a locking strategy
 
 ## References
 

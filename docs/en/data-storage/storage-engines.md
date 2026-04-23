@@ -246,9 +246,9 @@ MVCC interacts with the storage engine:
 
 ## Related BEPs
 
-- [BEE-6001 — SQL vs NoSQL](./120.md): The database category often determines which storage engine is available.
-- [BEE-6002 — Indexing Deep Dive](./121.md): B-tree index internals, when indexes help and when they hurt.
-- [BEE-6003 — Replication Strategies](./122.md): WAL shipping and logical replication depend directly on the storage engine's WAL format.
+- [BEE-6001 — SQL vs NoSQL](sql-vs-nosql-tradeoffs.md): The database category often determines which storage engine is available.
+- [BEE-6002 — Indexing Deep Dive](indexing-deep-dive.md): B-tree index internals, when indexes help and when they hurt.
+- [BEE-6003 — Replication Strategies](replication-strategies.md): WAL shipping and logical replication depend directly on the storage engine's WAL format.
 
 ## References
 

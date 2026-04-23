@@ -221,10 +221,10 @@ graph LR
 
 ## Related BEEs
 
-- [BEE-30083 ML Monitoring and Drift Detection](585) — population-level drift detection complements ADWIN's per-prediction detection
-- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — validate the retrained model before promoting it to replace the online learner
-- [BEE-30084 ML Experiment Tracking and Model Registry](586) — track each checkpoint and batch-retrained model in MLflow for auditability
-- [BEE-30027 AI Workflow Orchestration](529) — Airflow/Argo DAGs triggered by drift detection for batch retraining
+- [BEE-30083 ML Monitoring and Drift Detection](/ai-backend-patterns/ml-monitoring-and-drift-detection) — population-level drift detection complements ADWIN's per-prediction detection
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — validate the retrained model before promoting it to replace the online learner
+- [BEE-30084 ML Experiment Tracking and Model Registry](/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — track each checkpoint and batch-retrained model in MLflow for auditability
+- [BEE-30027 AI Workflow Orchestration](/ai-backend-patterns/ai-workflow-orchestration) — Airflow/Argo DAGs triggered by drift detection for batch retraining
 
 ## References
 

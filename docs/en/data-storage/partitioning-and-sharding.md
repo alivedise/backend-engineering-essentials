@@ -257,7 +257,7 @@ When you do shard, plan for resharding from day one. Use logical over-sharding s
 
 ## Related BEPs
 
-- [BEE-6001: SQL vs NoSQL](./120.md) — storage engine choice often determines sharding model options
-- [BEE-6002: Indexing Deep Dive](./121.md) — secondary index behavior in sharded systems
-- [BEE-6002: Replication Strategies](./121.md) — shards are typically replicated; partitioning and replication compose
-- [BEE-9004: Distributed Caching](203.md) — consistent hashing is used in cache cluster routing with the same principles
+- [BEE-6001: SQL vs NoSQL](sql-vs-nosql-tradeoffs.md) — storage engine choice often determines sharding model options
+- [BEE-6002: Indexing Deep Dive](indexing-deep-dive.md) — secondary index behavior in sharded systems
+- [BEE-6002: Replication Strategies](indexing-deep-dive.md) — shards are typically replicated; partitioning and replication compose
+- [BEE-9004: Distributed Caching](../caching/distributed-caching.md) — consistent hashing is used in cache cluster routing with the same principles

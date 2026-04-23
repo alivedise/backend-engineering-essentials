@@ -240,8 +240,8 @@ function handle_logout(request):
 
 ## 相關 BEE
 
-- [BEE-1001: Authentication vs Authorization](10.md) — 身份驗證管道背景
-- [BEE-1002: Token-Based Authentication](11.md) — session 的無狀態替代方案
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — 身份驗證管道背景
+- [BEE-1002: Token-Based Authentication](token-based-authentication.md) — session 的無狀態替代方案
 - [BEE-2001: Transport Security](/en/30) — Secure cookie 底層的 HTTPS 要求
 - [BEE-2004: Secrets Management](/en/33) — session store 中的 secrets 處理
 

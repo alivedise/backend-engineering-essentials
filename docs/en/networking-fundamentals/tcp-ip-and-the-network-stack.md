@@ -269,8 +269,8 @@ TCP is a byte stream. A single `send()` of 200 bytes does not guarantee the rece
 
 ## Related BEPs
 
-- [BEE-3002 — DNS Resolution](./51.md): What happens before the TCP handshake when you connect by hostname.
-- [BEE-3003 — HTTP/1.1, HTTP/2, HTTP/3](./52.md): Application protocols built on top of TCP (and UDP via QUIC).
-- [BEE-3004 — TLS/SSL Handshake](./53.md): The TLS layer that sits on top of TCP, adding another round-trip before data flows.
-- [BEE-3005 — Load Balancers](./54.md): How load balancers interact with TCP connections (L4 vs L7, keepalive implications).
-- [BEE-12003 — Timeouts](262.md): Setting timeouts correctly at every layer of a distributed system.
+- [BEE-3002 — DNS Resolution](dns-resolution.md): What happens before the TCP handshake when you connect by hostname.
+- [BEE-3003 — HTTP/1.1, HTTP/2, HTTP/3](http-versions.md): Application protocols built on top of TCP (and UDP via QUIC).
+- [BEE-3004 — TLS/SSL Handshake](tls-ssl-handshake.md): The TLS layer that sits on top of TCP, adding another round-trip before data flows.
+- [BEE-3005 — Load Balancers](load-balancers.md): How load balancers interact with TCP connections (L4 vs L7, keepalive implications).
+- [BEE-12003 — Timeouts](../resilience/timeouts-and-deadlines.md): Setting timeouts correctly at every layer of a distributed system.

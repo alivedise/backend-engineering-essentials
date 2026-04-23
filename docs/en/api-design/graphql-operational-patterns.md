@@ -226,7 +226,7 @@ The auto-register flow accepts any query the client sends on the first request a
 
 **2. Disabling introspection without enabling allowlisting.**
 
-A common partial fix: production rejects `__schema` introspection but still accepts any query the client sends. The attacker cannot enumerate the schema directly, but they can probe by sending guessed queries; the auto-register flow accepts them. Both controls are necessary; either alone is leaky. [BEE-2016 (BOLA)](../Security Fundamentals/499.md) is the per-object analog of this layered-defense argument.
+A common partial fix: production rejects `__schema` introspection but still accepts any query the client sends. The attacker cannot enumerate the schema directly, but they can probe by sending guessed queries; the auto-register flow accepts them. Both controls are necessary; either alone is leaky. [BEE-2016 (BOLA)](../security-fundamentals/broken-object-level-authorization-bola.md) is the per-object analog of this layered-defense argument.
 
 **3. Setting a query complexity budget once and never re-measuring.**
 

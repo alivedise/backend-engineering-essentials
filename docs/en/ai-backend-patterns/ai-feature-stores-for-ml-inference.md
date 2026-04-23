@@ -314,11 +314,11 @@ t_env.execute_sql("""
 
 ## Related BEEs
 
-- [BEE-30001 LLM API Integration Patterns](503) — LLM inference pipelines that consume features from online stores for prompt augmentation
-- [BEE-30007 RAG Pipeline Architecture](509) — vector retrieval as a form of on-demand feature computation
-- [BEE-30027 AI Workflow Orchestration](529) — orchestrating the feature pipeline alongside training and serving workflows
-- [BEE-6007 Database Migrations](126) — schema evolution in the offline store (Parquet/Delta schema changes)
-- [BEE-19018 Change Data Capture](437) — CDC as the source stream for real-time feature materialization
+- [BEE-30001 LLM API Integration Patterns](/ai-backend-patterns/llm-api-integration-patterns) — LLM inference pipelines that consume features from online stores for prompt augmentation
+- [BEE-30007 RAG Pipeline Architecture](/ai-backend-patterns/rag-pipeline-architecture) — vector retrieval as a form of on-demand feature computation
+- [BEE-30027 AI Workflow Orchestration](/ai-backend-patterns/ai-workflow-orchestration) — orchestrating the feature pipeline alongside training and serving workflows
+- [BEE-6007 Database Migrations](/data-storage/database-migrations) — schema evolution in the offline store (Parquet/Delta schema changes)
+- [BEE-19018 Change Data Capture](/distributed-systems/change-data-capture) — CDC as the source stream for real-time feature materialization
 
 ## References
 

@@ -225,10 +225,10 @@ Two-phase commit provides atomic commitment across distributed participants but 
 
 ## Related BEPs
 
-- [BEE-8001: ACID Properties](./160.md) -- foundation of transaction semantics within a single database
-- [BEE-8004: Saga Pattern](./163.md) -- compensating transactions as the practical alternative to 2PC
-- [BEE-8005: Idempotency and Exactly-Once Semantics](./164.md) -- making distributed operations safe to retry
-- [BEE-8006: Eventual Consistency Patterns](./165.md) -- trading strong consistency for availability
+- [BEE-8001: ACID Properties](acid-properties.md) -- foundation of transaction semantics within a single database
+- [BEE-8004: Saga Pattern](saga-pattern.md) -- compensating transactions as the practical alternative to 2PC
+- [BEE-8005: Idempotency and Exactly-Once Semantics](idempotency-and-exactly-once-semantics.md) -- making distributed operations safe to retry
+- [BEE-8006: Eventual Consistency Patterns](eventual-consistency-patterns.md) -- trading strong consistency for availability
 
 ## References
 

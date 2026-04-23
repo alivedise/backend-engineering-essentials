@@ -238,10 +238,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-30083 ML Monitoring and Drift Detection](585) — population-level drift complements per-prediction explanation drift
-- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — champion/challenger comparison should include explanation comparison
-- [BEE-30084 ML Experiment Tracking and Model Registry](586) — link explanation artifacts to MLflow runs via `mlflow.log_artifact()`
-- [BEE-30004 Evaluating and Testing LLM Applications](506) — LLM-specific evaluation patterns distinct from classical ML explainability
+- [BEE-30083 ML Monitoring and Drift Detection](/ai-backend-patterns/ml-monitoring-and-drift-detection) — population-level drift complements per-prediction explanation drift
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — champion/challenger comparison should include explanation comparison
+- [BEE-30084 ML Experiment Tracking and Model Registry](/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — link explanation artifacts to MLflow runs via `mlflow.log_artifact()`
+- [BEE-30004 Evaluating and Testing LLM Applications](/ai-backend-patterns/evaluating-and-testing-llm-applications) — LLM-specific evaluation patterns distinct from classical ML explainability
 
 ## References
 

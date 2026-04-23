@@ -280,10 +280,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-30088 ML Model Serving Infrastructure](590) — inference cost optimization with dynamic batching complements training cost optimization
-- [BEE-30084 ML Experiment Tracking and Model Registry](586) — log cost-per-run metrics to MLflow alongside model quality for cost/accuracy trade-off analysis
-- [BEE-30070 Distributed Training Infrastructure for Large Language Models](572) — DeepSpeed ZeRO and tensor parallelism for training costs at LLM scale
-- [BEE-13004 Profiling and Bottleneck Identification](303) — general profiling principles that apply to GPU training profiling
+- [BEE-30088 ML Model Serving Infrastructure](/ai-backend-patterns/ml-model-serving-infrastructure) — inference cost optimization with dynamic batching complements training cost optimization
+- [BEE-30084 ML Experiment Tracking and Model Registry](/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — log cost-per-run metrics to MLflow alongside model quality for cost/accuracy trade-off analysis
+- [BEE-30070 Distributed Training Infrastructure for Large Language Models](/ai-backend-patterns/distributed-training-infrastructure-for-large-language-models) — DeepSpeed ZeRO and tensor parallelism for training costs at LLM scale
+- [BEE-13004 Profiling and Bottleneck Identification](/performance-scalability/profiling-and-bottleneck-identification) — general profiling principles that apply to GPU training profiling
 
 ## References
 

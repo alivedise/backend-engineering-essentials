@@ -279,10 +279,10 @@ Saga 協調者在失敗時會重試補償交易。不冪等的補償交易（如
 
 ## 相關 BEE
 
-- [BEE-8001: ACID Properties](./160.md) — 為何單一資料庫交易是優先基準
-- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) — Saga 所取代的方案及其原因
-- [BEE-8005: Idempotency and Exactly-Once Semantics](./164.md) — 讓 Saga 步驟和補償操作可安全重試
-- [BEE-10001: Messaging Patterns for Microservices](./220.md) — 基於編排的 Saga 的事件基礎設施
+- [BEE-8001: ACID Properties](acid-properties.md) — 為何單一資料庫交易是優先基準
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](distributed-transactions-and-two-phase-commit.md) — Saga 所取代的方案及其原因
+- [BEE-8005: Idempotency and Exactly-Once Semantics](idempotency-and-exactly-once-semantics.md) — 讓 Saga 步驟和補償操作可安全重試
+- [BEE-10001: Messaging Patterns for Microservices](../messaging/message-queues-vs-event-streams.md) — 基於編排的 Saga 的事件基礎設施
 
 ## 參考資料
 

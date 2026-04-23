@@ -72,6 +72,7 @@ title: BEE list
 - [6006.Connection Pooling and Query Optimization](/data-storage/connection-pooling-and-query-optimization)
 - [6007.Database Migrations](/data-storage/database-migrations)
 - [6008.Database Connection Proxy and Pooler Architecture](/data-storage/database-connection-proxy-and-pooler-architecture)
+- [6009.Columnar Storage Compression](/data-storage/columnar-storage-compression)
 - [7001.Entity-Relationship Modeling](/data-modeling/entity-relationship-modeling)
 - [7002.Normalization and Denormalization](/data-modeling/normalization-and-denormalization)
 - [7003.Schema Evolution and Backward Compatibility](/data-modeling/schema-evolution-and-backward-compatibility)

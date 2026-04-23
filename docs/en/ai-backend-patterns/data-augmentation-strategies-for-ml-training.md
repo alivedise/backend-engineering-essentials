@@ -340,10 +340,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-30085 ML Data Validation and Pipeline Quality Gates](587) — validating that augmented examples still satisfy schema and distribution constraints
-- [BEE-30089 Testing Machine Learning Pipelines](591) — behavioral tests for augmentation pipelines (invariance tests: prediction SHOULD be stable under label-preserving augmentations)
-- [BEE-30091 ML Training Cost Optimization](593) — DataLoader `num_workers`, `pin_memory`, and `prefetch_factor` settings that determine augmentation throughput
-- [BEE-30092 Transfer Learning and Fine-Tuning Patterns](594) — augmentation strategy must match the pre-training augmentation when fine-tuning (use the backbone's `weights.transforms()` as the base)
+- [BEE-30085 ML Data Validation and Pipeline Quality Gates](/ai-backend-patterns/ml-data-validation-and-pipeline-quality-gates) — validating that augmented examples still satisfy schema and distribution constraints
+- [BEE-30089 Testing Machine Learning Pipelines](/ai-backend-patterns/testing-machine-learning-pipelines) — behavioral tests for augmentation pipelines (invariance tests: prediction SHOULD be stable under label-preserving augmentations)
+- [BEE-30091 ML Training Cost Optimization](/ai-backend-patterns/ml-training-cost-optimization) — DataLoader `num_workers`, `pin_memory`, and `prefetch_factor` settings that determine augmentation throughput
+- [BEE-30092 Transfer Learning and Fine-Tuning Patterns](/ai-backend-patterns/transfer-learning-and-fine-tuning-patterns) — augmentation strategy must match the pre-training augmentation when fine-tuning (use the backbone's `weights.transforms()` as the base)
 
 ## References
 

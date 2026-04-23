@@ -240,10 +240,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-30012 Fine-Tuning and PEFT Patterns](514) — LLM-specific fine-tuning (LoRA, QLoRA, adapters) — distinct from the CV/NLP fine-tuning covered here
-- [BEE-30091 ML Training Cost Optimization](593) — mixed precision and gradient checkpointing apply directly to fine-tuning workloads
-- [BEE-30089 Testing Machine Learning Pipelines](591) — behavioral tests for fine-tuned models should verify that task-specific invariants hold
-- [BEE-30087 Online Learning and Continual Model Updates](589) — continual learning addresses catastrophic forgetting in streaming settings; complementary to the batch fine-tuning approach here
+- [BEE-30012 Fine-Tuning and PEFT Patterns](/ai-backend-patterns/fine-tuning-and-peft-patterns) — LLM-specific fine-tuning (LoRA, QLoRA, adapters) — distinct from the CV/NLP fine-tuning covered here
+- [BEE-30091 ML Training Cost Optimization](/ai-backend-patterns/ml-training-cost-optimization) — mixed precision and gradient checkpointing apply directly to fine-tuning workloads
+- [BEE-30089 Testing Machine Learning Pipelines](/ai-backend-patterns/testing-machine-learning-pipelines) — behavioral tests for fine-tuned models should verify that task-specific invariants hold
+- [BEE-30087 Online Learning and Continual Model Updates](/ai-backend-patterns/online-learning-and-continual-model-updates) — continual learning addresses catastrophic forgetting in streaming settings; complementary to the batch fine-tuning approach here
 
 ## References
 

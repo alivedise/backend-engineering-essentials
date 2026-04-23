@@ -205,10 +205,10 @@ except Exception as e:
 
 ## 相關 BEE
 
-- [BEE-8002: 隔離層級與其異常現象](./161.md) -- 深入探討各隔離層級及其允許的異常現象
-- [BEE-8003: 分散式交易與兩階段提交](./162.md) -- 跨服務協調交易
-- [BEE-8004: Saga 模式](./163.md) -- 長時間執行的分散式工作流程的補償交易
-- [BEE-8006: 最終一致性模式](./165.md) -- 何時以可用性換取 ACID 保證
+- [BEE-8002: 隔離層級與其異常現象](isolation-levels-and-their-anomalies.md) -- 深入探討各隔離層級及其允許的異常現象
+- [BEE-8003: 分散式交易與兩階段提交](distributed-transactions-and-two-phase-commit.md) -- 跨服務協調交易
+- [BEE-8004: Saga 模式](saga-pattern.md) -- 長時間執行的分散式工作流程的補償交易
+- [BEE-8006: 最終一致性模式](eventual-consistency-patterns.md) -- 何時以可用性換取 ACID 保證
 
 ## 參考資料
 

@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: What is BEE?
-      link: /0
+      link: /bee-overall/bee-overview
     - theme: alt
       text: Full BEE List
       link: /list

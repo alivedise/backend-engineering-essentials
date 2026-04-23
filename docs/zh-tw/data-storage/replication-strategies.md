@@ -208,7 +208,7 @@ t=5   故障轉移：從節點 1 被提升 — W1 存在，無資料遺失
 
 ## 相關 BEE
 
-- [BEE-6001: SQL vs NoSQL](./120.md) — 選擇會限制複製選項的儲存引擎
-- [BEE-6004: 分片](./123.md) — 跨節點分區資料，通常與每個分片的複製結合使用
-- [BEE-8001: ACID 交易](./160.md) — 複製如何與交易隔離互動
-- [BEE-8006: 最終一致性](./165.md) — 無主節點和非同步複製自然提供的一致性模型
+- [BEE-6001: SQL vs NoSQL](sql-vs-nosql-tradeoffs.md) — 選擇會限制複製選項的儲存引擎
+- [BEE-6004: 分片](partitioning-and-sharding.md) — 跨節點分區資料，通常與每個分片的複製結合使用
+- [BEE-8001: ACID 交易](../transactions/acid-properties.md) — 複製如何與交易隔離互動
+- [BEE-8006: 最終一致性](../transactions/eventual-consistency-patterns.md) — 無主節點和非同步複製自然提供的一致性模型

@@ -275,10 +275,10 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-30082 ML 模型的影子模式與金絲雀部署](584) — 在服務基礎設施中安全升級新模型版本
-- [BEE-30083 ML 監控與漂移偵測](585) — 對服務層進行儀器化以偵測預測分佈移位
-- [BEE-30021 LLM 推論最佳化與自我託管](523) — 具有不同批次語義的 LLM 特定服務（vLLM、TGI）
-- [BEE-13003 連線池與資源管理](302) — 適用於模型服務客戶端的連線管理原則
+- [BEE-30082 ML 模型的影子模式與金絲雀部署](/zh-tw/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — 在服務基礎設施中安全升級新模型版本
+- [BEE-30083 ML 監控與漂移偵測](/zh-tw/ai-backend-patterns/ml-monitoring-and-drift-detection) — 對服務層進行儀器化以偵測預測分佈移位
+- [BEE-30021 LLM 推論最佳化與自我託管](/zh-tw/ai-backend-patterns/llm-inference-optimization-and-self-hosting) — 具有不同批次語義的 LLM 特定服務（vLLM、TGI）
+- [BEE-13003 連線池與資源管理](/zh-tw/performance-scalability/connection-pooling-and-resource-management) — 適用於模型服務客戶端的連線管理原則
 
 ## 參考資料
 

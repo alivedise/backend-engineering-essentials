@@ -238,10 +238,10 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-30083 ML 監控與漂移偵測](585) — 群體級別的漂移監控與逐預測解釋漂移互補
-- [BEE-30082 ML 模型的影子模式與金絲雀部署](584) — 冠軍/挑戰者比較應包含解釋比較
-- [BEE-30084 ML 實驗追蹤與模型登錄庫](586) — 通過 `mlflow.log_artifact()` 將解釋製品連結到 MLflow 運行
-- [BEE-30004 評估和測試 LLM 應用程式](506) — LLM 特定評估模式，與傳統 ML 可解釋性不同
+- [BEE-30083 ML 監控與漂移偵測](/zh-tw/ai-backend-patterns/ml-monitoring-and-drift-detection) — 群體級別的漂移監控與逐預測解釋漂移互補
+- [BEE-30082 ML 模型的影子模式與金絲雀部署](/zh-tw/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — 冠軍/挑戰者比較應包含解釋比較
+- [BEE-30084 ML 實驗追蹤與模型登錄庫](/zh-tw/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — 通過 `mlflow.log_artifact()` 將解釋製品連結到 MLflow 運行
+- [BEE-30004 評估和測試 LLM 應用程式](/zh-tw/ai-backend-patterns/evaluating-and-testing-llm-applications) — LLM 特定評估模式，與傳統 ML 可解釋性不同
 
 ## 參考資料
 

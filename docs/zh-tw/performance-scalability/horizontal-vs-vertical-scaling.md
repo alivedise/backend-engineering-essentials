@@ -206,7 +206,7 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-3002 — 負載平衡器](51.md)：在水平實例間路由流量
-- [BEE-6002 — 複製](121.md)：資料層的水平讀取擴展
-- [BEE-6004 — 分片](123.md)：資料層的水平寫入擴展
-- [BEE-13001 — 估算](300.md)：了解何時需要擴展
+- [BEE-3002 — 負載平衡器](../networking-fundamentals/dns-resolution.md)：在水平實例間路由流量
+- [BEE-6002 — 複製](../data-storage/indexing-deep-dive.md)：資料層的水平讀取擴展
+- [BEE-6004 — 分片](../data-storage/partitioning-and-sharding.md)：資料層的水平寫入擴展
+- [BEE-13001 — 估算](back-of-envelope-estimation.md)：了解何時需要擴展

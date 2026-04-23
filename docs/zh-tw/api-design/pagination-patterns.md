@@ -293,5 +293,5 @@ def get_page_size(requested: int | None) -> int:
 
 ## 相關 BEE
 
-- [BEE-4001: REST API 設計](./70.md) — 本文建立在其上的 REST 基礎規範。
-- [BEE-6006: 查詢優化](125.md) — 使游標分頁與鍵集查詢高效的索引策略。
+- [BEE-4001: REST API 設計](rest-api-design-principles.md) — 本文建立在其上的 REST 基礎規範。
+- [BEE-6006: 查詢優化](../data-storage/connection-pooling-and-query-optimization.md) — 使游標分頁與鍵集查詢高效的索引策略。

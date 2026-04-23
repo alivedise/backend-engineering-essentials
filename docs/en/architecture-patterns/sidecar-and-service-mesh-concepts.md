@@ -227,10 +227,10 @@ VirtualServices, DestinationRules, and AuthorizationPolicies interact. A misconf
 ## Related BEPs
 
 - [BEE-3007 — Mutual TLS (mTLS) Handshake and Server Configuration](../networking-fundamentals/mutual-tls-handshake-and-server-configuration.md): The security foundation the sidecar enforces
-- [BEE-3006 — Reverse Proxy Patterns](55.md): Simpler alternative for smaller deployments
-- [BEE-5001 — Microservices Architecture](100.md): The context in which service meshes become necessary
-- [BEE-12001 — Circuit Breaker Pattern](260.md): Reliability pattern the mesh automates
-- [BEE-14002 — Distributed Tracing](321.md): Observability that sidecars enable automatically
+- [BEE-3006 — Reverse Proxy Patterns](../networking-fundamentals/proxies-and-reverse-proxies.md): Simpler alternative for smaller deployments
+- [BEE-5001 — Microservices Architecture](monolith-vs-microservices-vs-modular-monolith.md): The context in which service meshes become necessary
+- [BEE-12001 — Circuit Breaker Pattern](../resilience/circuit-breaker-pattern.md): Reliability pattern the mesh automates
+- [BEE-14002 — Distributed Tracing](../observability/structured-logging.md): Observability that sidecars enable automatically
 
 ## References
 

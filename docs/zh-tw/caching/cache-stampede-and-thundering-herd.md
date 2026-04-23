@@ -356,10 +356,10 @@ def get_product_safe(product_id: str) -> dict:
 
 ## 相關 BEE
 
-- [BEE-9001: Caching Fundamentals](./200.md) -- 基礎概念：TTL、淘汰策略、一致性
-- [BEE-9002: Cache Invalidation](./201.md) -- 快取失效事件是踩踏的主要觸發源
-- [BEE-9004: Distributed Cache](./203.md) -- 踩踏在快取節點間的擴散
-- [BEE-12007: Rate Limiting](266.md) -- 踩踏發生時的最後一道 DB 保護
+- [BEE-9001: Caching Fundamentals](../caching/caching-fundamentals-and-cache-hierarchy.md) -- 基礎概念：TTL、淘汰策略、一致性
+- [BEE-9002: Cache Invalidation](../caching/cache-invalidation-strategies.md) -- 快取失效事件是踩踏的主要觸發源
+- [BEE-9004: Distributed Cache](../caching/distributed-caching.md) -- 踩踏在快取節點間的擴散
+- [BEE-12007: Rate Limiting](../resilience/rate-limiting-and-throttling.md) -- 踩踏發生時的最後一道 DB 保護
 
 ## 參考資料
 

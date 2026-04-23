@@ -221,10 +221,10 @@ graph LR
 
 ## 相關 BEE
 
-- [BEE-30083 ML 監控與漂移偵測](585) — 群體級別的漂移偵測與 ADWIN 的逐預測偵測互補
-- [BEE-30082 ML 模型的影子模式與金絲雀部署](584) — 在升級以替換線上學習器之前驗證重新訓練的模型
-- [BEE-30084 ML 實驗追蹤與模型登錄庫](586) — 在 MLflow 中追蹤每個 Checkpoint 和批次重新訓練的模型以確保可審計性
-- [BEE-30027 AI 工作流程編排](529) — 由漂移偵測觸發的用於批次重新訓練的 Airflow/Argo DAG
+- [BEE-30083 ML 監控與漂移偵測](/zh-tw/ai-backend-patterns/ml-monitoring-and-drift-detection) — 群體級別的漂移偵測與 ADWIN 的逐預測偵測互補
+- [BEE-30082 ML 模型的影子模式與金絲雀部署](/zh-tw/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — 在升級以替換線上學習器之前驗證重新訓練的模型
+- [BEE-30084 ML 實驗追蹤與模型登錄庫](/zh-tw/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — 在 MLflow 中追蹤每個 Checkpoint 和批次重新訓練的模型以確保可審計性
+- [BEE-30027 AI 工作流程編排](/zh-tw/ai-backend-patterns/ai-workflow-orchestration) — 由漂移偵測觸發的用於批次重新訓練的 Airflow/Argo DAG
 
 ## 參考資料
 

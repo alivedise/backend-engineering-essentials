@@ -216,10 +216,10 @@ NIST AI RMF 1.0 將負責任的 AI 實踐映射到四個操作職能：
 
 ## 相關 BEE
 
-- [BEE-30086 生產環境中的模型可解釋性](588) — SHAP 歸因分數通過解釋個別決策來補充公平性指標
-- [BEE-30085 ML 資料驗證與管道品質閘控](587) — 資料驗證強制執行模式和完整性；公平性審計將其擴展到分佈屬性
-- [BEE-30084 ML 實驗追蹤與模型登錄庫](586) — 模型卡附加到 MLflow 運行和模型版本
-- [BEE-30079 AI 合規與治理工程](581) — 模型卡所服務的更廣泛 AI 治理框架
+- [BEE-30086 生產環境中的模型可解釋性](/zh-tw/ai-backend-patterns/model-explainability-in-production) — SHAP 歸因分數通過解釋個別決策來補充公平性指標
+- [BEE-30085 ML 資料驗證與管道品質閘控](/zh-tw/ai-backend-patterns/ml-data-validation-and-pipeline-quality-gates) — 資料驗證強制執行模式和完整性；公平性審計將其擴展到分佈屬性
+- [BEE-30084 ML 實驗追蹤與模型登錄庫](/zh-tw/ai-backend-patterns/ml-experiment-tracking-and-model-registry) — 模型卡附加到 MLflow 運行和模型版本
+- [BEE-30079 AI 合規與治理工程](/zh-tw/ai-backend-patterns/ai-compliance-and-governance-engineering) — 模型卡所服務的更廣泛 AI 治理框架
 
 ## 參考資料
 

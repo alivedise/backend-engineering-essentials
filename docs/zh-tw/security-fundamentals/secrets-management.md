@@ -239,6 +239,6 @@ API_KEY=REPLACE_ME
 
 ## 相關 BEE
 
-- [BEE-1006: API Keys](15.md) — 如何為外部使用者設計與核發 API key。
-- [BEE-2005: Cryptography](./34.md) — 金鑰長度、演算法選擇與靜態加密。
-- [BEE-2006: Dependency Security](./35.md) — 可能間接暴露密鑰的供應鏈風險。
+- [BEE-1006: API Keys](../auth/api-key-management.md) — 如何為外部使用者設計與核發 API key。
+- [BEE-2005: Cryptography](cryptographic-basics-for-engineers.md) — 金鑰長度、演算法選擇與靜態加密。
+- [BEE-2006: Dependency Security](dependency-security-and-supply-chain.md) — 可能間接暴露密鑰的供應鏈風險。

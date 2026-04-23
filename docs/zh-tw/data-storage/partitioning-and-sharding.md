@@ -257,7 +257,7 @@ country 不是分區鍵。
 
 ## 相關 BEE
 
-- [BEE-6001: SQL vs NoSQL](./120.md) — 儲存引擎的選擇往往決定了可用的分片模型
-- [BEE-6002: 索引深度解析](./121.md) — 分片系統中次要索引的行為
-- [BEE-6002: 複製策略](./121.md) — 分片通常搭配複製；分區與複製可組合使用
-- [BEE-9004: 分散式快取](203.md) — 一致性雜湊在快取叢集路由中使用相同原則
+- [BEE-6001: SQL vs NoSQL](sql-vs-nosql-tradeoffs.md) — 儲存引擎的選擇往往決定了可用的分片模型
+- [BEE-6002: 索引深度解析](indexing-deep-dive.md) — 分片系統中次要索引的行為
+- [BEE-6002: 複製策略](indexing-deep-dive.md) — 分片通常搭配複製；分區與複製可組合使用
+- [BEE-9004: 分散式快取](../caching/distributed-caching.md) — 一致性雜湊在快取叢集路由中使用相同原則

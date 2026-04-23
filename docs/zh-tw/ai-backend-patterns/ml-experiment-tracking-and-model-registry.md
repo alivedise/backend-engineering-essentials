@@ -330,11 +330,11 @@ mlflow server \
 
 ## 相關 BEE
 
-- [BEE-30034 AI 實驗與模型 A/B 測試](536) — 生產中已上線模型版本的線上 A/B 測試
-- [BEE-30081 AI 機器學習特徵倉庫](583) — 訓練管道所使用的特徵基礎設施
-- [BEE-30082 ML 模型的影子模式與金絲雀部署](584) — 使用模型登錄庫版本的部署模式
-- [BEE-30083 ML 監控與漂移偵測](585) — 模型晉升後的生產監控
-- [BEE-6007 資料庫遷移](126) — PostgreSQL MLflow 後端 Schema 管理
+- [BEE-30034 AI 實驗與模型 A/B 測試](/zh-tw/ai-backend-patterns/ai-experimentation-and-model-a-b-testing) — 生產中已上線模型版本的線上 A/B 測試
+- [BEE-30081 AI 機器學習特徵倉庫](/zh-tw/ai-backend-patterns/ai-feature-stores-for-ml-inference) — 訓練管道所使用的特徵基礎設施
+- [BEE-30082 ML 模型的影子模式與金絲雀部署](/zh-tw/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — 使用模型登錄庫版本的部署模式
+- [BEE-30083 ML 監控與漂移偵測](/zh-tw/ai-backend-patterns/ml-monitoring-and-drift-detection) — 模型晉升後的生產監控
+- [BEE-6007 資料庫遷移](/zh-tw/data-storage/database-migrations) — PostgreSQL MLflow 後端 Schema 管理
 
 ## 參考資料
 

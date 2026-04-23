@@ -238,6 +238,6 @@ Run secret-scanning in CI as a second gate. This catches secrets that were intro
 
 ## Related BEPs
 
-- [BEE-1006: API Keys](15.md) — How to design and issue API keys for external consumers.
-- [BEE-2005: Cryptography](./34.md) — Key lengths, algorithm selection, and encryption at rest.
-- [BEE-2006: Dependency Security](./35.md) — Supply chain risks that can expose secrets indirectly.
+- [BEE-1006: API Keys](../auth/api-key-management.md) — How to design and issue API keys for external consumers.
+- [BEE-2005: Cryptography](cryptographic-basics-for-engineers.md) — Key lengths, algorithm selection, and encryption at rest.
+- [BEE-2006: Dependency Security](dependency-security-and-supply-chain.md) — Supply chain risks that can expose secrets indirectly.

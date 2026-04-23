@@ -205,10 +205,10 @@ Use database transactions for any multi-step write that must succeed or fail as 
 
 ## Related BEPs
 
-- [BEE-8002: Isolation Levels and Their Anomalies](./161.md) -- deep dive into isolation levels and which anomalies each allows
-- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) -- coordinating transactions across services
-- [BEE-8004: Saga Pattern](./163.md) -- compensating transactions for long-running distributed workflows
-- [BEE-8006: Eventual Consistency Patterns](./165.md) -- when to trade ACID guarantees for availability
+- [BEE-8002: Isolation Levels and Their Anomalies](isolation-levels-and-their-anomalies.md) -- deep dive into isolation levels and which anomalies each allows
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](distributed-transactions-and-two-phase-commit.md) -- coordinating transactions across services
+- [BEE-8004: Saga Pattern](saga-pattern.md) -- compensating transactions for long-running distributed workflows
+- [BEE-8006: Eventual Consistency Patterns](eventual-consistency-patterns.md) -- when to trade ACID guarantees for availability
 
 ## References
 

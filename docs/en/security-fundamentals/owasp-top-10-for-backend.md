@@ -335,12 +335,12 @@ Microservices on an internal network are not inherently trusted. A compromised s
 
 ## Related BEPs
 
-- [BEE-1001: Authentication vs Authorization](10.md) — foundational access control pipeline (A01, A07)
-- [BEE-2002: Input Validation and Sanitization](31.md) — defending against injection (A03)
-- [BEE-2003: Secrets Management](32.md) — protecting credentials and keys (A02)
-- [BEE-2004: CORS and Same-Origin Policy](33.md) — browser-side access control configuration (A05)
-- [BEE-2005: Cryptographic Basics for Engineers](34.md) — encryption and hashing fundamentals (A02)
-- [BEE-2006: Dependency Security and Supply Chain](35.md) — managing third-party risk (A06)
+- [BEE-1001: Authentication vs Authorization](../auth/authentication-vs-authorization.md) — foundational access control pipeline (A01, A07)
+- [BEE-2002: Input Validation and Sanitization](input-validation-and-sanitization.md) — defending against injection (A03)
+- [BEE-2003: Secrets Management](secrets-management.md) — protecting credentials and keys (A02)
+- [BEE-2004: CORS and Same-Origin Policy](cors-and-same-origin-policy.md) — browser-side access control configuration (A05)
+- [BEE-2005: Cryptographic Basics for Engineers](cryptographic-basics-for-engineers.md) — encryption and hashing fundamentals (A02)
+- [BEE-2006: Dependency Security and Supply Chain](dependency-security-and-supply-chain.md) — managing third-party risk (A06)
 
 ## References
 

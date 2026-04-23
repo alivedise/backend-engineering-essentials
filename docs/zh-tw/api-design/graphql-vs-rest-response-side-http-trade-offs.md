@@ -154,7 +154,7 @@ flowchart TD
     X -- Server unavailable --> E503["503 Service Unavailable<br/>{errors: [{extensions.code: 'INTERNAL_SERVER_ERROR'}]}"]
 ```
 
-**緩解 B：`extensions.code` 慣例。** 與 HTTP 狀態無關，`errors[]` 中的每個錯誤都應該在 `extensions.code` 攜帶穩定的機器可讀程式碼。這對應到 [RFC 9457 的 `type` URI 與 `errors[].code`](75.md) 的 GraphQL 版本。[Apollo Server 的預設](https://www.apollographql.com/docs/apollo-server/data/errors)包含 `GRAPHQL_PARSE_FAILED`、`GRAPHQL_VALIDATION_FAILED`、`BAD_USER_INPUT`、`PERSISTED_QUERY_NOT_FOUND`、`OPERATION_RESOLUTION_FAILURE`、`BAD_REQUEST`、`INTERNAL_SERVER_ERROR`。應用層級的程式碼如 `UNAUTHENTICATED`、`FORBIDDEN`、`INSUFFICIENT_FUNDS`、`ORDER_ALREADY_SHIPPED` 是應用程式自定義的慣例；Apollo 的預設不包含它們。把程式碼當 API 路徑對待：穩定、文件化、發布後不變更。
+**緩解 B：`extensions.code` 慣例。** 與 HTTP 狀態無關，`errors[]` 中的每個錯誤都應該在 `extensions.code` 攜帶穩定的機器可讀程式碼。這對應到 [RFC 9457 的 `type` URI 與 `errors[].code`](api-error-handling-and-problem-details.md) 的 GraphQL 版本。[Apollo Server 的預設](https://www.apollographql.com/docs/apollo-server/data/errors)包含 `GRAPHQL_PARSE_FAILED`、`GRAPHQL_VALIDATION_FAILED`、`BAD_USER_INPUT`、`PERSISTED_QUERY_NOT_FOUND`、`OPERATION_RESOLUTION_FAILURE`、`BAD_REQUEST`、`INTERNAL_SERVER_ERROR`。應用層級的程式碼如 `UNAUTHENTICATED`、`FORBIDDEN`、`INSUFFICIENT_FUNDS`、`ORDER_ALREADY_SHIPPED` 是應用程式自定義的慣例；Apollo 的預設不包含它們。把程式碼當 API 路徑對待：穩定、文件化、發布後不變更。
 
 **緩解 C：Partial-success 處理。** GraphQL 獨有的失敗模式，REST 沒有乾淨的對應。最佳實踐：
 

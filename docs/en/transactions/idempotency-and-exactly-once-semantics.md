@@ -353,10 +353,10 @@ Design every operation that has side effects to be idempotent. In distributed sy
 
 ## Related BEPs
 
-- [BEE-4003: API Idempotency](72.md) -- idempotency keys in HTTP API design
-- [BEE-8004: Saga Pattern](./163.md) -- saga compensating transactions must be idempotent
-- [BEE-10003: Delivery Guarantees](./222.md) -- at-most-once, at-least-once, exactly-once in messaging systems
-- [BEE-10007: Idempotent Message Processing](./226.md) -- patterns for idempotent consumers in event-driven systems
+- [BEE-4003: API Idempotency](../api-design/api-idempotency.md) -- idempotency keys in HTTP API design
+- [BEE-8004: Saga Pattern](saga-pattern.md) -- saga compensating transactions must be idempotent
+- [BEE-10003: Delivery Guarantees](../messaging/delivery-guarantees.md) -- at-most-once, at-least-once, exactly-once in messaging systems
+- [BEE-10007: Idempotent Message Processing](../messaging/idempotent-message-processing.md) -- patterns for idempotent consumers in event-driven systems
 
 ## References
 

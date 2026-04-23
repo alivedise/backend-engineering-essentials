@@ -228,9 +228,9 @@ ABAC requires a policy language, a policy engine, attribute stores for subjects 
 
 ## Related BEPs
 
-- [BEE-1001: Authentication vs Authorization](10.md) — the pipeline that precedes any permission model
-- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — how scopes relate to coarse-grained RBAC at the protocol level
-- [BEE-5002: API Gateway Patterns](101.md) — enforcement points in a gateway-first architecture
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — the pipeline that precedes any permission model
+- [BEE-1003: OAuth 2.0 and OpenID Connect](oauth-openid-connect.md) — how scopes relate to coarse-grained RBAC at the protocol level
+- [BEE-5002: API Gateway Patterns](../architecture-patterns/domain-driven-design-essentials.md) — enforcement points in a gateway-first architecture
 
 ## References
 

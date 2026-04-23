@@ -343,11 +343,11 @@ lifecycle:
 
 ## 相關 BEE
 
-- [BEE-30034 AI 實驗與模型 A/B 測試](536) — ML 的統計實驗設計和顯著性測試
-- [BEE-30009 LLM 可觀測性與監控](511) — 模型服務的指標收集
-- [BEE-16002 部署策略](361) — 一般軟體的藍綠、滾動和金絲雀模式
-- [BEE-30081 AI 機器學習特徵倉庫](583) — 模型服務底層的特徵基礎設施
-- [BEE-12007 速率限制與節流](266) — 服務層的流量控制
+- [BEE-30034 AI 實驗與模型 A/B 測試](/zh-tw/ai-backend-patterns/ai-experimentation-and-model-a-b-testing) — ML 的統計實驗設計和顯著性測試
+- [BEE-30009 LLM 可觀測性與監控](/zh-tw/ai-backend-patterns/llm-observability-and-monitoring) — 模型服務的指標收集
+- [BEE-16002 部署策略](/zh-tw/cicd-devops/deployment-strategies) — 一般軟體的藍綠、滾動和金絲雀模式
+- [BEE-30081 AI 機器學習特徵倉庫](/zh-tw/ai-backend-patterns/ai-feature-stores-for-ml-inference) — 模型服務底層的特徵基礎設施
+- [BEE-12007 速率限制與節流](/zh-tw/resilience/rate-limiting-and-throttling) — 服務層的流量控制
 
 ## 參考資料
 

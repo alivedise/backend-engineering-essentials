@@ -217,9 +217,9 @@ A server that ignores the `state` value on the callback is vulnerable to CSRF. A
 
 ## Related BEPs
 
-- [BEE-1001: Authentication vs Authorization](10.md) — the conceptual boundary that OAuth 2.0 and OIDC operate across
-- [BEE-1002: Token-Based Authentication](11.md) — JWT structure, validation, and the token lifecycle
-- [BEE-2004: Third-Party API Integration Security](33.md) — OAuth in the context of external service integration
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — the conceptual boundary that OAuth 2.0 and OIDC operate across
+- [BEE-1002: Token-Based Authentication](token-based-authentication.md) — JWT structure, validation, and the token lifecycle
+- [BEE-2004: Third-Party API Integration Security](../security-fundamentals/cors-and-same-origin-policy.md) — OAuth in the context of external service integration
 
 ## References
 

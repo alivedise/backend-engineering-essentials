@@ -362,9 +362,9 @@ If `/index.html` or `/api/config` carries `max-age=86400`, a deploy that changes
 
 ## Related BEPs
 
-- [BEE-3003: HTTP Fundamentals](52.md) -- request/response model, status codes, and headers
-- [BEE-9001: Caching Fundamentals and Cache Hierarchy](./200.md) -- TTL, eviction, and consistency concepts that underpin this article
-- [BEE-13005: CDN Architecture](304.md) -- how CDN nodes consume and propagate `Cache-Control` directives
+- [BEE-3003: HTTP Fundamentals](../networking-fundamentals/http-versions.md) -- request/response model, status codes, and headers
+- [BEE-9001: Caching Fundamentals and Cache Hierarchy](../caching/caching-fundamentals-and-cache-hierarchy.md) -- TTL, eviction, and consistency concepts that underpin this article
+- [BEE-13005: CDN Architecture](../performance-scalability/content-delivery-and-edge-computing.md) -- how CDN nodes consume and propagate `Cache-Control` directives
 
 ## References
 

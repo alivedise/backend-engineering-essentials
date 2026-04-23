@@ -304,9 +304,9 @@ Apply behavior verification (mocks, spies) only at architectural boundaries and 
 
 ## Related BEPs
 
-- [BEE-5004 — Hexagonal Architecture](103.md): Ports are natural mock boundaries. Mock the port interface, not the objects behind it.
-- [BEE-15001 — Test Pyramid](./340.md): Unit tests with doubles form the base; the pyramid determines how many of each type to write.
-- [BEE-15002 — Integration Testing](./341.md): When NOT to mock — cases where real infrastructure is required for meaningful test coverage.
+- [BEE-5004 — Hexagonal Architecture](../architecture-patterns/hexagonal-architecture.md): Ports are natural mock boundaries. Mock the port interface, not the objects behind it.
+- [BEE-15001 — Test Pyramid](testing-pyramid.md): Unit tests with doubles form the base; the pyramid determines how many of each type to write.
+- [BEE-15002 — Integration Testing](integration-testing-for-backend-services.md): When NOT to mock — cases where real infrastructure is required for meaningful test coverage.
 
 ## References
 

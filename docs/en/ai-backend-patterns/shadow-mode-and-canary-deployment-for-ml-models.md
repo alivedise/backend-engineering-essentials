@@ -343,11 +343,11 @@ lifecycle:
 
 ## Related BEEs
 
-- [BEE-30034 AI Experimentation and Model A/B Testing](536) — statistical experiment design and significance testing for ML
-- [BEE-30009 LLM Observability and Monitoring](511) — metrics collection for model serving
-- [BEE-16002 Deployment Strategies](361) — blue-green, rolling, and canary patterns for general software
-- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure underlying model serving
-- [BEE-12007 Rate Limiting and Throttling](266) — traffic control at the serving layer
+- [BEE-30034 AI Experimentation and Model A/B Testing](/ai-backend-patterns/ai-experimentation-and-model-a-b-testing) — statistical experiment design and significance testing for ML
+- [BEE-30009 LLM Observability and Monitoring](/ai-backend-patterns/llm-observability-and-monitoring) — metrics collection for model serving
+- [BEE-16002 Deployment Strategies](/cicd-devops/deployment-strategies) — blue-green, rolling, and canary patterns for general software
+- [BEE-30081 AI Feature Stores for ML Inference](/ai-backend-patterns/ai-feature-stores-for-ml-inference) — feature infrastructure underlying model serving
+- [BEE-12007 Rate Limiting and Throttling](/resilience/rate-limiting-and-throttling) — traffic control at the serving layer
 
 ## References
 

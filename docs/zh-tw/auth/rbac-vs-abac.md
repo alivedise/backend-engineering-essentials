@@ -227,9 +227,9 @@ ABAC 需要政策語言、政策引擎、subject 與 resource 的屬性儲存，
 
 ## 相關 BEE
 
-- [BEE-1001: Authentication vs Authorization](10.md) — 所有權限模型的前置管線
-- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — scope 如何在協定層面對應粗粒度 RBAC
-- [BEE-5002: API Gateway Patterns](101.md) — gateway-first 架構中的執行點
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — 所有權限模型的前置管線
+- [BEE-1003: OAuth 2.0 and OpenID Connect](oauth-openid-connect.md) — scope 如何在協定層面對應粗粒度 RBAC
+- [BEE-5002: API Gateway Patterns](../architecture-patterns/domain-driven-design-essentials.md) — gateway-first 架構中的執行點
 
 ## 參考資料
 

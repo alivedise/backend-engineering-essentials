@@ -14,9 +14,9 @@ slug: container-fundamentals
 真正理解容器是什麼——隔離的 Linux 程序，而非輕量 VM——將改變你建置、保護與操作容器的方式。
 
 **相關 BEE：**
-- [BEE-11001 程序](240.md) -- 容器本質上是程序
-- [BEE-14006 健康檢查](325.md) -- 容器內的健康檢查
-- [BEE-16002 部署策略](361.md) -- 容器作為部署單位
+- [BEE-11001 程序](../concurrency/threads-vs-processes-vs-coroutines.md) -- 容器本質上是程序
+- [BEE-14006 健康檢查](../observability/health-checks-and-readiness-probes.md) -- 容器內的健康檢查
+- [BEE-16002 部署策略](deployment-strategies.md) -- 容器作為部署單位
 
 ## 原則
 

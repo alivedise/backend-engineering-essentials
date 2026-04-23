@@ -180,7 +180,7 @@ The application increments `total_orders` and `total_revenue_cents` atomically w
 
 ### CQRS Read Models
 
-For complex read workloads, consider separating the write model (normalized) from the read model (denormalized and query-shaped). This is covered in depth in [BEE-5003: CQRS](./102.md).
+For complex read workloads, consider separating the write model (normalized) from the read model (denormalized and query-shaped). This is covered in depth in [BEE-5003: CQRS](../architecture-patterns/cqrs.md).
 
 ## The Consistency Cost
 
@@ -219,9 +219,9 @@ This is actually *semantically correct* denormalization: historical records ofte
 
 ## Related BEPs
 
-- [BEE-5003: CQRS](./102.md) — separate read models as a structured denormalization pattern
-- [BEE-6001: SQL vs NoSQL](./120.md) — when document databases are a natural fit for denormalized data
-- [BEE-7001: Entity-Relationship Modeling](./140.md) — how to identify entities before normalizing
+- [BEE-5003: CQRS](../architecture-patterns/cqrs.md) — separate read models as a structured denormalization pattern
+- [BEE-6001: SQL vs NoSQL](../data-storage/sql-vs-nosql-tradeoffs.md) — when document databases are a natural fit for denormalized data
+- [BEE-7001: Entity-Relationship Modeling](entity-relationship-modeling.md) — how to identify entities before normalizing
 
 ## Common Mistakes
 

@@ -298,7 +298,7 @@ WHERE status = 'active';
 
 ## 相關 BEE
 
-- [BEE-6001 — SQL vs NoSQL](./120.md)：選擇資料庫類型會影響可用的索引類型與相關性。
-- [BEE-6005 — 儲存引擎](./124.md)：儲存引擎（InnoDB、WiredTiger 等）如何在頁面層級與索引互動。
-- [BEE-6006 — 查詢優化](./125.md)：深入 EXPLAIN、統計資訊與查詢規劃器提示。
-- [BEE-13004 — 效能分析](303.md)：在正式環境中測量索引變更的實際影響。
+- [BEE-6001 — SQL vs NoSQL](sql-vs-nosql-tradeoffs.md)：選擇資料庫類型會影響可用的索引類型與相關性。
+- [BEE-6005 — 儲存引擎](storage-engines.md)：儲存引擎（InnoDB、WiredTiger 等）如何在頁面層級與索引互動。
+- [BEE-6006 — 查詢優化](connection-pooling-and-query-optimization.md)：深入 EXPLAIN、統計資訊與查詢規劃器提示。
+- [BEE-13004 — 效能分析](../performance-scalability/profiling-and-bottleneck-identification.md)：在正式環境中測量索引變更的實際影響。

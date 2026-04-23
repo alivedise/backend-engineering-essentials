@@ -9,7 +9,7 @@ state: draft
 
 ### What is BEE?
 
-BEE (Backend Engineering Essentials) is a numbered collection of backend engineering guidelines. See [BEE-0](0) for the full overview.
+BEE (Backend Engineering Essentials) is a numbered collection of backend engineering guidelines. See [BEE-0](/bee-overall/bee-overview) for the full overview.
 
 ### Who is BEE for?
 
@@ -25,7 +25,7 @@ BEE covers backend engineering broadly. ADE (API Design Essentials) goes deep on
 
 ### Can I propose a new BEE?
 
-Yes. Follow the structure described in [BEE-0](0) and submit a pull request.
+Yes. Follow the structure described in [BEE-0](/bee-overall/bee-overview) and submit a pull request.
 
 ## Content Questions
 
@@ -35,7 +35,7 @@ These keywords provide precise guidance levels. MUST means the principle is non-
 
 ### How are BEE numbers assigned?
 
-BEPs are numbered by category range. See the category table in [BEE-0](0) for the full mapping.
+BEPs are numbered by category range. See the category table in [BEE-0](/bee-overall/bee-overview) for the full mapping.
 
 ### What if my situation requires deviating from a BEE?
 

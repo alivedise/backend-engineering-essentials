@@ -240,8 +240,8 @@ Clearing the session cookie without deleting the server-side record leaves the s
 
 ## Related BEPs
 
-- [BEE-1001: Authentication vs Authorization](10.md) — identity pipeline context
-- [BEE-1002: Token-Based Authentication](11.md) — stateless alternative to sessions
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — identity pipeline context
+- [BEE-1002: Token-Based Authentication](token-based-authentication.md) — stateless alternative to sessions
 - [BEE-2001: Transport Security](/en/30) — HTTPS requirement underlying Secure cookie
 - [BEE-2004: Secrets Management](/en/33) — handling secrets in session stores
 

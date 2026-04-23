@@ -279,10 +279,10 @@ When a business workflow spans multiple services, use a saga: a sequence of loca
 
 ## Related BEPs
 
-- [BEE-8001: ACID Properties](./160.md) -- why single-database transactions are the preferred baseline
-- [BEE-8003: Distributed Transactions and Two-Phase Commit](./162.md) -- what sagas replace and why
-- [BEE-8005: Idempotency and Exactly-Once Semantics](./164.md) -- making saga steps and compensations safe to retry
-- [BEE-10001: Messaging Patterns for Microservices](./220.md) -- event infrastructure for choreography-based sagas
+- [BEE-8001: ACID Properties](acid-properties.md) -- why single-database transactions are the preferred baseline
+- [BEE-8003: Distributed Transactions and Two-Phase Commit](distributed-transactions-and-two-phase-commit.md) -- what sagas replace and why
+- [BEE-8005: Idempotency and Exactly-Once Semantics](idempotency-and-exactly-once-semantics.md) -- making saga steps and compensations safe to retry
+- [BEE-10001: Messaging Patterns for Microservices](../messaging/message-queues-vs-event-streams.md) -- event infrastructure for choreography-based sagas
 
 ## References
 

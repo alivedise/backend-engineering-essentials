@@ -260,8 +260,8 @@ Domain sharding (splitting assets across multiple subdomains) was a valid HTTP/1
 
 ## Related BEPs
 
-- [BEE-3001 — TCP/IP and the Network Stack](./50.md): TCP handshake, slow start, and why QUIC replaces TCP for HTTP/3.
-- [BEE-3004 — TLS/SSL Handshake](./53.md): ALPN extension, TLS 1.3 integration with QUIC, certificate negotiation.
-- [BEE-3005 — Load Balancers](./54.md): Layer 7 termination of HTTP/2 and HTTP/3, protocol translation to upstreams.
-- [BEE-4001 — REST API Design](70.md): How protocol version affects API latency and client connection strategy.
-- [BEE-9006 — HTTP Caching](205.md): Cache-Control semantics are defined in RFC 9110 and apply identically across all HTTP versions.
+- [BEE-3001 — TCP/IP and the Network Stack](tcp-ip-and-the-network-stack.md): TCP handshake, slow start, and why QUIC replaces TCP for HTTP/3.
+- [BEE-3004 — TLS/SSL Handshake](tls-ssl-handshake.md): ALPN extension, TLS 1.3 integration with QUIC, certificate negotiation.
+- [BEE-3005 — Load Balancers](load-balancers.md): Layer 7 termination of HTTP/2 and HTTP/3, protocol translation to upstreams.
+- [BEE-4001 — REST API Design](../api-design/rest-api-design-principles.md): How protocol version affects API latency and client connection strategy.
+- [BEE-9006 — HTTP Caching](../caching/http-caching-and-conditional-requests.md): Cache-Control semantics are defined in RFC 9110 and apply identically across all HTTP versions.

@@ -206,7 +206,7 @@ In-process caches, local rate-limit counters, and in-memory queues must all beco
 
 ## Related BEPs
 
-- [BEE-3002 — Load Balancers](51.md): routing traffic across horizontal instances
-- [BEE-6002 — Replication](121.md): horizontal read scaling at the data layer
-- [BEE-6004 — Sharding](123.md): horizontal write scaling at the data layer
-- [BEE-13001 — Back-of-Envelope Estimation](300.md): knowing when to scale
+- [BEE-3002 — Load Balancers](../networking-fundamentals/dns-resolution.md): routing traffic across horizontal instances
+- [BEE-6002 — Replication](../data-storage/indexing-deep-dive.md): horizontal read scaling at the data layer
+- [BEE-6004 — Sharding](../data-storage/partitioning-and-sharding.md): horizontal write scaling at the data layer
+- [BEE-13001 — Back-of-Envelope Estimation](back-of-envelope-estimation.md): knowing when to scale

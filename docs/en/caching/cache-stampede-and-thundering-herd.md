@@ -356,10 +356,10 @@ For most production systems, apply **jittered TTL** universally and add **single
 
 ## Related BEPs
 
-- [BEE-9001: Caching Fundamentals](./200.md) -- foundational concepts: TTL, eviction, consistency
-- [BEE-9002: Cache Invalidation](./201.md) -- invalidation events are the primary stampede trigger
-- [BEE-9004: Distributed Cache](./203.md) -- stampede propagation across cache nodes
-- [BEE-12007: Rate Limiting](266.md) -- last-resort DB protection when stampedes do occur
+- [BEE-9001: Caching Fundamentals](../caching/caching-fundamentals-and-cache-hierarchy.md) -- foundational concepts: TTL, eviction, consistency
+- [BEE-9002: Cache Invalidation](../caching/cache-invalidation-strategies.md) -- invalidation events are the primary stampede trigger
+- [BEE-9004: Distributed Cache](../caching/distributed-caching.md) -- stampede propagation across cache nodes
+- [BEE-12007: Rate Limiting](../resilience/rate-limiting-and-throttling.md) -- last-resort DB protection when stampedes do occur
 
 ## References
 

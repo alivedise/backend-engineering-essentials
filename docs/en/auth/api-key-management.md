@@ -197,10 +197,10 @@ A key with no expiry and no rotation plan is a credential that will eventually b
 
 ## Related BEPs
 
-- [BEE-1001: Authentication vs Authorization](10.md) — the conceptual boundary between identity and permission
-- [BEE-1002: Token-Based Authentication](11.md) — short-lived tokens as an alternative for user-delegated access
-- [BEE-2002: Secrets Management](31.md) — storing and rotating credentials in production infrastructure
-- [BEE-4002: Rate Limiting and Throttling](71.md) — per-key rate limiting strategies
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — the conceptual boundary between identity and permission
+- [BEE-1002: Token-Based Authentication](token-based-authentication.md) — short-lived tokens as an alternative for user-delegated access
+- [BEE-2002: Secrets Management](../security-fundamentals/input-validation-and-sanitization.md) — storing and rotating credentials in production infrastructure
+- [BEE-4002: Rate Limiting and Throttling](../api-design/api-versioning-strategies.md) — per-key rate limiting strategies
 
 ## References
 

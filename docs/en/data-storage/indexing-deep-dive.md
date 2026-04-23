@@ -298,7 +298,7 @@ WHERE status = 'active';
 
 ## Related BEPs
 
-- [BEE-6001 — SQL vs NoSQL](./120.md): Choosing the right database affects what index types are available and relevant.
-- [BEE-6005 — Storage Engines](./124.md): How the storage engine (InnoDB, WiredTiger, etc.) interacts with indexes at the page level.
-- [BEE-6006 — Query Optimization](./125.md): EXPLAIN in depth, statistics, and query planner hints.
-- [BEE-13004 — Profiling](303.md): Measuring the actual impact of index changes in production.
+- [BEE-6001 — SQL vs NoSQL](sql-vs-nosql-tradeoffs.md): Choosing the right database affects what index types are available and relevant.
+- [BEE-6005 — Storage Engines](storage-engines.md): How the storage engine (InnoDB, WiredTiger, etc.) interacts with indexes at the page level.
+- [BEE-6006 — Query Optimization](connection-pooling-and-query-optimization.md): EXPLAIN in depth, statistics, and query planner hints.
+- [BEE-13004 — Profiling](../performance-scalability/profiling-and-bottleneck-identification.md): Measuring the actual impact of index changes in production.

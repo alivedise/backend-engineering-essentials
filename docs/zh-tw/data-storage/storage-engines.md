@@ -246,9 +246,9 @@ MVCC 與儲存引擎的互動：
 
 ## 相關 BEE
 
-- [BEE-6001 — SQL vs NoSQL](./120.md)：資料庫類別通常決定了哪種儲存引擎可用且相關。
-- [BEE-6002 — 索引深度解析](./121.md)：B-tree 索引內部原理、索引何時有幫助、何時有害。
-- [BEE-6003 — 複製策略](./122.md)：WAL 傳送和邏輯複製直接依賴儲存引擎的 WAL 格式。
+- [BEE-6001 — SQL vs NoSQL](sql-vs-nosql-tradeoffs.md)：資料庫類別通常決定了哪種儲存引擎可用且相關。
+- [BEE-6002 — 索引深度解析](indexing-deep-dive.md)：B-tree 索引內部原理、索引何時有幫助、何時有害。
+- [BEE-6003 — 複製策略](replication-strategies.md)：WAL 傳送和邏輯複製直接依賴儲存引擎的 WAL 格式。
 
 ## 參考資料
 

@@ -197,10 +197,10 @@ Host: api.example.com
 
 ## 相關 BEE
 
-- [BEE-1001: Authentication vs Authorization](10.md) — 身份識別與授權之間的概念邊界
-- [BEE-1002: Token-Based Authentication](11.md) — 用於使用者委派存取的短期 token
-- [BEE-2002: Secrets Management](31.md) — 在正式環境中儲存與輪換憑證
-- [BEE-4002: Rate Limiting and Throttling](71.md) — 每個金鑰的速率限制策略
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — 身份識別與授權之間的概念邊界
+- [BEE-1002: Token-Based Authentication](token-based-authentication.md) — 用於使用者委派存取的短期 token
+- [BEE-2002: Secrets Management](../security-fundamentals/input-validation-and-sanitization.md) — 在正式環境中儲存與輪換憑證
+- [BEE-4002: Rate Limiting and Throttling](../api-design/api-versioning-strategies.md) — 每個金鑰的速率限制策略
 
 ## 參考資料
 

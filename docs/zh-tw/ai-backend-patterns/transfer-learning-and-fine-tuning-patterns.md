@@ -226,10 +226,10 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-30012 微調與 PEFT 模式](514) — LLM 特定的微調（LoRA、QLoRA、適配器）——與這裡涵蓋的 CV/NLP 微調不同
-- [BEE-30091 ML 訓練成本最佳化](593) — 混合精度和梯度檢查點直接適用於微調工作負載
-- [BEE-30089 測試機器學習管道](591) — 微調模型的行為測試應驗證任務特定的不變量
-- [BEE-30087 線上學習與持續模型更新](589) — 持續學習在流式設定中解決災難性遺忘；與這裡的批次微調方法互補
+- [BEE-30012 微調與 PEFT 模式](/zh-tw/ai-backend-patterns/fine-tuning-and-peft-patterns) — LLM 特定的微調（LoRA、QLoRA、適配器）——與這裡涵蓋的 CV/NLP 微調不同
+- [BEE-30091 ML 訓練成本最佳化](/zh-tw/ai-backend-patterns/ml-training-cost-optimization) — 混合精度和梯度檢查點直接適用於微調工作負載
+- [BEE-30089 測試機器學習管道](/zh-tw/ai-backend-patterns/testing-machine-learning-pipelines) — 微調模型的行為測試應驗證任務特定的不變量
+- [BEE-30087 線上學習與持續模型更新](/zh-tw/ai-backend-patterns/online-learning-and-continual-model-updates) — 持續學習在流式設定中解決災難性遺忘；與這裡的批次微調方法互補
 
 ## 參考資料
 

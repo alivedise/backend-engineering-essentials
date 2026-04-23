@@ -330,11 +330,11 @@ For W&B, all data is stored in W&B's cloud (or self-hosted with W&B Server). For
 
 ## Related BEEs
 
-- [BEE-30034 AI Experimentation and Model A/B Testing](536) — online A/B testing for live model versions in production
-- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure consumed by training pipelines
-- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — deployment patterns that consume model registry versions
-- [BEE-30083 ML Monitoring and Drift Detection](585) — production monitoring after a model is promoted
-- [BEE-6007 Database Migrations](126) — PostgreSQL MLflow backend schema management
+- [BEE-30034 AI Experimentation and Model A/B Testing](/ai-backend-patterns/ai-experimentation-and-model-a-b-testing) — online A/B testing for live model versions in production
+- [BEE-30081 AI Feature Stores for ML Inference](/ai-backend-patterns/ai-feature-stores-for-ml-inference) — feature infrastructure consumed by training pipelines
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — deployment patterns that consume model registry versions
+- [BEE-30083 ML Monitoring and Drift Detection](/ai-backend-patterns/ml-monitoring-and-drift-detection) — production monitoring after a model is promoted
+- [BEE-6007 Database Migrations](/data-storage/database-migrations) — PostgreSQL MLflow backend schema management
 
 ## References
 

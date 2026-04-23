@@ -293,5 +293,5 @@ Running `SELECT COUNT(*)` on every paginated request doubles the database load f
 
 ## Related BEPs
 
-- [BEE-4001: REST API Design](./70.md) — Foundational REST conventions this article builds on.
-- [BEE-6006: Query Optimization](125.md) — Index strategies that make cursor pagination and keyset queries efficient.
+- [BEE-4001: REST API Design](rest-api-design-principles.md) — Foundational REST conventions this article builds on.
+- [BEE-6006: Query Optimization](../data-storage/connection-pooling-and-query-optimization.md) — Index strategies that make cursor pagination and keyset queries efficient.

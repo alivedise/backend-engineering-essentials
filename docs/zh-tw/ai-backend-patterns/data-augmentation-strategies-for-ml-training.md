@@ -315,10 +315,10 @@ graph TD
 
 ## 相關 BEE
 
-- [BEE-30085 ML 資料驗證與管道品質閘控](587) — 驗證增強樣本仍滿足 schema 和分佈約束
-- [BEE-30089 測試機器學習管道](591) — 增強管道的行為測試（不變性測試：預測應該（SHOULD）在保留標籤的增強下保持穩定）
-- [BEE-30091 ML 訓練成本最佳化](593) — 決定增強吞吐量的 DataLoader `num_workers`、`pin_memory` 和 `prefetch_factor` 設定
-- [BEE-30092 遷移學習與微調模式](594) — 微調時增強策略必須符合預訓練增強（使用主幹的 `weights.transforms()` 作為基礎）
+- [BEE-30085 ML 資料驗證與管道品質閘控](/zh-tw/ai-backend-patterns/ml-data-validation-and-pipeline-quality-gates) — 驗證增強樣本仍滿足 schema 和分佈約束
+- [BEE-30089 測試機器學習管道](/zh-tw/ai-backend-patterns/testing-machine-learning-pipelines) — 增強管道的行為測試（不變性測試：預測應該（SHOULD）在保留標籤的增強下保持穩定）
+- [BEE-30091 ML 訓練成本最佳化](/zh-tw/ai-backend-patterns/ml-training-cost-optimization) — 決定增強吞吐量的 DataLoader `num_workers`、`pin_memory` 和 `prefetch_factor` 設定
+- [BEE-30092 遷移學習與微調模式](/zh-tw/ai-backend-patterns/transfer-learning-and-fine-tuning-patterns) — 微調時增強策略必須符合預訓練增強（使用主幹的 `weights.transforms()` 作為基礎）
 
 ## 參考文獻
 

@@ -272,9 +272,9 @@ A dependency that was clean at deploy time may have a CVE published the followin
 
 ## Related BEPs
 
-- [BEE-2001: OWASP Top 10 for Backend](30.md) — A06 Vulnerable and Outdated Components in context of the full Top 10
-- [BEE-2002: Secrets Management](31.md) — credential leaks via compromised dependencies
-- [BEE-16006: Pipeline Design](365.md) — CI/CD pipeline security controls and artifact signing
+- [BEE-2001: OWASP Top 10 for Backend](owasp-top-10-for-backend.md) — A06 Vulnerable and Outdated Components in context of the full Top 10
+- [BEE-2002: Secrets Management](input-validation-and-sanitization.md) — credential leaks via compromised dependencies
+- [BEE-16006: Pipeline Design](../cicd-devops/pipeline-design.md) — CI/CD pipeline security controls and artifact signing
 
 ## References
 

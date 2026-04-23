@@ -180,7 +180,7 @@ CREATE TABLE seller_stats (
 
 ### CQRS 讀取模型
 
-對於複雜的讀取工作負載，可考慮將寫入模型（正規化）與讀取模型（反正規化、為查詢優化）分開。詳細說明請參閱 [BEE-5003: CQRS](./102.md)。
+對於複雜的讀取工作負載，可考慮將寫入模型（正規化）與讀取模型（反正規化、為查詢優化）分開。詳細說明請參閱 [BEE-5003: CQRS](../architecture-patterns/cqrs.md)。
 
 ## 一致性成本
 
@@ -219,9 +219,9 @@ ALTER TABLE orders
 
 ## 相關 BEE
 
-- [BEE-5003: CQRS](./102.md) — 將讀取模型分離，作為一種結構化的反正規化模式
-- [BEE-6001: SQL vs NoSQL](./120.md) — 文件型資料庫在反正規化資料上的適用場景
-- [BEE-7001: Entity-Relationship 建模](./140.md) — 正規化前如何識別實體
+- [BEE-5003: CQRS](../architecture-patterns/cqrs.md) — 將讀取模型分離，作為一種結構化的反正規化模式
+- [BEE-6001: SQL vs NoSQL](../data-storage/sql-vs-nosql-tradeoffs.md) — 文件型資料庫在反正規化資料上的適用場景
+- [BEE-7001: Entity-Relationship 建模](entity-relationship-modeling.md) — 正規化前如何識別實體
 
 ## 常見錯誤
 

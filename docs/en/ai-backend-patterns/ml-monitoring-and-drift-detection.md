@@ -270,11 +270,11 @@ AWS SageMaker Model Monitor runs on a configurable schedule and emits metrics to
 
 ## Related BEEs
 
-- [BEE-30009 LLM Observability and Monitoring](511) — LLM-specific observability: token counts, latency, output quality
-- [BEE-30034 AI Experimentation and Model A/B Testing](536) — statistical experiment design for ML
-- [BEE-30081 AI Feature Stores for ML Inference](583) — feature infrastructure; feature drift often originates here
-- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — deployment gates that precede ongoing monitoring
-- [BEE-14001 The Three Pillars: Logs, Metrics, Traces](320) — observability foundations
+- [BEE-30009 LLM Observability and Monitoring](/ai-backend-patterns/llm-observability-and-monitoring) — LLM-specific observability: token counts, latency, output quality
+- [BEE-30034 AI Experimentation and Model A/B Testing](/ai-backend-patterns/ai-experimentation-and-model-a-b-testing) — statistical experiment design for ML
+- [BEE-30081 AI Feature Stores for ML Inference](/ai-backend-patterns/ai-feature-stores-for-ml-inference) — feature infrastructure; feature drift often originates here
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — deployment gates that precede ongoing monitoring
+- [BEE-14001 The Three Pillars: Logs, Metrics, Traces](/observability/three-pillars-logs-metrics-traces) — observability foundations
 
 ## References
 

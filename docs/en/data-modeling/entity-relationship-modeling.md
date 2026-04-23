@@ -219,10 +219,10 @@ The opposite failure: a `StatusEntity` table with one column and five rows inste
 
 ## Related BEPs
 
-- [BEE-5002: Domain-Driven Design](101.md) — Bounded contexts and aggregates shape which entities belong to the same model.
-- [BEE-6001: SQL vs NoSQL](./120.md) — The ER model applies to relational databases; document stores require different modeling strategies.
-- [BEE-7002: Normalization](./141.md) — After translating ER to tables, normalization rules refine the physical design.
-- [BEE-7006: Polymorphism in Schema Design](./145.md) — When an entity has subtypes, ER modeling must decide between table-per-type, table-per-hierarchy, and other strategies.
+- [BEE-5002: Domain-Driven Design](../architecture-patterns/domain-driven-design-essentials.md) — Bounded contexts and aggregates shape which entities belong to the same model.
+- [BEE-6001: SQL vs NoSQL](../data-storage/sql-vs-nosql-tradeoffs.md) — The ER model applies to relational databases; document stores require different modeling strategies.
+- [BEE-7002: Normalization](normalization-and-denormalization.md) — After translating ER to tables, normalization rules refine the physical design.
+- [BEE-7006: Polymorphism in Schema Design](polymorphism-in-data-models.md) — When an entity has subtypes, ER modeling must decide between table-per-type, table-per-hierarchy, and other strategies.
 
 
 ## References

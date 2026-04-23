@@ -217,9 +217,9 @@ Implicit grant 直接在 URL fragment（`#access_token=...`）中回傳 access t
 
 ## 相關 BEE
 
-- [BEE-1001: Authentication vs Authorization](10.md) — OAuth 2.0 與 OIDC 所跨越的身分認證與授權概念邊界
-- [BEE-1002: Token-Based Authentication](11.md) — JWT 結構、驗證與令牌生命週期
-- [BEE-2004: Third-Party API Integration Security](33.md) — OAuth 在外部服務整合情境下的應用
+- [BEE-1001: Authentication vs Authorization](authentication-vs-authorization.md) — OAuth 2.0 與 OIDC 所跨越的身分認證與授權概念邊界
+- [BEE-1002: Token-Based Authentication](token-based-authentication.md) — JWT 結構、驗證與令牌生命週期
+- [BEE-2004: Third-Party API Integration Security](../security-fundamentals/cors-and-same-origin-policy.md) — OAuth 在外部服務整合情境下的應用
 
 ## 參考資料
 

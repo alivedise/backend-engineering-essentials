@@ -275,10 +275,10 @@ graph TD
 
 ## Related BEEs
 
-- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](584) — promote new model versions safely in the serving infrastructure
-- [BEE-30083 ML Monitoring and Drift Detection](585) — instrument the serving layer to detect prediction distribution shifts
-- [BEE-30021 LLM Inference Optimization and Self-Hosting](523) — LLM-specific serving (vLLM, TGI) with different batching semantics
-- [BEE-13003 Connection Pooling and Resource Management](302) — connection management principles that apply to model serving clients
+- [BEE-30082 Shadow Mode and Canary Deployment for ML Models](/ai-backend-patterns/shadow-mode-and-canary-deployment-for-ml-models) — promote new model versions safely in the serving infrastructure
+- [BEE-30083 ML Monitoring and Drift Detection](/ai-backend-patterns/ml-monitoring-and-drift-detection) — instrument the serving layer to detect prediction distribution shifts
+- [BEE-30021 LLM Inference Optimization and Self-Hosting](/ai-backend-patterns/llm-inference-optimization-and-self-hosting) — LLM-specific serving (vLLM, TGI) with different batching semantics
+- [BEE-13003 Connection Pooling and Resource Management](/performance-scalability/connection-pooling-and-resource-management) — connection management principles that apply to model serving clients
 
 ## References
 
