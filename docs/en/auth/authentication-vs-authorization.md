@@ -133,13 +133,15 @@ OAuth 2.0 is an authorization delegation framework. An access token proves that 
 
 Internal APIs, background job handlers, and admin-only routes are common blind spots. Every request path that accesses protected data MUST enforce authorization regardless of where the request originates.
 
-## Related BEPs
+## Related BEEs
 
-- [BEE-1002: Token-Based Authentication](11.md) — how tokens establish identity
-- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — delegation vs. authentication
-- [BEE-1004: Session Management](13.md) — maintaining authenticated state
-- [BEE-1005: RBAC vs ABAC](14.md) — permission models in depth
-- [BEE-1006: API Key Management](15.md) — API credential patterns
+- [BEE-1002](token-based-authentication.md) Token-Based Authentication -- how tokens establish identity
+- [BEE-1003](oauth-openid-connect.md) OAuth 2.0 and OpenID Connect -- delegation vs authentication
+- [BEE-1004](session-management.md) Session Management -- maintaining authenticated state
+- [BEE-1005](rbac-vs-abac.md) RBAC vs ABAC -- permission models in depth
+- [BEE-1006](api-key-management.md) API Key Management -- API credential patterns
+- [BEE-1007](webauthn-fundamentals.md) WebAuthn Fundamentals -- modern phishing-resistant authentication
+- [BEE-1011](migrating-from-passwords-to-passkeys.md) Migrating from Passwords to Passkeys -- rollout playbook for the modern auth model
 
 ## References
 

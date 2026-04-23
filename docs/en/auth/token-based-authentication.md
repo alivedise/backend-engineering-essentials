@@ -160,13 +160,15 @@ A 24-hour access token that is leaked is usable for 24 hours with no recourse (s
 
 An access token issued for `api-a.example.com` presented to `api-b.example.com` should be rejected. If the audience claim is not validated, tokens issued for one service are accepted by another, breaking the isolation that tokens are supposed to provide.
 
-## Related BEPs
+## Related BEEs
 
-- [BEE-1001: Authentication vs Authorization](10.md) — the conceptual boundary between identity and permission
-- [BEE-1002: OAuth 2.0 and OpenID Connect](11.md) — token issuance and delegation flows
-- [BEE-1004: Session Management](13.md) — server-side sessions as an alternative to tokens
-- [BEE-2001: OWASP Top 10 Mapping](30.md) — security vulnerability context
-- [BEE-2002: Cryptographic Primitives](31.md) — signing algorithms and key management basics
+- [BEE-1001](authentication-vs-authorization.md) Authentication vs Authorization -- the conceptual boundary between identity and permission
+- [BEE-1003](oauth-openid-connect.md) OAuth 2.0 and OpenID Connect -- token issuance and delegation flows
+- [BEE-1004](session-management.md) Session Management -- server-side sessions as an alternative to tokens
+- [BEE-1007](webauthn-fundamentals.md) WebAuthn Fundamentals -- WebAuthn ceremonies typically issue a session token on success
+- [BEE-1008](passkeys-discoverable-credentials.md) Passkeys: Discoverable Credentials and UX Patterns -- passkey-issued sessions follow the same token-management patterns covered here
+- [BEE-2001](../security-fundamentals/owasp-top-10-for-backend.md) OWASP Top 10 for Backend -- security vulnerability context
+- [BEE-2005](../security-fundamentals/cryptographic-basics-for-engineers.md) Cryptographic Basics for Engineers -- signing algorithms and key management basics
 
 ## References
 

@@ -135,11 +135,13 @@ OAuth 2.0 是授權委派框架。Access token 只證明資源擁有者委派了
 
 ## 相關 BEE
 
-- [BEE-1002: Token-Based Authentication](11.md) — token 如何建立身份
-- [BEE-1003: OAuth 2.0 and OpenID Connect](12.md) — 委派 vs. 認證
-- [BEE-1004: Session Management](13.md) — 維持已認證的狀態
-- [BEE-1005: RBAC vs ABAC](14.md) — 深入探討權限模型
-- [BEE-1006: API Key Management](15.md) — API 憑證模式
+- [BEE-1002](token-based-authentication.md) Token-Based Authentication -- token 如何建立身份
+- [BEE-1003](oauth-openid-connect.md) OAuth 2.0 and OpenID Connect -- 委派 vs 認證
+- [BEE-1004](session-management.md) Session Management -- 維持已認證的狀態
+- [BEE-1005](rbac-vs-abac.md) RBAC vs ABAC -- 深入探討權限模型
+- [BEE-1006](api-key-management.md) API Key Management -- API 憑證模式
+- [BEE-1007](webauthn-fundamentals.md) WebAuthn 基礎 -- 現代的抗釣魚認證
+- [BEE-1011](migrating-from-passwords-to-passkeys.md) 從密碼遷移到 Passkey -- 現代認證模型的推行手冊
 
 ## 參考資料
 
