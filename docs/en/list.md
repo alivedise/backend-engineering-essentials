@@ -12,6 +12,7 @@ title: BEE list
 - [1004.Session Management](/auth/session-management)
 - [1005.RBAC vs ABAC Access Control Models](/auth/rbac-vs-abac)
 - [1006.API Key Management](/auth/api-key-management)
+- [1007.WebAuthn Fundamentals](/auth/webauthn-fundamentals)
 - [2001.OWASP Top 10 for Backend](/security-fundamentals/owasp-top-10-for-backend)
 - [2002.Input Validation and Sanitization](/security-fundamentals/input-validation-and-sanitization)
 - [2003.Secrets Management](/security-fundamentals/secrets-management)

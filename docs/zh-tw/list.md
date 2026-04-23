@@ -12,6 +12,7 @@ title: BEE 全列表
 - [1004.Session Management](/zh-tw/auth/session-management)
 - [1005.RBAC vs ABAC Access Control Models](/zh-tw/auth/rbac-vs-abac)
 - [1006.API Key Management](/zh-tw/auth/api-key-management)
+- [1007.WebAuthn 基礎](/zh-tw/auth/webauthn-fundamentals)
 - [2001.OWASP Top 10 for Backend](/zh-tw/security-fundamentals/owasp-top-10-for-backend)
 - [2002.Input Validation and Sanitization](/zh-tw/security-fundamentals/input-validation-and-sanitization)
 - [2003.Secrets Management](/zh-tw/security-fundamentals/secrets-management)
