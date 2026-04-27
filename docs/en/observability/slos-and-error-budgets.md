@@ -108,7 +108,7 @@ flowchart TD
     REVIEW --> SLO
 ```
 
-The feedback loop is the key insight: error budgets make reliability self-regulating. A team that ships fast consumes budget. When the budget is gone, the team cannot ship until reliability work refills it. This aligns incentives without requiring management escalation.
+Error budgets make reliability self-regulating via a feedback loop. A team that ships fast consumes budget. When the budget is gone, the team cannot ship until reliability work refills it. This aligns incentives without requiring management escalation.
 
 ## Worked Example
 

@@ -33,7 +33,7 @@ The NIST AI RMF organizes governance around four interconnected functions:
 
 The NIST framework complements the EU Act: GOVERN and MAP align with the Act's risk classification and documentation requirements; MEASURE aligns with accuracy, robustness, and bias obligations; MANAGE aligns with post-market monitoring and record-keeping.
 
-The key insight for backend engineers is that most of the EU AI Act's high-risk obligations reduce to four concrete technical artifacts: **an immutable audit log**, **a model registry with lineage**, **a model card**, and **a live explainability and drift pipeline**. Building these artifacts correctly is a backend infrastructure problem.
+Most of the EU AI Act's high-risk obligations reduce to four concrete technical artifacts: **an immutable audit log**, **a model registry with lineage**, **a model card**, and **a live explainability and drift pipeline**. Building these artifacts correctly is a backend infrastructure problem.
 
 ## Technical Obligations for High-Risk AI (Articles 9–15)
 

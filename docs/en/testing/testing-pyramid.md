@@ -144,7 +144,7 @@ For backend services with real I/O boundaries, the pyramid model remains the mor
 
 ## Google's Test Sizes
 
-Google uses a dimension-based taxonomy — **small, medium, large** — that overlaps with but is distinct from the pyramid model. The key insight from Google's approach is that test *scope* and test *speed* are two separate axes, and both matter.
+Google uses a dimension-based taxonomy (**small, medium, large**) that overlaps with but is distinct from the pyramid model. Google's approach treats test *scope* and test *speed* as two separate axes, and both matter.
 
 | Google size | Allowed I/O | Rough pyramid equivalent |
 |---|---|---|

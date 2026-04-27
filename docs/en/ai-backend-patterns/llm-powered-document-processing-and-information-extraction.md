@@ -15,7 +15,7 @@ LLM-powered information extraction turns unstructured documents — invoices, co
 
 Traditional document processing relied on rigid rule-based parsers, regular expressions, and template matching. These approaches break whenever a new vendor uses a slightly different invoice layout or a contract clause is reworded. LLMs change the unit of work from "write a parser per template" to "define a schema once and let the model handle layout variation."
 
-Li et al. (arXiv:2312.17617, 2023) surveyed this shift in a comprehensive review of LLMs for generative information extraction. The key insight is that LLMs do not merely apply rules — they perform semantic reasoning over document content, inferring field values even when formatting is inconsistent, fields are implicit, or values span multiple sentences.
+Li et al. (arXiv:2312.17617, 2023) surveyed this shift in a comprehensive review of LLMs for generative information extraction. LLMs do not merely apply rules. They perform semantic reasoning over document content, inferring field values even when formatting is inconsistent, fields are implicit, or values span multiple sentences.
 
 Two extraction failure modes dominate production deployments. First, hallucination: the model confidently returns a field value that does not appear in the document. Second, schema drift: the model returns a value in the right field but in the wrong format (a date as "January 3" instead of "2026-01-03"), causing downstream parse failures. Both require explicit mitigation at the schema definition and validation layers.
 

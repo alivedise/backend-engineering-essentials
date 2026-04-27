@@ -23,7 +23,7 @@ BEE-2005 (Cryptographic Basics for Engineers) covers algorithm selection — whi
 
 ## Design Thinking
 
-The central insight of key management is that **the confidentiality of a secret is its own lifecycle problem**. A key exposed at generation (via a weak PRNG) is compromised before it is ever used. A key stored in plaintext on disk is compromised whenever the disk is accessible. A key that never rotates remains valid for any attacker who obtained it — months or years after the initial breach.
+**The confidentiality of a secret is its own lifecycle problem.** A key exposed at generation (via a weak PRNG) is compromised before it is ever used. A key stored in plaintext on disk is compromised whenever the disk is accessible. A key that never rotates remains valid for any attacker who obtained it, for months or years after the initial breach.
 
 Two design decisions shape a key management architecture:
 

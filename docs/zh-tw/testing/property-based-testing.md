@@ -15,7 +15,7 @@ slug: property-based-testing
 
 範例式測試（BEE-15001 測試金字塔中的主流形式）有一個結構性弱點：你只能測試你想到要寫的情況。開發者寫下 `assert sort([3,1,2]) == [1,2,3]` 時，選擇了一個特定的輸入和預期輸出。若排序演算法在這個輸入上正確，但在包含重複元素的輸入、空列表或百萬個相同值的列表上失敗，測試依然通過，程式錯誤就這樣被發布出去了。
 
-基於屬性的測試（PBT）由 Koen Claessen 和 John Hughes 以 QuickCheck 的形式發明，發表於 ICFP 2000（「QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs」，ACM SIGPLAN Notices）。該論文在 2010 年獲得 ACM SIGPLAN 最具影響力 ICFP 論文獎。核心洞見：不要指定*範例*，而要指定*屬性*——對所有有效輸入都必須成立的全稱量化主張。框架生成數百或數千個隨機輸入，驗證屬性是否成立，並在找到反例時，自動將其縮小至最小的失敗案例。
+基於屬性的測試（PBT）由 Koen Claessen 和 John Hughes 以 QuickCheck 的形式發明，發表於 ICFP 2000（「QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs」，ACM SIGPLAN Notices）。該論文在 2010 年獲得 ACM SIGPLAN 最具影響力 ICFP 論文獎。不要指定*範例*，而要指定*屬性*：對所有有效輸入都必須成立的全稱量化主張。框架生成數百或數千個隨機輸入，驗證屬性是否成立，並在找到反例時，自動將其縮小至最小的失敗案例。
 
 David MacIver（Hypothesis 的創建者，Python 領先 PBT 函式庫）記錄了 Hypothesis 找到 Argon2 實作中的緩衝區溢位（僅在雜湊長度超過 512 時觸發）、ISO 8601 日期解析中的年/月對調（僅在 `0005-01-01` 這樣的日期觸發）以及 npm 套件中的原型污染（Prototype Poisoning）漏洞——全部透過比實作程式碼更短的迴路（roundtrip）和不變量（invariant）屬性發現。
 

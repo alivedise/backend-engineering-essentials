@@ -19,7 +19,7 @@ The conventional answer is integration testing: deploy both services into a shar
 
 Contract testing solves a narrower problem: it verifies that a consumer's expectations about a provider are met, and that a provider's implementation satisfies all of its consumers' expectations — without deploying both services simultaneously, without a shared environment, and with fast, independent feedback to both teams.
 
-The key insight is that most cross-service failures are not about complex behavior — they are about shape. A field was renamed. A status enum value was removed. A required parameter was added. These are all detectable by comparing the contract (what the consumer expects) against the implementation (what the provider actually produces), without executing any business logic.
+Most cross-service failures are not about complex behavior. They are about shape. A field was renamed. A status enum value was removed. A required parameter was added. These are all detectable by comparing the contract (what the consumer expects) against the implementation (what the provider actually produces), without executing any business logic.
 
 ## Principle
 

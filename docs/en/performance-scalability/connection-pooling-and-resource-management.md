@@ -68,7 +68,7 @@ For a 4-core server with data primarily on SSD (spindle count ≈ 0–1):
 connections = (4 × 2) + 1 = 9
 ```
 
-The key insight: once the thread count exceeds CPU core count, additional threads contend for CPU time. I/O waits (disk, network) create brief windows where another thread can run, which is why a small multiple above core count outperforms a naive "one connection per request thread" model. The Oracle Real-world Performance Group demonstrated that reducing a connection pool from hundreds of connections to ~96 dropped response time from ~100ms to ~2ms — a 50× improvement.
+Once the thread count exceeds CPU core count, additional threads contend for CPU time. I/O waits (disk, network) create brief windows where another thread can run, which is why a small multiple above core count outperforms a naive "one connection per request thread" model. The Oracle Real-world Performance Group demonstrated that reducing a connection pool from hundreds of connections to ~96 dropped response time from ~100ms to ~2ms, a 50× improvement.
 
 **Practical guidance:**
 - Start with the formula result, then load-test and tune.

@@ -13,7 +13,7 @@ Dark launches, grey releases, and A/B tests are three production-testing pattern
 
 ## Context
 
-The insight behind all three patterns is the same: staging environments cannot reproduce production. Real traffic has a distribution of user types, session states, third-party latency, and edge-case inputs that no synthetic load generator faithfully replicates. The only way to know how a new system behaves under real conditions is to route real production traffic to it — the question is how much risk the user is exposed to while you learn.
+All three patterns share one premise: staging environments cannot reproduce production. Real traffic has a distribution of user types, session states, third-party latency, and edge-case inputs that no synthetic load generator faithfully replicates. The only way to know how a new system behaves under real conditions is to route real production traffic to it. The question is how much risk the user is exposed to while you learn.
 
 Facebook popularized the **dark launch** (also called shadow testing or traffic mirroring) as a technique for validating new backends at scale before enabling them for users. The pattern — deploy the new code, mirror production traffic to it, compare outputs without ever returning the shadow response — lets engineers stress-test a new system under production load while users continue receiving the old, known-good response. The new code is "dark" because users cannot see or interact with its output.
 

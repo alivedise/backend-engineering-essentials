@@ -17,7 +17,7 @@ Distributed systems replicate data across nodes to achieve fault tolerance and l
 
 Strong consistency answers "always" -- at the cost of coordination overhead and availability. Eventual consistency answers "eventually" -- accepting temporary divergence in exchange for higher availability and lower write latency. This trade-off is not hypothetical. Werner Vogels, CTO of Amazon, formalized it in his landmark 2008 paper: *Eventually Consistent* ([ACM Queue](https://queue.acm.org/detail.cfm?id=1466448), [All Things Distributed](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)). Amazon's DynamoDB, Cassandra, Riak, and CouchDB all build on these ideas.
 
-The critical insight -- explored thoroughly in Martin Kleppmann's *Designing Data-Intensive Applications* ([O'Reilly](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)) -- is that "eventual consistency" is not a single model. It is a family of models spanning a spectrum, each with different guarantees and trade-offs.
+Martin Kleppmann's *[Designing Data-Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)* explores this thoroughly: "eventual consistency" is not a single model. It is a family of models spanning a spectrum, each with different guarantees and trade-offs.
 
 ## Principle
 

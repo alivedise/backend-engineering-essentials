@@ -15,7 +15,7 @@ Relational, document, key-value, column-family, graph -- choose based on data sh
 
 Every application stores data, and the choice of database shapes everything downstream: query complexity, consistency guarantees, operational burden, and how naturally the data model maps to the problem domain. The term "NoSQL" (coined as a Twitter hashtag for a 2009 meetup on open-source distributed databases) covers a wide range of systems that trade away some relational guarantees in exchange for schema flexibility, horizontal scalability, or specialized access patterns.
 
-The core insight from Martin Kleppmann's *Designing Data-Intensive Applications* (DDIA, Chapter 2) and Pramod Sadalage & Martin Fowler's *NoSQL Distilled* is that no single database type is universally superior. Each family of databases excels at a different data shape, and real systems increasingly use several database types together — a practice called **polyglot persistence**.
+Martin Kleppmann's *Designing Data-Intensive Applications* (DDIA, Chapter 2) and Pramod Sadalage & Martin Fowler's *NoSQL Distilled* both argue that no single database type is universally superior. Each family of databases excels at a different data shape, and real systems increasingly use several database types together, a practice called **polyglot persistence**.
 
 **References:**
 - [DDIA Chapter 2 — Data Models and Query Languages](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/ch02.html)

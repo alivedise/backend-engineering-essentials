@@ -19,7 +19,7 @@ Amazon's Dynamo paper (DeCandia et al., SOSP 2007) operationalized these ideas i
 
 Cassandra (Lakshman and Malik, ACM SIGOPS 2010) adopted all three mechanisms from Dynamo and exposed them as operational primitives. Hinted handoff is automatic and on-by-default. Read repair is triggered probabilistically on coordinator reads (configurable per table with `read_repair` option). Background anti-entropy is performed through the `nodetool repair` command, which must be scheduled externally — Cassandra provides no built-in scheduler. Riak introduced **Active Anti-Entropy (AAE)** in version 1.3 (2013), running Merkle tree comparison as a continuous, autonomous background daemon rather than a triggered command, eliminating the operational burden of manual repair scheduling.
 
-The key insight common to all these implementations is that eventual consistency is not a property the system provides automatically at zero cost — it is a property the system provides given that the repair mechanisms run. A Cassandra cluster with repair disabled is not eventually consistent; it is a cluster that will accumulate drift until nodes diverge permanently.
+Eventual consistency is not a property these implementations provide automatically at zero cost. It is a property they provide given that the repair mechanisms run. A Cassandra cluster with repair disabled is not eventually consistent; it is a cluster that will accumulate drift until nodes diverge permanently.
 
 ## Design Thinking
 

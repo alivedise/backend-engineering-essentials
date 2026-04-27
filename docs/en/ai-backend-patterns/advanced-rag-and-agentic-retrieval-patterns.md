@@ -39,7 +39,7 @@ Each layer adds latency and cost. The question is which layers to invest in base
 
 ### Apply HyDE When Queries and Documents Are Phrased Differently
 
-**SHOULD** use HyDE for factual question-answering workloads where user queries are phrased in natural language but documents are written in technical or domain-specific language. The core insight is that a hypothetical answer is closer in embedding space to real answers than the question is:
+**SHOULD** use HyDE for factual question-answering workloads where user queries are phrased in natural language but documents are written in technical or domain-specific language. A hypothetical answer is closer in embedding space to real answers than the question is:
 
 ```python
 from openai import OpenAI

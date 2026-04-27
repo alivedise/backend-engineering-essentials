@@ -19,7 +19,7 @@ The amplification effect arises from **fan-out**: a single user request often fa
 
 Dean and Barroso quantified this in Google BigTable: reading 1,000 key-value pairs required fan-out across tablet servers, and P99.9 latency for that read was 1,800ms — even though individual tablet server reads completed in a few milliseconds. By sending a **hedged request** (a duplicate request to a second server after a brief delay) and using whichever response arrived first, P99.9 dropped to 74ms with only a 2% increase in total requests.
 
-The paper's contribution was naming and systematizing a class of techniques Google engineers had discovered independently: **tail-tolerant** design. The insight is to treat tail latency not as a bug to fix but as an environmental condition to route around.
+The paper's contribution was naming and systematizing a class of techniques Google engineers had discovered independently: **tail-tolerant** design. This approach treats tail latency not as a bug to fix but as an environmental condition to route around.
 
 ## Design Thinking
 

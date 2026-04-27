@@ -23,7 +23,7 @@ The seminal watermarking paper is Kirchenbauer et al. "A Watermark for Large Lan
 
 ### The Green/Red List Algorithm (Kirchenbauer et al.)
 
-The core insight: at each token generation step, the model assigns probabilities to all tokens in the vocabulary. If we deterministically bias the probability distribution toward a pseudorandomly chosen subset ("green list") of the vocabulary, those tokens will be overrepresented in the output. A detector who knows the seed and partition rule can measure this bias statistically.
+At each token generation step, the model assigns probabilities to all tokens in the vocabulary. If we deterministically bias the probability distribution toward a pseudorandomly chosen subset ("green list") of the vocabulary, those tokens will be overrepresented in the output. A detector who knows the seed and partition rule can measure this bias statistically.
 
 **Watermarking step (per token at position t):**
 

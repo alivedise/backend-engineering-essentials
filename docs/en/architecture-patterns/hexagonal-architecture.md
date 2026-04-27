@@ -17,7 +17,7 @@ Backend systems accumulate coupling between business logic and infrastructure ov
 
 Hexagonal Architecture -- also called the **Ports and Adapters** pattern -- was defined by Alistair Cockburn in 2005 as a structural approach to eliminate this coupling. The pattern was later popularized in large-scale systems; Netflix adopted it explicitly to swap data sources without touching business logic, achieving migrations (JSON API to GraphQL) in hours rather than weeks.
 
-The core insight: **the application exists to implement business rules**. Everything else -- HTTP, databases, message queues, CLI -- is infrastructure. Hexagonal Architecture makes the boundary between the two explicit and enforced.
+**The application exists to implement business rules.** Everything else -- HTTP, databases, message queues, CLI -- is infrastructure. Hexagonal Architecture makes the boundary between the two explicit and enforced.
 
 ## Principle
 

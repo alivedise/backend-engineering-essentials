@@ -19,7 +19,7 @@ Every major LLM provider exposes two kinds of model identifiers: **dated snapsho
 
 Anthropic's deprecation commitments document (2025) is notable for honestly naming the costs of forced migration: shutdown-avoidant behaviors observed in alignment evaluations, loss of comparative research baselines, and user loss of specific model characteristics. Minimum notice before retirement is 60 days for publicly released models. Once retired, requests fail outright — there is no provider-level graceful degradation.
 
-The core insight is that prompts are model-specific contracts, not model-agnostic instructions. A healthcare provider migrating from Gemini 1.5 to 2.5 Flash encountered unsolicited diagnostic opinions in output, 5× token inflation, and broken JSON parsing — requiring over 400 hours of re-engineering. Formatting changes alone can cause up to 76 accuracy-point variation between model versions on the same task. The migration cost is not the API call change; it is the behavioral contract renegotiation.
+Prompts are model-specific contracts, not model-agnostic instructions. A healthcare provider migrating from Gemini 1.5 to 2.5 Flash encountered unsolicited diagnostic opinions in output, 5× token inflation, and broken JSON parsing — requiring over 400 hours of re-engineering. Formatting changes alone can cause up to 76 accuracy-point variation between model versions on the same task. The migration cost is not the API call change; it is the behavioral contract renegotiation.
 
 ## Design Thinking
 

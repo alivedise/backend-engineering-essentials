@@ -37,7 +37,7 @@ Structured output enforcement operates at three tiers with different cost, contr
 
 **Local constrained decoding** (Outlines, Guidance, llama.cpp GBNF) is the choice for self-hosted models where hard guarantees are required and API cost matters.
 
-The key insight: JSON mode is not constrained decoding. It guarantees syntactic validity, not schema compliance. Do not use JSON mode as a substitute for structured outputs or schema validation.
+JSON mode is not constrained decoding. It guarantees syntactic validity, not schema compliance. Do not use JSON mode as a substitute for structured outputs or schema validation.
 
 ## Best Practices
 

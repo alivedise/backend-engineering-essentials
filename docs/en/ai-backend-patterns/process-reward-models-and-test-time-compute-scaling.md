@@ -108,7 +108,7 @@ Brown et al. ("Large Language Monkeys", arXiv:2407.21787) showed that **coverage
 
 ### Adaptive Budget Allocation
 
-Snell et al. (arXiv:2408.03314, 2024) showed that **difficulty-adaptive** best-of-N achieves the same accuracy as uniform best-of-N using **4× fewer samples**. The key insight: problems where the base model has near-0% or near-100% pass@1 gain little from more samples. The 10%–90% difficulty range is where test-time compute pays off most. Allocate based on question difficulty:
+Snell et al. (arXiv:2408.03314, 2024) showed that **difficulty-adaptive** best-of-N achieves the same accuracy as uniform best-of-N using **4× fewer samples**. Problems where the base model has near-0% or near-100% pass@1 gain little from more samples. The 10%–90% difficulty range is where test-time compute pays off most. Allocate based on question difficulty:
 
 ```python
 def adaptive_best_of_n(model, verifier, prompt: str, total_budget: int) -> str:

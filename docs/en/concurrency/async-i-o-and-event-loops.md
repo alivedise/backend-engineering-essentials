@@ -74,7 +74,7 @@ flowchart TD
     C3["Connection 3\n(waiting on API call)"] -. registered .-> Poll
 ```
 
-The critical insight: while Connection 1 waits on its database query, the thread is not blocked — it loops back and can service the I/O completion for Connection 2. The single thread handles thousands of in-flight operations concurrently, not by running them simultaneously, but by interleaving them at I/O boundaries.
+While Connection 1 waits on its database query, the thread is not blocked. It loops back and can service the I/O completion for Connection 2. The single thread handles thousands of in-flight operations concurrently, not by running them simultaneously but by interleaving them at I/O boundaries.
 
 Node.js implements this via **libuv**, a cross-platform C library that selects the best polling mechanism for the current OS (epoll on Linux, kqueue on macOS/BSD, IOCP on Windows). libuv also maintains a thread pool (default: 4 threads) for I/O operations that lack native async OS support — filesystem reads, DNS resolution, and some crypto operations.
 
