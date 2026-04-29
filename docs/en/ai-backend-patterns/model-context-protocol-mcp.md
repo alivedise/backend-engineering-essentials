@@ -51,9 +51,13 @@ Client                          Server
 | Transport | When to use | Notes |
 |-----------|-------------|-------|
 | **stdio** | Local process, same machine | Server launched as subprocess; fastest; no network config |
-| **HTTP + SSE** | Remote server, multi-tenant | Server streams responses via SSE; supports OAuth 2.0 |
+| **Streamable HTTP** | Remote server, multi-tenant | Single HTTP endpoint; POST returns JSON or `text/event-stream`; resumable via `Last-Event-ID`; supports OAuth 2.0. Replaced HTTP+SSE in spec revision 2025-03-26. |
 
-Stdio is the default for developer tools and Claude Desktop. HTTP is the right choice for shared enterprise servers accessed by multiple hosts or users.
+Stdio is the default for developer tools and Claude Desktop. Streamable HTTP is the right choice for shared enterprise servers accessed by multiple hosts or users.
+
+Streamable HTTP routes all traffic through a single endpoint (conventionally `/mcp`). A `POST` carries one JSON-RPC message; the server replies with either an `application/json` body for one-shot calls or a `text/event-stream` body when it needs to interleave progress notifications, log messages, or server-to-client requests on the way to the final response. An optional `GET` on the same endpoint opens a long-lived SSE channel for server-initiated messages outside any specific request. Sessions are correlated by an `Mcp-Session-Id` response header issued on `initialize` and echoed by the client on subsequent requests; resume after a dropped connection uses the standard SSE `Last-Event-ID` mechanism. Servers that omit the session header operate statelessly and can be deployed on serverless and edge runtimes.
+
+The earlier HTTP+SSE transport (defined in the November 2024 spec) used two separate endpoints: a long-lived `GET /sse` for server messages and a `POST /messages` for client messages. It is deprecated; new servers should use Streamable HTTP, and clients should fall back to HTTP+SSE only for backward compatibility with older servers.
 
 ## MCP Primitives
 
@@ -166,14 +170,14 @@ flowchart LR
     ClientA["MCP Client A"]
     ClientB["MCP Client B"]
     ServerA["MCP Server\n(Order Service)\n[stdio]"]
-    ServerB["MCP Server\n(Knowledge Base)\n[HTTP+SSE]"]
+    ServerB["MCP Server\n(Knowledge Base)\n[Streamable HTTP]"]
     DB["Database"]
     KB["Vector Store"]
 
     Host --> ClientA
     Host --> ClientB
     ClientA -->|"JSON-RPC / stdio"| ServerA
-    ClientB -->|"JSON-RPC / HTTPS+SSE"| ServerB
+    ClientB -->|"JSON-RPC / Streamable HTTP"| ServerB
     ServerA --> DB
     ServerB --> KB
 
@@ -186,7 +190,7 @@ flowchart LR
     style KB fill:#2d6a4f,color:#fff
 ```
 
-One host runs multiple clients — one client per server. Servers are independent services: they can be deployed locally (stdio) or remotely (HTTP+SSE) without changing the host's integration logic.
+One host runs multiple clients, one client per server. Servers are independent services: they can be deployed locally (stdio) or remotely (Streamable HTTP) without changing the host's integration logic.
 
 ## Comparison to Alternatives
 

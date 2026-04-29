@@ -51,9 +51,13 @@ MCP 有三個角色：
 | 傳輸 | 使用時機 | 備注 |
 |------|---------|------|
 | **stdio** | 本地進程，同一台機器 | 伺服器作為子進程啟動；最快；無需網路配置 |
-| **HTTP + SSE** | 遠端伺服器，多租戶 | 伺服器透過 SSE 串流回應；支援 OAuth 2.0 |
+| **Streamable HTTP** | 遠端伺服器，多租戶 | 單一 HTTP 端點；POST 回應為 JSON 或 `text/event-stream`；可透過 `Last-Event-ID` 續傳；支援 OAuth 2.0。於規格 2025-03-26 修訂版取代 HTTP+SSE。 |
 
-Stdio 是開發者工具和 Claude Desktop 的預設選擇。HTTP 是供多個主機或用戶存取的共享企業伺服器的正確選擇。
+Stdio 是開發者工具和 Claude Desktop 的預設選擇。Streamable HTTP 是供多個主機或用戶存取的共享企業伺服器的正確選擇。
+
+Streamable HTTP 將所有流量導向單一端點（慣例為 `/mcp`）。`POST` 攜帶一個 JSON-RPC 訊息；伺服器以 `application/json` 主體回應一次性呼叫，或以 `text/event-stream` 主體在送出最終回應前穿插進度通知、日誌訊息以及伺服器對客戶端的請求。可選的 `GET` 在同一端點開啟長連線 SSE 通道，用於與特定請求無關的伺服器主動訊息。會話關聯透過 `Mcp-Session-Id` 回應標頭：伺服器在 `initialize` 時發放，客戶端在後續請求中回送；連線中斷後的續傳沿用 SSE 標準的 `Last-Event-ID` 機制。省略會話標頭的伺服器以無狀態方式運作，可部署於 serverless 與邊緣執行環境。
+
+較早的 HTTP+SSE 傳輸（定義於 2024 年 11 月的規格）使用兩個獨立端點：長連線的 `GET /sse` 接收伺服器訊息，以及 `POST /messages` 送出客戶端訊息。此傳輸已棄用；新伺服器應採用 Streamable HTTP，客戶端僅在需要與舊伺服器相容時才回退到 HTTP+SSE。
 
 ## MCP 原語
 
@@ -166,14 +170,14 @@ flowchart LR
     ClientA["MCP 客戶端 A"]
     ClientB["MCP 客戶端 B"]
     ServerA["MCP 伺服器\n（訂單服務）\n[stdio]"]
-    ServerB["MCP 伺服器\n（知識庫）\n[HTTP+SSE]"]
+    ServerB["MCP 伺服器\n（知識庫）\n[Streamable HTTP]"]
     DB["資料庫"]
     KB["向量存儲"]
 
     Host --> ClientA
     Host --> ClientB
     ClientA -->|"JSON-RPC / stdio"| ServerA
-    ClientB -->|"JSON-RPC / HTTPS+SSE"| ServerB
+    ClientB -->|"JSON-RPC / Streamable HTTP"| ServerB
     ServerA --> DB
     ServerB --> KB
 
@@ -186,7 +190,7 @@ flowchart LR
     style KB fill:#2d6a4f,color:#fff
 ```
 
-一個主機執行多個客戶端——每個伺服器一個客戶端。伺服器是獨立的服務：它們可以在本地（stdio）或遠端（HTTP+SSE）部署，而不改變主機的整合邏輯。
+一個主機執行多個客戶端，每個伺服器一個客戶端。伺服器是獨立的服務：可以在本地（stdio）或遠端（Streamable HTTP）部署，而不改變主機的整合邏輯。
 
 ## 與替代方案的比較
 
