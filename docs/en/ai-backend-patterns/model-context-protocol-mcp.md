@@ -211,6 +211,7 @@ MCP's key architectural difference is that tool definitions live outside the app
 - [BEE-30002](ai-agent-architecture-patterns.md) -- AI Agent Architecture Patterns: agents that use MCP servers must still apply step limits, loop detection, and tool authorization — MCP is a transport layer, not a security layer
 - [BEE-19048](../distributed-systems/service-to-service-authentication.md) -- Service-to-Service Authentication: remote MCP servers require authenticated connections; the same bearer token and OAuth 2.0 patterns used for service-to-service auth apply
 - [BEE-4006](../api-design/api-error-handling-and-problem-details.md) -- API Error Handling and Problem Details: MCP tool error responses follow structured formats; servers should return machine-readable error codes, not raw exception messages
+- [BEE-3008](../networking-fundamentals/http-as-a-substrate-for-new-protocols.md) -- HTTP as a Substrate for New Protocols: places MCP's Streamable HTTP transport in the broader pattern of layering protocols on HTTP, walking how it composes single-endpoint dispatch, content-negotiated body, custom session header, and SSE `Last-Event-ID` resume from existing primitives
 
 ## References
 

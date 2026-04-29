@@ -336,3 +336,4 @@ flowchart LR
 - [BEE-3004](tls-ssl-handshake.md) — TLS/SSL Handshake：在代理層進行 SSL 終止是主流部署模式；詳見終止拓樸、憑證管理，以及重新加密 vs 穿透的取捨
 - [BEE-3005](load-balancers.md) — Load Balancers：反向代理與 L7 負載平衡器有大量重疊；負載平衡器在核心代理機制上增加了上游健康檢查、連線排水（connection draining）與負載平衡演算法
 - [BEE-5006](../architecture-patterns/sidecar-and-service-mesh-concepts.md) — Sidecar and Service Mesh：邊車代理將反向代理的概念延伸至東西向（service-to-service）流量；控制面、xDS API 與 mTLS 憑證自動化在此深入說明
+- [BEE-3008](http-as-a-substrate-for-new-protocols.md) — HTTP as a Substrate for New Protocols：串流與基於 Upgrade 的慣例只有在中介裝置正確轉發時才能端到端運作；本文盤點反向代理需要支援的慣例

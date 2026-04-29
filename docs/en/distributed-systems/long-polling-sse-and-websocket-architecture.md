@@ -291,6 +291,7 @@ server {
 - [BEE-11005](../concurrency/producer-consumer-and-worker-pool-patterns.md) -- Producer-Consumer and Worker Pool Patterns: message fan-out from a pub/sub broker to WebSocket connections is a producer-consumer problem
 - [BEE-19036](api-gateway-patterns.md) -- API Gateway Patterns: WebSocket connections typically pass through the API Gateway, which must be configured to pass through the Upgrade handshake and support long-lived connections
 - [BEE-12007](../resilience/rate-limiting-and-throttling.md) -- Rate Limiting and Throttling: rate limiting WebSocket connections requires per-connection or per-user message rate limits, not just per-request IP-based limits
+- [BEE-3008](../networking-fundamentals/http-as-a-substrate-for-new-protocols.md) -- HTTP as a Substrate for New Protocols: SSE and WebSocket are two of several conventions layered on HTTP; this article frames the broader pattern and inventories which HTTP primitives each convention exploits
 
 ## References
 

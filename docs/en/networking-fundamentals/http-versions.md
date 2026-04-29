@@ -265,3 +265,4 @@ Domain sharding (splitting assets across multiple subdomains) was a valid HTTP/1
 - [BEE-3005 — Load Balancers](load-balancers.md): Layer 7 termination of HTTP/2 and HTTP/3, protocol translation to upstreams.
 - [BEE-4001 — REST API Design](../api-design/rest-api-design-principles.md): How protocol version affects API latency and client connection strategy.
 - [BEE-9006 — HTTP Caching](../caching/http-caching-and-conditional-requests.md): Cache-Control semantics are defined in RFC 9110 and apply identically across all HTTP versions.
+- [BEE-3008 — HTTP as a Substrate for New Protocols](http-as-a-substrate-for-new-protocols.md): How SSE, WebSocket, gRPC, Streamable HTTP, and WebTransport layer on top of these versions, and which version's primitives each one exploits.

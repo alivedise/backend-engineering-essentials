@@ -237,6 +237,7 @@ dialOpts := []grpc.DialOption{
 - [BEE-10006](../messaging/backpressure-and-flow-control.md) -- 背壓與流量控制：gRPC 的 HTTP/2 流量控制是通用背壓原則的一個實作；相同概念適用於訊息佇列和響應式串流
 - [BEE-12003](../resilience/timeouts-and-deadlines.md) -- 逾時與截止時間：gRPC 截止時間傳播是分散式截止時間管理的典型範例；這些概念同樣適用於 REST 呼叫和非同步操作
 - [BEE-19037](long-polling-sse-and-websocket-architecture.md) -- 長輪詢、SSE 與 WebSocket 架構：SSE 和 WebSocket 透過 HTTP/1.1 提供伺服器推送和雙向通訊；gRPC 串流是 HTTP/2 的等價物，具有更強的型別約束和更好的流量控制
+- [BEE-3008](../networking-fundamentals/http-as-a-substrate-for-new-protocols.md) -- HTTP as a Substrate for New Protocols：將 gRPC 的 HTTP/2 框架、`application/grpc` 內容型別，以及在 trailers 中攜帶狀態碼，作為透過 HTTP/2 原語分層 RPC 協定的標準範例
 
 ## 參考資料
 

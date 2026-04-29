@@ -237,6 +237,7 @@ dialOpts := []grpc.DialOption{
 - [BEE-10006](../messaging/backpressure-and-flow-control.md) -- Backpressure and Flow Control: gRPC's HTTP/2 flow control is one implementation of the general backpressure principle; the same concepts apply to message queues and reactive streams
 - [BEE-12003](../resilience/timeouts-and-deadlines.md) -- Timeouts and Deadlines: gRPC deadline propagation is the canonical example of distributed deadline management; the concepts apply equally to REST calls and async operations
 - [BEE-19037](long-polling-sse-and-websocket-architecture.md) -- Long-Polling, SSE, and WebSocket Architecture: SSE and WebSockets provide server-push and bidirectional communication over HTTP/1.1; gRPC streaming is the HTTP/2 equivalent with stronger typing and better flow control
+- [BEE-3008](../networking-fundamentals/http-as-a-substrate-for-new-protocols.md) -- HTTP as a Substrate for New Protocols: treats gRPC's HTTP/2 framing, `application/grpc` content-type, and trailers-for-status as the canonical example of layering an RPC protocol through HTTP/2 primitives
 
 ## References
 

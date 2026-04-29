@@ -291,6 +291,7 @@ server {
 - [BEE-11005](../concurrency/producer-consumer-and-worker-pool-patterns.md) -- 生產者-消費者與 Worker Pool 模式：從 pub/sub broker 到 WebSocket 連線的訊息扇出是一個生產者-消費者問題
 - [BEE-19036](api-gateway-patterns.md) -- API Gateway 模式：WebSocket 連線通常通過 API Gateway，Gateway 必須配置為傳遞升級握手並支援長期連線
 - [BEE-12007](../resilience/rate-limiting-and-throttling.md) -- 速率限制與節流：速率限制 WebSocket 連線需要每連線或每使用者的訊息速率限制，而不僅僅是基於 IP 的每請求限制
+- [BEE-3008](../networking-fundamentals/http-as-a-substrate-for-new-protocols.md) -- HTTP as a Substrate for New Protocols：SSE 與 WebSocket 是疊加在 HTTP 上的數個慣例之二；本文提供更廣的框架，盤點各個慣例倚賴哪些 HTTP 原語
 
 ## 參考資料
 
