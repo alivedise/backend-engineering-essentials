@@ -25,6 +25,10 @@ Rate limiting addresses three concerns simultaneously:
 - **Fairness** — ensures all clients receive proportionate access regardless of their aggressiveness
 - **Overload prevention** — acts as a load shedding valve at the API layer (see [BEE-26](26.md)4), preventing traffic spikes from propagating to databases and downstream services
 
+:::tip Deep Dive
+For API-level rate limiting governance, quota tiers, and header semantics (RateLimit-Limit, RateLimit-Remaining, Retry-After), see [ADE (API Design Essentials)](https://alivedise.github.io/api-design-essentials/).
+:::
+
 ## Principle
 
 **Apply rate limits at every public interface. Choose a rate limiting algorithm appropriate for your traffic pattern. Communicate limits and their current state in every response. Return HTTP 429 with a `Retry-After` header when a limit is exceeded. Apply limits at multiple dimensions. Implement distributed rate limiting when running multiple instances.**

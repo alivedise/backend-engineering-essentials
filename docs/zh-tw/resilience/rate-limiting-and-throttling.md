@@ -25,6 +25,10 @@ slug: rate-limiting-and-throttling
 - **確保公平** — 保障所有客戶端獲得相稱的存取機會，不受其請求積極程度影響
 - **防止過載** — 作為 API 層的負載卸載閥（參見 [BEE-12005](graceful-degradation.md)），防止流量突增向資料庫及下游服務蔓延
 
+:::tip 深入探討
+關於 API 層級的限流治理、配額分級與標頭語義（RateLimit-Limit、RateLimit-Remaining、Retry-After），請參閱 [ADE (API Design Essentials)](https://alivedise.github.io/api-design-essentials/)。
+:::
+
 ## 原則
 
 **在每個公開介面套用限流。選擇適合流量模式的限流演算法。在每個回應中傳達限制及其當前狀態。超過限制時返回 HTTP 429 並附上 `Retry-After` 標頭。從多個維度套用限制。在執行多個實例時實施分散式限流。**
