@@ -303,7 +303,6 @@ flowchart TD
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG Pipeline Architecture: the overall retrieval pipeline that chunking feeds into
 - [BEE-30015](retrieval-reranking-and-hybrid-search.md) -- Retrieval Reranking and Hybrid Search: combining vector and BM25 retrieval after chunking
 - [BEE-30029](advanced-rag-and-agentic-retrieval-patterns.md) -- Advanced RAG and Agentic Retrieval Patterns: multi-hop retrieval that depends on chunk quality
-- [BEE-30051](llm-tokenization-internals-and-token-budget-management.md) -- LLM Tokenization Internals and Token Budget Management: chunk size in tokens requires tokenizer-accurate counting
 
 ## References
 

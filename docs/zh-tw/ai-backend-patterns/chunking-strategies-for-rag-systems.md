@@ -303,7 +303,6 @@ flowchart TD
 - [BEE-30007](rag-pipeline-architecture.md) -- RAG 管道架構：分塊為其提供輸入的整體檢索管道
 - [BEE-30015](retrieval-reranking-and-hybrid-search.md) -- 檢索重排序與混合搜尋：分塊後結合向量和 BM25 檢索
 - [BEE-30029](advanced-rag-and-agentic-retrieval-patterns.md) -- 進階 RAG 與代理檢索模式：依賴文字塊品質的多跳檢索
-- [BEE-30051](llm-tokenization-internals-and-token-budget-management.md) -- LLM 分詞內部機制與 Token 預算管理：token 計數的文字塊大小需要分詞器精確計算
 
 ## 參考資料
 

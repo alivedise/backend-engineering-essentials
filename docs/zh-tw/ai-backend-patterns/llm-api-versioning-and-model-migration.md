@@ -370,7 +370,6 @@ flowchart TD
 
 ## 相關 BEE
 
-- [BEE-30034](ai-experimentation-and-model-a-b-testing.md) -- AI 實驗與模型 A/B 測試：模型遷移重用的金絲雀發佈與穩定使用者分配模式
 - [BEE-30028](prompt-management-and-versioning.md) -- 提示詞管理與版本控制：需要重新工程時，與模型 ID 一同進行提示詞版本管理
 - [BEE-30004](evaluating-and-testing-llm-applications.md) -- 評估與測試 LLM 應用：回歸套件所基於的黃金資料集評估方法
 - [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI 成本最佳化與模型路由：跨模型按成本和能力路由的備用鏈模式

@@ -379,7 +379,6 @@ flowchart TD
 
 ## Related BEEs
 
-- [BEE-30034](ai-experimentation-and-model-a-b-testing.md) -- AI Experimentation and Model A/B Testing: the canary ramp and stable user-assignment patterns that model migration reuses
 - [BEE-30028](prompt-management-and-versioning.md) -- Prompt Management and Versioning: versioning prompts alongside model IDs when re-engineering is required
 - [BEE-30004](evaluating-and-testing-llm-applications.md) -- Evaluating and Testing LLM Applications: the golden-dataset evaluation methodology that the regression suite is built on
 - [BEE-30011](ai-cost-optimization-and-model-routing.md) -- AI Cost Optimization and Model Routing: the fallback chain pattern for routing across models by cost and capability
