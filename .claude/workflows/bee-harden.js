@@ -191,8 +191,11 @@ check whether the edits introduced NEW tone violations or reader-model
 regressions (a term now used before introduction, a new unanswered question).
 ${TONE_BLACKLIST}
 Also check internal consistency: does any unedited sentence now contradict an
-edited one? Read-only: do NOT edit any file. Verdict "clean" only if no
-finding survives your honest effort to refute.`
+edited one? The zh-TW mirror (${a.zhPath}) is synced by a LATER stage of this
+pipeline — EN/zh parity mismatch is expected at this point and MUST NOT be
+reported as a finding against the EN revision. Read-only: do NOT edit any
+file. Verdict "clean" only if no finding survives your honest effort to
+refute.`
 }
 
 function fixPrompt(a, findings) {

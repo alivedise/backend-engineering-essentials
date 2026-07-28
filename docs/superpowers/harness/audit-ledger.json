@@ -1,1 +1,14 @@
-{}
+{
+  "docs/en/Caching/cache-eviction-policies.md": {
+    "id": 9003,
+    "lastAudited": "2026-07-29",
+    "findings": { "tone": 4, "organization": 2, "references": 3, "factual": 5, "template": 2 },
+    "notes": "revised: template restructure to canonical skeleton; LFU worked-example tie-break bug fixed; fabricated Redis blockquote replaced with doc-verified prose; Dan Luu random/2-random correction; Redis 8.6 LRM policies added; S3-FIFO and SIEVE sections added (verified against SOSP'23/NSDI'24 papers); zh synced 27 passages; 2 minor residuals noted in report"
+  },
+  "docs/en/Caching/cache-invalidation-strategies.md": {
+    "id": 9002,
+    "lastAudited": "2026-07-29",
+    "findings": { "tone": 4, "organization": 5, "references": 5, "factual": 8, "template": 3 },
+    "notes": "reverted: revision kept surfacing new blocking findings across 3 verify rounds (Varnish grace/soft-purge semantics, MGET versioned-keys claim, Soft Invalidation internal contradiction); audit findings are real (broken self-links, template drift, 8 factual issues) but the article needs a manual harden pass"
+  }
+}

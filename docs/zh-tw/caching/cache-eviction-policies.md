@@ -8,20 +8,43 @@ slug: cache-eviction-policies
 # [BEE-9003] 快取淘汰策略
 
 :::info
-LRU、LFU、FIFO 與自適應策略 -- 快取在記憶體耗盡時如何決定要丟棄哪些資料，以及如何為你的工作負載選擇正確的策略。
+LRU、LFU、FIFO 與自適應策略決定記憶體耗盡時快取要丟棄哪些資料。本文說明各策略的運作方式，以及如何為特定工作負載選擇合適的策略。
 :::
 
-## 為什麼淘汰策略很重要
+## 背景
 
 快取是有限資源。RAM 有成本上限；以磁碟為後端的快取雖然容量較大，但同樣有限制。當快取空間用完時，每新增一筆資料就必須丟棄一筆舊資料。問題是：要丟棄哪一筆？
 
-錯誤的答案會悄悄摧毀快取的價值。若淘汰了熱門資料，下一次請求就會 miss，轉而查詢資料庫並重新填入快取 -- 然後可能再次被淘汰。在極端的存取模式下，一個行為不佳的淘汰策略即使搭配大型快取，**命中率也可能趨近於零**。
+錯誤的答案會悄悄摧毀快取的價值。若淘汰了熱門資料，下一次請求就會 miss，轉而查詢資料庫並重新填入快取。該策略隨後又在片刻後淘汰同一筆資料，如此循環。在極端的存取模式下，一個行為不佳的淘汰策略即使搭配大型快取，**命中率也可能趨近於零**。
 
-正確答案完全取決於你的工作負載。不存在放諸四海皆準的最佳策略。理解這些取捨，是讓快取能吸收 95% 讀取流量與僅僅增加延遲之間的差異所在。
+正確答案完全取決於你的工作負載。不存在放諸四海皆準的最佳策略。策略若與存取模式不匹配，快取就會淘汰熱門資料、保留冷門資料；以下各節說明每種策略會在何處、以何種方式失效。
 
 :::warning 沒有淘汰策略不是選項
 若你未設定淘汰策略且沒有記憶體限制，長時間執行的程序會讓快取無限增長，最終以 OOM 錯誤崩潰。務必設定明確的記憶體上限及對應的淘汰策略。
 :::
+
+## 視覺化
+
+以下並列比較兩種主流策略：時間性與頻率性。
+
+```mermaid
+flowchart LR
+    subgraph LRU["LRU 決策"]
+        L1["存取事件"] --> L2["移至串列頭部"]
+        L3["需要淘汰"] --> L4["移除尾部\n（最久未觸及）"]
+        L5["熱門資料閒置\n一段時間"] --> L6["逐漸滑向尾部"]
+        L6 --> L7["若閒置夠久\n最終被淘汰"]
+    end
+
+    subgraph LFU["LFU 決策"]
+        F1["存取事件"] --> F2["計數器遞增"]
+        F3["需要淘汰"] --> F4["移除計數最低者\n（最不常觸及）"]
+        F5["熱門資料閒置\n一段時間"] --> F6["計數器維持高值"]
+        F6 --> F7["留在快取中\n（頻率偏差）"]
+    end
+```
+
+LRU 回應**時間性**：停止被存取的資料會逐漸滑向尾部，最終被淘汰。LFU 回應**累積頻率**：過去熱門的資料即使已停止被存取，仍可能維持高計數而長期抵抗淘汰。以下的核心策略一節說明實務中的 LFU 實作如何應對這種頻率偏差。
 
 ## 核心策略
 
@@ -69,6 +92,7 @@ LFU 會淘汰存取次數最少的資料。其依據是**頻率局部性**：熱
 **特性：**
 - 即使某段時間未活躍，也能保留持續熱門的資料
 - **適應緩慢**：過去熱門的資料即使已不再被存取，仍會保有高計數而不易被淘汰（頻率偏差）
+- **實務中以衰減緩解**：正式環境的實作會定期衰減計數器以對抗頻率偏差；Redis 的 `lfu-decay-time`（預設 1 分鐘）控制計數器閒置多久後開始縮減，讓過時的高計數不會無限期阻擋淘汰
 - 新資料從計數 1 開始，很快就會被淘汰，即使它即將變得非常熱門
 - 實作複雜度較高；未最佳化的版本為 O(log n)
 
@@ -97,7 +121,7 @@ FIFO 會淘汰在快取中存放最久的資料，無論其被存取的頻率或
 - 實作極為簡單，負擔極低
 - **不感知存取模式**：大量存取的資料只因插入時間最早就被淘汰
 - 在某些設定下會出現 **Belady 異常**：增加快取容量反而使命中率下降
-- 鮮少用於生產環境的應用快取；適合串流管線與佇列
+- 在通用型應用快取中，過去並不常見，但 FIFO 佇列近年在研究與生產環境中重新受到重視，成為新一代設計的基礎元件；詳見下方進階策略中的 S3-FIFO 與 SIEVE
 
 **適合：** 訊息佇列、日誌緩衝區、資料本身就有時間生命週期且越舊越無用的場景。
 
@@ -107,15 +131,16 @@ FIFO 會淘汰在快取中存放最久的資料，無論其被存取的頻率或
 
 **特性：**
 - 負擔趨近於零
-- 對均勻存取分佈的工作負載，實際表現令人意外地接近 LRU
+- 純隨機淘汰是較弱的基準線：Dan Luu 的 CPU 快取模擬（[Caches: LRU vs. random](https://danluu.com/2choices-eviction/)）發現，純隨機與 FIFO 都嚴格劣於 LRU
+- **2-random**（隨機抽樣兩筆資料，淘汰其中較久未使用的一筆）才是具競爭力的變體：同一組模擬顯示，在較大的快取容量下，2-random 的表現與 LRU 相當甚至更好
 - 不具確定性：行為難以推理和測試
-- Dan Luu 的基準測試（[Caches: LRU vs. random](https://danluu.com/2choices-eviction/)）顯示，在部分真實工作負載中，隨機淘汰的表現接近 LRU，實作卻簡單得多
+- Redis 的 `allkeys-random` 策略實作的是單純均勻隨機淘汰，而非 2-random 變體；它在偏斜的工作負載下接受比 LRU 更低的命中率以換取簡單性（官方文件僅建議在各鍵存取頻率大致相同時使用）
 
 **適合：** 記憶體嚴格受限的嵌入式系統、實作簡單性比多幾個百分點命中率更重要的場景。
 
 ### 基於 TTL 的過期（TTL-Based Expiry）
 
-資料在設定的存活時間（TTL）後過期，無論存取頻率或時間。嚴格來說，這不是淘汰策略，而是**有效性策略** -- 資料不是因容量壓力被淘汰，而是因可能過時而過期。
+資料在設定的存活時間（TTL）後過期，無論存取頻率或時間。TTL 過期屬於有效性策略：資料因可能過時而離開快取；淘汰則由容量壓力驅動。
 
 實際上，TTL 與淘汰策略協同運作：TTL 資料過期時被清除（釋放空間），淘汰策略則處理未過期資料之間的容量壓力。
 
@@ -125,17 +150,19 @@ FIFO 會淘汰在快取中存放最久的資料，無論其被存取的頻率或
 
 ## 進階策略
 
+純粹的 LRU、LFU、FIFO 都有已知的失效模式。以下內容受到兩種未列於本文清單的設計影響：CLOCK 是作業系統分頁置換長期使用的高效 LRU 近似演算法，是下方 FIFO 佇列設計（S3-FIFO 與 SIEVE）的前身；ARC（Adaptive Replacement Cache，用於 ZFS）以自適應方式混合時間性與頻率性訊號，則是 W-TinyLFU 所採用的自適應時間頻率並重做法的先驅。
+
 ### LRU-K
 
 LRU-K 淘汰第 K 次最近存取時間最遠的資料。LRU 等價於 LRU-1；LRU-2 和 LRU-3 是常見選擇。
 
-其核心概念是：資料必須被存取至少 K 次，才被視為「熱門」而不易被淘汰。單次存取（例如掃描）不會晉升資料；需要 K 次存取才能晉升。
+資料必須被存取至少 K 次，才被視為「熱門」而不易被淘汰。單次存取（例如掃描）不會晉升資料；需要 K 次存取才能晉升。
 
 這直接解決了掃描污染問題。全表掃描每筆資料只存取一次；當 K=2 時，這些資料不會被晉升，快取滿時會優先被淘汰。
 
 ### W-TinyLFU（Caffeine）
 
-W-TinyLFU 是 [Caffeine](https://github.com/ben-manes/caffeine)（高效能 Java 快取函式庫）以及 Ristretto（Go）所使用的淘汰策略。它在多種工作負載下的表現持續優於 LRU 和 LFU。
+W-TinyLFU 是 [Caffeine](https://github.com/ben-manes/caffeine)（高效能 Java 快取函式庫）所使用的淘汰策略。Ristretto（Go）採用相關但不同的做法：它使用 TinyLFU 准入過濾器決定哪些資料能進入快取，再以取樣 LFU（sampled LFU）淘汰，而非下方描述的完整視窗化方案。兩者在多種工作負載下的表現都持續優於純 LRU 和 LFU。
 
 **架構：**
 
@@ -150,7 +177,21 @@ W-TinyLFU 是 [Caffeine](https://github.com/ben-manes/caffeine)（高效能 Java
 
 結果：W-TinyLFU 在頻率偏向和時間偏向的工作負載上都能獲得高命中率，包含純 LRU 或純 LFU 都難以應對的混合工作負載。詳見 [Caffeine 效能基準測試](https://github.com/ben-manes/caffeine/wiki/Efficiency)的多組追蹤資料集比較。
 
-## 實際範例：LRU vs. LFU vs. FIFO
+### S3-FIFO
+
+Yang 等人證明，只要安排得當，FIFO 佇列不只能逼近 LRU，還能勝過它（〈FIFO Queues are All You Need for Cache Eviction〉，SOSP 2023）。S3-FIFO 此後已被 Google 與 Redpanda 採用。
+
+S3-FIFO 將快取拆成三個 FIFO 佇列：一個小佇列（約佔容量 10%）過濾新資料、一個主佇列（約佔 90%）保留已證明自身價值的資料，以及一個只保留鍵、不保留值的幽靈佇列，記錄最近被淘汰的資料。新資料先進入小佇列；若在被淘汰前再次被存取，就晉升到主佇列，否則就被淘汰，其鍵移入幽靈佇列。若某筆資料的鍵仍在幽靈佇列中時又被存取，則會跳過小佇列，直接進入主佇列。
+
+在論文涵蓋 14 個資料集、共 6,594 組追蹤記錄中，在較大的快取容量（每組追蹤資料物件數的 10%）下，S3-FIFO 在 14 個資料集中的 10 個表現最佳，勝過包括 LRU 與 ARC 在內的所有比較演算法；在較小的快取容量（0.1%）下，則在 14 個中的 7 個表現最佳。在 16 個執行緒下，S3-FIFO 的吞吐量也達到最佳化 LRU 實作的約六倍，因為每次命中只需更新一個小型的物件計數器，而 LRU 每次存取都必須將物件移到串列頭部（並伴隨相應的鎖定）。
+
+### SIEVE
+
+SIEVE（〈SIEVE is Simpler than LRU: an Efficient Turn-Key Eviction Algorithm for Web Caches〉，Zhang 等人，NSDI 2024）做得更進一步：只用一個 FIFO 佇列、每筆資料一個位元，以及一根稱為「指標」（hand）的移動指針。
+
+每筆資料都保有一個 visited 位元，在快取命中時設定為 1。新資料從頭部進入，指標則從尾部開始。淘汰時，SIEVE 檢查指標所在位置的資料：若其 visited 位元已設定，SIEVE 會清除該位元、將資料留在原地，並將指標朝頭部方向前進；如此重複，直到找到 visited 位元未設定的資料，就地淘汰該筆資料，無論它位於佇列何處。CLOCK（其佇列形式，FIFO-Reinsertion）會將每筆存活的資料移回頭部，並固定從尾部淘汰；SIEVE 則讓存活的資料留在原地，僅讓指標朝頭部漂移，這正是 SIEVE 在不需要 LRU 那種每次存取都要調整串列的情況下，仍能在 miss ratio 上勝過 CLOCK 的原因。
+
+## 範例
 
 快取容量：4。存取序列：`A, B, C, D, A, E`。
 
@@ -172,22 +213,24 @@ W-TinyLFU 是 [Caffeine](https://github.com/ben-manes/caffeine)（高效能 Java
   LFU:  [A:1, B:1, C:1]
   FIFO: [A, B, C]
 
-步驟 4：存取 D（miss，插入 -- 快取已滿）
+步驟 4：存取 D（miss，插入，快取已滿）
   LRU:  [D, C, B, A]
   LFU:  [A:1, B:1, C:1, D:1]
   FIFO: [A, B, C, D]
 
-步驟 5：存取 A（hit -- A 已在快取中）
+步驟 5：存取 A（hit，A 已在快取中）
   LRU:  A 移至頭部：[A, D, C, B]（A 最近被存取）
   LFU:  A 計數遞增：[A:2, B:1, C:1, D:1]
   FIFO: [A, B, C, D]（FIFO 不追蹤存取；順序不變）
 
-步驟 6：存取 E（miss，插入 -- 必須淘汰）
+步驟 6：存取 E（miss，插入，必須淘汰）
   LRU:  淘汰 B（最久未使用），插入 E。
         結果：[E, A, D, C]
 
-  LFU:  淘汰 B、C 或 D（計數均為 1；以時間為輔助 -> 淘汰 D）
-        結果：[E:1, A:2, B:1, C:1]
+  LFU:  淘汰 B、C 或 D（計數均為 1；以時間為輔助排序打破平手）。
+        B 最後一次存取在步驟 2，C 在步驟 3，D 在步驟 4，因此 B 是
+        三者中最久未被存取的。淘汰 B，插入 E。
+        結果：[E:1, A:2, C:1, D:1]
 
   FIFO: 淘汰 A（最早插入），插入 E。
         結果：[B, C, D, E]
@@ -199,33 +242,12 @@ W-TinyLFU 是 [Caffeine](https://github.com/ben-manes/caffeine)（高效能 Java
 | 策略 | 步驟 6 被淘汰 | 原因 |
 |------|-------------|------|
 | LRU  | B           | B 在步驟 2 後未再被存取 |
-| LFU  | D（或 B 或 C）| D 只被存取一次，與 B、C 相同，但插入最晚 |
+| LFU  | B           | B 只被存取一次，與 C、D 同分，但三者中最久未被存取 |
 | FIFO | A           | A 最早插入，不論步驟 5 的命中 |
 
 FIFO 淘汰 A 是最明顯的錯誤：A 就在一個步驟之前被存取，卻因為插入最早而第一個被淘汰。
 
-LRU 和 LFU 的選擇都有其依據。LFU 因為 A 的計數更高而選擇保留它，若 A 持續熱門則是正確的。LRU 因為 A 最近被存取而保留它，若 A 最近的活躍度能預測未來活躍度則是正確的。
-
-## LRU vs. LFU 行為示意圖
-
-```mermaid
-flowchart LR
-    subgraph LRU["LRU 決策"]
-        L1["存取事件"] --> L2["移至串列頭部"]
-        L3["需要淘汰"] --> L4["移除尾部\n（最久未觸及）"]
-        L5["熱門資料閒置\n一段時間"] --> L6["逐漸滑向尾部"]
-        L6 --> L7["若閒置夠久\n最終被淘汰"]
-    end
-
-    subgraph LFU["LFU 決策"]
-        F1["存取事件"] --> F2["計數器遞增"]
-        F3["需要淘汰"] --> F4["移除計數最低者\n（最不常觸及）"]
-        F5["熱門資料閒置\n一段時間"] --> F6["計數器維持高值"]
-        F6 --> F7["留在快取中\n（頻率偏差）"]
-    end
-```
-
-此圖顯示關鍵差異：LRU 回應**時間性**，停止被存取的資料最終會被淘汰。LFU 回應**累積頻率**，過去熱門的資料即使不再被存取也會留在快取中 -- 直到計數衰減或主動淘汰。
+在這個追蹤序列中，LRU 與 LFU 的結果一致：兩者都淘汰 B。LRU 淘汰 B 是因為它是最久未使用的資料。LFU 淘汰 B 則是因為它與 C、D 的存取次數相同，而時間性的輔助排序讓存取較近的 C 和 D 得以保留。若序列拉長，兩種策略就會出現分歧：當某筆低計數資料的存取時間比某筆已經閒置的高計數資料更近時，LFU 會保留那筆閒置的高計數資料，LRU 則不會。
 
 ## Redis 淘汰策略
 
@@ -240,11 +262,13 @@ CONFIG SET maxmemory-policy allkeys-lru
 
 | 策略 | 淘汰對象 | 演算法 |
 |------|---------|--------|
-| `noeviction` | 無 -- 快取滿時寫入回傳錯誤 | 無 |
+| `noeviction` | 無：快取滿時寫入回傳錯誤 | 無 |
 | `allkeys-lru` | 所有鍵 | LRU |
 | `volatile-lru` | 有設定 TTL 的鍵 | LRU |
 | `allkeys-lfu` | 所有鍵 | LFU |
 | `volatile-lfu` | 有設定 TTL 的鍵 | LFU |
+| `allkeys-lrm` | 所有鍵 | LRM（最近最少修改；Redis 8.6+） |
+| `volatile-lrm` | 有設定 TTL 的鍵 | LRM（Redis 8.6+） |
 | `allkeys-random` | 所有鍵 | 隨機 |
 | `volatile-random` | 有設定 TTL 的鍵 | 隨機 |
 | `volatile-ttl` | 有設定 TTL 的鍵 | 優先淘汰最快過期的 |
@@ -252,14 +276,15 @@ CONFIG SET maxmemory-policy allkeys-lru
 **關鍵差異：**
 
 - `allkeys-*` 策略適用於資料庫中的所有鍵，包括未設 TTL 的鍵。
-- `volatile-*` 策略只適用於有設定過期時間的鍵。若沒有這樣的鍵，則無資料被淘汰，記憶體達上限後新寫入會失敗。
+- `volatile-*` 策略只適用於有設定過期時間的鍵。若不存在這樣的鍵，其行為就形同 `noeviction`：不會有任何資料被淘汰，記憶體達上限後新寫入會失敗。
+- `*-lrm` 策略（Redis 8.6 以後）依最後寫入時間而非最後讀取時間淘汰，適用於想淘汰近期未更新的過時資料的情境，無論該資料被讀取的頻率為何（在 LRM 下，單純讀取並不能讓鍵保持存活）。
 - `noeviction` 只適合你寧願收到錯誤也不想遺失資料的情境（例如主要資料儲存，而非快取）。
 
-**Redis 建議：**
+**Redis 文件的建議：**
 
-> 當你預期請求的熱門度呈冪次分佈（即少部分資料被存取的頻率遠高於其他資料）時，使用 `allkeys-lru`。若不確定，這是安全的預設值。若存取模式穩定，想保留最一致熱門的資料，使用 `allkeys-lfu`。
+[Redis 官方淘汰文件](https://redis.io/docs/latest/develop/reference/eviction/)提供的是經驗法則，而非單一的固定建議。文件建議在少部分鍵的存取頻率遠高於其他鍵時使用 `allkeys-lru`，理由是帕雷托原則（Pareto principle），並指出在沒有理由偏好其他策略時，這是不錯的預設值。文件建議在想保留經常被讀取的資料、同時淘汰近期未修改的資料時使用 `allkeys-lrm`；在各鍵存取頻率大致相同時使用 `allkeys-random`；在應用程式能事先識別合適的淘汰對象並為其指定較短 TTL 時使用 `volatile-ttl`。文件對 `allkeys-lfu` 並沒有對應的經驗法則；Redis 另一篇 [LFU vs. LRU 部落格文章](https://redis.io/blog/lfu-vs-lru-how-to-choose-the-right-cache-eviction-policy/)則將 LFU 描述為通常適合存取模式穩定、可預測的工作負載。
 
-注意：Redis 實作的 LRU 和 LFU 是**近似演算法**，而非精確算法。對於 LRU，Redis 會隨機取樣一定數量的鍵（`maxmemory-samples`，預設為 5），從中淘汰最久未使用的。這避免了維護完整排序串列的負擔，同時在實際效果上接近真正的 LRU。`allkeys-lfu` 使用帶有衰減的對數計數器，防止過時的高計數阻礙淘汰。
+請注意，Redis 實作的 LRU、LRM 與 LFU 都是**近似演算法**，而非精確演算法。對於 LRU，Redis 會隨機取樣一定數量的鍵（`maxmemory-samples`，預設為 5），從中淘汰最久未使用的；LRM 以相同方式取樣，淘汰最久未修改的。這避免了維護完整排序串列的負擔，同時在實際效果上接近精確演算法的結果。`allkeys-lfu` 策略使用帶有衰減的對數計數器追蹤存取頻率，防止過時的高計數無限期阻擋淘汰。
 
 ## 選擇正確策略
 
@@ -268,11 +293,11 @@ flowchart TD
     A["你的工作負載是什麼？"] --> B{"存取模式"}
     B --> C["時間性：最近存取的\n資料近期可能再次存取"]
     B --> D["頻率性：相同熱門資料\n長期持續被存取"]
-    B --> E["循序掃描：線性存取，\n資料不會重複使用"]
+    B --> E["混合：熱門資料集\n加上定期全表掃描"]
     B --> F["未知 /\n混合工作負載"]
     C --> G["LRU 或 allkeys-lru"]
     D --> H["LFU 或 allkeys-lfu"]
-    E --> I["LRU-K 或\nW-TinyLFU（Caffeine）"]
+    E --> I["抗掃描：\nLRU-K 或 W-TinyLFU"]
     F --> J["以 LRU 為安全預設；\n監控命中率；\n視需要調整"]
 ```
 
@@ -286,22 +311,13 @@ flowchart TD
 | Redis 僅含 TTL 鍵 | volatile-lru | 只淘汰 TTL 鍵，保留不過期的資料 |
 | Redis 作為主要儲存（非快取） | noeviction | 不要悄悄遺失資料 |
 
-## 常見錯誤
+## 最佳實踐
 
-**1. 未確認預設淘汰策略就直接使用。**
-Redis 預設為 `noeviction`，記憶體滿時寫入會回傳錯誤。若用 Redis 作為快取，請明確設定 `maxmemory` 和 `maxmemory-policy`。在生產環境依賴預設值是一顆延時炸彈。
-
-**2. 快取太小，無法容納工作集。**
-若快取只能存放 10,000 筆資料，而活躍工作集有 500,000 筆，淘汰率會高到快取幾乎毫無助益。在決定快取大小前，先分析工作集的大小。命中率低於 80% 通常代表的是大小問題，而非策略問題。
-
-**3. 完全沒有淘汰策略（OOM 崩潰）。**
-無大小限制且無淘汰策略的程序內快取會隨時間無限增長。JVM heap 耗盡、Node.js heap 溢出、Linux OOM kill 是常見症狀。任何快取（包括程序內快取，例如 Caffeine 的 `maximumSize`、Guava Cache 的 `maximumWeight`）都請務必設定最大大小。
-
-**4. 在掃描密集的工作負載中使用 LRU。**
-全表掃描、批次 ETL 作業或逐夜報告讀取數百萬筆唯一資料，會以永遠不會再被存取的資料污染 LRU 快取。每次掃描的鍵都會替換熱門資料。掃描結束後，快取充滿冷資料，命中率暴跌直到快取重新預熱。針對掃描查詢，請使用 LRU-K、W-TinyLFU 或獨立的快取池。
-
-**5. 未監控淘汰率。**
-少量淘汰不是問題，這正是快取的工作方式。但淘汰率相對命中率過高，代表快取太小或策略不對。匯出並監控 `evicted_keys`（Redis `INFO stats`）或快取函式庫的對應指標，當淘汰率超過會影響命中率的閾值時發出警示。
+- **MUST** 在使用 Redis 作為快取時明確設定 `maxmemory` 與 `maxmemory-policy`。Redis 預設為 `noeviction`，記憶體滿後寫入會回傳錯誤；在生產環境依賴預設值等於埋下一顆隨時會爆的地雷。
+- **MUST** 為每個程序內快取設定最大大小，不只是外部快取。沒有大小限制且不淘汰的快取會無限增長；JVM heap 耗盡、Node.js heap 溢出、Linux OOM kill 都是常見症狀。請使用明確的上限，例如 Caffeine 的 `maximumSize` 或 Guava Cache 的 `maximumWeight`。
+- **SHOULD** 在決定快取大小前先分析工作集大小。若快取只能存放 10,000 筆資料，而活躍工作集有 500,000 筆，淘汰率會高到快取幾乎不具價值。少量淘汰不是問題，這正是快取的運作方式。若要判斷問題出在大小還是策略，可比較實際命中率與熱門資料集應占存取量的預期比例，並檢查 `evicted_keys`（Redis `INFO stats`）或快取函式庫的對應指標：淘汰率相對命中率偏高，指向的是大小問題而非策略問題。
+- **SHOULD** 為掃描密集的工作負載使用 LRU-K、W-TinyLFU，或獨立的快取池。全表掃描、批次 ETL 作業或逐夜報告依序讀取數百萬筆唯一資料，會污染 LRU 快取：每個被掃描的鍵都會替換一筆熱門資料，命中率因而崩跌，直到快取重新預熱。
+- **SHOULD** 在生產環境匯出並監控淘汰率。`evicted_keys`（Redis `INFO stats`）或快取函式庫的對應計數器，能反映快取正承受記憶體壓力；當淘汰率隨命中率下降而上升時應發出警示。
 
 ## 相關 BEE
 
@@ -315,8 +331,11 @@ Redis 預設為 `noeviction`，記憶體滿時寫入會回傳錯誤。若用 Red
 - [LFU vs. LRU: How to choose the right cache eviction policy -- Redis Blog](https://redis.io/blog/lfu-vs-lru-how-to-choose-the-right-cache-eviction-policy/)
 - [Cache eviction strategies -- Redis Blog](https://redis.io/blog/cache-eviction-strategies/)
 - [Cache replacement policies -- Wikipedia](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+- [The LRU-K Page Replacement Algorithm for Database Disk Buffering -- O'Neil, O'Neil, and Weikum, SIGMOD 1993](https://dl.acm.org/doi/10.1145/170035.170081)
 - [TinyLFU: A Highly Efficient Cache Admission Policy -- Einziger et al., ACM TOS 2017](https://dl.acm.org/doi/10.1145/3149371)
 - [Caffeine -- Efficiency benchmarks (GitHub Wiki)](https://github.com/ben-manes/caffeine/wiki/Efficiency)
 - [Design of a Modern Cache -- High Scalability](https://highscalability.com/design-of-a-modern-cache/)
 - [Caches: LRU vs. random -- Dan Luu](https://danluu.com/2choices-eviction/)
 - [It's Time to Revisit LRU vs. FIFO -- Eytan et al., HotStorage 2020 (USENIX)](https://www.usenix.org/system/files/hotstorage20_paper_eytan.pdf)
+- [FIFO Queues are All You Need for Cache Eviction -- Yang et al., SOSP 2023](https://dl.acm.org/doi/10.1145/3600006.3613147)
+- [SIEVE is Simpler than LRU: an Efficient Turn-Key Eviction Algorithm for Web Caches -- Zhang et al., NSDI 2024](https://www.usenix.org/conference/nsdi24/presentation/zhang-yazhuo)
